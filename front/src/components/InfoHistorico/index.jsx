@@ -6,7 +6,7 @@ function TabelaDeHistorico() {
   return(
       <Container>
          <div className="infoHistorico">
-           <div> 
+           <div className="button--voltar"> 
            <Button width="100px" height="35px" title="VOLTAR"/> 
            </div>
            <div className="seu--historico">SEU HISTÓRICO</div>

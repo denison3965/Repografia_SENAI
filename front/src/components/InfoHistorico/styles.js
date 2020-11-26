@@ -11,6 +11,9 @@ export const Container = styled.div`
         display: flex;
         justify-content: space-between;
     }
+    .button--voltar{
+        cursor: pointer;
+    }
     .seu--historico{
         background-color: var(--color-azulMaisClaro);
         height: 50px;
