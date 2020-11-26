@@ -9,9 +9,12 @@ export default createGlobalStyle`
   html, body, #root {
     height: 100%;
     width: 100%;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
   }
   *, button, input {
-    font-family: Roboto;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
   }
   :root {
     --color-azul: #095B8A;

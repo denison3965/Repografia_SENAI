@@ -9,7 +9,7 @@ function App() {
   return (
     <div className="App">
       {/* <Header title = ""/>  */}
-      <Button width = "" height = "" title = ""/>
+      {/* <Button width = "" height = "" title = ""/> */}
       {/*Carregando estilo global*/}
       <GlobalStyles />
     </div>
