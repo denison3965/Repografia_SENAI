@@ -7,9 +7,15 @@ export const Container = styled.div`
     position: fixed;
 
     .logo--senai{
-        margin-left: 20px;
+        margin-left: 40px;
+        margin-top: 23px;
     }
 `;
-
+export const Titulo = styled.div`
+  color: white;
+  text-align: center;
+  font-size: 50px;
+  margin-top: -70px;
+`;
 
 
