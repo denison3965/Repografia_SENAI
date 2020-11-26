@@ -7,4 +7,8 @@ export const Container = styled.div`
   background-color: var(--color-azul);
 `;
 
+export const NavIcons = styled.ul`
+
+`;
+
 

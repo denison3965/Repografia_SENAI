@@ -7,6 +7,8 @@ function App() {
   return (
     <div className="App">
       <NavLateral />
+
+      {/*Carregando estilo global*/}
       <GlobalStyles />
     </div>
   );
