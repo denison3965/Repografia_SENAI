@@ -5,6 +5,11 @@ export const Container = styled.div`
     height: 20vh;
     background-color: var(--color-azul);
     position: fixed;
+
+    .logo--senai{
+        margin-left: 20px;
+    }
 `;
+
 
 

@@ -6,7 +6,7 @@ function Logo(props) {
   return (
       <Container style={{width: props.width}}>
           <LogoSenai src={SENAI} style={{width: props.width, height: props.height}}/>
-          <Titulo>Suíço-Brasileira Paulo Ernesto Tolle</Titulo>
+          <Titulo>Suíço-Brasileira "Paulo Ernesto Tolle"</Titulo>
           
       </Container>
   )
