@@ -1,19 +1,17 @@
 import React from 'react';
-
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
+import Login  from './pages/login'
 import Header from './components/Header'
-import TabelaDeHistorico from './pages/TabelaDeHistorico'
-import Button from './components/Button'
 import NavLateral from './components/Nav_Lateral'
-import Logo from './components/Logo'
-import Login from './pages/login'
-
+import Formulario from './components/formulario'
+import InfoHistorico from './components/InfoHistorico'
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
 
 const Routes = () => (
     <BrowserRouter>
         <Switch>
             <Route exact path="/" component={Login}/>
-            <Route  path="/historico" component={TabelaDeHistorico} />
+            <Route  path="/historico" component={InfoHistorico} />
+            <Route path="/Formulario" component={Formulario}/>
         </Switch>
     </BrowserRouter>
 )
