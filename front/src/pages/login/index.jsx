@@ -10,7 +10,7 @@ function login() {
       <Container>
         
         <div className="logo_posicao">
-          <Logo width="395px" height="94px"/>
+          <Logo width="100%" height="100%" color="black"/>
         </div>
 
         <form className="barra_cinza" />
@@ -30,7 +30,7 @@ function login() {
             <input type="text" name="senha" className="senhatxt_posicao" />
 
             <div className="entrar_posicao">
-              <Button width="369px" height="30px" title="Entrar"/>
+              <Button width="38.5vw" height="30px" title="Entrar" font-size="3vw"/>
             </div>
 
             <a href="#text1" className="esqueci_senha">Esqueci minha senha</a> 

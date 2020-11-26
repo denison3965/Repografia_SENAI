@@ -3,61 +3,59 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
+  flex: wrap;
+  flex-direction: row;
   width: 100vw;
   height: 100vh;
   background-color: #095B8A;
 
   .barra_cinza{
     position: absolute;
-    width: 540px;
+    width: 54.5vw;
     height: 100vh;
     left: 23%;
     background: #EEF1F2;
   }
   .nif_posicao{
     position: absolute;
-    width: 369px;
-    height: 30px;
     left: 32%;
-    top: 205px;
+    top: 45%;
     }
   .niftxt_posicao{
     position: absolute;
-    width: 369px;
-    height: 30px;
+    width: 38.5vw;
+    height: 6vh;
     left: 32%;
-    top: 235px;
+    top: 50%;
     }
   .senha_posicao{
     position: absolute;
-    width: 369px;
-    height: 30px;
     left: 32%;
-    top: 270px;
+    top: 59%;
     }
   .senhatxt_posicao{
     position: absolute;
-    width: 369px;
-    height: 30px;
+    width: 38.5vw;
+    height: 6vh;
     left: 32%;
-    top: 300px;
+    right: 25%;
+    top: 64%;
     }
   .entrar_posicao{
     position: absolute;
-    left: 29%;
-    top: 310px;
+    left: 28.9%;
+    top: 67%;
   }
   .esqueci_senha{
     position: absolute;
-    width: 125px;
-    height: 30px;
-    left: 45%;
-    top: 380px;
+    margin-left: 44.5vw;
+    width: 13vw;
+    top: 82%;
 
     font-family: Roboto;
     font-style: normal;
     font-weight: normal;
-    font-size: 12px;
+    font-size: 2.5vh;
     line-height: 21px;
     text-align: center;
 
@@ -65,15 +63,14 @@ export const Container = styled.div`
   }
   .Nao_acesso{
     position: absolute;
-    width: 166px;
-    height: 25px;
-    left: 31%;
-    top: 410px;
+    left: 15%;
+    right: 37%;
+    top: 87%;
 
     font-family: Roboto;
     font-style: normal;
     font-weight: normal;
-    font-size: 12px;
+    font-size: 2.5vh;
     line-height: 21px;
     text-align: center;
 
@@ -82,15 +79,15 @@ export const Container = styled.div`
   }
   .o_que_fazer{
     position: absolute;
-    width: 90px;
-    height: 25px;
-    left: 58%;
-    top: 410px;
+    margin-left: 56vw;
+    width: 12vw;
+    top: 87%;
+    z-index: 999;
 
     font-family: Roboto;
     font-style: normal;
     font-weight: normal;
-    font-size: 12px;
+    font-size: 2.5vh;
     line-height: 21px;
     text-align: center;
 
@@ -99,10 +96,11 @@ export const Container = styled.div`
   }
   .logo_posicao{
     position: absolute;
-    width: 395px;
-    height: 94px;
+    width: 41%;
+    height: 5%;
     left: 30%;
-    top: 5%;
+    right: 26%;
+    top: 7%;
     z-index: 999;
   }
 `;
