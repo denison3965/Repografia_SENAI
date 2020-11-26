@@ -11,10 +11,10 @@ function Logo(props) {
   return (
       <Container style={{width: props.width}}>
           <LogoSenai src={SENAI} style={{width: props.width, height: props.height}}/>
-          <Titulo style={{color: props.color}}>Suíço-Brasileira "Paulo Ernesto Tolle"</Titulo>
+          <Titulo style={{color: props.color,fontSize: props.fontSize }}>Suíço-Brasileira "Paulo Ernesto Tolle"</Titulo>
           
       </Container>
   )
 }
 
-export default Logo;
+export default Logo; 

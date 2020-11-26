@@ -12,7 +12,6 @@ export const Container = styled.div`
 export const Titulo = styled.div`
   color: white;
   text-align: center;
-  font-size: 50px;
 `;
 
 
