@@ -1,4 +1,4 @@
-//para criar essa estrutura rode o snypts rfc
+//para criar essa estrutura rode o snypts: rfc
 import React from 'react';
 
 import { Container } from './styles';
