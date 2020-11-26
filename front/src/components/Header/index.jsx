@@ -1,10 +1,14 @@
 import React from 'react';
-import { Container } from './styles';
+import { Container,Titulo } from './styles';
+import Logo from '../Logo'
 
-function Header() {
+function Header(props) {
   return(
       <Container>
-          bLA BLA BLA
+        <div className="logo--senai">
+        <Logo width="150px" height="40px" />
+        </div>
+        <Titulo> {props.title} </Titulo>
       </Container>
   )
 }
