@@ -4,7 +4,7 @@ import { Container } from './styles';
 function Header() {
   return(
       <Container>
-          bLA BLA BLA
+          <logo />
       </Container>
   )
 }
