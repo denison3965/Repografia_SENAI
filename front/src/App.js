@@ -7,7 +7,10 @@ import GlobalStyles from './styles/GlobalStyles'
 function App() {
   return (
     <div className="App">
-      <Header />
+      <NavLateral />
+
+      {/*Carregando estilo global*/}
+      <GlobalStyles />
     </div>
   );
 }
