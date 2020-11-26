@@ -6,7 +6,7 @@ import { Container, NavIcons } from './styles';
 function Nav_Lateral() {
   return (
       <Container>
-        <Logo></Logo>
+        <Logo width="150px" height="40px"/>
         <NavIcons>
             <li>
                 <img alt="banco img"/>
