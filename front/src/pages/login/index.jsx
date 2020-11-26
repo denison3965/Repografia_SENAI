@@ -2,6 +2,7 @@
 import React from 'react';
 
 import { Container } from './styles';
+import { Head } from './styles';
 
 function login() {
   return (
