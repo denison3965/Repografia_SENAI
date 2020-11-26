@@ -7,8 +7,8 @@ import GlobalStyles from './styles/GlobalStyles'
 function App() {
   return (
     <div className="App">
-      <Header />
-
+      <Header title = ""/> 
+      
       {/*Carregando estilo global*/}
       <GlobalStyles />
     </div>
