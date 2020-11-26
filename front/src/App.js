@@ -6,14 +6,10 @@ import GlobalStyles from './styles/GlobalStyles'
 function App() {
   return (
     <div className="App">
-<<<<<<< HEAD
       <NavLateral />
 
       {/*Carregando estilo global*/}
       <GlobalStyles />
-=======
-      <Header />
->>>>>>> a92552c71c127ffd8e8018cb1935540eac8779eb
     </div>
   );
 }
