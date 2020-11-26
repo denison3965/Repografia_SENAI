@@ -4,17 +4,13 @@ import Login  from './pages/login'
 import Header from './components/Header'
 import NavLateral from './components/Nav_Lateral'
 import GlobalStyles from './styles/GlobalStyles'
-import Button from './components/Button'
-import TabelaDeHistorico from './components/TabelaDeHistorico'
+import Routes from './routes'
 
 function App() {
   return (
     <div className="App">
-      {/* <Header title = ""/>  */}
-      {/* <Button width = "" height = "" title = ""/> */}
-      <TabelaDeHistorico />
 
-      {/*Carregando estilo global*/}
+      <Routes />
       <GlobalStyles />
     </div>
   );
