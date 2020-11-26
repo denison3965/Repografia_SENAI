@@ -1,17 +1,13 @@
-//para criar essa estrutura rode o snypts rfc
 import React from 'react';
 
 import { Container } from './styles';
 
-function login() {
+function Nav_Lateral() {
   return (
       <Container>
-          Ola eu sou o login
+
       </Container>
   )
 }
 
-export default login;
-
-
-
+export default Nav_Lateral;
