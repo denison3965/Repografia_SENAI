@@ -1,21 +1,23 @@
 import React from 'react';
+import Logo from '../../components/Logo'
 
-import { Container } from './styles';
+import { Container, NavIcons } from './styles';
 
 function Nav_Lateral() {
   return (
       <Container>
+        <Logo></Logo>
         <NavIcons>
             <li>
-                <img src={} alt="banco img"/>
+                <img alt="banco img"/>
                 <div>Registros</div>
             </li>
             <li>
-                <img src={} alt="Grafico img"/>
+                <img alt="Grafico img"/>
                 <div>Registros</div>
             </li>
             <li>
-                <img src={} alt="pessoas img"/>
+                <img alt="pessoas img"/>
                 <div>Registros</div>
             </li>
         </NavIcons>
