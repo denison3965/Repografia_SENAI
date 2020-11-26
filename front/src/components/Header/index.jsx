@@ -6,7 +6,7 @@ function Header(props) {
   return(
       <Container>
         <div className="logo--senai">
-        <Logo width="150px" height="40px" />
+         <Logo width="150px" height="40px" />
         </div>
         <Titulo> {props.title} </Titulo>
       </Container>
