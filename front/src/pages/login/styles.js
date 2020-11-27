@@ -18,39 +18,50 @@ export const Container = styled.div`
   }
   .nif_posicao{
     position: absolute;
-    left: 32%;
+    left: 15%;
     top: 45%;
     }
   .niftxt_posicao{
     position: absolute;
     width: 38.5vw;
     height: 6vh;
-    left: 32%;
+    left: 15%;
     top: 50%;
     }
   .senha_posicao{
     position: absolute;
-    left: 32%;
+    left: 15%;
     top: 59%;
     }
   .senhatxt_posicao{
     position: absolute;
     width: 38.5vw;
     height: 6vh;
-    left: 32%;
+    left: 15%;
     right: 25%;
     top: 64%;
     }
   .entrar_posicao{
-    position: absolute;
-    left: 28.9%;
-    top: 67%;
+    position: relative;
+    width:38.5vw;
+    height:30px; 
+    left: 15%;
+    top: 73%;
+  }
+  .links{
+    position: relative;
+    background-color: #Cafe;
+    left: 15%;
+    height: 13vh;
+    width: 38.5vw;
+    top: 75%;
   }
   .esqueci_senha{
-    position: absolute;
-    margin-left: 44.5vw;
+    position: relative;
+    left: 37%;
     width: 13vw;
-    top: 82%;
+    font-size: 2vw;
+    top: 2%;
 
     font-family: Roboto;
     font-style: normal;
@@ -62,10 +73,10 @@ export const Container = styled.div`
     color: #C11B04;
   }
   .Nao_acesso{
-    position: absolute;
-    left: 15%;
+    position: relative;
+    left: 0.01vw;
     right: 37%;
-    top: 87%;
+    top: 81%;
 
     font-family: Roboto;
     font-style: normal;
@@ -78,10 +89,10 @@ export const Container = styled.div`
 
   }
   .o_que_fazer{
-    position: absolute;
-    margin-left: 56vw;
+    position: relative;
+    left: 12vw;
     width: 12vw;
-    top: 87%;
+    top: 81%;
     z-index: 999;
 
     font-family: Roboto;

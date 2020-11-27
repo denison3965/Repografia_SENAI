@@ -13,8 +13,7 @@ function login() {
           <Logo width="100%" height="100%" color="black"/>
         </div>
 
-        <form className="barra_cinza" />
-          <form>
+          <form className="barra_cinza">
             <div className="nif_posicao">
               <label>
                 NIF:
@@ -30,13 +29,16 @@ function login() {
             <input type="text" name="senha" className="senhatxt_posicao" />
 
             <div className="entrar_posicao">
-              <Button width="38.5vw" height="30px" title="Entrar" font-size="3vw"/>
+              {<Button title="Entrar" font-size="3vw" width="100%" height="100%"/>}
             </div>
 
-            <a href="#text1" className="esqueci_senha">Esqueci minha senha</a> 
+            <div className="links">
 
+            <a href="#text1" className="esqueci_senha">Esqueci minha senha</a> 
             <text className="Nao_acesso">Não tenho acesso.</text>
             <a href="#text2" className="o_que_fazer">O que fazer?</a> 
+
+            </div>
           </form>
 
       </Container>
