@@ -14,5 +14,6 @@ export const LogoSenai = styled.img`
 export const Titulo = styled.div`
   color: white;
   text-align: center;
+  font-size: 16px;
   margin-top: 5px;
 `;

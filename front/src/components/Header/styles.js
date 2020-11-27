@@ -1,21 +1,21 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-    width: 100vw;
-    height: 20vh;
+
     background-color: var(--color-azul);
+<<<<<<< HEAD
     position: absolute;
+=======
+    height: 130px;
+>>>>>>> 315f8a1da7a3cc09ce690a0436163b681dc5f035
 
     .logo--senai{
-        margin-left: 40px;
-        margin-top: 23px;
+      padding: 30px;
     }
 `;
 export const Titulo = styled.div`
   color: white;
   text-align: center;
-  font-size: 50px;
-  margin-top: -70px;
 `;
 
 
