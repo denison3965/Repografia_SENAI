@@ -1,7 +1,6 @@
 import React, { Component, useState } from 'react';
 import ReactPaginate from 'react-paginate'
 import SaibaMais from '../SaibaMais'
-import Breadcrumb from '../../components/Breadcrumb'
 import { Container, Info, Tabela, Title, Pesquisa, Input  } from './styles';
 
 
