@@ -1,7 +1,6 @@
 import React, { Component, useState } from 'react';
 import ReactPaginate from 'react-paginate'
-
-
+import SaibaMais from '../SaibaMais'
 import { Container, Info, Tabela, Title, Pesquisa, Input  } from './styles';
 
 
@@ -18,10 +17,15 @@ export class Tabela_Registros extends Component {
       tableData: [],
       orgtableData: [],
       perPage:5,
-      currentPage: 0
+      currentPage: 0,
+      search: ''
+
     }
     this.handlePageClick = this.handlePageClick.bind(this);
+
   }
+
+  
 
   //funcao para fazer a ppaginacao funciona
   handlePageClick = (e) => {
@@ -52,6 +56,7 @@ export class Tabela_Registros extends Component {
 
   componentDidMount(){
     this.getData();
+
   }
 
   getData() {
@@ -69,14 +74,46 @@ export class Tabela_Registros extends Component {
         totalpaginas: 900,
         coordenador: 'Sergio',
         avaliado: 'Nao',
-        data: '24/11/2020',
+        data: '21/11/2020',
         dataentrega: '04/12/2020',
         observacao: 'Vou levar a apostila ai a tarde',
         acabamento: ' Encadernamento com espiral, Capa em pvc, frente e verso'
       },
       {
         nomedarequisicao : 'qualquer coisa C#',
-        nomedosolicitante: 'Atila',
+        nomedosolicitante: 'Danilo',
+        departamento: 'Informatica',
+        cc: '20150102',
+        arquivo: 'apostila.pdf',
+        copias: 30,
+        paginas: 30,
+        totalpaginas: 900,
+        coordenador: 'Sergio',
+        avaliado: 'Nao',
+        data: '26/11/2020',
+        dataentrega: '04/12/2020',
+        observacao: 'Vou levar a apostila ai a tarde',
+        acabamento: ' Encadernamento com espiral, Capa em pvc, frente e verso'
+      },
+      {
+        nomedarequisicao : 'qualquer coisa C#',
+        nomedosolicitante: 'Danilo',
+        departamento: 'Informatica',
+        cc: '20150102',
+        arquivo: 'apostila.pdf',
+        copias: 30,
+        paginas: 30,
+        totalpaginas: 900,
+        coordenador: 'Sergio',
+        avaliado: 'Nao',
+        data: '23/11/2020',
+        dataentrega: '04/12/2020',
+        observacao: 'Vou levar a apostila ai a tarde',
+        acabamento: ' Encadernamento com espiral, Capa em pvc, frente e verso'
+      },
+      {
+        nomedarequisicao : 'qualquer coisa C#',
+        nomedosolicitante: 'Milton',
         departamento: 'Informatica',
         cc: '20150102',
         arquivo: 'apostila.pdf',
@@ -219,7 +256,7 @@ export class Tabela_Registros extends Component {
         acabamento: ' Encadernamento com espiral, Capa em pvc, frente e verso'
       },
       {
-        nomedarequisicao : 'qualquer coisa C#',
+        nomedarequisicao : 'fdsfdsdfsdfdsf',
         nomedosolicitante: 'Atila',
         departamento: 'Informatica',
         cc: '20150102',
@@ -235,39 +272,7 @@ export class Tabela_Registros extends Component {
         acabamento: ' Encadernamento com espiral, Capa em pvc, frente e verso'
       },
       {
-        nomedarequisicao : 'qualquer coisa C#',
-        nomedosolicitante: 'Atila',
-        departamento: 'Informatica',
-        cc: '20150102',
-        arquivo: 'apostila.pdf',
-        copias: 30,
-        paginas: 30,
-        totalpaginas: 900,
-        coordenador: 'Sergio',
-        avaliado: 'Nao',
-        data: '24/11/2020',
-        dataentrega: '04/12/2020',
-        observacao: 'Vou levar a apostila ai a tarde',
-        acabamento: ' Encadernamento com espiral, Capa em pvc, frente e verso'
-      },
-      {
-        nomedarequisicao : 'qualquer coisa C#',
-        nomedosolicitante: 'Atila',
-        departamento: 'Informatica',
-        cc: '20150102',
-        arquivo: 'apostila.pdf',
-        copias: 30,
-        paginas: 30,
-        totalpaginas: 900,
-        coordenador: 'Sergio',
-        avaliado: 'Nao',
-        data: '24/11/2020',
-        dataentrega: '04/12/2020',
-        observacao: 'Vou levar a apostila ai a tarde',
-        acabamento: ' Encadernamento com espiral, Capa em pvc, frente e verso'
-      },
-      {
-        nomedarequisicao : 'qualquer coisa C#',
+        nomedarequisicao : 'teste',
         nomedosolicitante: 'Atila',
         departamento: 'Informatica',
         cc: '20150102',
@@ -299,18 +304,37 @@ export class Tabela_Registros extends Component {
     })
 
   }
+ 
+  updateSearch(event) {
+    this.setState({search: event.target.value.substr(0,20)})
+  }
+  
 
   render(){
 
-
+    let filterRegister = this.state.tableData.filter(
+      (register) => {
+        return register.nomedosolicitante.toLowerCase().indexOf(this.state.search) !== -1 ||
+               register.data.toLowerCase().indexOf(this.state.search) !== -1 ||
+               register.coordenador.toLowerCase().indexOf(this.state.search) !== -1 ||
+               register.departamento.toLowerCase().indexOf(this.state.search) !== -1 ||
+               register.cc.toLowerCase().indexOf(this.state.search) !== -1 ||
+               register.avaliado.toLowerCase().indexOf(this.state.search) !== -1
+      }
+    )
 
     return(
       <Container>
+
+
         <Info>
           <Title>Registros</Title>
           <Pesquisa>
             <p>pesquisa:</p>
-            <Input placeholder="Ex: Danilo"/>  
+            <Input 
+            value={this.state.search}
+            onChange={this.updateSearch.bind(this)}
+            placeholder="Ex: Danilo"/>  
           </Pesquisa>
         </Info>
         <Tabela>
@@ -333,7 +357,7 @@ export class Tabela_Registros extends Component {
             <tbody>
               
               {
-                this.state.tableData.map((element) => (
+                filterRegister.map((element) => (
                   <tr>
                     <td>{element.nomedarequisicao}</td>
                     <td>{element.nomedosolicitante}</td>
@@ -345,6 +369,8 @@ export class Tabela_Registros extends Component {
                     <td>{element.coordenador}</td>
                     <td>{element.avaliado}</td>
                     <td>{element.data}</td>
+                    <td><SaibaMais data={element.nomedarequisicao}/></td>
+                    
 
                   </tr>
                             
@@ -372,6 +398,7 @@ export class Tabela_Registros extends Component {
     )
   }
 }
+
 
 
 
