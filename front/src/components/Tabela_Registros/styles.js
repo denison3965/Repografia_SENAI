@@ -51,4 +51,5 @@ font-size: 30px;
 export const Input = styled.input`
     height:25px;
     width: 150px;
+    padding-left: 10px;
 `;

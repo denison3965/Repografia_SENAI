@@ -1,6 +1,7 @@
 import React, { Component, useState } from 'react';
 import ReactPaginate from 'react-paginate'
 import SaibaMais from '../SaibaMais'
+import Breadcrumb from '../../components/Breadcrumb'
 import { Container, Info, Tabela, Title, Pesquisa, Input  } from './styles';
 
 
@@ -18,7 +19,9 @@ export class Tabela_Registros extends Component {
       orgtableData: [],
       perPage:5,
       currentPage: 0,
-      search: ''
+      search: '',
+      crumbs: ['Inicio', 'Registros']
+      
 
     }
     this.handlePageClick = this.handlePageClick.bind(this);
@@ -326,7 +329,6 @@ export class Tabela_Registros extends Component {
     return(
       <Container>
 
-
         <Info>
           <Title>Registros</Title>
           <Pesquisa>
@@ -393,6 +395,9 @@ export class Tabela_Registros extends Component {
         containerClassName={"pagination"}
         subContainerClassName={"pages pagination"}
         activeClassName={"active"}/>
+
+        <hr></hr>
+        <p style={{color: "#ccc", fontSize: "15px"}}>@SENAI Suíço-Brasileira "Paulo Ernesto Tolle"</p>
 
     </Container>
     )
