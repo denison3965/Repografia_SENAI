@@ -10,5 +10,6 @@ export const Container = styled.div`
       height: 35px;
       border-color: var(--color-vermelho);
       font-size: 20px;
+      cursor: pointer;
   }
 `;
