@@ -1,9 +1,11 @@
 import React from 'react';
 import { Container } from './styles';
+import Header from '../Header';
 
 function formulario() {
   return (
     <Container>
+        <Header/>
         <form className="form_esquerda">
             <div className="inf_solicitacao"></div>
             <div className="inf_requisicao"></div>
@@ -31,7 +33,22 @@ function formulario() {
             <div className="div_assinatura">
                 <p className="assinatura">Assinatura ______________________________</p>
             </div>
+
+               
+
         </form>
+        
+        <form className="form_baixo">
+            <h5 className='tittle_upload'>Upload do exemplar:</h5>
+            <div className="div_upload">
+                
+                <p className="text_upload">Arraste e solte um arquivo aqui <br/> ou</p>
+                <input type="file" className="cursor-pointer input_exemplar" id="attachment" name="attachment"/>
+
+            </div>
+        </form>
+        
+
     </Container>
   );
 }

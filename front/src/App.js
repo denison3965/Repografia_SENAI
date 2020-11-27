@@ -1,6 +1,5 @@
-import React from 'react'
-import GlobalStyles from './styles/GlobalStyles'
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
+import React from 'react';
+import GlobalStyles from './styles/GlobalStyles';
 
 
 import Routes from './routes'
