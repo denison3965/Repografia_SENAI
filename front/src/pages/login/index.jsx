@@ -32,13 +32,18 @@ function login() {
               {<Button title="Entrar" font-size="3vw" width="100%" height="100%"/>}
             </div>
 
-            <div className="links">
-
-            <a href="#text1" className="esqueci_senha">Esqueci minha senha</a> 
-            <text className="Nao_acesso">Não tenho acesso.</text>
-            <a href="#text2" className="o_que_fazer">O que fazer?</a> 
-
+            <div className="esqueci_senha">
+            <a href="#text1">Esqueci minha senha</a>  
             </div>
+
+            <div className="Nao_acesso">
+            <text>Não tenho acesso.</text>
+            </div>
+
+            <div className="o_que_fazer"> 
+            <a href="#text2" >O que fazer?</a>
+            </div>
+
           </form>
 
       </Container>

@@ -9,6 +9,9 @@ export const Container = styled.div`
   height: 100vh;
   background-color: #095B8A;
 
+  a{
+    color: #c11b04;
+  }
   .barra_cinza{
     position: absolute;
     width: 54.5vw;
@@ -48,62 +51,41 @@ export const Container = styled.div`
     left: 15%;
     top: 73%;
   }
-  .links{
-    position: relative;
-    background-color: #Cafe;
-    left: 15%;
-    height: 13vh;
-    width: 38.5vw;
-    top: 75%;
-  }
   .esqueci_senha{
     position: relative;
-    left: 37%;
-    width: 13vw;
-    font-size: 2vw;
-    top: 2%;
+    left: 15%;
+    height: 5vh;
+    width: 38.5vw;
+    top: 75%;
 
     font-family: Roboto;
-    font-style: normal;
-    font-weight: normal;
     font-size: 2.5vh;
     line-height: 21px;
     text-align: center;
-
-    color: #C11B04;
   }
   .Nao_acesso{
     position: relative;
-    left: 0.01vw;
-    right: 37%;
-    top: 81%;
+    width: 45%;
+    left: 1%;
+    top: 76%;
 
     font-family: Roboto;
-    font-style: normal;
-    font-weight: normal;
     font-size: 2.5vh;
     line-height: 21px;
     text-align: center;
-
-    color: #000000;
 
   }
   .o_que_fazer{
     position: relative;
-    left: 12vw;
+    left: 35vw;
     width: 12vw;
-    top: 81%;
+    top: 71.5%;
     z-index: 999;
 
     font-family: Roboto;
-    font-style: normal;
-    font-weight: normal;
     font-size: 2.5vh;
     line-height: 21px;
     text-align: center;
-
-    color: #C11B04;
-
   }
   .logo_posicao{
     position: absolute;
