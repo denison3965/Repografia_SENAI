@@ -7,7 +7,6 @@ import Perfil from './pages/Perfil'
 import Historico from './pages/Perfil_Historico'
 import Detalhes from './pages/Detalhes'
 import Graficos from './pages/Mesa_Grafico'
-import TabelaBaixarPeriodo from './components/Tabela_BaixarPeriodo'
 
 const Routes = () => (
     <BrowserRouter>
@@ -17,7 +16,6 @@ const Routes = () => (
             <Route path="/Historico" component={Historico} />
             <Route path="/Formulario" component={Formulario}/>
             <Route path="/graficos" component={Graficos}/>
-            <Route path="/Baixar" component={TabelaBaixarPeriodo}/>
             <Route path="/Perfil" component={Perfil}/>
             <Route path="/detalhes" render={(props) => <Detalhes {...props} data=""/>}/>
         </Switch>
