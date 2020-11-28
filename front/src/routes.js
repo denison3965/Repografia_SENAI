@@ -1,12 +1,13 @@
 import React from 'react';
 import Login  from './pages/login'
-import Formulario from './components/formulario'
+import Formulario from './pages/Formulario'
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
 import Adm_Registros from './pages/Adm_Registros'
 import Perfil from './pages/Perfil'
 import Historico from './pages/Perfil_Historico'
-import Graficos from './components/Graficos'
 import Detalhes from './pages/Detalhes'
+import Graficos from './pages/Mesa_Grafico'
+import Funcionarios from './pages/funcionarios'
 
 const Routes = () => (
     <BrowserRouter>
@@ -18,6 +19,7 @@ const Routes = () => (
             <Route path="/graficos" component={Graficos}/>
             <Route path="/Perfil" component={Perfil}/>
             <Route path="/detalhes" render={(props) => <Detalhes {...props} data=""/>}/>
+            <Route path="/adm/funcionarios-cadastrados" component={Funcionarios}/>
         </Switch>
     </BrowserRouter>
 )

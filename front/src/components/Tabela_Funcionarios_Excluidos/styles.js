@@ -53,3 +53,4 @@ export const Input = styled.input`
     width: 150px;
     padding-left: 10px;
 `;
+

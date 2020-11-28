@@ -7,6 +7,7 @@ import Icon_Folha from '../../assets/img/folha.png'
 import Icon_Pessoa from '../../assets/img/pessoa.png'
 import Icon_Grafico from '../../assets/img/grafico.png'
 import Icon_Banco from '../../assets/img/banco.png'
+import { Link } from 'react-router-dom'
 
 import { Container, NavIcons } from './styles';
 
@@ -28,7 +29,7 @@ function Nav_Lateral(props) {
                 <li>
                     <div className="Nav_Lateral_li_esquerdo">
                         <img src={Icon_Banco} style={{width:"25px", height:"25px"}} alt="banco img"/>
-                        <div className="Nav_Lateral_Icon_title">Registros</div>
+                        <Link to="/adm/registros"><div className="Nav_Lateral_Icon_title">Registros</div></Link>
                     </div>
                     {
                         ativado == "1" ? (
@@ -41,7 +42,7 @@ function Nav_Lateral(props) {
 
                     <div className="Nav_Lateral_li_esquerdo">
                         <img src={Icon_Grafico} style={{width:"25px", height:"25px"}} alt="Grafico img"/>
-                        <div className="Nav_Lateral_Icon_title">Gráficos e relatórios</div>
+                        <Link to="/graficos"><div className="Nav_Lateral_Icon_title">Gráficos e relatórios</div></Link>
                     </div>
 
                     {
@@ -53,10 +54,12 @@ function Nav_Lateral(props) {
                 </li>
                 <li> 
 
-                    <div className="Nav_Lateral_li_esquerdo">
-                        <img src={Icon_Pessoa} style={{width:"25px", height:"25px"}} alt="pessoas img"/>
-                        <div className="Nav_Lateral_Icon_title">Funcionários </div>
-                    </div>
+                    <Link to="/adm/funcionarios-cadastrados">
+                        <div className="Nav_Lateral_li_esquerdo">
+                            <img src={Icon_Pessoa} style={{width:"25px", height:"25px"}} alt="pessoas img"/>
+                            <div className="Nav_Lateral_Icon_title">Funcionários </div>
+                        </div>
+                    </Link>
 
                     {
                         ativado == "3" ? (
