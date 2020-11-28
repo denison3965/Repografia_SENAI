@@ -5,8 +5,8 @@ import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
 import Adm_Registros from './pages/Adm_Registros'
 import Perfil from './pages/Perfil'
 import Historico from './pages/Perfil_Historico'
-import Graficos from './components/Graficos'
 import Detalhes from './pages/Detalhes'
+import Graficos from './pages/Mesa_Grafico'
 import Funcionarios from './pages/funcionarios'
 
 const Routes = () => (
