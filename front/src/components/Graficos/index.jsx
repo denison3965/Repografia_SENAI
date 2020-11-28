@@ -45,7 +45,6 @@ function Graficos() {
             'Milton',
             'Sangra',
             'Claudia',
-            'teste',
         ],
         datasets:[
             {
