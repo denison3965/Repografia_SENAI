@@ -1,16 +1,16 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Nav_Lateral from '../../components/Nav_Lateral'
 import User_Box_Info from '../../components/User_Box_Info'
-import Tabela_Registros from '../../components/Tabela_Registros'
+import Tabela_Funcionarios from '../../components/Tabela_Funcionarios'
 import { Link } from 'react-router-dom'
+
 import { Container, Adm_Area, Menu_Area, Tabela, Navegation } from './styles';
 
-function Adm_Registros() {
+function funcionarios() {
   return (
       <Container>
-
-          <Menu_Area>
-              <Nav_Lateral ativado="1" /> 
+           <Menu_Area>
+              <Nav_Lateral ativado="3" /> 
           </Menu_Area>
 
           <Adm_Area>
@@ -21,7 +21,7 @@ function Adm_Registros() {
                 <Navegation>
                   <ul>
                     <Link >
-                      <li>Registros</li>
+                      <li>Funcionários cadastrados</li>
                     </Link>
 
                   </ul>
@@ -29,15 +29,15 @@ function Adm_Registros() {
 
               </div>
               <Tabela> 
-                <Tabela_Registros />
+                <Tabela_Funcionarios />
+              </Tabela>
+
+              <Tabela> 
+                <Tabela_Funcionarios />
               </Tabela>
           </Adm_Area>
       </Container>
   );
 }
 
-
-
-
-export default Adm_Registros;
-
+export default funcionarios;
