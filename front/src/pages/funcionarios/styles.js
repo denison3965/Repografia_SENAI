@@ -9,7 +9,7 @@ export const Container = styled.div`
 export const Adm_Area = styled.div`
     width: 88vw;
     min-height: 100vh;
-    margin-left: 200px;
+    margin-left: 225px;
     position: absolute;
 
       .User_Box_Info_Area{

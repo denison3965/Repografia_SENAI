@@ -16,6 +16,7 @@ function Mesa_Grafico() {
       </MenuLateral>
 
       <InfoBox>
+        
         <User_Box_Info />
 
         <div style={{width: "70vw", marginLeft:"100px"}}>

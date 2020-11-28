@@ -15,6 +15,7 @@ export const Titulo = styled.div`
   margin-left: 15px;
   font-size: 22px;
   font-weight: 300;
+  width: 600px;
 `;
 
 export const Exit_Area = styled.div`
