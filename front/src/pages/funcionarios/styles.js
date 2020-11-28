@@ -17,7 +17,6 @@ export const Adm_Area = styled.div`
 
 
         hr{
-          margin-top: 50px;
           margin-left:30px;
           margin-right:30px;
           margin-bottom: 30px;
@@ -53,5 +52,23 @@ export const Navegation = styled.nav`
         li{
           color: #666;
         }
+    }
+`;
+export const AddUser = styled.div`
+  display: flex;
+  margin-left: 40px;
+  margin-bottom: -25px;
+  margin-top: 30px;
+
+    
+    img{
+      width: 25px;
+      height: 25px;
+
+    }
+    p{
+      color: #666;
+      margin-top: 3px;
+      margin-left: 5px;
     }
 `;
