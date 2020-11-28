@@ -6,6 +6,7 @@ import Adm_Registros from './pages/Adm_Registros'
 import Historico from './pages/Perfil_Historico'
 import Graficos from './components/Graficos'
 import Detalhes from './pages/Detalhes'
+import Funcionarios from './pages/funcionarios'
 
 const Routes = () => (
     <BrowserRouter>
@@ -16,6 +17,7 @@ const Routes = () => (
             <Route path="/Formulario" component={Formulario}/>
             <Route path="/graficos" component={Graficos}/>
             <Route path="/detalhes" render={(props) => <Detalhes {...props} data=""/>}/>
+            <Route path="/adm/funcionarios-cadastrados" component={Funcionarios}/>
         </Switch>
     </BrowserRouter>
 )
