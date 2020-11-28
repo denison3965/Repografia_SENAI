@@ -1,13 +1,14 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  width: 12vw;
+  width: 200px;
   height:100%;
   position: fixed;
   background-color: var(--color-azul);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  z-index: 999;
 
     .Nav_Latera_Logo{
       margin-top: 50px;
@@ -52,5 +53,6 @@ export const NavIcons = styled.ul`
     }
 
 `;
+
 
 
