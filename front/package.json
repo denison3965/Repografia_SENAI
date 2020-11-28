@@ -8,15 +8,6 @@
     "@testing-library/user-event": "^12.1.10",
     "axios": "^0.21.0",
     "bootstrap": "^4.5.3",
-<<<<<<< HEAD
-    "filesize": "^6.1.0",
-    "react": "^17.0.1",
-    "react-bootstrap": "^1.4.0",
-    "react-circular-progressbar": "^2.0.3",
-    "react-dom": "^17.0.1",
-    "react-dropzone": "^11.2.4",
-    "react-icons": "^4.1.0",
-=======
     "chart.js": "^2.9.4",
     "react": "^17.0.1",
     "react-bootstrap": "^1.4.0",
@@ -25,7 +16,6 @@
     "react-bootstrap-table2-paginator": "^2.1.2",
     "react-dom": "^17.0.1",
     "react-paginate": "^6.5.0",
->>>>>>> 315f8a1da7a3cc09ce690a0436163b681dc5f035
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
     "react-simple-hook-modal": "^1.1.0",

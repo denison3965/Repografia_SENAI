@@ -1,6 +1,6 @@
 import React from 'react';
 import Login  from './pages/login'
-import Formulario from './components/formulario'
+import Formulario from './pages/Formulario'
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
 import Adm_Registros from './pages/Adm_Registros'
 import Historico from './pages/Perfil_Historico'

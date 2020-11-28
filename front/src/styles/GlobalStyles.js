@@ -23,6 +23,7 @@ export default createGlobalStyle`
     --color-cinzaClaro: #DDDDDD;
     --color-cinzaMaisClaro: #DEE3E6;
     --color-branco: #FFFFFF;
-    --color-azulMaisClaro: #D0E7EE ;
+    --color-azulMaisClaro: #D0E7EE;
+    --color-preto: #000;
   }
 `;
