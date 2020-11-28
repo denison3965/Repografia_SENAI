@@ -31,6 +31,10 @@ function funcionarios() {
               <Tabela> 
                 <Tabela_Funcionarios />
               </Tabela>
+
+              <Tabela> 
+                <Tabela_Funcionarios />
+              </Tabela>
           </Adm_Area>
       </Container>
   );

@@ -20,8 +20,14 @@ export const Titulo = styled.div`
 export const Exit_Area = styled.div`
   margin-right: 30px;
   color: #666;
+
+  @media only screen and (max-width: 1400px) {
+    margin-right: 200px;
+}
+  
 `;
 
 export const User_Info = styled.div`
   display: flex;
+  margin-right: 200px;
 `;
