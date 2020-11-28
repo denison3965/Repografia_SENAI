@@ -4,11 +4,10 @@ export const Container = styled.div`
     display: flex;
     flex-wrap:wrap;
     width: 100%;
-    height: 290vh;
+    height: 310vh;
     background-color: var(--color-branco);
-
-    html, body{
-        height: 100%
+    p {
+        font-weight: 300;
     }
 
     .form_esquerda{
@@ -19,7 +18,8 @@ export const Container = styled.div`
         flex-direction: row;
         justify-content: center;
         align-content: center;
-        margin-bottom: -30vh;
+        margin-bottom: -38vh;
+        margin-top: -25vh;
     }
     .form_direita{
         width: 50%;
@@ -29,50 +29,97 @@ export const Container = styled.div`
         flex-direction: column;
         justify-content: center;
         align-content: center;
-        margin-bottom: -30vh;
+        margin-bottom: -38vh;
+        margin-top: -25vh;
     }
     .form_baixo{
         width: 100%;
-        height: 25%;
+        height: 33%;
         display:flex;
         flex-wrap: wrap;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        background-color: var(--color-branco)
+        background: hidden;
+    }
+
+   .div_titulo_form{
+        width: 100%;
+        height: min-content;
+        border-bottom: solid;
+        border-width: 1px;
+    }
+    .titulo_form{
+        width: 100%;
+        height: 95%;
+        margin-top: 2.2%;
+        margin-bottom: 2.2%;
+        text-align: center; 
+        font-weight: bold;
     }
 
     .inf_solicitacao{
         width:40vw;
-        height:50vh;
+        height:70vh;
+        max-width: 40vw;
+        max-height: 70vh;
         border: solid;
         border-width: 1px;
         border-radius:2px;
-        margin-left: 1vw;
         margin-right: -5vw;
         margin-bottom: 2vh;
+        font-size: 1.2vw;
         background-color: var(--color-azulMaisClaro);
     }
+    .div1_informacao{
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        width: 100%;
+        height: 100%;
+    }
+    .p_esquerdo{
+        width: 40%;
+        margin-bottom: -5vh;
+        margin-left: 2%;
+        text-align: center;
+    }
+    .p_direito{
+        width:48%;
+        margin-bottom: -5vh;
+        margin-right: 5%;
+        text-align: center;
+    }
+
+    form div div p{
+
+    }
+ 
+
+
     .inf_requisicao{
         width:40vw;
         height: 100vh;
+        max-width: 40vw;
+        max-height: 100vh;
         border: solid;
         border-width: 1px;
         border-radius:2px;
-        margin-left: 1vw;
         margin-right: -5vw;
         margin-top: 2vh;
         background-color: var(--color-azulMaisClaro);
     }
     .acabamento{
         width:40vw;
-        height: 122vh;
+        height: 142vh;
+        max-width: 40vw;
+        max-height: 142vh;
         border: solid;
         border-width: 1px;
         margin-left: -6vw;
         background-color: var(--color-azulMaisClaro);
     }
-    .div_dropdown{
+    .div_dropdown_form_direita{
         width: 40vw;
         height: 14.2vh;
         margin-left: -6vw;
@@ -82,9 +129,21 @@ export const Container = styled.div`
         flex-wrap: wrap;
         flex-direction: row;
     }
-    .dropdown{
+    .dropdown_form_direita{
         width: 15vw;
         height: 9vh;
+        margin: 5%;
+        margin-left: 2.7vw;
+        border: solid;
+        border-width: 1px;
+        border-radius: 2px;
+        margin-bottom: 5vh;
+        font-size:20px;
+        background-color: var(--color-azulMaisClaro);
+    }
+    .dropdown_form_baixo{
+        width: 13vw;
+        height: 7vh;
         margin: 5%;
         margin-left: 2.7vw;
         border: solid;
@@ -108,16 +167,18 @@ export const Container = styled.div`
     .div_upload{
         width: 70vw;
         height: 40vh;
-        border: 1px dashed black;
+        border: 1px dashed var(--color-preto);
         background: hidden;
         border-radius: 65px;
         text-align: center;
+        margin-bottom: 6vh;
     }
     .tittle_upload{
         width: 70vw;
         font-size: 2vw;
         background-color:white;
         text-align: center;
+        margin-left: -1.5vw;
     }
     .text_upload{
         font-size: 1.5vw;
@@ -137,5 +198,32 @@ export const Container = styled.div`
         padding-bottom: 2vh;
         padding-right: 17.5vw;
         padding-left: 17.5vw;
+    }
+    .img_cloud{
+        margin-left: -2.5%;
+        margin-top: 3%;
+        margin-bottom:3%;
+        width: 5vw;
+        height: 10vh;
+        position: absolute;
+    }
+    .sair--button{
+        cursor: pointer;
+        height: 2vh;
+        width: 4vw;
+        color: #626262;
+        position: absolute;
+        margin-left: 93%;
+    }
+    .div_pai--button{
+        width: 100%;
+    }
+    option{
+        font-size: 16px;
+    }
+    @media only screen and (max-width: 779px) {
+        .img_cloud {
+            margin-top: -1%;
+        }
     }
 `;
