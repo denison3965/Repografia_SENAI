@@ -113,7 +113,8 @@ export class Tabela_De_Historico extends Component {
           register.coordenador.toLowerCase().indexOf(this.state.search) !== -1 ||
           register.departamento.toLowerCase().indexOf(this.state.search) !== -1 ||
           register.cc.toLowerCase().indexOf(this.state.search) !== -1 ||
-          register.avaliado.toLowerCase().indexOf(this.state.search) !== -1
+          register.nomedarequisicao.toLowerCase().indexOf(this.state.search) !== -1 ||
+          register.feedback.toLowerCase().indexOf(this.state.search) !== -1
       }
     )
 
