@@ -19,23 +19,65 @@ function formulario() {
                 <div className="div_titulo_form"><p className="titulo_form">Informações da solicitação</p></div>
 
                 <div className="div1_informacao">
-                    <p className="p_esquerdo">Nome do Solicitante:</p> 
-                    <p className="p_direito">resposta</p>
-                    <p className="p_esquerdo">Escola solicitante:</p> 
-                    <p className="p_direito">resposta</p>
-                    <p className="p_esquerdo">Telefone:</p> 
-                    <p className="p_direito">resposta</p>
-                    <p className="p_esquerdo">Data de solicitação:</p> 
-                    <p className="p_direito">resposta</p>
-                    <p className="p_esquerdo">Data esperada para a entrega:</p> 
-                    <p className="p_direito">resposta</p>
-                    <p className="p_esquerdo">Número:</p> 
-                    <p className="p_direito">resposta</p>
+                    <div className="div1_p">
+                        <p>Nome do Solicitante:</p> 
+                        <p className="p_resposta">resposta</p>
+                    </div>
+                    <div className="div1_p">
+                        <p>Escola solicitante:</p> 
+                        <p className="p_resposta">resposta</p>
+                    </div>
+                    <div className="div1_p">
+                        <p>Telefone:</p> 
+                        <p className="p_resposta">resposta</p>
+                    </div>
+                    <div className="div1_p">
+                        <p>Data de solicitação:</p> 
+                        <p className="p_resposta">resposta</p>
+                    </div>
+                    <div className="div1_p">
+                        <p>Data esperada para a entrega:</p> 
+                        <p className="p_resposta">resposta</p>
+                    </div>
+                        
                 </div>
             </div>
 
             <div className="inf_requisicao">
-            <div className="div_titulo_form"><p className="titulo_form">Informações da requisição</p></div>
+                <div className="div_titulo_form"><p className="titulo_form">Informações da requisição</p></div>
+
+                <div className="div2_informacao">
+                    <div className="div2_p_input">
+                        <p>Fornecedor:</p> 
+                        <p className="p_resposta">Copiadora Módulo LTDA</p>
+                    </div>
+                    <div className="div2_p_input">
+                        <p>Número:</p> 
+                        <p className="p_resposta">2020-X</p>
+                    </div>
+                    <div className="div2_p_input">
+                        <p>Nome da requisição:</p> 
+                        <input type="text"/>
+                    </div>
+                    
+                    <div className="div2_p_input">
+                        <p>Páginas:</p> 
+                        <input type="number"/>
+                    </div>
+                    <div className="div2_p_input">
+                        <p>Cópias:</p> 
+                        <input type="number"/>
+                    </div>
+                    <div className="div2_p_input">
+                        <p>Total de páginas:</p> 
+                        <p className="p_resposta">00000</p>
+                    </div>     
+                </div>
+                <div className="div_OBS">
+                    <p className="div_OBS_titulo">Observação:</p> 
+                    <input className="div_OBS_input" type="text"/>
+                </div>
+
             </div>
 
         </form>
@@ -58,7 +100,117 @@ function formulario() {
             </div>
 
             <div className="acabamento">
-            <div className="div_titulo_form"><p className="titulo_form">Acabamento</p></div>
+                <div className="div_titulo_form"><p className="titulo_form">Acabamento</p></div>
+                <div className="div1_acabamento">
+
+                    <div className="div_checkbox">
+                        <label className="container">2 Grampos a cavalo
+                            <input type="checkbox"/>
+                            <span className="checkmark"></span>
+                        </label>
+                        <label className="container">Encadernação com espiral
+                            <input type="checkbox"/>
+                            <span className="checkmark"></span>
+                        </label>
+                    </div>
+
+
+                    <div className="div_checkbox">
+                        <label className="container">2 Grampos laterais
+                            <input type="checkbox"/>
+                            <span className="checkmark"></span>
+                        </label>   
+                        <label className="container">Capa em PVC
+                            <input type="checkbox"/>
+                            <span className="checkmark"></span>
+                        </label>                    
+                    </div>
+
+                    <div className="div_checkbox">
+                        <label className="container">Reduzido
+                            <input type="checkbox"/>
+                            <span className="checkmark"></span>
+                        </label>
+                        <label className="container">Capa em papel 150g/m2
+                            <input type="checkbox"/>
+                            <span className="checkmark"></span>
+                        </label>
+                    </div>
+
+                    <div className="div_checkbox">
+                        <label className="container" >Preto e branco
+                            <input type="checkbox"/>
+                            <span className="checkmark"></span>
+                        </label>
+                        <label className="container">Colorido
+                            <input type="checkbox"/>
+                            <span className="checkmark"></span>
+                        </label>
+                    </div>
+
+                    <div className="div_checkbox">
+                        <label className="container">Frente e verso
+                            <input type="checkbox"/>
+                            <span className="checkmark"></span>
+                        </label>
+                        <label className="container">
+                            <input type="checkbox"/>
+                        </label>
+                    </div>
+
+
+                </div>
+                <div className="acabamento_sub_titulo_form"><p className="titulo_form">Formato</p></div>
+                <div className="div2_acabamento">
+
+                    <div className="div_checkbox">
+                        <label className="container">A3
+                            <input type="checkbox"/>
+                            <span className="checkmark"></span>
+                        </label>
+                        <label className="container">A4
+                            <input type="checkbox"/>
+                            <span className="checkmark"></span>
+                        </label>
+                    </div>
+
+
+                    <div className="div_checkbox">
+                        <label className="container">A5
+                            <input type="checkbox"/>
+                            <span className="checkmark"></span>
+                        </label>   
+                        <label className="container">Outros(colocar em OBS)
+                            <input type="checkbox"/>
+                            <span className="checkmark"></span>
+                        </label>                    
+                    </div>
+                </div>
+                <div className="acabamento_sub_titulo_form"><p className="titulo_form">Suporte</p></div>
+                <div className="div3_acabamento">
+                <div className="div_checkbox">
+                        <label className="container">Zipdrive
+                            <input type="checkbox"/>
+                            <span className="checkmark"></span>
+                        </label>
+                        <label className="container">Papel
+                            <input type="checkbox"/>
+                            <span className="checkmark"></span>
+                        </label>
+                    </div>
+
+
+                    <div className="div_checkbox">
+                        <label className="container">E-mail
+                            <input type="checkbox"/>
+                            <span className="checkmark"></span>
+                        </label>   
+                        <label className="container">Outros (colocar em OBS)
+                            <input type="checkbox"/>
+                            <span className="checkmark"></span>
+                        </label>                    
+                    </div>
+                </div>
             </div> 
 
             <div className="div_assinatura">
@@ -79,7 +231,7 @@ function formulario() {
                 <option value="Indefinido"> Ciclano Sobrenome</option>
             </select>
 
-            <h5 className='tittle_upload'>Upload do exemplar:</h5>
+            <h5 className='titulo_upload'>Upload do exemplar:</h5>
 
             <div className="div_upload">
                 <img className="img_cloud" src={IconCloud} alt=""/>
