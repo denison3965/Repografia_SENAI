@@ -19,7 +19,7 @@ function Mesa_Grafico() {
         
         <User_Box_Info />
 
-        <div style={{width: "70vw", marginLeft:"100px"}}>
+        <div style={{width: "80vw", marginLeft:"30px"}}>
           <hr></hr>
         </div>
         

@@ -19,8 +19,6 @@ export class Tabela_Registros extends Component {
       perPage:5,
       currentPage: 0,
       search: '',
-      crumbs: ['Inicio', 'Registros']
-      
 
     }
     this.handlePageClick = this.handlePageClick.bind(this);

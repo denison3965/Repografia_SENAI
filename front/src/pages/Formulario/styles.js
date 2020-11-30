@@ -4,7 +4,7 @@ export const Container = styled.div`
     display: flex;
     flex-wrap:wrap;
     width: 100%;
-    height: 310vh;
+    height: 360vh;
     background-color: var(--color-branco);
     p {
         font-weight: 300;
@@ -12,7 +12,7 @@ export const Container = styled.div`
 
     .form_esquerda{
         width: 50%;
-        height: 75%;
+        height: 80%;
         display:flex;
         flex-wrap: wrap;
         flex-direction: row;
@@ -23,7 +23,7 @@ export const Container = styled.div`
     }
     .form_direita{
         width: 50%;
-        height: 75%;
+        height: 80%;
         display:flex;
         flex-wrap: wrap;
         flex-direction: column;
@@ -60,9 +60,9 @@ export const Container = styled.div`
 
     .inf_solicitacao{
         width:40vw;
-        height:70vh;
+        height:110vh;
         max-width: 40vw;
-        max-height: 70vh;
+        max-height: 110vh;
         border: solid;
         border-width: 1px;
         border-radius:2px;
@@ -72,6 +72,7 @@ export const Container = styled.div`
         background-color: var(--color-azulMaisClaro);
     }
     .div1_informacao{
+        padding: 2vw;
         display: flex;
         flex-wrap: wrap;
         flex-direction: row;
@@ -82,13 +83,14 @@ export const Container = styled.div`
         width: 40%;
         margin-bottom: -5vh;
         margin-left: 2%;
-        text-align: center;
+        text-align: left;
     }
     .p_direito{
         width:48%;
+        max-width: 48%;
         margin-bottom: -5vh;
         margin-right: 5%;
-        text-align: center;
+        text-align: left;
     }
 
     form div div p{
@@ -111,9 +113,9 @@ export const Container = styled.div`
     }
     .acabamento{
         width:40vw;
-        height: 142vh;
+        height: 182vh;
         max-width: 40vw;
-        max-height: 142vh;
+        max-height: 182vh;
         border: solid;
         border-width: 1px;
         margin-left: -6vw;
