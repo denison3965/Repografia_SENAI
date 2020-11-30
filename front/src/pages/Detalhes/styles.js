@@ -49,6 +49,13 @@ export const Information = styled.div`
           .registro_valor{
             margin-left: 2vw;
           }
+          .registro_valor_img{
+            margin-left: 2vw;
+            display: flex;
+            p {
+              margin-left: 10px
+            }
+          }
         }
 
       .right-side{

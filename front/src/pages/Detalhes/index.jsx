@@ -8,6 +8,9 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import { Info } from '../../components/Tabela_Registros/styles';
 
+import Impressao from '../../assets/img/impressao.png'
+import Baixar from '../../assets/img/seta-para-baixo.png'
+
 
 function Detalhes(props) {
 
@@ -68,7 +71,10 @@ function Detalhes(props) {
 
                   <div className="registro_item">
                     <div className="registro_chave"><strong>Cópias:</strong></div>
-                    <div className="registro_valor"> </div>
+                    <div className="registro_valor_img">
+                      <img src={Baixar} alt="impressora" style={{width: 20, height: 20}}/>
+                      <p> apostila.pdf</p>   
+                    </div>
                   </div>
 
                   <div className="registro_item">
@@ -110,13 +116,16 @@ function Detalhes(props) {
                   </div>
 
                   <div className="registro_item">
-                    <div className="registro_chave"><strong>Numero da requisicao:</strong></div>
+                    <div className="registro_chave"><strong>Acabamento:</strong></div>
                     <div className="registro_valor"> </div>
                   </div>
 
                   <div className="registro_item">
-                    <div className="registro_chave"><strong>Numero da requisicao:</strong></div>
-                    <div className="registro_valor"> </div>
+                    <div className="registro_chave"><strong>Imprimir:</strong></div>
+                    <div className="registro_valor_img">
+                      <img src={Impressao} alt="impressora" style={{width: 25, height: 25}}/>
+                      <p> Click aqui para impremir</p>   
+                    </div>
                   </div>
 
                 </div>
