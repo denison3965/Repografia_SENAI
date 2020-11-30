@@ -9,8 +9,14 @@ export const Container = styled.div`
 export const Adm_Area = styled.div`
     width: 88vw;
     min-height: 100vh;
-    margin-left: 200px;
-    position: absolute;
+    padding-left: 30px;
+
+    @media only screen and (max-width: 1400px) {
+      padding-left: 5rem;
+    }
+    @media only screen and (max-width: 1090px) {
+      padding-left: 10rem;
+    }
 
       .User_Box_Info_Area{
         margin-top: 20px;
@@ -35,6 +41,8 @@ export const Tabela = styled.div`
 
 export const Menu_Area = styled.div`
   width: 200px;
+
+
 
 `;
 

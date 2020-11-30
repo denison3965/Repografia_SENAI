@@ -18,7 +18,7 @@ const Routes = () => (
             <Route path="/Formulario" component={Formulario}/>
             <Route path="/graficos" component={Graficos}/>
             <Route path="/Perfil" component={Perfil}/>
-            <Route path="/detalhes" render={(props) => <Detalhes {...props} data=""/>}/>
+            <Route path="/detalhes/:nif" render={(props) => <Detalhes {...props} data=""/>}/>
             <Route path="/adm/funcionarios-cadastrados" component={Funcionarios}/>
         </Switch>
     </BrowserRouter>

@@ -3,9 +3,10 @@ import Nav_Lateral from '../../components/Nav_Lateral'
 import User_Box_Info from '../../components/User_Box_Info'
 import Tabela_Registros from '../../components/Tabela_Registros'
 
-import { Container, Adm_Area, Menu_Area } from './styles';
+import { Container, Adm_Area, Menu_Area, Information } from './styles';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import { Info } from '../../components/Tabela_Registros/styles';
 
 
 function Detalhes(props) {
@@ -33,9 +34,21 @@ function Detalhes(props) {
                 <hr></hr>
               </div>
 
-          </Adm_Area>
-          <p>{registro}</p>
+              <Information>
+                <div className="left-side">
+
+                </div>
+                <div className="right-side">
+
+                </div>
+
+              </Information>
+
+              <p>{registro}</p>
           <p>basta pegar a variavel registro que tera o codigo do regidtro a ser mostrado e fazer um fetch para ppegar o respectivo registro</p>
+
+          </Adm_Area>
+          
       </Container>
   );
 }

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  width: 200px;
+  width: 225px;
   height:100%;
   position: fixed;
   background-color: var(--color-azul);

@@ -1,9 +1,6 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-
-    margin-left: 30px;
-    margin-right:30px;
   .pagination {
     margin: 15px auto;
     display: flex;
@@ -38,7 +35,6 @@ export const Info = styled.div`
     justify-content: space-between; 
 `;
 export const Tabela = styled.div`
-
 `;
 export const Pesquisa = styled.div`
     display: flex;
@@ -57,3 +53,4 @@ export const Input = styled.input`
     width: 150px;
     padding-left: 10px;
 `;
+

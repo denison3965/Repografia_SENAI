@@ -9,15 +9,21 @@ export const Container = styled.div`
 export const Adm_Area = styled.div`
     width: 88vw;
     min-height: 100vh;
-    margin-left: 200px;
-    position: absolute;
+    padding-left: 30px;
+    
+    @media only screen and (max-width: 1400px) {
+      padding-left: 5rem;
+    }
+    @media only screen and (max-width: 1090px) {
+      padding-left: 10rem;
+    }
+
 
       .User_Box_Info_Area{
         margin-top: 20px;
 
 
         hr{
-          margin-top: 50px;
           margin-left:30px;
           margin-right:30px;
           margin-bottom: 30px;
@@ -53,5 +59,23 @@ export const Navegation = styled.nav`
         li{
           color: #666;
         }
+    }
+`;
+export const AddUser = styled.div`
+  display: flex;
+  margin-left: 40px;
+  margin-bottom: -25px;
+  margin-top: 30px;
+
+    
+    img{
+      width: 25px;
+      height: 25px;
+
+    }
+    p{
+      color: #666;
+      margin-top: 3px;
+      margin-left: 5px;
     }
 `;

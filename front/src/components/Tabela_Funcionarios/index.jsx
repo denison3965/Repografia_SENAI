@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import ReactPaginate from 'react-paginate'
 import SaibaMais from '../SaibaMais'
 import { Container, Info, Tabela, Title, Pesquisa, Input  } from './styles';
+import IconExcluir from '../../assets/img/excluir.png'
+import IconSenha from '../../assets/img/senha.png'
 
 export class Tabela_Funcionarios extends Component {
 
@@ -96,7 +98,6 @@ export class Tabela_Funcionarios extends Component {
     // slice = data.slice(15, 15 + 5) 
     //slice = 20, ou seja na pagina ira commecar a listar pelo numero 20
     var slice = data.slice(this.state.offset, this.state.offset + this.state.perPage)
-    console.log(slice)
 
     this.setState({
       pageCount: Math.ceil(data.length / this.state.perPage),
@@ -108,6 +109,25 @@ export class Tabela_Funcionarios extends Component {
  
   updateSearch(event) {
     this.setState({search: event.target.value.substr(0,20)})
+  }
+
+  //Metodo para excluir funcionario
+  excluirUser(nif) {
+    let res = window.confirm(`Tem certeza que deseja excluir o usuario ${nif.target.name} ?`)
+
+    if(res) {
+      //Fazer a exclusao do usuario usando o nif.target.alt para acessar o nif
+      alert('Usuario excluido com sucesso')
+    }
+  }
+
+  setarSenha(nif) {
+    let res = window.confirm(`Tem certeza que deseja restaurar a senha do funcionario ${nif.target.name} ?     Se sim a senha sera restaurada para 'senai115'`)
+    
+    if (res) {
+      //Setar senha para 'senai115' no banco de dados usando o nif.target.alt para acessar o nif
+      alert(`senha do usuario ${nif.target.name} foi restaurada para 'senai115' com sucesso`)
+    }
   }
   
 
@@ -147,7 +167,8 @@ export class Tabela_Funcionarios extends Component {
                 <th scope="col">email</th>
                 <th scope="col">fone</th>
                 <th scope="col">Data de criação</th>
-                <th scope="col">ação</th>
+                <th scope="col">excluir</th>
+                <th scope="col">restaurar senha</th>
               </tr>
             </thead>
             <tbody>
@@ -161,7 +182,9 @@ export class Tabela_Funcionarios extends Component {
                     <td>{element.email}</td>
                     <td>{element.fone}</td>
                     <td>{element.datacriacao}</td>
-                    <td></td>
+                    <td><img onClick={this.excluirUser.bind(this)} src={IconExcluir} alt={element.nif} name={element.nome} style={{height: '20x', width: '20px', marginLeft: '15px', cursor: 'pointer'}}/></td>
+                    {/*Estou passando o nif da pessoa a ser excluida pelo alt da imagem */}
+                    <td><img onClick={this.setarSenha.bind(this)} src={IconSenha} alt={element.nif} name={element.nome} style={{height: '20x', width: '20px', marginLeft: '50px', cursor: 'pointer'}}/></td>
                     
 
                   </tr>
