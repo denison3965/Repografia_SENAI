@@ -29,7 +29,7 @@ function formulario() {
                     <p className="p_direito">resposta</p>
                     <p className="p_esquerdo">Data esperada para a entrega:</p> 
                     <p className="p_direito">resposta</p>
-                    <p className="p_esquerdo">Número</p> 
+                    <p className="p_esquerdo">Número:</p> 
                     <p className="p_direito">resposta</p>
                 </div>
             </div>
