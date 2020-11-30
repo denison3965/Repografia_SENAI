@@ -8,7 +8,7 @@ function SaibaMais(props) {
   return (
       <Container >
         <Link to={{
-          pathname: `/detalhes/:${props.data}`,
+          pathname: `/${props.caminho}/:${props.data}`,
           state: {registro: [props.data]}
         }} >
           <img src={SaibaMaisInfo} alt="Saiba mais" style={{width: '25px', height: '25px'}}/>

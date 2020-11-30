@@ -15,7 +15,7 @@ export const Container = styled.div`
     color: #666666;
     background-color: #FFFFFF;
     text-align: center;
-    font-size: 16px;
+    font-size: 20px;
     cursor: pointer;
   }
   .localizacao{
@@ -31,7 +31,7 @@ export const Container = styled.div`
     padding: 5px 11px;
     text-align: center;
     display: inline-block;
-    font-size: 16px;
+    font-size: 25px;
     cursor: pointer;
   }
   .seu_historico{
@@ -44,7 +44,7 @@ export const Container = styled.div`
     padding: 5px 11px;
     text-align: center;
     display: inline-block;
-    font-size: 16px;
+    font-size: 25px;
     cursor: pointer;
   }
   .informacoes{
@@ -53,21 +53,32 @@ export const Container = styled.div`
   }
   .telefone{
     position: relative;
+    font-size: 30px;
+    margin-bottom: 30px;
   }
   .email{
     position: relative;
+    font-size: 30px;
+    margin-bottom: 30px;
   }
   .numero{
     position: relative;
+    font-size: 30px;
+    margin-bottom: 30px;
   }
   .cargo{
     position: relative;
+    font-size: 30px;
+    margin-bottom: 30px;
   }
   .nif{
     position: relative;
+    font-size: 30px;
+    margin-bottom: 30px;
   }
   .informacao{
     position: absolute;
+    margin-bottom: 30px;
     left: 55vw;
   }
   .senha_posicao{
@@ -87,10 +98,20 @@ export const Container = styled.div`
     top: 72vh;
     left: 33vw;
     background-color: none;
-    padding: 5px 75px;
+    padding: 10px 150px;
     text-align: center;
     display: inline-block;
-    font-size: 16px;
-    border: 2px solid #c11b04;
+    font-size: 25px;
+    border: 2px dashed #c11b04;
+  }
+  .posicao_avatar{
+    position: absolute;
+  }
+  .posicao_maisinfo{
+    position: relative;
+    align-items: center;
+    display: list-item;
+    left: 2.5vw;
+    cursor: pointer;
   }
 `;

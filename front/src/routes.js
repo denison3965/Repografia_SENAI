@@ -6,20 +6,24 @@ import Adm_Registros from './pages/Adm_Registros'
 import Perfil from './pages/Perfil'
 import Historico from './pages/Perfil_Historico'
 import Detalhes from './pages/Detalhes'
+import DetalhesHistorico from './pages/Detalhes_Historico'
 import Graficos from './pages/Mesa_Grafico'
 import Funcionarios from './pages/funcionarios'
+import Cadastro from './pages/Cadastro'
 
 const Routes = () => (
     <BrowserRouter>
         <Switch>
             <Route exact path="/" component={Login}/>
-            <Route path="/adm/registros" component={Adm_Registros} />
+            <Route path="/registros" component={Adm_Registros} />
             <Route path="/Historico" component={Historico} />
             <Route path="/Formulario" component={Formulario}/>
             <Route path="/graficos" component={Graficos}/>
             <Route path="/Perfil" component={Perfil}/>
             <Route path="/detalhes/:nif" render={(props) => <Detalhes {...props} data=""/>}/>
-            <Route path="/adm/funcionarios-cadastrados" component={Funcionarios}/>
+            <Route path="/detalhes-historicos/:nif" render={(props) => <DetalhesHistorico {...props} data=""/>}/>
+            <Route path="/funcionarios-cadastrados" component={Funcionarios}/>
+            <Route path="/cadastro" component={Cadastro} />
         </Switch>
     </BrowserRouter>
 )

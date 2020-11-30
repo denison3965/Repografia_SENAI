@@ -17,9 +17,12 @@ function Mesa_Grafico() {
 
       <InfoBox>
         
-        <User_Box_Info />
+        <div className="user_box_info">
+          <User_Box_Info />
+        </div>
 
-        <div style={{width: "70vw", marginLeft:"100px"}}>
+
+        <div style={{width: "80vw", marginLeft:"30px"}}>
           <hr></hr>
         </div>
         

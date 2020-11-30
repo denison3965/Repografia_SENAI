@@ -29,7 +29,7 @@ function Nav_Lateral(props) {
                 <li>
                     <div className="Nav_Lateral_li_esquerdo">
                         <img src={Icon_Banco} style={{width:"25px", height:"25px"}} alt="banco img"/>
-                        <Link to="/adm/registros"><div className="Nav_Lateral_Icon_title">Registros</div></Link>
+                        <Link to="/registros"><div className="Nav_Lateral_Icon_title">Registros</div></Link>
                     </div>
                     {
                         ativado == "1" ? (
@@ -54,7 +54,7 @@ function Nav_Lateral(props) {
                 </li>
                 <li> 
 
-                    <Link to="/adm/funcionarios-cadastrados">
+                    <Link to="/funcionarios-cadastrados">
                         <div className="Nav_Lateral_li_esquerdo">
                             <img src={Icon_Pessoa} style={{width:"25px", height:"25px"}} alt="pessoas img"/>
                             <div className="Nav_Lateral_Icon_title">Funcionários </div>
@@ -73,11 +73,14 @@ function Nav_Lateral(props) {
 
         <div className="Nav_Lateral_Bottom">
             <NavIcons>
-                <li>
-                    <img src={Icon_Folha} style={{width:"25px", height:"25px"}} alt="formulario"/>
-                    <div className="Nav_Lateral_Icon_title">Formulario para requisicao</div>
-                </li>
+                <Link to='/formulario'>
+                    <li>
+                        <img src={Icon_Folha} style={{width:"25px", height:"25px"}} alt="formulario"/>
+                        <div className="Nav_Lateral_Icon_title">Formulario para requisicao</div>
+                    </li>
+                </Link>
             </NavIcons>
+            
         </div>
         
       </Container>

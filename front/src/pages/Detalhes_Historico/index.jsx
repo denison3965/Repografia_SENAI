@@ -1,9 +1,8 @@
 import React from 'react';
-import Nav_Lateral from '../../components/Nav_Lateral'
-import User_Box_Info from '../../components/User_Box_Info'
-import Tabela_Registros from '../../components/Tabela_Registros'
+import Header from '../../components/Header'
 
-import { Container, Adm_Area, Menu_Area, Information } from './styles';
+
+import { Container, Adm_Area, Header_Area, Information } from './styles';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { Info } from '../../components/Tabela_Registros/styles';
@@ -12,7 +11,7 @@ import Impressao from '../../assets/img/impressao.png'
 import Baixar from '../../assets/img/seta-para-baixo.png'
 
 
-function Detalhes(props) {
+function DetalhesHistorico(props) {
 
   //pegando o node do registro a ser mostrado ( tem que pegar o id depois )
   console.log(props.location.state.registro[0])
@@ -27,15 +26,11 @@ function Detalhes(props) {
 
   return (
       <Container>
-           <Menu_Area>
-              <Nav_Lateral ativado="1" /> 
-          </Menu_Area>
+          <Header_Area>
+              <Header titulo="Historico" /> 
+          </Header_Area>
 
           <Adm_Area>
-              <div className="User_Box_Info_Area">
-                <User_Box_Info />
-                <hr></hr>
-              </div>
 
               <Information>
                 <div className="left-side">
@@ -129,7 +124,34 @@ function Detalhes(props) {
                   </div>
 
                 </div>
+                <div className="feedback">
+                    <p><strong>Seu feedback?</strong></p>
 
+                    <div className=""> 
+
+                      <div className="custom-control custom-radio">
+                        <input type="radio" id="customRadio1" name="customRadio" className="custom-control-input"/>
+                        <label className="custom-control-label" for="customRadio1">Chegou!!!!</label>
+                      </div>
+                      <div className="custom-control custom-radio">
+                        <input type="radio" id="customRadio2" name="customRadio" className="custom-control-input"/>
+                        <label className="custom-control-label" for="customRadio2">Chegou, porém com uma qualidade ruim</label>
+                      </div>
+                      <div className="custom-control custom-radio mb-3">
+                        <input type="radio" id="customRadio3" name="customRadio" className="custom-control-input"/>
+                        <label className="custom-control-label" for="customRadio3">Não Chegou</label>
+                      </div>
+
+                    </div>
+
+
+                    <button type="button" class="btn btn-primary">Enviar</button>
+                </div>
+
+                <div className="cancelar">
+                    <p><strong>Deseja cancelar esse pedido ?</strong></p>
+                    <button type="button" class="btn btn-light">Cancelar</button>
+                </div>
               </Information>
 
               <p>{registro}</p>
@@ -141,4 +163,4 @@ function Detalhes(props) {
   );
 }
 
-export default Detalhes;
+export default DetalhesHistorico;
