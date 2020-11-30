@@ -6,6 +6,7 @@ import Adm_Registros from './pages/Adm_Registros'
 import Perfil from './pages/Perfil'
 import Historico from './pages/Perfil_Historico'
 import Detalhes from './pages/Detalhes'
+import DetalhesHistorico from './pages/Detalhes_Historico'
 import Graficos from './pages/Mesa_Grafico'
 import Funcionarios from './pages/funcionarios'
 
@@ -19,6 +20,7 @@ const Routes = () => (
             <Route path="/graficos" component={Graficos}/>
             <Route path="/Perfil" component={Perfil}/>
             <Route path="/detalhes/:nif" render={(props) => <Detalhes {...props} data=""/>}/>
+            <Route path="/detalhes-historicos/:nif" render={(props) => <DetalhesHistorico {...props} data=""/>}/>
             <Route path="/adm/funcionarios-cadastrados" component={Funcionarios}/>
         </Switch>
     </BrowserRouter>

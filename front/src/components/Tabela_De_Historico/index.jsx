@@ -163,7 +163,7 @@ export class Tabela_De_Historico extends Component {
                     <td>{element.coordenador}</td>
                     <td>{element.feedback}</td>
                     <td>{element.data}</td>
-                    <td><SaibaMais data={element.nomedarequisicao}/></td>
+                    <td><SaibaMais caminho="detalhes-historicos" data={element.nomedarequisicao}/></td>
                     
 
                   </tr>
