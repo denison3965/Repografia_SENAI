@@ -36,9 +36,88 @@ function Detalhes(props) {
 
               <Information>
                 <div className="left-side">
+                  <div className="registro_item">
+                    <div className="registro_chave"><strong>Numero da requisicao:</strong></div>
+                    <div className="registro_valor"> </div>
+                  </div>
+
+                  <div className="registro_item">
+                    <div className="registro_chave"><strong>Nome da requisicao :</strong></div>
+                    <div className="registro_valor"> </div>
+                  </div>
+
+                  <div className="registro_item">
+                    <div className="registro_chave"><strong>Nome do solicitante: </strong></div>
+                    <div className="registro_valor"> </div>
+                  </div>
+
+                  <div className="registro_item">
+                    <div className="registro_chave"><strong>cc:</strong></div>
+                    <div className="registro_valor"> </div>
+                  </div>
+
+                  <div className="registro_item">
+                    <div className="registro_chave"><strong>Departamento:</strong></div>
+                    <div className="registro_valor"> </div>
+                  </div>
+
+                  <div className="registro_item">
+                    <div className="registro_chave"><strong>Arquivo solicitado para copia: </strong></div>
+                    <div className="registro_valor"> </div>
+                  </div>
+
+                  <div className="registro_item">
+                    <div className="registro_chave"><strong>Cópias:</strong></div>
+                    <div className="registro_valor"> </div>
+                  </div>
+
+                  <div className="registro_item">
+                    <div className="registro_chave"><strong>Paginas do documento:</strong></div>
+                    <div className="registro_valor"> </div>
+                  </div>
+
+                  <div className="registro_item">
+                    <div className="registro_chave"><strong>Total de paginas:</strong> </div>
+                    <div className="registro_valor"> </div>
+                  </div>
+
+                  <div className="registro_item">
+                    <div className="registro_chave"><strong>Coordenador: </strong></div>
+                    <div className="registro_valor"> </div>
+                  </div>
 
                 </div>
                 <div className="right-side">
+
+                  <div className="registro_item">
+                    <div className="registro_chave"><strong>Avaliado:</strong></div>
+                    <div className="registro_valor"> </div>
+                  </div>
+
+                  <div className="registro_item">
+                    <div className="registro_chave"><strong>Data do pedido:</strong></div>
+                    <div className="registro_valor"> </div>
+                  </div>
+
+                  <div className="registro_item">
+                    <div className="registro_chave"><strong>Data prevista pata entrega:</strong></div>
+                    <div className="registro_valor"> </div>
+                  </div>
+
+                  <div className="registro_item">
+                    <div className="registro_chave"><span style={{color: 'red', textTransform: ''}}>Observação:</span></div>
+                    <div className="registro_valor"> </div>
+                  </div>
+
+                  <div className="registro_item">
+                    <div className="registro_chave"><strong>Numero da requisicao:</strong></div>
+                    <div className="registro_valor"> </div>
+                  </div>
+
+                  <div className="registro_item">
+                    <div className="registro_chave"><strong>Numero da requisicao:</strong></div>
+                    <div className="registro_valor"> </div>
+                  </div>
 
                 </div>
 

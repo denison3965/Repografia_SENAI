@@ -34,15 +34,35 @@ export const Information = styled.div`
   margin-right: 30px;
   margin-left: 30px;
 
+  @media only screen and (max-width: 1300px) {
+      flex-direction: column;
+      margin-left: 10%;
+  }
+
+        .registro_item{
+          display: flex;
+          margin-bottom: 30px;
+
+          .registro_chave{
+            margin-left: 5vw;
+          }
+          .registro_valor{
+            margin-left: 2vw;
+          }
+        }
+
       .right-side{
         flex:1;
-        height: 50px;
-        background-color: red;
+
+        
+
       }
+
       .left-side{
         flex:1;
-        height: 50px;
-        background-color: blue;
+
+
+
       }
 `; 
 
