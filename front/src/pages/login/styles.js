@@ -79,7 +79,7 @@ export const Container = styled.div`
     position: relative;
     left: 35vw;
     width: 12vw;
-    top: 71.5%;
+    top: 74.5%;
     z-index: 999;
 
     font-family: Roboto;
