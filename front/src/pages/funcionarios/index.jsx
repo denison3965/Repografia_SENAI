@@ -18,7 +18,7 @@ function funcionarios() {
           <Adm_Area>
               <div className="User_Box_Info_Area">
                 <User_Box_Info />
-                <Link>
+                <Link to="/cadastro">
                   <AddUser>
                       <img src={AddIcon} alt="usuario"/>
                       <p>Adicionar um novo funcionario</p>

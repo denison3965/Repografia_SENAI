@@ -14,6 +14,9 @@ export const InfoBox = styled.div`
    width: 88vw;
    min-height: 100vh;
    padding-left: 30px;
+   .user_box_info{
+     margin-top: 20px;
+   }
 
 
    @media only screen and (max-width: 1400px) {
