@@ -10,6 +10,7 @@ import DetalhesHistorico from './pages/Detalhes_Historico'
 import Graficos from './pages/Mesa_Grafico'
 import Funcionarios from './pages/funcionarios'
 import Cadastro from './pages/Cadastro'
+import PerfilAdm from './pages/Perfil_Adm'
 
 const Routes = () => (
     <BrowserRouter>
@@ -24,6 +25,7 @@ const Routes = () => (
             <Route path="/detalhes-historicos/:nif" render={(props) => <DetalhesHistorico {...props} data=""/>}/>
             <Route path="/funcionarios-cadastrados" component={Funcionarios}/>
             <Route path="/cadastro" component={Cadastro} />
+            <Route path="/perfil-adm" component={PerfilAdm} />
         </Switch>
     </BrowserRouter>
 )
