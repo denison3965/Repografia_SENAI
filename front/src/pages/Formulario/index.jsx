@@ -8,6 +8,7 @@ function formulario() {
   return (
     <Container>
         <Header/>
+        <h3 className="titulo_do_formulario">Solicitação de Serviços Reprográficos</h3>
         <div className="div_pai--button">
             <div onClick="Voltar" className="sair--button"><p>Voltar</p></div>
         </div>
@@ -57,16 +58,16 @@ function formulario() {
                     </div>
                     <div className="div2_p_input">
                         <p>Nome da requisição:</p> 
-                        <input type="text"/>
+                        <input placeholder="Título da sua requisição..." maxlength="50" className="div2_input_text" type="text"/>
                     </div>
                     
                     <div className="div2_p_input">
                         <p>Páginas:</p> 
-                        <input type="number"/>
+                        <input placeholder="0" className="div2_input_number" type="number"/>
                     </div>
                     <div className="div2_p_input">
                         <p>Cópias:</p> 
-                        <input type="number"/>
+                        <input placeholder="0" className="div2_input_number" type="number"/>
                     </div>
                     <div className="div2_p_input">
                         <p>Total de páginas:</p> 
@@ -74,8 +75,8 @@ function formulario() {
                     </div>     
                 </div>
                 <div className="div_OBS">
-                    <p className="div_OBS_titulo">Observação:</p> 
-                    <input className="div_OBS_input" type="text"/>
+                    <p className="div_OBS_titulo">Observação:</p>
+                    <textarea className="div_OBS_input" placeholder="Escreva uma breve observação (não obrigatório)..." maxlength="255"></textarea>
                 </div>
 
             </div>
