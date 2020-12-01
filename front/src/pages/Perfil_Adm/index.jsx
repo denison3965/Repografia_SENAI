@@ -64,7 +64,7 @@ function Adm_Registros() {
            
 
             <div className="password_box2">
-              <button type="button" class="btn btn-secondary">Historico</button>
+              <Link to="/historico-adm"><button type="button" class="btn btn-secondary">Historico</button></Link>
             </div>
 
             <div className="password_box">

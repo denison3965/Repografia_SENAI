@@ -11,6 +11,7 @@ import Graficos from './pages/Mesa_Grafico'
 import Funcionarios from './pages/funcionarios'
 import Cadastro from './pages/Cadastro'
 import PerfilAdm from './pages/Perfil_Adm'
+import HistoricoAdm from './pages/Historico_Adm'
 
 const Routes = () => (
     <BrowserRouter>
@@ -26,6 +27,7 @@ const Routes = () => (
             <Route path="/funcionarios-cadastrados" component={Funcionarios}/>
             <Route path="/cadastro" component={Cadastro} />
             <Route path="/perfil-adm" component={PerfilAdm} />
+            <Route path="/historico-adm" component={HistoricoAdm} />
         </Switch>
     </BrowserRouter>
 )

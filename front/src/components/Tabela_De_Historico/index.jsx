@@ -122,7 +122,7 @@ export class Tabela_De_Historico extends Component {
       <Container>
 
         <Info>
-          <Title>Registros</Title>
+          <Title>Historico de Registros</Title>
           <Pesquisa>
             <p>pesquisa:</p>
             <Input
