@@ -3,6 +3,7 @@ import { Container } from './styles';
 import Header from '../../components/Header';
 import Avatar from '../../assets/img/avatar.png';
 import MaisInfo from '../../assets/img/maisInfo.png';
+import { Link } from 'react-router-dom'
 
 function perfil() {
   return (
@@ -16,7 +17,7 @@ function perfil() {
 
           <div className="localizacao">
                 <div className="seu_perfil">Seu Perfil</div>
-                <div className="seu_historico">Seu Histórico</div>
+                <Link to="/historico"><div className="seu_historico">Seu Histórico</div></Link>
           </div>
          
           <hr/>
@@ -42,7 +43,7 @@ function perfil() {
 
           <div>
                 <div className="posicao_requisicao">Nova Requisição
-                <img src={MaisInfo} style={{height: "80px", width: "80px"}} className="posicao_maisinfo" alt="maisInfo"  />
+                <Link to="/formulario"><img src={MaisInfo} style={{height: "80px", width: "80px"}} className="posicao_maisinfo" alt="maisInfo"  /></Link>
                 </div>
           </div>
       </Container>
