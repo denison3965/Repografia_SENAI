@@ -41,10 +41,6 @@ function perfil() {
             <div className="cargo">Cargo:</div>
          </div>
 
-         {/* <div className="senha_posicao">
-                <div>Editar Senha</div>
-          </div> */}
-
          <div className="senha_posicao">
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
               Editar senha
