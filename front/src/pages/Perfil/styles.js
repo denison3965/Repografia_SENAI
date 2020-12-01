@@ -75,11 +75,9 @@ export const Container = styled.div`
     top: 88vh;
     left: 83vw;
     background-color: none;
-    padding: 5px 11px;
     text-align: center;
     display: inline-block;
     font-size: 16px;
-    border: 2px solid #c11b04;
     cursor: pointer;
   }
   .posicao_requisicao{
