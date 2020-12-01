@@ -47,7 +47,7 @@ export const Container = styled.div`
   .entrar_posicao{
     position: relative;
     width:38.5vw;
-    height:30px; 
+    height:45px; 
     left: 15%;
     top: 73%;
   }

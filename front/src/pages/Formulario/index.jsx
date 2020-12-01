@@ -1,16 +1,95 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Container } from './styles';
 import Header from '../../components/Header';
 import  Button  from '../../components/Button'
 import IconCloud from '../../assets/img/iconcloud.png'
 
-function formulario() {
+function Formulario() {
+
+    const [nomeReq, setNomeReq] = useState();
+    const [paginas, setPaginas] = useState(0);
+    const [copias, setCopias] = useState(0);
+    const [totalPaginas, setTotalPaginas] = useState();
+
+    async function multiplicarDois(){
+        setTotalPaginas(paginas * copias);
+    }
+
+
+    function pegarDataSolicitante(){
+        var tempo = new Date();
+        var dia = tempo.getDate();
+        var mes = tempo.getMonth()+1;
+        var ano = tempo.getFullYear();
+        return (`${dia}/${mes}/${ano}`);
+    }
+
+    function pegarDataEntrega(){
+        var dataEntrega = new Date();
+        dataEntrega.setDate(dataEntrega.getDate()+15);
+
+        var tempo2 = new Date(dataEntrega);
+        var dia2 = tempo2.getDate();
+        var mes2 = tempo2.getMonth()+1;
+        var ano2 = tempo2.getFullYear();
+        return (`${dia2}/${mes2}/${ano2}`);
+    }
+    
+    var dataSolicitante = pegarDataSolicitante();
+    var dataEntrega = pegarDataEntrega();
+
+
+    function gerarNumeroRequisicao(){
+        var dataAtual = new Date();
+        var tempo = new Date(dataAtual);
+        var dataAtual = tempo.getFullYear();
+        return (`${dataAtual}`)
+
+        /* Continuar lógica após a construção do banco de dados */
+    }
+
+    var numeroReq = gerarNumeroRequisicao();
+    
+
+    
+
+
+
+    /* const data = { 
+
+        nomeSolicitante: "Átila",
+        escolaSolicitante: "1.15",
+        telefone: "0000000",
+        dataSolicitante: dataSolicitante,
+        dataEntrega: dataEntrega,
+
+
+        fornecedor: "Copiadora Módulo LTDA",
+        numero: numeroReq,
+        nomeRequisicao: nomereq,
+        paginas: "",
+        copias: "",
+        totalPaginas: "",
+        observacao: "",
+
+
+        departamento: "",
+        cc: "",
+
+        acabamento: "",
+        formato: "",
+        suporte: "",
+        coodernador: "",
+        arquivoExemplar: "",
+
+     } */
+
   return (
     <Container>
         <Header/>
         <h3 className="titulo_do_formulario">Solicitação de Serviços Reprográficos</h3>
         <div className="div_pai--button">
-            <div onClick="Voltar" className="sair--button"><p>Voltar</p></div>
+            <div className="sair--button"><p>Voltar</p></div>
         </div>
             
 
@@ -58,20 +137,30 @@ function formulario() {
                     </div>
                     <div className="div2_p_input">
                         <p>Nome da requisição:</p> 
-                        <input placeholder="Título da sua requisição..." maxlength="50" className="div2_input_text" type="text"/>
+                        <input onChange={e => setNomeReq(e.target.value)} placeholder="Título da sua requisição..." maxlength="50" className="div2_input_text" type="text"/>
                     </div>
                     
                     <div className="div2_p_input">
                         <p>Páginas:</p> 
-                        <input placeholder="0" className="div2_input_number" type="number"/>
+                        <input onChange={
+                            function (e) {
+                                setPaginas(e.target.value)
+                                setTotalPaginas(paginas * copias)
+                            }
+                            } placeholder="0" className="div2_input_number" type="number"/>
                     </div>
                     <div className="div2_p_input">
                         <p>Cópias:</p> 
-                        <input placeholder="0" className="div2_input_number" type="number"/>
+                        <input onChange={
+                            function (e) {
+                                setCopias(e.target.value)
+                                setTotalPaginas(paginas * copias)
+                            }
+                            } placeholder="0" className="div2_input_number" type="number"/>
                     </div>
                     <div className="div2_p_input">
                         <p>Total de páginas:</p> 
-                        <p className="p_resposta">00000</p>
+                        <p className="p_resposta">{totalPaginas}</p>
                     </div>     
                 </div>
                 <div className="div_OBS">
@@ -249,4 +338,4 @@ function formulario() {
   );
 }
 
-export default formulario;
+export default Formulario;

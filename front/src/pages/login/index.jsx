@@ -29,7 +29,7 @@ function login() {
         <input type="text" name="senha" className="senhatxt_posicao" />
 
         <div className="entrar_posicao">
-          {<Button title="Entrar" font-size="3vw" width="100%" height="100%" />}
+          {<Button title="Entrar" font-size="3vw" width="100%" height="4.5vh" />}
         </div>
 
         <div className="esqueci_senha">
