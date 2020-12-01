@@ -8,6 +8,7 @@ import Icon_Pessoa from '../../assets/img/pessoa.png'
 import Icon_Grafico from '../../assets/img/grafico.png'
 import Icon_Banco from '../../assets/img/banco.png'
 import { Link } from 'react-router-dom'
+import Grupo from '../../assets/img/grupo-de-usuarios.png'
 
 import { Container, NavIcons } from './styles';
 
@@ -28,11 +29,23 @@ function Nav_Lateral(props) {
             <NavIcons>
                 <li>
                     <div className="Nav_Lateral_li_esquerdo">
+                        <img src={Icon_Pessoa} style={{width:"25px", height:"25px"}} alt="banco img"/>
+                        <Link to="/perfil-adm"><div className="Nav_Lateral_Icon_title">Perfil Adm</div></Link>
+                    </div>
+                    {
+                        ativado == "1" ? (
+                        <img className="Nav_Lateral_Icon_Ativado"src={Icon_Ativado} style={{width:"25px", height:"25px"}} alt="banco img"/>
+                        ):<div></div>
+                    }
+                    
+                </li>
+                <li>
+                    <div className="Nav_Lateral_li_esquerdo">
                         <img src={Icon_Banco} style={{width:"25px", height:"25px"}} alt="banco img"/>
                         <Link to="/registros"><div className="Nav_Lateral_Icon_title">Registros</div></Link>
                     </div>
                     {
-                        ativado == "1" ? (
+                        ativado == "2" ? (
                         <img className="Nav_Lateral_Icon_Ativado"src={Icon_Ativado} style={{width:"25px", height:"25px"}} alt="banco img"/>
                         ):<div></div>
                     }
@@ -46,7 +59,7 @@ function Nav_Lateral(props) {
                     </div>
 
                     {
-                        ativado == "2" ? (
+                        ativado == "3" ? (
                         <img className="Nav_Lateral_Icon_Ativado"src={Icon_Ativado} style={{width:"25px", height:"25px"}} alt="banco img"/>
                         ):<div></div>
                     }
@@ -56,13 +69,13 @@ function Nav_Lateral(props) {
 
                     <Link to="/funcionarios-cadastrados">
                         <div className="Nav_Lateral_li_esquerdo">
-                            <img src={Icon_Pessoa} style={{width:"25px", height:"25px"}} alt="pessoas img"/>
+                            <img src={Grupo} style={{width:"25px", height:"25px"}} alt="pessoas img"/>
                             <div className="Nav_Lateral_Icon_title">Funcionários </div>
                         </div>
                     </Link>
 
                     {
-                        ativado == "3" ? (
+                        ativado == "4" ? (
                         <img className="Nav_Lateral_Icon_Ativado"src={Icon_Ativado} style={{width:"25px", height:"25px"}} alt="banco img"/>
                         ):<div></div>
                     }

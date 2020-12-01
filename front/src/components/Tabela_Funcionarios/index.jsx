@@ -161,14 +161,14 @@ export class Tabela_Funcionarios extends Component {
           <table className="table table-striped">
             <thead>
               <tr>
-                <th scope="col">NIF</th>
-                <th scope="col">nome</th>
-                <th scope="col">cargo</th>
-                <th scope="col">email</th>
-                <th scope="col">fone</th>
-                <th scope="col">Data de criação</th>
-                <th scope="col">excluir</th>
-                <th scope="col">restaurar senha</th>
+                <th scope="col"><strong>NIF</strong></th>
+                <th scope="col"><strong>nome</strong></th>
+                <th scope="col"><strong>cargo</strong></th>
+                <th scope="col"><strong>email</strong></th>
+                <th scope="col"><strong>fone</strong></th>
+                <th scope="col"><strong>Data de criação</strong></th>
+                <th scope="col"><strong>excluir</strong></th>
+                <th scope="col"><strong>restaurar senha</strong></th>
               </tr>
             </thead>
             <tbody>

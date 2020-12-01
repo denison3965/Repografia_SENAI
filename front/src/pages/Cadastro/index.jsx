@@ -23,7 +23,7 @@ function Cadastro() {
             <ul>
               <Link to="/funcionarios-cadastrados">
                 <li>Funcionários cadastrados</li>
-              </Link> 
+              </Link>
 
               <li>/</li>
 
@@ -37,47 +37,56 @@ function Cadastro() {
 
           <div className="container_cadastro">
             <div className="top_info">
-              <img src={AddIcon} alt="pessoa" style={{width: 50, height: 50}} />
+              <img src={AddIcon} alt="pessoa" style={{ width: 50, height: 50 }} />
               <h2>Cadastro</h2>
             </div>
             <form>
               <div class="form-row">
                 <div class="form-group col-md-6">
                   <label for="inputEmail4">Nome</label>
-                  <input type="text" class="form-control" id="inputNome" placeholder="Ex: Pedro" required/>
+                  <input type="text" class="form-control" id="inputNome" placeholder="Ex: Pedro" required />
                 </div>
                 <div class="form-group col-md-6">
                   <label for="inputPassword4">Cargo</label>
-                  <input type="text" class="form-control" id="inputCargo" placeholder="Ex: Professor"/>
+                  <input type="text" class="form-control" id="inputCargo" placeholder="Ex: Professor"  required/>
                 </div>
               </div>
               <div class="form-row">
                 <div class="form-group col-md-6">
                   <label for="inputEmail4">NIF</label>
-                  <input type="text" class="form-control" id="inputNif" placeholder="Ex: 0000000"/>
+                  <input type="text" class="form-control" id="inputNif" placeholder="Ex: 0000000"  required/>
                 </div>
                 <div class="form-group col-md-6">
                   <label for="inputPassword4">Telefone</label>
-                  <input type="text" class="form-control" id="inputTelefone" placeholder="Ex: 11 99556-8741"/>
+                  <input type="text" class="form-control" id="inputTelefone" placeholder="Ex: 11 99556-8741" />
                 </div>
               </div>
               <div class="form-row">
                 <div class="form-group col-md-6">
                   <label for="inputEmail4">Email</label>
-                  <input type="email" class="form-control" id="inputEmail4" placeholder="senia@outlook.com"/>
+                  <input type="email" class="form-control" id="inputEmail4" placeholder="senia@outlook.com" required/>
                 </div>
+
+                <div class="form-group col-md-6">
+                  <label for="inputState">O usuario tera acesso administartivo ?</label>
+                  <select id="inputState" class="form-control">
+                    <option selected>nao</option>
+                    <option>sim</option>
+                  </select>
+                </div>
+
               </div>
               <div className="area_botao">
-                
-                  <button type="button" class="btn btn-success">Cadastrar</button>
-                  <Link to="/funcionarios-cadastrados"><button type="button" class="btn btn-danger">Voltar</button></Link>
-               
+
+                <button type="button" class="btn btn-success">Cadastrar</button>
+                <Link to="/funcionarios-cadastrados"><button type="button" class="btn btn-danger">Voltar</button></Link>
+
               </div>
-              
+
 
             </form>
           </div>
-          
+
 
         </div>
       </Area_Cadastro>

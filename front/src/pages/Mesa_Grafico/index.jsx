@@ -12,7 +12,7 @@ function Mesa_Grafico() {
     <Container>
 
       <MenuLateral>
-        <Nav_Lateral ativado="2" />
+        <Nav_Lateral ativado="3" />
       </MenuLateral>
 
       <InfoBox>

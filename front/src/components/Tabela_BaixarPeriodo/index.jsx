@@ -53,9 +53,9 @@ export class Tabela_BaixarPeriodo extends Component {
                 <table class="table">
                     <thead>
                         <tr>
-                            <th scope="col">ID</th>
-                            <th scope="col">Período</th>
-                            <th scope="col">Baixar</th>
+                            <th scope="col"><strong>ID</strong></th>
+                            <th scope="col"><strong>Período</strong></th>
+                            <th scope="col"><strong>Baixar</strong></th>
                         </tr>
                     </thead>
                     <tbody>
