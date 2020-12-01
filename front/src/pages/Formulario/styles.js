@@ -10,11 +10,20 @@ export const Container = styled.div`
         font-weight: 300;
     }
 
+    .titulo_do_formulario{
+        color: #fff;
+        position: absolute;
+        margin-top: 5vh;
+        margin-left: 16.5vw;
+        font-weight: 300;
+        font-style: italic;
+    }
+
     .form_esquerda{
         width: 50%;
         max-width: 50%;
-        height: 74%;
-        max-height: 74%;
+        height: 76%;
+        max-height: 76%;
         display:flex;
         flex-wrap: wrap;
         flex-direction: row;
@@ -26,8 +35,8 @@ export const Container = styled.div`
     .form_direita{
         width: 50%;
         max-width: 50%;
-        height: 74%;
-        max-height: 74%;
+        height: 76%;
+        max-height: 76%;
         display:flex;
         flex-wrap: wrap;
         flex-direction: column;
@@ -117,18 +126,30 @@ export const Container = styled.div`
 
     .div2_p_input{
         display:flex;
-        width:100%;
-        min-width: 100%;
+        width:98%;
+        min-width: 98%;
         height: min-content;
         padding: 0.8vw;
+    }
+    .div2_input_number{
+        margin-left: 1vw;
+        width: 13%;
+        height: 5vh;
+    }
+    .div2_input_text{
+        margin-left: 1vw;
+        width: 60%;
+        height: 5vh;
     }
     .div_OBS{
         display:flex;
         flex-direction: column;
+        margin-top: -2vh;
         width:100%;
         min-width: 100%;
         height: max-content;
-        padding: 0.8vw;
+        padding: 1.8vw;
+        
     }
     .div_OBS_titulo{
         width: 100%;
@@ -138,7 +159,8 @@ export const Container = styled.div`
     }
     .div_OBS_input{
         width: 100%;
-        height: 90%;
+        height: 24vh;
+        resize: none;
     }
 
     .acabamento{
