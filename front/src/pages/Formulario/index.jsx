@@ -7,12 +7,14 @@ import IconCloud from '../../assets/img/iconcloud.png'
 function Formulario() {
 
     const [nomeReq, setNomeReq] = useState();
-    const [paginas, setPaginas] = useState(0);
-    const [copias, setCopias] = useState(0);
+    const [paginas, setPaginas] = useState(null);
+    const [copias, setCopias] = useState(null);
     const [totalPaginas, setTotalPaginas] = useState();
+    const [aux , setAuxi] = useState(true)
 
-    async function multiplicarDois(){
-        setTotalPaginas(paginas * copias);
+    if (paginas != null && copias != null && aux == true) {
+        setTotalPaginas( paginas * copias)
+        setAuxi(false)
     }
 
 
@@ -145,7 +147,7 @@ function Formulario() {
                         <input onChange={
                             function (e) {
                                 setPaginas(e.target.value)
-                                setTotalPaginas(paginas * copias)
+                                setAuxi(true)
                             }
                             } placeholder="0" className="div2_input_number" type="number"/>
                     </div>
@@ -154,7 +156,7 @@ function Formulario() {
                         <input onChange={
                             function (e) {
                                 setCopias(e.target.value)
-                                setTotalPaginas(paginas * copias)
+                                setAuxi(true)
                             }
                             } placeholder="0" className="div2_input_number" type="number"/>
                     </div>
