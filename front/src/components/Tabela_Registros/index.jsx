@@ -368,7 +368,7 @@ export class Tabela_Registros extends Component {
                     <td>{element.coordenador}</td>
                     <td>{element.avaliado}</td>
                     <td>{element.data}</td>
-                    <td><SaibaMais data={element.nomedarequisicao}/></td>
+                    <td><SaibaMais caminho="detalhes"data={element.nomedarequisicao}/></td>
                     
 
                   </tr>

@@ -4,7 +4,7 @@ export const Container = styled.div`
     display: flex;
     flex-wrap:wrap;
     width: 100%;
-    height: 360vh;
+    height: 312vh;
     background-color: var(--color-branco);
     p {
         font-weight: 300;
@@ -12,7 +12,9 @@ export const Container = styled.div`
 
     .form_esquerda{
         width: 50%;
-        height: 80%;
+        max-width: 50%;
+        height: 74%;
+        max-height: 74%;
         display:flex;
         flex-wrap: wrap;
         flex-direction: row;
@@ -23,7 +25,9 @@ export const Container = styled.div`
     }
     .form_direita{
         width: 50%;
-        height: 80%;
+        max-width: 50%;
+        height: 74%;
+        max-height: 74%;
         display:flex;
         flex-wrap: wrap;
         flex-direction: column;
@@ -60,43 +64,35 @@ export const Container = styled.div`
 
     .inf_solicitacao{
         width:40vw;
-        height:110vh;
+        height:66vh;
         max-width: 40vw;
-        max-height: 110vh;
+        max-height: 66vh;
         border: solid;
         border-width: 1px;
         border-radius:2px;
         margin-right: -5vw;
         margin-bottom: 2vh;
         font-size: 1.2vw;
+        
         background-color: var(--color-azulMaisClaro);
     }
     .div1_informacao{
-        padding: 2vw;
-        display: flex;
-        flex-wrap: wrap;
-        flex-direction: row;
+        margin-top: 2vh;
+        padding: 1vw;
         width: 100%;
-        height: 100%;
-    }
-    .p_esquerdo{
-        width: 40%;
-        margin-bottom: -5vh;
-        margin-left: 2%;
-        text-align: left;
-    }
-    .p_direito{
-        width:48%;
-        max-width: 48%;
-        margin-bottom: -5vh;
-        margin-right: 5%;
-        text-align: left;
+        height: 100%
     }
 
-    form div div p{
-
+    .div1_p{
+        display:flex;
+        width:100%;
+        min-width: 100%;
+        height: min-content;
+        padding: 0.8vw;
     }
- 
+    .p_resposta{
+        margin-left: 1vw;
+    }
 
 
     .inf_requisicao{
@@ -109,18 +105,160 @@ export const Container = styled.div`
         border-radius:2px;
         margin-right: -5vw;
         margin-top: 2vh;
+        font-size: 1.2vw;
         background-color: var(--color-azulMaisClaro);
     }
+
+    .div2_informacao{
+        padding: 1vw;
+        width: 100%;
+        height: 57%;
+    }
+
+    .div2_p_input{
+        display:flex;
+        width:100%;
+        min-width: 100%;
+        height: min-content;
+        padding: 0.8vw;
+    }
+    .div_OBS{
+        display:flex;
+        flex-direction: column;
+        width:100%;
+        min-width: 100%;
+        height: max-content;
+        padding: 0.8vw;
+    }
+    .div_OBS_titulo{
+        width: 100%;
+        height: min-content;
+        text-align: center; 
+        font-weight: bold;
+    }
+    .div_OBS_input{
+        width: 100%;
+        height: 90%;
+    }
+
     .acabamento{
         width:40vw;
-        height: 182vh;
+        height: 138vh;
         max-width: 40vw;
-        max-height: 182vh;
+        max-height: 138vh;
         border: solid;
         border-width: 1px;
         margin-left: -6vw;
         background-color: var(--color-azulMaisClaro);
     }
+
+    .acabamento_sub_titulo_form{
+        width: 100%;
+        height: min-content;
+        border-top: solid;
+        border-bottom: solid;
+        border-width: 1px;
+    }
+
+    .div1_acabamento{
+        width:100%;
+        min-width: 100%;
+        height: 37%;
+        min-height: 37%;
+        padding: 1vw;
+        padding-top: 4vh;
+        
+    }
+
+    .div2_acabamento{
+        width:100%;
+        min-width: 100%;
+        height: 23.7%;
+        min-height: 23.7%;
+        padding-top: 9vh;
+        padding-left: 4vw;
+    }
+
+    .div3_acabamento{
+        width:100%;
+        min-width: 100%;
+        height: 23%;
+        min-height: 23%;
+        padding-top: 8vh;
+        padding-left: 4vw;
+    }
+
+    .container {
+        width: 50%;
+        display: block;
+        position: relative;
+        padding-left: 35px;
+        cursor: pointer;
+        font-size: 1.2vw;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    .container input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        height: 0;
+        width: 0;
+    }
+
+    .checkmark {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 25px;
+        width: 25px;
+        background-color: #fff;
+        border: solid;
+        border-width: 1px;
+        border-radius: 20%;
+    }
+
+    .container:hover input ~ .checkmark {
+        background-color: #ccc;
+    }
+
+    .container input:checked ~ .checkmark {
+        background-color: #2196F3;
+    }
+
+    .checkmark:after {
+        content: "";
+        position: absolute;
+        display: none;
+    }
+
+    .container input:checked ~ .checkmark:after {
+        display: block;
+    }
+
+    .container .checkmark:after {
+        left: 9px;
+        top: 5px;
+        width: 5px;
+        height: 10px;
+        border: solid white;
+        border-width: 0 3px 3px 0;
+        -webkit-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        transform: rotate(45deg);
+    }
+
+    .div_checkbox{
+        display: flex;
+        width: 100%;
+        max-width: 100%;
+        height: min-content;
+        padding: 0.8vw;
+    }
+
     .div_dropdown_form_direita{
         width: 40vw;
         height: 14.2vh;
@@ -175,7 +313,7 @@ export const Container = styled.div`
         text-align: center;
         margin-bottom: 6vh;
     }
-    .tittle_upload{
+    .titulo_upload{
         width: 70vw;
         font-size: 2vw;
         background-color:white;
@@ -215,10 +353,11 @@ export const Container = styled.div`
         width: 4vw;
         color: #626262;
         position: absolute;
-        margin-left: 93%;
+        margin-left: 91%;
     }
     .div_pai--button{
         width: 100%;
+        padding: 2vw;
     }
     option{
         font-size: 16px;
