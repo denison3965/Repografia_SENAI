@@ -43,7 +43,7 @@ function Graficos() {
             'Atila',
             'Danilo',
             'Milton',
-            'Sangra',
+            'Sandra',
             'Claudia',
         ],
         datasets:[
