@@ -112,4 +112,5 @@ export const Container = styled.div`
     left: 2.5vw;
     cursor: pointer;
   }
+  .posicao_do_form{}
 `;
