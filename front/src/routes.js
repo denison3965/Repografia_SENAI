@@ -12,22 +12,37 @@ import Funcionarios from './pages/funcionarios'
 import Cadastro from './pages/Cadastro'
 import PerfilAdm from './pages/Perfil_Adm'
 import HistoricoAdm from './pages/Historico_Adm'
+import { Component } from 'react';
+import { isAuthenticated } from "./auth";
+
+const PrivateRoute = ({ component: Component, ... rest}) => (
+    <Route
+    {...rest}
+    render={props =>
+      isAuthenticated() ? (
+        <Component {...props} />
+      ) : (
+        <Redirect to={{ pathname: "/", state: { from: props.location } }} />
+      )
+    }
+  />
+);
 
 const Routes = () => (
     <BrowserRouter>
         <Switch>
             <Route exact path="/" component={Login}/>
-            <Route path="/registros" component={Adm_Registros} />
-            <Route path="/Historico" component={Historico} />
-            <Route path="/Formulario" component={Formulario}/>
-            <Route path="/graficos" component={Graficos}/>
-            <Route path="/Perfil" component={Perfil}/>
-            <Route path="/detalhes/:nif" render={(props) => <Detalhes {...props} data=""/>}/>
-            <Route path="/detalhes-historicos/:nif" render={(props) => <DetalhesHistorico {...props} data=""/>}/>
-            <Route path="/funcionarios-cadastrados" component={Funcionarios}/>
-            <Route path="/cadastro" component={Cadastro} />
-            <Route path="/perfil-adm" component={PerfilAdm} />
-            <Route path="/historico-adm" component={HistoricoAdm} />
+            <PrivateRoute path="/registros" component={Adm_Registros} />
+            <PrivateRoute path="/Historico" component={Historico} />
+            <PrivateRoute path="/Formulario" component={Formulario}/>
+            <PrivateRoute path="/graficos" component={Graficos}/>
+            <PrivateRoute path="/Perfil" component={Perfil}/>
+            <PrivateRoute path="/detalhes/:nif" render={(props) => <Detalhes {...props} data=""/>}/>
+            <PrivateRoute path="/detalhes-historicos/:nif" render={(props) => <DetalhesHistorico {...props} data=""/>}/>
+            <PrivateRoute path="/funcionarios-cadastrados" component={Funcionarios}/>
+            <PrivateRoute path="/cadastro" component={Cadastro} />
+            <PrivateRoute path="/perfil-adm" component={PerfilAdm} />
+            <PrivateRoute path="/historico-adm" component={HistoricoAdm} />
         </Switch>
     </BrowserRouter>
 )

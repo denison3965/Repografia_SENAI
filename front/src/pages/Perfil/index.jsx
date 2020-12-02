@@ -22,6 +22,8 @@ function perfil() {
          
           <hr/>
 
+          <form className="posicao_do_form">
+
           <div className="posicao_avatar">
              <img src={Avatar} style={{height: "300px", width: "300px", marginLeft: '20px', marginRight: '20px' }} alt="avatar" />
           </div>
@@ -31,12 +33,6 @@ function perfil() {
                 <div className="numero">Número:</div>
                 <div className="nif">NIF:</div>
           </div>
-
-         <div className="informacoes">
-            <div className="telefone">Telefone:</div>
-            <div className="numero">Número:</div>
-            <div className="nif">NIF:</div>
-         </div>
 
          <div className="informacao">
             <div className="email">e-mail:</div>
@@ -94,6 +90,8 @@ function perfil() {
                 <Link to="/formulario"><img src={MaisInfo} style={{height: "80px", width: "80px"}} className="posicao_maisinfo" alt="maisInfo"  /></Link>
                 </div>
           </div>
+
+          </form>
       </Container>
    )
 }
