@@ -10,7 +10,7 @@ function Adm_Registros() {
       <Container>
 
           <Menu_Area>
-              <Nav_Lateral ativado="1" /> 
+              <Nav_Lateral ativado="2" /> 
           </Menu_Area>
 
           <Adm_Area>
