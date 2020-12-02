@@ -7,6 +7,10 @@ import IconCloud from '../../assets/img/iconcloud.png'
 function Formulario() {
 
     // Logica para pegar as checkBox que foram selecionadas
+
+        const array_nomes = ["2 Grampos a cavalo", "2 Grampos laterais", "Colorido", "Encadernação com espiral", "Frente e verso", "Reduzido", "preto e branco", "Capa em papel 150g/m2", "Capa em PVC"]
+        let array_acabamento = []
+
         const [checkedItems, setCheckedItems] = useState(
             {
                 "2 Grampos a cavalo": false,
@@ -15,7 +19,10 @@ function Formulario() {
                 "Encadernação com espiral": false,
                 "Frente e verso": false,
                 "Reduzido": false,
-                "preto e branco": false
+                "preto e branco": false,
+                "Capa em papel 150g/m2": false,
+                "Capa em PVC" : false
+
             }
             ); //plain object as state
 
@@ -25,7 +32,21 @@ function Formulario() {
         }
 
         useEffect(() => {
-            console.log(checkedItems);
+            //Criando um array que tera os estados binarios de cada acabamento, Ex: [ true, true, false, false ...]
+            const array_bin = Object.values(checkedItems)
+
+            array_bin.map((element, indice) => {
+                
+                if (element) {
+
+                    let item = array_nomes[indice]
+                    array_acabamento.push(item)
+                    console.log(array_acabamento)
+
+                }
+            })
+
+            
         }, [checkedItems]); 
     // **Logica para pegar as checkBox que foram selecionadas**  
   
@@ -103,10 +124,10 @@ function Formulario() {
         observacao: observacao,
 
 
-        departamento: "",
+        departamento: ,
         cc: "",
 
-        acabamento: "",
+        acabamento: array_acabamento,
         formato: "",
         suporte: "",
         coodernador: "",
