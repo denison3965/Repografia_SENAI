@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container } from './styles';
 import Header from '../../components/Header';
 import  Button  from '../../components/Button'
@@ -6,11 +6,39 @@ import IconCloud from '../../assets/img/iconcloud.png'
 
 function Formulario() {
 
+    // Logica para pegar as checkBox que foram selecionadas
+        const [checkedItems, setCheckedItems] = useState(
+            {
+                "2 Grampos a cavalo": false,
+                "2 Grampos laterais": false,
+                "Colorido": false,
+                "Encadernação com espiral": false,
+                "Frente e verso": false,
+                "Reduzido": false,
+                "preto e branco": false
+            }
+            ); //plain object as state
+
+        const handleChange = (event) => {
+            // updating an object instead of a Map
+            setCheckedItems({...checkedItems, [event.target.name] : event.target.checked });
+        }
+
+        useEffect(() => {
+            console.log(checkedItems);
+        }, [checkedItems]); 
+    // **Logica para pegar as checkBox que foram selecionadas**  
+  
+
     const [nomeReq, setNomeReq] = useState();
     const [paginas, setPaginas] = useState(null);
     const [copias, setCopias] = useState(null);
     const [totalPaginas, setTotalPaginas] = useState();
-    const [aux , setAuxi] = useState(true)
+    const [aux , setAuxi] = useState(true);
+    const [observacao, setObservacao] = useState();
+
+
+
 
     if (paginas != null && copias != null && aux == true) {
         setTotalPaginas( paginas * copias)
@@ -69,10 +97,10 @@ function Formulario() {
         fornecedor: "Copiadora Módulo LTDA",
         numero: numeroReq,
         nomeRequisicao: nomereq,
-        paginas: "",
-        copias: "",
-        totalPaginas: "",
-        observacao: "",
+        paginas: paginas,
+        copias: setCopias,
+        totalPaginas: setTotalPaginas,
+        observacao: observacao,
 
 
         departamento: "",
@@ -167,7 +195,7 @@ function Formulario() {
                 </div>
                 <div className="div_OBS">
                     <p className="div_OBS_titulo">Observação:</p>
-                    <textarea className="div_OBS_input" placeholder="Escreva uma breve observação (não obrigatório)..." maxlength="255"></textarea>
+                    <textarea onChange={e => setObservacao(e.target.value)} className="div_OBS_input" placeholder="Escreva uma breve observação (não obrigatório)..." maxlength="255"></textarea>
                 </div>
 
             </div>
@@ -197,11 +225,11 @@ function Formulario() {
 
                     <div className="div_checkbox">
                         <label className="container">2 Grampos a cavalo
-                            <input type="checkbox"/>
+                            <input type="checkbox" name="2 Grampos a cavalo" onChange={handleChange}/>
                             <span className="checkmark"></span>
                         </label>
                         <label className="container">Encadernação com espiral
-                            <input type="checkbox"/>
+                            <input type="checkbox" name="Encadernação com espiral" onChange={handleChange}/>
                             <span className="checkmark"></span>
                         </label>
                     </div>
@@ -209,40 +237,40 @@ function Formulario() {
 
                     <div className="div_checkbox">
                         <label className="container">2 Grampos laterais
-                            <input type="checkbox"/>
+                            <input type="checkbox" name="2 Grampos laterais" onChange={handleChange}/>
                             <span className="checkmark"></span>
                         </label>   
                         <label className="container">Capa em PVC
-                            <input type="checkbox"/>
+                            <input type="checkbox" name="Capa em PVC" onChange={handleChange}/>
                             <span className="checkmark"></span>
                         </label>                    
                     </div>
 
                     <div className="div_checkbox">
                         <label className="container">Reduzido
-                            <input type="checkbox"/>
+                            <input type="checkbox" name="Reduzido" onChange={handleChange}/>
                             <span className="checkmark"></span>
                         </label>
                         <label className="container">Capa em papel 150g/m2
-                            <input type="checkbox"/>
+                            <input type="checkbox" name="Capa em papel 150g/m2" onChange={handleChange}/>
                             <span className="checkmark"></span>
                         </label>
                     </div>
 
                     <div className="div_checkbox">
                         <label className="container" >Preto e branco
-                            <input type="checkbox"/>
+                            <input type="checkbox" name="preto e branco"onChange={handleChange}/>
                             <span className="checkmark"></span>
                         </label>
                         <label className="container">Colorido
-                            <input type="checkbox"/>
+                            <input type="checkbox" name="Colorido" onChange={handleChange}/>
                             <span className="checkmark"></span>
                         </label>
                     </div>
 
                     <div className="div_checkbox">
                         <label className="container">Frente e verso
-                            <input type="checkbox"/>
+                            <input type="checkbox" name="Frente e verso" onChange={handleChange}/>
                             <span className="checkmark"></span>
                         </label>
                         <label className="container">
