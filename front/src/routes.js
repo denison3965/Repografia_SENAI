@@ -34,7 +34,7 @@ const Routes = () => (
             <Route exact path="/" component={Login}/>
             <PrivateRoute path="/registros" component={Adm_Registros} />
             <PrivateRoute path="/Historico" component={Historico} />
-            <PrivateRoute path="/Formulario" component={Formulario}/>
+            <Route path="/Formulario" component={Formulario}/>
             <PrivateRoute path="/graficos" component={Graficos}/>
             <PrivateRoute path="/Perfil" component={Perfil}/>
             <PrivateRoute path="/detalhes/:nif" render={(props) => <Detalhes {...props} data=""/>}/>
