@@ -4,6 +4,7 @@ import SaibaMais from '../SaibaMais'
 import { Container, Info, Tabela, Title, Pesquisa, Input  } from './styles';
 import IconExcluir from '../../assets/img/excluir.png'
 import IconSenha from '../../assets/img/senha.png'
+import IconCaneta from '../../assets/img/caneta.png'
 
 export class Tabela_Funcionarios extends Component {
 
@@ -129,6 +130,11 @@ export class Tabela_Funcionarios extends Component {
       alert(`senha do usuario ${nif.target.name} foi restaurada para 'senai115' com sucesso`)
     }
   }
+
+  // editarUser(nif) {
+  //   let res = window.confirm(`Tem certeza que deseja editar o usuario ${nif.target.name} ?`)
+    
+  // }
   
 
   render(){
@@ -146,6 +152,66 @@ export class Tabela_Funcionarios extends Component {
 
     return(
       <Container>
+
+        {/* Modal  */}
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Editar Usuário</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div className="nome">
+                      <form class="form-inline" style={{ margin: "40px" }}>
+                          <div class="form-group">
+                            <label style={{ marginRight: "30px" }} for="inputPassword6">Editar Nome:      </label>
+                            <input style={{ width: "200px" }} id="inputPassword6" class="form-control mx-sm-3" />
+                          </div>
+                      </form>
+                      <form class="form-inline" style={{ margin: "40px" }}>
+                          <div class="form-group">
+                            <label style={{ marginRight: "30px" }} for="inputPassword6">Editar Cargo:     </label>
+                            <input style={{ width: "200px" }} id="inputPassword6" class="form-control mx-sm-3" />
+                          </div>
+                      </form>
+                      <form class="form-inline" style={{ margin: "40px" }}>
+                          <div class="form-group">
+                            <label style={{ marginRight: "45px" }} for="inputPassword6">Editar NIF:      </label>
+                            <input style={{ width: "200px" }} id="inputPassword6" class="form-control mx-sm-3" />
+                          </div>
+                      </form>
+                      <form class="form-inline" style={{ margin: "40px" }}>
+                          <div class="form-group">
+                            <label style={{ marginRight: "13px" }} for="inputPassword6">Editar Telefone:      </label>
+                            <input style={{ width: "200px" }} id="inputPassword6" class="form-control mx-sm-3" />
+                          </div>
+                      </form>
+                      <form class="form-inline" style={{ margin: "40px" }}>
+                          <div class="form-group">
+                            <label style={{ marginRight: "13px" }} for="inputPassword6">Editar Email:      </label>
+                            <input style={{ width: "200px" }} id="inputPassword6" class="form-control mx-sm-3" />
+                          </div>
+                      </form>
+                      <form class="form-inline" style={{ margin: "40px"}}>
+                      <div class="form-group col-md-6">
+                        <label for="inputState">O usuario tera acesso administartivo ?</label>
+                        <select id="inputState" class="form-control">
+                          <option selected>nao</option>
+                          <option>sim</option>
+                        </select>
+                      </div>
+                      </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary">Alterar Usuário</button>
+                </div>
+              </div>
+          </div>
+          </div>
 
         <Info>
           <Title>Funcionários cadastrados</Title>
@@ -169,6 +235,7 @@ export class Tabela_Funcionarios extends Component {
                 <th scope="col"><strong>Data de criação</strong></th>
                 <th scope="col"><strong>excluir</strong></th>
                 <th scope="col"><strong>restaurar senha</strong></th>
+                <th scope="col"><strong>ação</strong></th>
               </tr>
             </thead>
             <tbody>
@@ -185,6 +252,8 @@ export class Tabela_Funcionarios extends Component {
                     <td><img onClick={this.excluirUser.bind(this)} src={IconExcluir} alt={element.nif} name={element.nome} style={{height: '20x', width: '20px', marginLeft: '15px', cursor: 'pointer'}}/></td>
                     {/*Estou passando o nif da pessoa a ser excluida pelo alt da imagem */}
                     <td><img onClick={this.setarSenha.bind(this)} src={IconSenha} alt={element.nif} name={element.nome} style={{height: '20x', width: '20px', marginLeft: '50px', cursor: 'pointer'}}/></td>
+
+                    <td><img data-toggle="modal" data-target="#exampleModal" src={IconCaneta} alt={element.nif} name={element.nome} style={{height: '20x', width: '20px', marginLeft: '10px', cursor: 'pointer'}}/></td>
                     
 
                   </tr>

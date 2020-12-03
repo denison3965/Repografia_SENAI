@@ -36,10 +36,10 @@ const Routes = () => (
             <PrivateRoute path="/Historico" component={Historico} />
             <PrivateRoute path="/Formulario" component={Formulario}/>
             <PrivateRoute path="/graficos" component={Graficos}/>
-            <PrivateRoute path="/Perfil" component={Perfil}/>
+            <Route path="/Perfil" component={Perfil}/>
             <PrivateRoute path="/detalhes/:nif" render={(props) => <Detalhes {...props} data=""/>}/>
             <PrivateRoute path="/detalhes-historicos/:nif" render={(props) => <DetalhesHistorico {...props} data=""/>}/>
-            <PrivateRoute path="/funcionarios-cadastrados" component={Funcionarios}/>
+            <Route path="/funcionarios-cadastrados" component={Funcionarios}/>
             <PrivateRoute path="/cadastro" component={Cadastro} />
             <PrivateRoute path="/perfil-adm" component={PerfilAdm} />
             <PrivateRoute path="/historico-adm" component={HistoricoAdm} />
