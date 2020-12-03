@@ -315,11 +315,16 @@ export class Tabela_Registros extends Component {
     let filterRegister = this.state.tableData.filter(
       (register) => {
         return register.nomedosolicitante.toLowerCase().indexOf(this.state.search) !== -1 ||
+               register.nomedosolicitante.indexOf(this.state.search) !== -1 ||
                register.data.toLowerCase().indexOf(this.state.search) !== -1 ||
                register.coordenador.toLowerCase().indexOf(this.state.search) !== -1 ||
+               register.coordenador.indexOf(this.state.search) !== -1 ||
                register.departamento.toLowerCase().indexOf(this.state.search) !== -1 ||
+               register.departamento.indexOf(this.state.search) !== -1 ||
                register.cc.toLowerCase().indexOf(this.state.search) !== -1 ||
-               register.avaliado.toLowerCase().indexOf(this.state.search) !== -1
+               register.avaliado.toLowerCase().indexOf(this.state.search) !== -1 ||
+               register.avaliado.indexOf(this.state.search) !== -1
+               
       }
     )
 

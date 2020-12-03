@@ -1,11 +1,12 @@
 //para criar essa estrutura rode o snypts: rfc
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container } from './styles';
 import Button from '../../components/Button'
 import Logo from '../../components/Logo'
 import { Head } from './styles';
+import axios from 'axios'
 
-function login() {
+function  Login() {
   return (
     <Container>
 
@@ -95,7 +96,7 @@ function login() {
   )
 }
 
-export default login;
+export default Login;
 
 
 

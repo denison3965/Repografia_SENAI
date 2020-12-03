@@ -112,10 +112,13 @@ export class Tabela_Funcionarios_Excluidos extends Component {
         (register) => {
           return register.nif.toLowerCase().indexOf(this.state.search) !== -1 ||
                  register.nome.toLowerCase().indexOf(this.state.search) !== -1 ||
+                 register.nome.indexOf(this.state.search) !== -1 ||
                  register.cargo.toLowerCase().indexOf(this.state.search) !== -1 ||
-                 register.email.toLowerCase().indexOf(this.state.search) !== -1 ||
+                 register.cargo.indexOf(this.state.search) !== -1 ||
+                 register.email.indexOf(this.state.search) !== -1 ||
                  register.fone.toLowerCase().indexOf(this.state.search) !== -1 ||
                  register.datacriacao.toLowerCase().indexOf(this.state.search) !== -1 ||
+                 register.datacriacao.indexOf(this.state.search) !== -1 ||
                  register.dataexclusao.toLowerCase().indexOf(this.state.search) !== -1 
                  
         }

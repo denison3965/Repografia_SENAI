@@ -109,12 +109,17 @@ export class Tabela_De_Historico extends Component {
     let filterRegister = this.state.tableData.filter(
       (register) => {
         return register.nomedosolicitante.toLowerCase().indexOf(this.state.search) !== -1 ||
+        register.nomedosolicitante.indexOf(this.state.search) !== -1 ||
           register.data.toLowerCase().indexOf(this.state.search) !== -1 ||
           register.coordenador.toLowerCase().indexOf(this.state.search) !== -1 ||
+          register.coordenador.indexOf(this.state.search) !== -1 ||
           register.departamento.toLowerCase().indexOf(this.state.search) !== -1 ||
+          register.departamento.indexOf(this.state.search) !== -1 ||
           register.cc.toLowerCase().indexOf(this.state.search) !== -1 ||
           register.nomedarequisicao.toLowerCase().indexOf(this.state.search) !== -1 ||
-          register.feedback.toLowerCase().indexOf(this.state.search) !== -1
+          register.nomedarequisicao.indexOf(this.state.search) !== -1 ||
+          register.feedback.toLowerCase().indexOf(this.state.search) !== -1 ||
+          register.feedback.indexOf(this.state.search) !== -1
       }
     )
 

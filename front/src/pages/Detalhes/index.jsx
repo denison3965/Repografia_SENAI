@@ -10,9 +10,34 @@ import { Info } from '../../components/Tabela_Registros/styles';
 
 import Impressao from '../../assets/img/impressao.png'
 import Baixar from '../../assets/img/seta-para-baixo.png'
+import { useHistory } from 'react-router-dom'
 
 
 function Detalhes(props) {
+
+      //Verificando Se o usuario esta autorizado para acessar essa pagina
+      const history = useHistory()
+    
+      useEffect(() => {
+          
+  
+          axios.get('http://localhost:3000/v1/teste', {
+              method: 'GET',
+              headers:  {'X-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjA3MDMyNzEyLCJleHAiOjE2MDcwMzMwMTJ9.9AR7MM57F3d7ATO_0zifm0BRYSXgCBh2cVFzgFMJNd4'}         
+          }).then((res) => {
+  
+              if(res.data[0].auth)
+              {
+                  console.log('Voce tem acesso')
+              }
+              else
+              {
+                  history.push("/")
+              }
+  
+          }).catch (() => {history.push("/")})
+      }, [])
+      //**Verificando Se o usuario esta autorizado para acessar essa pagina**
 
   //pegando o node do registro a ser mostrado ( tem que pegar o id depois )
   console.log(props.location.state.registro[0])

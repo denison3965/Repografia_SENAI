@@ -17,7 +17,7 @@ import HistoricoAdm from './pages/Historico_Adm'
 const Routes = () => (
     <BrowserRouter>
         <Switch>
-            <Route path="/" component={Login}/>
+            <Route exact path="/" component={Login}/>
             <Route path="/registros" component={Adm_Registros} />
             <Route path="/Historico" component={Historico} />
             <Route path="/Formulario" component={Formulario}/>
