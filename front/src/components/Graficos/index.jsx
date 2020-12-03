@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container } from './styles';
-import {Pie} from 'react-chartjs-2'
-import {Bar} from 'react-chartjs-2'
+import {Pie, Bar} from 'react-chartjs-2'
+
 
 function Graficos() {
 

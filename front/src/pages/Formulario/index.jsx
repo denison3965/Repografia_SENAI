@@ -57,6 +57,8 @@ function Formulario() {
     const [totalPaginas, setTotalPaginas] = useState();
     const [aux , setAuxi] = useState(true);
     const [observacao, setObservacao] = useState();
+    const [departamento, setDepartamento] = useState();
+    const [coordenador, setCoordernador] = useState();
 
 
 
@@ -100,45 +102,74 @@ function Formulario() {
     }
 
     var numeroReq = gerarNumeroRequisicao();
+
+    const suporteReq = escolhido2();
+    const formatoReq = escolhido1();
     
 
-    
+    const data = { 
+
+        "nomeSolicitante": "Átila",
+        "escolaSolicitante": "1.15",
+        "telefone": "0000000",
+        "dataSolicitante": dataSolicitante,
+        "dataEntrega": dataEntrega,
 
 
-
-    /* const data = { 
-
-        nomeSolicitante: "Átila",
-        escolaSolicitante: "1.15",
-        telefone: "0000000",
-        dataSolicitante: dataSolicitante,
-        dataEntrega: dataEntrega,
-
-
-        fornecedor: "Copiadora Módulo LTDA",
-        numero: numeroReq,
-        nomeRequisicao: nomereq,
-        paginas: paginas,
-        copias: setCopias,
-        totalPaginas: setTotalPaginas,
-        observacao: observacao,
+        "fornecedor": "Copiadora Módulo LTDA",
+        "numero": numeroReq,
+        "nomeRequisicao": nomeReq,
+        "paginas": paginas,
+        "copias": copias,
+        "totalPaginas": totalPaginas,
+        "observacao": observacao,
 
 
-        departamento: ,
-        cc: "",
+        "departamento": departamento,
 
-        acabamento: array_acabamento,
-        formato: "",
-        suporte: "",
-        coodernador: "",
-        arquivoExemplar: "",
+        "acabamento": array_acabamento,
+        "formato": formatoReq,
+        "suporte": suporteReq,
+        "coodernador": coordenador,
+        "arquivoExemplar": "",
 
-     } */
+    }
+
+
+    function escolhido1() {
+        var formato = '';
+        const items = document.getElementsByName('groupOfDefaultRadios');
+        for (var i = 0; i < items.length; i++) {
+            if (items[i].checked) {
+            formato = items[i].value
+            break;
+            }
+        }  
+        return formato;
+    }
+    function escolhido2() {
+        var suporte = '';
+        const items = document.getElementsByName('groupOfDefaultRadios2');
+        for (var i = 0; i < items.length; i++) {
+            if (items[i].checked) {
+            suporte = items[i].value
+            break;
+            }
+        }  
+        return suporte;
+    }
+      
+     function EnviarFormulario () {
+        
+        console.log(data)
+
+     }
+     
 
   return (
     <Container>
         <Header/>
-        <h3 className="titulo_do_formulario">Solicitação de Serviços Reprográficos</h3>
+        <h3 className="titulo_do_formulario" onClick={EnviarFormulario}>Solicitação de Serviços Reprográficos</h3>
         <div className="div_pai--button">
             <div className="sair--button"><p>Voltar</p></div>
         </div>
@@ -225,19 +256,17 @@ function Formulario() {
 
         <form className="form_direita">
             <div className="div_dropdown_form_direita">
-                <select className="dropdown_form_direita">
-                    <option selected value="Indefinido">Área de Atuação</option>
-                    <option value="Indefinido">CT</option>
-                    <option value="Indefinido">CAI</option>
-                    <option value="Indefinido">PC</option>
-                    <option value="Indefinido">CST</option>
-                    <option value="Indefinido">Pós Graduação</option>
+                <select className="dropdown_form_direita" onChange={(e) => setDepartamento(e.target.value)}>
+                    <option selected value="">Área de Atuação</option>
+                    <option value="CT">CT</option>
+                    <option value="CAI">CAI</option>
+                    <option value="PC">PC</option>
+                    <option value="CST">CST</option>
+                    <option value="Pós Graduação">Pós Graduação</option>
                 </select>
-                <select className="dropdown_form_direita">
-                    <option selected value="Indefinido">CC</option>
-                    <option value="Indefinido">45220</option>
-                    <option value="Indefinido">2014251</option>
-                </select>                
+                <div className="dropdown_form_direita">
+                        <p>{departamento}</p>
+                </div>                
             </div>
 
             <div className="acabamento">
@@ -246,11 +275,11 @@ function Formulario() {
 
                     <div className="div_checkbox">
                         <label className="container">2 Grampos a cavalo
-                            <input type="checkbox" name="2 Grampos a cavalo" onChange={handleChange}/>
+                            <input className="container_input_checkbox" type="checkbox" name="2 Grampos a cavalo" onChange={handleChange}/>
                             <span className="checkmark"></span>
                         </label>
                         <label className="container">Encadernação com espiral
-                            <input type="checkbox" name="Encadernação com espiral" onChange={handleChange}/>
+                            <input className="container_input_checkbox" type="checkbox" name="Encadernação com espiral" onChange={handleChange}/>
                             <span className="checkmark"></span>
                         </label>
                     </div>
@@ -258,98 +287,109 @@ function Formulario() {
 
                     <div className="div_checkbox">
                         <label className="container">2 Grampos laterais
-                            <input type="checkbox" name="2 Grampos laterais" onChange={handleChange}/>
+                            <input className="container_input_checkbox" type="checkbox" name="2 Grampos laterais" onChange={handleChange}/>
                             <span className="checkmark"></span>
                         </label>   
                         <label className="container">Capa em PVC
-                            <input type="checkbox" name="Capa em PVC" onChange={handleChange}/>
+                            <input className="container_input_checkbox" type="checkbox" name="Capa em PVC" onChange={handleChange}/>
                             <span className="checkmark"></span>
                         </label>                    
                     </div>
 
                     <div className="div_checkbox">
                         <label className="container">Reduzido
-                            <input type="checkbox" name="Reduzido" onChange={handleChange}/>
+                            <input className="container_input_checkbox" type="checkbox" name="Reduzido" onChange={handleChange}/>
                             <span className="checkmark"></span>
                         </label>
                         <label className="container">Capa em papel 150g/m2
-                            <input type="checkbox" name="Capa em papel 150g/m2" onChange={handleChange}/>
+                            <input className="container_input_checkbox" type="checkbox" name="Capa em papel 150g/m2" onChange={handleChange}/>
                             <span className="checkmark"></span>
                         </label>
                     </div>
 
                     <div className="div_checkbox">
                         <label className="container" >Preto e branco
-                            <input type="checkbox" name="preto e branco"onChange={handleChange}/>
+                            <input className="container_input_checkbox" type="checkbox" name="preto e branco"onChange={handleChange}/>
                             <span className="checkmark"></span>
                         </label>
                         <label className="container">Colorido
-                            <input type="checkbox" name="Colorido" onChange={handleChange}/>
+                            <input className="container_input_checkbox" type="checkbox" name="Colorido" onChange={handleChange}/>
                             <span className="checkmark"></span>
                         </label>
                     </div>
 
                     <div className="div_checkbox">
                         <label className="container">Frente e verso
-                            <input type="checkbox" name="Frente e verso" onChange={handleChange}/>
+                            <input className="container_input_checkbox" type="checkbox" name="Frente e verso" onChange={handleChange}/>
                             <span className="checkmark"></span>
                         </label>
                         <label className="container">
-                            <input type="checkbox"/>
+                            <input className="container_input_checkbox" type="checkbox"/>
                         </label>
                     </div>
 
 
                 </div>
+
                 <div className="acabamento_sub_titulo_form"><p className="titulo_form">Formato</p></div>
+
                 <div className="div2_acabamento">
 
                     <div className="div_checkbox">
-                        <label className="container">A3
-                            <input type="checkbox"/>
-                            <span className="checkmark"></span>
-                        </label>
-                        <label className="container">A4
-                            <input type="checkbox"/>
-                            <span className="checkmark"></span>
-                        </label>
+
+                        <div className="custom-control custom-radio container">
+                            <input type="radio" className="custom-control-input check_radio" id="radio1" name="groupOfDefaultRadios" value="A3"/>
+                            <label className="custom-control-label" for="radio1"> <p className="p_radio">A3</p> </label>
+                        </div> 
+
+                        <div className="custom-control custom-radio container">
+                            <input type="radio" className="custom-control-input" id="radio2" name="groupOfDefaultRadios" value="A4"/>
+                            <label className="custom-control-label" for="radio2"> <p className="p_radio">A4</p> </label>
+                        </div> 
                     </div>
 
-
                     <div className="div_checkbox">
-                        <label className="container">A5
-                            <input type="checkbox"/>
-                            <span className="checkmark"></span>
-                        </label>   
-                        <label className="container">Outros(colocar em OBS)
-                            <input type="checkbox"/>
-                            <span className="checkmark"></span>
-                        </label>                    
+                        <div className="custom-control custom-radio container">
+                            <input type="radio" className="custom-control-input" id="radio3" name="groupOfDefaultRadios" value="A5"/>
+                            <label className="custom-control-label" for="radio3"> <p className="p_radio">A5</p> </label>
+                        </div> 
+
+                        <div className="custom-control custom-radio container">
+                            <input type="radio" className="custom-control-input" id="radio4" name="groupOfDefaultRadios" value="Outros (colocar em OBS)"/>
+                            <label className="custom-control-label" for="radio4"> <p className="p_radio">Outros (colocar em OBS)</p> </label>
+                        </div>  
+
                     </div>
                 </div>
-                <div className="acabamento_sub_titulo_form"><p className="titulo_form">Suporte</p></div>
-                <div className="div3_acabamento">
-                <div className="div_checkbox">
-                        <label className="container">Zipdrive
-                            <input type="checkbox"/>
-                            <span className="checkmark"></span>
-                        </label>
-                        <label className="container">Papel
-                            <input type="checkbox"/>
-                            <span className="checkmark"></span>
-                        </label>
-                    </div>
 
+                <div className="acabamento_sub_titulo_form"><p className="titulo_form">Suporte</p></div>
+
+                <div className="div3_acabamento">
 
                     <div className="div_checkbox">
-                        <label className="container">E-mail
-                            <input type="checkbox"/>
-                            <span className="checkmark"></span>
-                        </label>   
-                        <label className="container">Outros (colocar em OBS)
-                            <input type="checkbox"/>
-                            <span className="checkmark"></span>
-                        </label>                    
+
+                        <div className="custom-control custom-radio container">
+                            <input type="radio" className="custom-control-input" id="radio5" name="groupOfDefaultRadios2" value="Zipdrive"/>
+                            <label className="custom-control-label" for="radio5"> <p className="p_radio">Zipdrive</p> </label>
+                        </div> 
+
+                        <div className="custom-control custom-radio container">
+                            <input type="radio" className="custom-control-input" id="radio6" name="groupOfDefaultRadios2" value="Papel"/>
+                            <label className="custom-control-label" for="radio6"> <p className="p_radio">Papel</p> </label>
+                        </div> 
+                    </div>
+
+                    <div className="div_checkbox">
+                        <div className="custom-control custom-radio container">
+                            <input type="radio" className="custom-control-input" id="radio7" name="groupOfDefaultRadios2" value="E-mail"/>
+                            <label className="custom-control-label" for="radio7"> <p className="p_radio">E-mail</p> </label>
+                        </div> 
+
+                        <div className="custom-control custom-radio container">
+                            <input type="radio" className="custom-control-input" id="radio8" name="groupOfDefaultRadios2" value="Outros (colocar em OBS)"/>
+                            <label className="custom-control-label" for="radio8"> <p className="p_radio">Outros (colocar em OBS)</p> </label>
+                        </div>  
+                        
                     </div>
                 </div>
             </div> 
@@ -364,12 +404,12 @@ function Formulario() {
 
         <form className="form_baixo">
 
-            <select className="dropdown_form_baixo">
-                <option selected value="Indefinido">Coordenador</option>
-                <option value="Indefinido"> Sandra Sobrenome</option>
-                <option value="Indefinido"> Alexandre Sobrenome</option>
-                <option value="Indefinido"> Fulano Sobrenome</option>
-                <option value="Indefinido"> Ciclano Sobrenome</option>
+            <select className="dropdown_form_baixo" onChange={e => setCoordernador(e.target.value)}>
+                <option selected value="">Coordenador</option>
+                <option value="Sandra Sobrenome"> Sandra Sobrenome</option>
+                <option value="Alexandre Sobrenome"> Alexandre Sobrenome</option>
+                <option value="Fulano Sobrenome"> Fulano Sobrenome</option>
+                <option value="Ciclano Sobrenome"> Ciclano Sobrenome</option>
             </select>
 
             <h5 className='titulo_upload'>Upload do exemplar:</h5>
@@ -380,7 +420,7 @@ function Formulario() {
                 <input type="file" multiple="multiple" className="cursor-pointer input_exemplar" id="attachment" name="attachment"/>
             </div>
 
-            {<Button fontStyle="italic" fontSize="1.8vw" title="Enviar" width="15vw"/>}
+            {<Button fontStyle="italic" fontSize="1.8vw" title="Enviar" width="15vw" />}
 
         </form>
         

@@ -12,18 +12,38 @@ import Funcionarios from './pages/funcionarios'
 import Cadastro from './pages/Cadastro'
 import PerfilAdm from './pages/Perfil_Adm'
 import HistoricoAdm from './pages/Historico_Adm'
-import { Component } from 'react';
 import { isAuthenticated } from "./auth";
 
 const PrivateRoute = ({ component: Component, ... rest}) => (
+
+
     <Route
     {...rest}
     render={props =>
-      isAuthenticated() ? (
-        <Component {...props} />
-      ) : (
-        <Redirect to={{ pathname: "/", state: { from: props.location } }} />
-      )
+
+      
+
+      {
+        let teste
+        // console.log(isAuthenticated())
+        
+         isAuthenticated().then((res) =>{
+           console.log("Meu testtttttttte " + res)
+          res ? (
+            <Component {...props} />
+        
+          ) : (
+            <Redirect to={{ pathname: "/", state: { from: props.location } }} />
+          )
+         } )
+        
+      }
+      // isAuthenticated() == true ? (
+      //   <Component {...props} />
+        
+      // ) : (
+      //   <Redirect to={{ pathname: "/", state: { from: props.location } }} />
+      // )
     }
   />
 );
@@ -34,7 +54,7 @@ const Routes = () => (
             <Route exact path="/" component={Login}/>
             <PrivateRoute path="/registros" component={Adm_Registros} />
             <PrivateRoute path="/Historico" component={Historico} />
-            <PrivateRoute path="/Formulario" component={Formulario}/>
+            <Route path="/Formulario" component={Formulario}/>
             <PrivateRoute path="/graficos" component={Graficos}/>
             <Route path="/Perfil" component={Perfil}/>
             <PrivateRoute path="/detalhes/:nif" render={(props) => <Detalhes {...props} data=""/>}/>
