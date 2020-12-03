@@ -5,6 +5,7 @@ import Tabela_Registros from '../../components/Tabela_Registros'
 import { Link } from 'react-router-dom'
 import { Container, Adm_Area, Menu_Area, Tabela, Navegation } from './styles';
 import { useHistory } from 'react-router-dom'
+import axios from 'axios'
 
 function Adm_Registros() {
 

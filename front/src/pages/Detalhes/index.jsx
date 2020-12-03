@@ -11,6 +11,7 @@ import { Info } from '../../components/Tabela_Registros/styles';
 import Impressao from '../../assets/img/impressao.png'
 import Baixar from '../../assets/img/seta-para-baixo.png'
 import { useHistory } from 'react-router-dom'
+import axios from 'axios'
 
 
 function Detalhes(props) {

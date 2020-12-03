@@ -4,6 +4,7 @@ import User_Box_Info from '../../components/User_Box_Info'
 import { Link } from 'react-router-dom'
 import AddIcon from '../../assets/img/add.png'
 import { useHistory } from 'react-router-dom'
+import axios from 'axios'
 
 
 import { Container, Nav_Header, Area_Cadastro, Navegation } from './styles';

@@ -8,8 +8,9 @@ import AddIcon from '../../assets/img/add.png'
 
 import { Container, Adm_Area, Menu_Area, Tabela, Navegation, AddUser } from './styles';
 import { useHistory } from 'react-router-dom'
+import axios from 'axios'
 
-function funcionarios() {
+function Funcionarios() {
       //Verificando Se o usuario esta autorizado para acessar essa pagina
       const history = useHistory()
     
@@ -73,4 +74,4 @@ function funcionarios() {
   );
 }
 
-export default funcionarios;
+export default Funcionarios;
