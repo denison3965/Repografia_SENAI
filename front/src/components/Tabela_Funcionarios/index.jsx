@@ -122,14 +122,14 @@ export class Tabela_Funcionarios extends Component {
     }
   }
 
-  setarSenha(nif) {
-    let res = window.confirm(`Tem certeza que deseja restaurar a senha do funcionario ${nif.target.name} ?     Se sim a senha sera restaurada para 'senai115'`)
+  // setarSenha(nif) {
+  //   let res = window.confirm(`Tem certeza que deseja restaurar a senha do funcionario ${nif.target.name} ?     Se sim a senha sera restaurada para 'senai115'`)
     
-    if (res) {
-      //Setar senha para 'senai115' no banco de dados usando o nif.target.alt para acessar o nif
-      alert(`senha do usuario ${nif.target.name} foi restaurada para 'senai115' com sucesso`)
-    }
-  }
+  //   if (res) {
+  //     //Setar senha para 'senai115' no banco de dados usando o nif.target.alt para acessar o nif
+  //     alert(`senha do usuario ${nif.target.name} foi restaurada para 'senai115' com sucesso`)
+  //   }
+  // }
 
   // editarUser(nif) {
   //   let res = window.confirm(`Tem certeza que deseja editar o usuario ${nif.target.name} ?`)
@@ -153,7 +153,63 @@ export class Tabela_Funcionarios extends Component {
     return(
       <Container>
 
-        {/* Modal  */}
+        {/* Modal Excluir usuario */}
+        <div class="modal fade" id="exampleModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+               <div class="modal-content">
+                  <div class="modal-header">
+                     <h5 class="modal-title" id="exampleModalLabel">Usuário</h5>
+                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                     </button>
+                  </div>
+                  <div class="modal-body">
+                     <div className="senha">
+                        <form class="form-inline" style={{ margin: "40px" }}>
+                           <div class="modal-body">
+                                <p>Tem certeza que deseja excluir o usuario ?</p>
+                           </div>
+                        </form>
+                     </div>
+                  </div>
+                  <div class="modal-footer">
+                     <button type="button" class="btn btn-primary">Excluir Usuário</button>
+                  </div>
+               </div>
+            </div>
+         </div>
+
+
+
+        {/* Modal Restaurar Senha */}
+        <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+               <div class="modal-content">
+                  <div class="modal-header">
+                     <h5 class="modal-title" id="exampleModalLabel">Senha</h5>
+                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                     </button>
+                  </div>
+                  <div class="modal-body">
+                     <div className="senha">
+                        <form class="form-inline" style={{ margin: "40px" }}>
+                           <div class="modal-body">
+                                <p>Tem certeza que deseja restaurar a senha do funcionario?     Se sim a senha sera restaurada para 'senai115'</p>
+                           </div>
+                        </form>
+                     </div>
+                  </div>
+                  <div class="modal-footer">
+                     <button type="button" class="btn btn-primary">Restaurar Senha</button>
+                  </div>
+               </div>
+            </div>
+         </div>
+
+
+
+        {/* Modal Ação  */}
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog" role="document">
               <div class="modal-content">
@@ -249,9 +305,9 @@ export class Tabela_Funcionarios extends Component {
                     <td>{element.email}</td>
                     <td>{element.fone}</td>
                     <td>{element.datacriacao}</td>
-                    <td><img onClick={this.excluirUser.bind(this)} src={IconExcluir} alt={element.nif} name={element.nome} style={{height: '20x', width: '20px', marginLeft: '15px', cursor: 'pointer'}}/></td>
+                    <td><img data-toggle="modal" data-target="#exampleModal3" src={IconExcluir} alt={element.nif} name={element.nome} style={{height: '20x', width: '20px', marginLeft: '15px', cursor: 'pointer'}}/></td>
                     {/*Estou passando o nif da pessoa a ser excluida pelo alt da imagem */}
-                    <td><img onClick={this.setarSenha.bind(this)} src={IconSenha} alt={element.nif} name={element.nome} style={{height: '20x', width: '20px', marginLeft: '50px', cursor: 'pointer'}}/></td>
+                    <td><img data-toggle="modal" data-target="#exampleModal2" src={IconSenha} alt={element.nif} name={element.nome} style={{height: '20x', width: '20px', marginLeft: '50px', cursor: 'pointer'}}/></td>
 
                     <td><img data-toggle="modal" data-target="#exampleModal" src={IconCaneta} alt={element.nif} name={element.nome} style={{height: '20x', width: '20px', marginLeft: '10px', cursor: 'pointer'}}/></td>
                     
