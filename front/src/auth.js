@@ -8,7 +8,7 @@ export const isAuthenticated = async() => {
 
     await axios.get("http://localhost:3000/v1/teste",  {
         method: 'GET',
-        headers: {'X-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjA3MDIzNzA3LCJleHAiOjE2MDcwMjQwMDd9.5PNTUUEg_m98eB21GBQdy0nQSxHRxidIcaKzh4RakII'}
+        headers: {'X-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjA3MDI5MjMzLCJleHAiOjE2MDcwMjk1MzN9.iw2eMmzb3FN6emuva8TElEdiOcFXhpoRDPKR4wYMWKI'}
     })
     .then ((res) => {
 
