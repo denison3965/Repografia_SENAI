@@ -57,8 +57,8 @@ function Formulario() {
     const [totalPaginas, setTotalPaginas] = useState();
     const [aux , setAuxi] = useState(true);
     const [observacao, setObservacao] = useState();
-    const [formato, setFormato] = useState();
-    const [suporte, setSuporte] = useState();
+    const [departamento, setDepartamento] = useState();
+    const [coordenador, setCoordernador] = useState();
 
 
 
@@ -103,60 +103,73 @@ function Formulario() {
 
     var numeroReq = gerarNumeroRequisicao();
 
-    var radios = document.getElementsByName("groupOfDefaultRadios");
-    for (var i = 0; i < radios.length; i++) {
-        if (radios[i].checked) {
-            console.log("Escolheu: " + radios[i].value);
-            setFormato(radios[i].value)
-        }
-    }
-
-    var radios2 = document.getElementsByName("groupOfDefaultRadios2");
-    for (var i = 0; i < radios2.length; i++) {
-        if (radios2[i].checked) {
-            console.log("Escolheu: " + radios2[i].value);
-            setSuporte(radios2[i].value)
-        }
-    }
+    const suporteReq = escolhido2();
+    const formatoReq = escolhido1();
     
 
-    
+    const data = { 
+
+        "nomeSolicitante": "Átila",
+        "escolaSolicitante": "1.15",
+        "telefone": "0000000",
+        "dataSolicitante": dataSolicitante,
+        "dataEntrega": dataEntrega,
 
 
-
-    /* const data = { 
-
-        nomeSolicitante: "Átila",
-        escolaSolicitante: "1.15",
-        telefone: "0000000",
-        dataSolicitante: dataSolicitante,
-        dataEntrega: dataEntrega,
-
-
-        fornecedor: "Copiadora Módulo LTDA",
-        numero: numeroReq,
-        nomeRequisicao: nomereq,
-        paginas: paginas,
-        copias: setCopias,
-        totalPaginas: setTotalPaginas,
-        observacao: observacao,
+        "fornecedor": "Copiadora Módulo LTDA",
+        "numero": numeroReq,
+        "nomeRequisicao": nomeReq,
+        "paginas": paginas,
+        "copias": copias,
+        "totalPaginas": totalPaginas,
+        "observacao": observacao,
 
 
-        departamento: ,
-        cc: "",
+        "departamento": departamento,
 
-        acabamento: array_acabamento,
-        formato: formato,
-        suporte: suporte,
-        coodernador: "",
-        arquivoExemplar: "",
+        "acabamento": array_acabamento,
+        "formato": formatoReq,
+        "suporte": suporteReq,
+        "coodernador": coordenador,
+        "arquivoExemplar": "",
 
-     } */
+    }
+
+
+    function escolhido1() {
+        var formato = '';
+        const items = document.getElementsByName('groupOfDefaultRadios');
+        for (var i = 0; i < items.length; i++) {
+            if (items[i].checked) {
+            formato = items[i].value
+            break;
+            }
+        }  
+        return formato;
+    }
+    function escolhido2() {
+        var suporte = '';
+        const items = document.getElementsByName('groupOfDefaultRadios2');
+        for (var i = 0; i < items.length; i++) {
+            if (items[i].checked) {
+            suporte = items[i].value
+            break;
+            }
+        }  
+        return suporte;
+    }
+      
+     function EnviarFormulario () {
+        
+        console.log(data)
+
+     }
+     
 
   return (
     <Container>
         <Header/>
-        <h3 className="titulo_do_formulario">Solicitação de Serviços Reprográficos</h3>
+        <h3 className="titulo_do_formulario" onClick={EnviarFormulario}>Solicitação de Serviços Reprográficos</h3>
         <div className="div_pai--button">
             <div className="sair--button"><p>Voltar</p></div>
         </div>
@@ -243,19 +256,17 @@ function Formulario() {
 
         <form className="form_direita">
             <div className="div_dropdown_form_direita">
-                <select className="dropdown_form_direita">
-                    <option selected value="Indefinido">Área de Atuação</option>
-                    <option value="Indefinido">CT</option>
-                    <option value="Indefinido">CAI</option>
-                    <option value="Indefinido">PC</option>
-                    <option value="Indefinido">CST</option>
-                    <option value="Indefinido">Pós Graduação</option>
+                <select className="dropdown_form_direita" onChange={(e) => setDepartamento(e.target.value)}>
+                    <option selected value="">Área de Atuação</option>
+                    <option value="CT">CT</option>
+                    <option value="CAI">CAI</option>
+                    <option value="PC">PC</option>
+                    <option value="CST">CST</option>
+                    <option value="Pós Graduação">Pós Graduação</option>
                 </select>
-                <select className="dropdown_form_direita">
-                    <option selected value="Indefinido">CC</option>
-                    <option value="Indefinido">45220</option>
-                    <option value="Indefinido">2014251</option>
-                </select>                
+                <div className="dropdown_form_direita">
+                        <p>{departamento}</p>
+                </div>                
             </div>
 
             <div className="acabamento">
@@ -393,12 +404,12 @@ function Formulario() {
 
         <form className="form_baixo">
 
-            <select className="dropdown_form_baixo">
-                <option selected value="Indefinido">Coordenador</option>
-                <option value="Indefinido"> Sandra Sobrenome</option>
-                <option value="Indefinido"> Alexandre Sobrenome</option>
-                <option value="Indefinido"> Fulano Sobrenome</option>
-                <option value="Indefinido"> Ciclano Sobrenome</option>
+            <select className="dropdown_form_baixo" onChange={e => setCoordernador(e.target.value)}>
+                <option selected value="">Coordenador</option>
+                <option value="Sandra Sobrenome"> Sandra Sobrenome</option>
+                <option value="Alexandre Sobrenome"> Alexandre Sobrenome</option>
+                <option value="Fulano Sobrenome"> Fulano Sobrenome</option>
+                <option value="Ciclano Sobrenome"> Ciclano Sobrenome</option>
             </select>
 
             <h5 className='titulo_upload'>Upload do exemplar:</h5>
@@ -409,7 +420,7 @@ function Formulario() {
                 <input type="file" multiple="multiple" className="cursor-pointer input_exemplar" id="attachment" name="attachment"/>
             </div>
 
-            {<Button fontStyle="italic" fontSize="1.8vw" title="Enviar" width="15vw"/>}
+            {<Button fontStyle="italic" fontSize="1.8vw" title="Enviar" width="15vw" />}
 
         </form>
         

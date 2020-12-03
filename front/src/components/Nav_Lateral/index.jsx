@@ -9,6 +9,7 @@ import Icon_Grafico from '../../assets/img/grafico.png'
 import Icon_Banco from '../../assets/img/banco.png'
 import { Link } from 'react-router-dom'
 import Grupo from '../../assets/img/grupo-de-usuarios.png'
+import axios from 'axios'
 
 import { Container, NavIcons } from './styles';
 
@@ -19,10 +20,15 @@ function Nav_Lateral(props) {
     useEffect(()=>{
         setAtivado(props.ativado)
     },[])
+
+    function teste () {
+        
+        axios.get("http://localhost:3000/v1/denison").then((res) => console.log(res))
+    }
   return (
       <Container>
         <div className="Nav_Lateral_top_side">
-            <div class="Nav_Latera_Logo">
+            <div class="Nav_Latera_Logo" onClick={teste}>
                 <Logo width="150px" height="40px" />
             </div>
 

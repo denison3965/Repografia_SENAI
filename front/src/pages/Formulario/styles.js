@@ -322,6 +322,15 @@ export const Container = styled.div`
         display:flex;
         flex-wrap: wrap;
         flex-direction: row;
+
+    }
+    .dropdown_form_direita p{
+        flex:1;
+        height:100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
     }
     .dropdown_form_direita{
         width: 15vw;
