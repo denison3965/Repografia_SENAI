@@ -6,11 +6,13 @@ import { Link } from 'react-router-dom'
 import { Container, Adm_Area, Menu_Area, Tabela, Navegation } from './styles';
 import { useHistory } from 'react-router-dom'
 import axios from 'axios'
+import { useState } from 'react';
 
 function Adm_Registros() {
 
       //Verificando Se o usuario esta autorizado para acessar essa pagina
       const history = useHistory()
+      const [showPage, setShowPage] = useState(false)
     
       useEffect(() => {
           
@@ -23,6 +25,8 @@ function Adm_Registros() {
               if(res.data[0].auth)
               {
                   console.log('Voce tem acesso')
+                  setShowPage(true)
+
               }
               else
               {
@@ -35,32 +39,41 @@ function Adm_Registros() {
 
 
   return (
-      <Container>
+      <div>
+        {
+        showPage
+          ?
+          <Container>
 
-          <Menu_Area>
-              <Nav_Lateral ativado="2" /> 
-          </Menu_Area>
+            <Menu_Area>
+                <Nav_Lateral ativado="2" /> 
+            </Menu_Area>
 
-          <Adm_Area>
-              <div className="User_Box_Info_Area">
-                <User_Box_Info />
-                <hr></hr>
+            <Adm_Area>
+                <div className="User_Box_Info_Area">
+                  <User_Box_Info />
+                  <hr></hr>
 
-                <Navegation>
-                  <ul>
-                    <Link >
-                      <li>Registros</li>
-                    </Link>
+                  <Navegation>
+                    <ul>
+                      <Link >
+                        <li>Registros</li>
+                      </Link>
 
-                  </ul>
-                </Navegation>
+                    </ul>
+                  </Navegation>
 
-              </div>
-              <Tabela> 
-                <Tabela_Registros />
-              </Tabela>
-          </Adm_Area>
-      </Container>
+                </div>
+                <Tabela> 
+                  <Tabela_Registros />
+                </Tabela>
+            </Adm_Area>
+        </Container> 
+        :<div></div>
+        }
+
+      </div>
+      
   );
 }
 
