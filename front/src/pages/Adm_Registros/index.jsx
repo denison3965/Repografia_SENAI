@@ -1,4 +1,4 @@
-import React, { Component, useEffect } from 'react';
+import React, { Component, useEffect, useState} from 'react';
 import Nav_Lateral from '../../components/Nav_Lateral'
 import User_Box_Info from '../../components/User_Box_Info'
 import Tabela_Registros from '../../components/Tabela_Registros'
@@ -6,7 +6,6 @@ import { Link } from 'react-router-dom'
 import { Container, Adm_Area, Menu_Area, Tabela, Navegation } from './styles';
 import { useHistory } from 'react-router-dom'
 import axios from 'axios'
-import { useState } from 'react';
 import Loading from '../../assets/img/loading.gif'
 
 const loading = {
@@ -30,7 +29,7 @@ function Adm_Registros() {
       useEffect(() => {
           
   
-          axios.get('http://localhost:3000/v1/teste', {
+          axios.get(process.env.REACT_APP_SERVER_TO_AUTHENTICATE, {
               method: 'GET',
               headers:  {'X-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjA3MDMyNzEyLCJleHAiOjE2MDcwMzMwMTJ9.9AR7MM57F3d7ATO_0zifm0BRYSXgCBh2cVFzgFMJNd4'}         
           }).then((res) => {
@@ -98,4 +97,6 @@ function Adm_Registros() {
 
 
 export default Adm_Registros;
+
+
 
