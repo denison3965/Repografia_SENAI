@@ -7,6 +7,19 @@ import { Container, Adm_Area, Menu_Area, Tabela, Navegation } from './styles';
 import { useHistory } from 'react-router-dom'
 import axios from 'axios'
 import { useState } from 'react';
+import Loading from '../../assets/img/loading.gif'
+
+const loading = {
+  position: 'fixed',
+  left: 0,
+  right: 0,
+  top: 0,
+  bottom: 0,
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  zIndex: 99,
+}
 
 function Adm_Registros() {
 
@@ -69,7 +82,11 @@ function Adm_Registros() {
                 </Tabela>
             </Adm_Area>
         </Container> 
-        :<div></div>
+        :<div>
+            <div style={loading}>
+              <img src={Loading} alt="loading"></img>
+            </div>
+        </div>
         }
 
       </div>
