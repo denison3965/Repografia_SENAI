@@ -25,8 +25,8 @@ const loading = {
 
 function Adm_Registros() {
 
-    console.log('MEU TOKEN E ' + cookies.get('tokenJWT'))
-    let token = cookies.get('tokenJWT')
+    
+    
 
       //Verificando Se o usuario esta autorizado para acessar essa pagina
       const history = useHistory()
@@ -34,10 +34,12 @@ function Adm_Registros() {
     
       useEffect(() => {
           
+        console.log('MEU TOKEN E ' + cookies.get('tokenJWT'))
+        var token = cookies.get('tokenJWT')
   
           axios.get(process.env.REACT_APP_SERVER_TO_AUTHENTICATE, {
               method: 'GET',
-              headers:  { 'X-access-token' : token  }         
+              headers:  { 'X-access-token' : token }         
           }).then((res) => {
   
               if(res.data[0].auth)
@@ -53,7 +55,7 @@ function Adm_Registros() {
               }
   
           }).catch ((err) => {
-            // history.push("/")
+            history.push("/")
             console.log('O erro e aqui ' + err )
           })
       }, [])
