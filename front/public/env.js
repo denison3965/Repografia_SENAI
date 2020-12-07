@@ -69,7 +69,7 @@ window.env = {
   "npm_package_browserslist_development_0": "last 1 chrome version",
   "npm_package_dependencies_react_simple_hook_modal": "^1.1.0",
   "npm_package_dependencies_axios": "^0.21.0",
-  "PATH": "/tmp/yarn--1607363257455-0.7105059819971342:/home/deny/Desktop/Projetos/Reppografia_SENAI/front/node_modules/.bin:/home/deny/.config/yarn/link/node_modules/.bin:/home/deny/.yarn/bin:/usr/libexec/lib/node_modules/npm/bin/node-gyp-bin:/usr/lib/node_modules/npm/bin/node-gyp-bin:/usr/bin/node_modules/npm/bin/node-gyp-bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/deny/Android/Sdk/emulator:/home/deny/Android/Sdk/tools:/home/deny/Android/Sdk/tools/bin:/home/deny/Android/Sdk/platform-tools:/home/deny/Android/Sdk/emulator:/home/deny/Android/Sdk/tools:/home/deny/Android/Sdk/tools/bin:/home/deny/Android/Sdk/platform-tools",
+  "PATH": "/tmp/yarn--1607369196518-0.678880848006975:/home/deny/Desktop/Projetos/Reppografia_SENAI/front/node_modules/.bin:/home/deny/.config/yarn/link/node_modules/.bin:/home/deny/.yarn/bin:/usr/libexec/lib/node_modules/npm/bin/node-gyp-bin:/usr/lib/node_modules/npm/bin/node-gyp-bin:/usr/bin/node_modules/npm/bin/node-gyp-bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/deny/Android/Sdk/emulator:/home/deny/Android/Sdk/tools:/home/deny/Android/Sdk/tools/bin:/home/deny/Android/Sdk/platform-tools:/home/deny/Android/Sdk/emulator:/home/deny/Android/Sdk/tools:/home/deny/Android/Sdk/tools/bin:/home/deny/Android/Sdk/platform-tools",
   "NODE": "/usr/bin/node",
   "SESSION_MANAGER": "local/deny-desktop:@/tmp/.ICE-unix/1710,unix/deny-desktop:/tmp/.ICE-unix/1710",
   "INVOCATION_ID": "1749a36909844ffda74d0fb899e32abe",

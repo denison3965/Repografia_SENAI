@@ -486,41 +486,8 @@ function Formulario() {
                             <img src={Loading} alt="loading"></img>
                         </div>
                     </div>
-<<<<<<< HEAD
-                </div>
-            </div> 
-
-            <div className="div_assinatura">
-                <p className="assinatura">Assinatura ______________________________</p>
-            </div>
-
-               
-
-        </form>
-
-        <form className="form_baixo">
-
-            <select className="dropdown_form_baixo" onChange={e => setCoordernador(e.target.value)}>
-                <option selected value="">Coordenador</option>
-                <option value="Sandra Sobrenome"> Sandra Sobrenome</option>
-                <option value="Alexandre Sobrenome"> Alexandre Sobrenome</option>
-                <option value="Fulano Sobrenome"> Fulano Sobrenome</option>
-                <option value="Ciclano Sobrenome"> Ciclano Sobrenome</option>
-            </select>
-
-            <h5 className='titulo_upload'>Upload do exemplar:</h5>
-
-            <div className="div_upload">
-                <img className="img_cloud" src={IconCloud} alt=""/>
-                <p className="text_upload">Arraste e solte um arquivo aqui <br/> ou</p>
-                <input type="file" className="cursor-pointer input_exemplar" id="attachment" name="attachment"/>
-            </div>
-
-            {<Button fontStyle="italic" fontSize="1.8vw" title="Enviar" width="15vw" />}
-=======
             }
         </div>
->>>>>>> 66a8b3c3508894ba1bf3e33edec0c8314ef6ef3f
 
 
     );
