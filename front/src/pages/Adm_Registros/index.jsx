@@ -32,7 +32,7 @@ function Adm_Registros() {
   
           axios.get('http://localhost:3000/v1/teste', {
               method: 'GET',
-              headers:  {'X-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjA3MDMyNzEyLCJleHAiOjE2MDcwMzMwMTJ9.9AR7MM57F3d7ATO_0zifm0BRYSXgCBh2cVFzgFMJNd4'}         
+              headers:  {'X-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjA3MzYyODkzLCJleHAiOjE2MDczNjMxOTN9.l9MWm6UZTcH_bjoMaEiTz0bZK5gQPO9Te1Pze48lAKk'}         
           }).then((res) => {
   
               if(res.data[0].auth)
