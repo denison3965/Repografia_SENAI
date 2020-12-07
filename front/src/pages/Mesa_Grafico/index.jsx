@@ -41,9 +41,9 @@ function Mesa_Grafico() {
                headers:  {'X-access-token': token }         
            }).then((res) => {
    
-               if(res.data[0].auth)
+               if(res.data[0].auth && res.data[0].adm === true)
                {
-                   console.log('Voce tem acesso')
+                   console.log('Voce tem acesso adiministrativo')
                    setShowPage(true)
  
                }

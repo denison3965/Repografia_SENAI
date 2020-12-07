@@ -27,14 +27,21 @@ function  Login() {
       let token = res.data.token
 
       cookies.set('tokenJWT', token, {path: '/'})
-      console.log(cookies.get('tokenJWT') + "Esse e o meu token")
       console.log(res.data)
 
       if (res.data.message == 'Login valido' && res.data.isAd == true) 
       {
-         history.push("/registros")
+         history.push("/perfil-adm")
         
       }
+
+      if (res.data.message == 'Login valido' && res.data.isAd == false) 
+      {
+         history.push("/perfil")
+        
+      }
+
+
     })
     
   }
