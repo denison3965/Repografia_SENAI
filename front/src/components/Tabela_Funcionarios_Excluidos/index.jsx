@@ -112,10 +112,13 @@ export class Tabela_Funcionarios_Excluidos extends Component {
         (register) => {
           return register.nif.toLowerCase().indexOf(this.state.search) !== -1 ||
                  register.nome.toLowerCase().indexOf(this.state.search) !== -1 ||
+                 register.nome.indexOf(this.state.search) !== -1 ||
                  register.cargo.toLowerCase().indexOf(this.state.search) !== -1 ||
-                 register.email.toLowerCase().indexOf(this.state.search) !== -1 ||
+                 register.cargo.indexOf(this.state.search) !== -1 ||
+                 register.email.indexOf(this.state.search) !== -1 ||
                  register.fone.toLowerCase().indexOf(this.state.search) !== -1 ||
                  register.datacriacao.toLowerCase().indexOf(this.state.search) !== -1 ||
+                 register.datacriacao.indexOf(this.state.search) !== -1 ||
                  register.dataexclusao.toLowerCase().indexOf(this.state.search) !== -1 
                  
         }
@@ -123,6 +126,34 @@ export class Tabela_Funcionarios_Excluidos extends Component {
   
       return(
         <Container>
+
+          {/* Modal Restaurar Senha */}
+        <div class="modal fade" id="exampleModal4" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+               <div class="modal-content">
+                  <div class="modal-header">
+                     <h5 class="modal-title" id="exampleModalLabel">Usuário</h5>
+                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                     </button>
+                  </div>
+                  <div class="modal-body">
+                     <div className="senha">
+                        <form class="form-inline" style={{ margin: "40px" }}>
+                           <div class="modal-body">
+                                <p>Gostaria de restaurar o usuário?</p>
+                           </div>
+                        </form>
+                     </div>
+                  </div>
+                  <div class="modal-footer">
+                     <button type="button" class="btn btn-primary">Restaurar Usuário</button>
+                  </div>
+               </div>
+            </div>
+         </div>
+
+
   
           <Info>
             <Title>Funcionários excluidos</Title>
@@ -160,7 +191,7 @@ export class Tabela_Funcionarios_Excluidos extends Component {
                       <td>{element.fone}</td>
                       <td>{element.datacriacao}</td>
                       <td>{element.dataexclusao}</td>
-                      <td><img onClick={this.restaurarUsuario.bind(this)} src={IconVoltar} alt={element.nif} name={element.nome} style={{width: 25, height: 25, marginLeft: 50, cursor: 'pointer'}} /></td>
+                      <td><img data-toggle="modal" data-target="#exampleModal4" src={IconVoltar} alt={element.nif} name={element.nome} style={{width: 25, height: 25, marginLeft: 50, cursor: 'pointer'}} /></td>
                       
   
                     </tr>

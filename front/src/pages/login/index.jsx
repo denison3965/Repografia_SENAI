@@ -1,12 +1,46 @@
 //para criar essa estrutura rode o snypts: rfc
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container } from './styles';
 import Button from '../../components/Button'
 import Logo from '../../components/Logo'
 import { Head } from './styles';
+import axios from 'axios'
+import { useHistory } from 'react-router-dom'
+import Cookies from 'universal-cookie'
 
-function login() {
+const cookies = new Cookies()
+
+function  Login() {
+
+  const history = useHistory()
+
+  const [nif, setNif] = useState('')
+  const [password, setPassword] = useState('')
+
+  const enviarFormulario = () => {
+    console.log( "senha :" +password + "nif" + nif)
+    axios.post('http://localhost:3000/v1/login',{
+      nif: nif,
+      password: password
+    })
+    .then((res) => {
+      let token = res.data.token
+
+      cookies.set('tokenJWT', token, {path: '/'})
+      console.log(cookies.get('tokenJWT') + "Esse e o meu token")
+      console.log(res.data)
+
+      if (res.data.message == 'Login valido' && res.data.isAd == true) 
+      {
+         history.push("/registros")
+        
+      }
+    })
+    
+  }
+  
   return (
+    
     <Container>
 
       <div className="logo_posicao">
@@ -19,17 +53,17 @@ function login() {
             NIF:
               </label>
         </div>
-        <input type="text" name="nif" className="niftxt_posicao" />
+        <input type="text" name="nif" className="niftxt_posicao" onChange={(e) => setNif(e.target.value)}/>
 
         <div className="senha_posicao">
           <label>
             Senha:
               </label>
         </div>
-        <input type="text" name="senha" className="senhatxt_posicao" />
+        <input type="text" name="senha" className="senhatxt_posicao" onChange={(e) => setPassword(e.target.value)} />
 
-        <div className="entrar_posicao">
-          {<Button title="Entrar" font-size="3vw" width="100%" height="4.5vh" />}
+        <div className="entrar_posicao" onClick={enviarFormulario}>
+          {<Button title="Entrar" font-size="3vw" width="100%" height="4.5vh"  />}
         </div>
 
         <div className="esqueci_senha">
@@ -95,7 +129,7 @@ function login() {
   )
 }
 
-export default login;
+export default Login;
 
 
 
