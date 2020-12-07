@@ -156,14 +156,9 @@ function Formulario() {
 
     const suporteReq = escolhido2();
     const formatoReq = escolhido1();
-<<<<<<< HEAD
-    
-    const data = { 
-=======
 
 
     const data = {
->>>>>>> 66a8b3c3508894ba1bf3e33edec0c8314ef6ef3f
 
         "nomeSolicitante": "Átila",
         "escolaSolicitante": "1.15",
