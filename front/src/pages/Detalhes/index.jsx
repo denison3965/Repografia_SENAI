@@ -13,6 +13,9 @@ import Baixar from '../../assets/img/seta-para-baixo.png'
 import { useHistory } from 'react-router-dom'
 import axios from 'axios'
 import Loading from '../../assets/img/loading.gif'
+import Cookies from 'universal-cookie'
+
+const cookies = new Cookies()
 
 const loading = {
   position: 'fixed',
@@ -35,10 +38,12 @@ function Detalhes(props) {
       
         useEffect(() => {
             
+          console.log('MEU TOKEN E ' + cookies.get('tokenJWT'))
+          var token = cookies.get('tokenJWT')
     
             axios.get(process.env.REACT_APP_SERVER_TO_AUTHENTICATE, {
                 method: 'GET',
-                headers:  {'X-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjA3MDMyNzEyLCJleHAiOjE2MDcwMzMwMTJ9.9AR7MM57F3d7ATO_0zifm0BRYSXgCBh2cVFzgFMJNd4'}         
+                headers:  {'X-access-token': token }         
             }).then((res) => {
     
                 if(res.data[0].auth)

@@ -6,8 +6,11 @@ import AddIcon from '../../assets/img/add.png'
 import { useHistory } from 'react-router-dom'
 import axios from 'axios'
 import Loading from '../../assets/img/loading.gif'
+import Cookies from 'universal-cookie'
 
 import { Container, Nav_Header, Area_Cadastro, Navegation } from './styles';
+
+const cookies = new Cookies()
 
 const loading = {
   position: 'fixed',
@@ -21,22 +24,52 @@ const loading = {
   zIndex: 99,
 }
 
+
+
+  
 function Cadastro() {
       //Verificando Se o usuario esta autorizado para acessar essa pagina
       const history = useHistory()
       const [showPage, setShowPage] = useState(false)
+
+      const [nome, setNome] = useState()
+      const [cargo, setCargo]= useState()
+      const [nif, setNif] = useState()
+      const[telefone, setTelefone] = useState()
+      const [email, setEmail] = useState()
+      const [administartivo, setAdministartivo] = useState()
+
+
+      let params = {
+          nome: nome,
+          cargo: cargo,
+          nif: nif,
+          telefone: telefone,
+          email: email,
+          administartivo: administartivo
+      }
+
+      function enviarFormulario() {
+          axios.post('/http://localhost:3000​​​​​​​​/v1/cadastro', params).then(result => {
+              console.log(result.data)
+            
+          })
+      }
     
       useEffect(() => {
+
+        console.log('MEU TOKEN E ' + cookies.get('tokenJWT'))
+        var token = cookies.get('tokenJWT')
           
   
           axios.get( process.env.REACT_APP_SERVER_TO_AUTHENTICATE , {
               method: 'GET',
-              headers:  {'X-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjA3MDMyNzEyLCJleHAiOjE2MDcwMzMwMTJ9.9AR7MM57F3d7ATO_0zifm0BRYSXgCBh2cVFzgFMJNd4'}         
+              headers:  {'X-access-token': token}         
           }).then((res) => {
   
-              if(res.data[0].auth)
+              if(res.data[0].auth && res.data[0].adm === true)
               {
-                  console.log('Voce tem acesso')
+                  console.log('Voce tem acesso como adiministrador')
                   setShowPage(true)
 
               }
@@ -89,32 +122,32 @@ function Cadastro() {
                   <div class="form-row">
                     <div class="form-group col-md-6">
                       <label for="inputEmail4">Nome</label>
-                      <input type="text" class="form-control" id="inputNome" placeholder="Ex: Pedro" required />
+                      <input type="text" class="form-control" id="inputNome" placeholder="Ex: Pedro" required  onChange={e => setNome(e.target.value)}/>
                     </div>
                     <div class="form-group col-md-6">
                       <label for="inputPassword4">Cargo</label>
-                      <input type="text" class="form-control" id="inputCargo" placeholder="Ex: Professor"  required/>
+                      <input type="text" class="form-control" id="inputCargo" placeholder="Ex: Professor"  required  onChange={e => setCargo(e.target.value)}/>
                     </div>
                   </div>
                   <div class="form-row">
                     <div class="form-group col-md-6">
                       <label for="inputEmail4">NIF</label>
-                      <input type="text" class="form-control" id="inputNif" placeholder="Ex: 0000000"  required/>
+                      <input type="text" class="form-control" id="inputNif" placeholder="Ex: 0000000"  required  onChange={e => setNif(e.target.value)} />
                     </div>
                     <div class="form-group col-md-6">
                       <label for="inputPassword4">Telefone</label>
-                      <input type="text" class="form-control" id="inputTelefone" placeholder="Ex: 11 99556-8741" />
+                      <input type="text" class="form-control" id="inputTelefone" placeholder="Ex: 11 99556-8741" onChange={e => setTelefone(e.target.value)}/>
                     </div>
                   </div>
                   <div class="form-row">
                     <div class="form-group col-md-6">
                       <label for="inputEmail4">Email</label>
-                      <input type="email" class="form-control" id="inputEmail4" placeholder="senia@outlook.com" required/>
+                      <input type="email" class="form-control" id="inputEmail4" placeholder="senia@outlook.com" required onChange={e => setEmail(e.target.value)} />
                     </div>
     
                     <div class="form-group col-md-6">
                       <label for="inputState">O usuario tera acesso administartivo ?</label>
-                      <select id="inputState" class="form-control">
+                      <select id="inputState" class="form-control" onChange={e => setAdministartivo(e.target.value)}>
                         <option selected>nao</option>
                         <option>sim</option>
                       </select>
@@ -123,7 +156,7 @@ function Cadastro() {
                   </div>
                   <div className="area_botao">
     
-                    <button type="button" class="btn btn-success">Cadastrar</button>
+                    <button type="button" class="btn btn-success" onClick={enviarFormulario} >Cadastrar</button>
                     <Link to="/funcionarios-cadastrados"><button type="button" class="btn btn-danger">Voltar</button></Link>
     
                   </div>
@@ -145,8 +178,8 @@ function Cadastro() {
       }]
     </div>
 
+    )
+  }
 
-  )
-}
 
 export default Cadastro;

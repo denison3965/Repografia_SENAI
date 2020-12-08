@@ -35,12 +35,12 @@ function Adm_Registros() {
 
             axios.get(process.env.REACT_APP_SERVER_TO_AUTHENTICATE, {
                 method: 'GET',
-                headers:  {'X-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjA3MTMyMzQ3LCJleHAiOjE2MDcxMzI2NDd9.H8DhPaujH4c7YxxGy-UeSjVOk7Wi-v8vTfyDkb8M8lo'}       
+                headers:  {'X-access-token': token }       
             }).then((res) => {
     
-                if(res.data[0].auth)
+                if(res.data[0].auth && res.data[0].adm === true)
                 {
-                    console.log('Voce tem acesso')
+                    console.log('Voce tem acesso adiministrativo')
                     setShowPage(true)
   
                 }
