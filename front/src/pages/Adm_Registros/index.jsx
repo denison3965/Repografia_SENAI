@@ -1,4 +1,4 @@
-import React, { Component, useEffect } from 'react';
+import React, { Component, useEffect, useState} from 'react';
 import Nav_Lateral from '../../components/Nav_Lateral'
 import User_Box_Info from '../../components/User_Box_Info'
 import Tabela_Registros from '../../components/Tabela_Registros'
@@ -6,8 +6,10 @@ import { Link } from 'react-router-dom'
 import { Container, Adm_Area, Menu_Area, Tabela, Navegation } from './styles';
 import { useHistory } from 'react-router-dom'
 import axios from 'axios'
-import { useState } from 'react';
 import Loading from '../../assets/img/loading.gif'
+import Cookies from 'universal-cookie'
+
+const cookies = new Cookies()
 
 const loading = {
   position: 'fixed',
@@ -23,6 +25,9 @@ const loading = {
 
 function Adm_Registros() {
 
+    console.log('MEU TOKEN E ' + cookies.get('tokenJWT'))
+    let token = cookies.get('tokenJWT')
+
       //Verificando Se o usuario esta autorizado para acessar essa pagina
       const history = useHistory()
       const [showPage, setShowPage] = useState(false)
@@ -30,9 +35,9 @@ function Adm_Registros() {
       useEffect(() => {
           
   
-          axios.get('http://localhost:3000/v1/teste', {
+          axios.get(process.env.REACT_APP_SERVER_TO_AUTHENTICATE, {
               method: 'GET',
-              headers:  {'X-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjA3MzYyODkzLCJleHAiOjE2MDczNjMxOTN9.l9MWm6UZTcH_bjoMaEiTz0bZK5gQPO9Te1Pze48lAKk'}         
+              headers:  { 'X-access-token' : token  }         
           }).then((res) => {
   
               if(res.data[0].auth)
@@ -43,10 +48,14 @@ function Adm_Registros() {
               }
               else
               {
+                  console.log('estou no else')
                   history.push("/")
               }
   
-          }).catch (() => {history.push("/")})
+          }).catch ((err) => {
+            // history.push("/")
+            console.log('O erro e aqui ' + err )
+          })
       }, [])
       //**Verificando Se o usuario esta autorizado para acessar essa pagina**
 
@@ -98,4 +107,6 @@ function Adm_Registros() {
 
 
 export default Adm_Registros;
+
+
 

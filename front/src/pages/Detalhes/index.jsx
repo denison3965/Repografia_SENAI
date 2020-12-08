@@ -12,52 +12,73 @@ import Impressao from '../../assets/img/impressao.png'
 import Baixar from '../../assets/img/seta-para-baixo.png'
 import { useHistory } from 'react-router-dom'
 import axios from 'axios'
+import Loading from '../../assets/img/loading.gif'
+
+const loading = {
+  position: 'fixed',
+  left: 0,
+  right: 0,
+  top: 0,
+  bottom: 0,
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  zIndex: 99,
+}
 
 
 function Detalhes(props) {
 
-      //Verificando Se o usuario esta autorizado para acessar essa pagina
-      const history = useHistory()
+        //Verificando Se o usuario esta autorizado para acessar essa pagina
+        const history = useHistory()
+        const [showPage, setShowPage] = useState(false)
+      
+        useEffect(() => {
+            
     
-      useEffect(() => {
-          
+            axios.get(process.env.REACT_APP_SERVER_TO_AUTHENTICATE, {
+                method: 'GET',
+                headers:  {'X-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjA3MDMyNzEyLCJleHAiOjE2MDcwMzMwMTJ9.9AR7MM57F3d7ATO_0zifm0BRYSXgCBh2cVFzgFMJNd4'}         
+            }).then((res) => {
+    
+                if(res.data[0].auth)
+                {
+                    console.log('Voce tem acesso')
+                    setShowPage(true)
   
-          axios.get('http://localhost:3000/v1/teste', {
-              method: 'GET',
-              headers:  {'X-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjA3MDMyNzEyLCJleHAiOjE2MDcwMzMwMTJ9.9AR7MM57F3d7ATO_0zifm0BRYSXgCBh2cVFzgFMJNd4'}         
-          }).then((res) => {
-  
-              if(res.data[0].auth)
-              {
-                  console.log('Voce tem acesso')
-              }
-              else
-              {
-                  history.push("/")
-              }
-  
-          }).catch (() => {history.push("/")})
-      }, [])
-      //**Verificando Se o usuario esta autorizado para acessar essa pagina**
+                }
+                else
+                {
+                    history.push("/")
+                }
+    
+            }).catch (() => {history.push("/")})
+        }, [])
+        //**Verificando Se o usuario esta autorizado para acessar essa pagina**
 
   //pegando o node do registro a ser mostrado ( tem que pegar o id depois )
   console.log(props.location.state.registro[0])
 
-  const[registro, setRegistro] = useState('')
+  const [registro, setRegistro] = useState('')
 
   useEffect(() => {
     setRegistro(props.location.state.registro[0])
 
   }, [])
-  
+
 
   return (
-      <Container>
-           <Menu_Area>
-              <Nav_Lateral ativado="1" /> 
-          </Menu_Area>
 
-          <Adm_Area>
+    <div>
+      {
+        showPage
+          ?
+          <Container>
+            <Menu_Area>
+              <Nav_Lateral ativado="1" />
+            </Menu_Area>
+
+            <Adm_Area>
               <div className="User_Box_Info_Area">
                 <User_Box_Info />
                 <hr></hr>
@@ -98,8 +119,8 @@ function Detalhes(props) {
                   <div className="registro_item">
                     <div className="registro_chave"><strong>Cópias:</strong></div>
                     <div className="registro_valor_img">
-                      <img src={Baixar} alt="impressora" style={{width: 20, height: 20}}/>
-                      <p> apostila.pdf</p>   
+                      <img src={Baixar} alt="impressora" style={{ width: 20, height: 20 }} />
+                      <p> apostila.pdf</p>
                     </div>
                   </div>
 
@@ -137,7 +158,7 @@ function Detalhes(props) {
                   </div>
 
                   <div className="registro_item">
-                    <div className="registro_chave"><span style={{color: 'red', textTransform: ''}}>Observação:</span></div>
+                    <div className="registro_chave"><span style={{ color: 'red', textTransform: '' }}>Observação:</span></div>
                     <div className="registro_valor"> </div>
                   </div>
 
@@ -149,8 +170,8 @@ function Detalhes(props) {
                   <div className="registro_item">
                     <div className="registro_chave"><strong>Imprimir:</strong></div>
                     <div className="registro_valor_img">
-                      <img src={Impressao} alt="impressora" style={{width: 25, height: 25}}/>
-                      <p> Click aqui para impremir</p>   
+                      <img src={Impressao} alt="impressora" style={{ width: 25, height: 25 }} />
+                      <p> Click aqui para impremir</p>
                     </div>
                   </div>
 
@@ -159,11 +180,21 @@ function Detalhes(props) {
               </Information>
 
               <p>{registro}</p>
-          <p>basta pegar a variavel registro que tera o codigo do regidtro a ser mostrado e fazer um fetch para ppegar o respectivo registro</p>
+              <p>basta pegar a variavel registro que tera o codigo do regidtro a ser mostrado e fazer um fetch para ppegar o respectivo registro</p>
 
-          </Adm_Area>
-          
-      </Container>
+            </Adm_Area>
+
+          </Container>
+          : <div>
+            <div style={loading}>
+              <img src={Loading} alt="loading"></img>
+            </div>
+          </div>
+      }
+    </div>
+
+
+
   );
 }
 
