@@ -8,7 +8,7 @@ import TabelaBaixarPeriodo from '../../components/Tabela_BaixarPeriodo'
 import { useHistory } from 'react-router-dom'
 
 import axios from 'axios'
-import Loading from '../../assets/img/loading.gif'
+import Loading from '../../assets/img/loading2.gif'
 import Cookies from 'universal-cookie'
 
 const cookies = new Cookies()
@@ -27,87 +27,88 @@ const loading = {
 
 
 function Mesa_Grafico() {
-       //Verificando Se o usuario esta autorizado para acessar essa pagina
-       const history = useHistory()
-       const [showPage, setShowPage] = useState(false)
-     
-       useEffect(() => {
+  //Verificando Se o usuario esta autorizado para acessar essa pagina
+  const history = useHistory()
+  const [showPage, setShowPage] = useState(false)
 
-        console.log('MEU TOKEN E ' + cookies.get('tokenJWT'))
-        var token = cookies.get('tokenJWT')
-   
-           axios.get(process.env.REACT_APP_SERVER_TO_AUTHENTICATE, {
-               method: 'GET',
-               headers:  {'X-access-token': token }         
-           }).then((res) => {
-   
-               if(res.data[0].auth)
-               {
-                   console.log('Voce tem acesso')
-                   setShowPage(true)
- 
-               }
-               else
-               {
-                   history.push("/")
-               }
-   
-           }).catch (() => {history.push("/")})
-       }, [])
-       //**Verificando Se o usuario esta autorizado para acessar essa pagina**
+  useEffect(() => {
+
+    console.log('MEU TOKEN E ' + cookies.get('tokenJWT'))
+    var token = cookies.get('tokenJWT')
+
+    axios.get(process.env.REACT_APP_SERVER_TO_AUTHENTICATE, {
+      method: 'GET',
+      headers: { 'X-access-token': token }
+    }).then((res) => {
+
+      if (res.data[0].auth && res.data[0].adm === true) {
+        console.log('Voce tem acesso adiministrativo')
+        setShowPage(true)
+
+      }
+      else {
+        history.push("/")
+      }
+
+    }).catch(() => { history.push("/") })
+  }, [])
+  //**Verificando Se o usuario esta autorizado para acessar essa pagina**
   return (
-    <div>
+
+    <Container>
+
+      <MenuLateral>
+        <Nav_Lateral ativado="3" />
+      </MenuLateral>
+
       {
         showPage
           ?
-          <Container>
+          <InfoBox>
 
-            <MenuLateral>
-              <Nav_Lateral ativado="3" />
-            </MenuLateral>
-
-            <InfoBox>
-
-              <div className="user_box_info">
-                <User_Box_Info />
-              </div>
+            <div className="user_box_info">
+              <User_Box_Info />
+            </div>
 
 
-              <div style={{ width: "80vw", marginLeft: "30px" }}>
-                <hr></hr>
-              </div>
+            <div style={{ width: "80vw", marginLeft: "30px" }}>
+              <hr></hr>
+            </div>
 
 
-              <Navegation>
-                <ul>
-                  <Link >
-                    <li>Relatórios</li>
-                  </Link>
-                </ul>
+            <Navegation>
+              <ul>
+                <Link >
+                  <li>Relatórios</li>
+                </Link>
+              </ul>
 
-              </Navegation>
+            </Navegation>
 
-              <Info>
-                <Title>Relatórios</Title>
-              </Info>
+            <Info>
+              <Title>Relatórios</Title>
+            </Info>
 
-              <Grafico>
-                <Graficos />
-              </Grafico>
+            <Grafico>
+              <Graficos />
+            </Grafico>
 
-              <Tabela>
-                <TabelaBaixarPeriodo />
-              </Tabela>
+            <Tabela>
+              <TabelaBaixarPeriodo />
+            </Tabela>
 
-            </InfoBox>
-          </Container>
+          </InfoBox>
+
           : <div>
             <div style={loading}>
               <img src={Loading} alt="loading"></img>
             </div>
           </div>
       }
-    </div>
+
+
+    </Container>
+
 
 
 

@@ -1,4 +1,4 @@
-import React, { Component, useEffect, useState} from 'react';
+import React, { Component, useEffect, useState } from 'react';
 import Nav_Lateral from '../../components/Nav_Lateral'
 import User_Box_Info from '../../components/User_Box_Info'
 import Tabela_Registros from '../../components/Tabela_Registros'
@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 import { Container, Adm_Area, Menu_Area, Tabela, Navegation } from './styles';
 import { useHistory } from 'react-router-dom'
 import axios from 'axios'
-import Loading from '../../assets/img/loading.gif'
+import Loading from '../../assets/img/loading2.gif'
 import Cookies from 'universal-cookie'
 
 const cookies = new Cookies()
@@ -25,83 +25,86 @@ const loading = {
 
 function Adm_Registros() {
 
-    
-    
 
-      //Verificando Se o usuario esta autorizado para acessar essa pagina
-      const history = useHistory()
-      const [showPage, setShowPage] = useState(false)
-    
-      useEffect(() => {
-          
-        console.log('MEU TOKEN E ' + cookies.get('tokenJWT'))
-        var token = cookies.get('tokenJWT')
-  
-          axios.get(process.env.REACT_APP_SERVER_TO_AUTHENTICATE, {
-              method: 'GET',
-              headers:  { 'X-access-token' : token }         
-          }).then((res) => {
-  
-              if(res.data[0].auth)
-              {
-                  console.log('Voce tem acesso')
-                  setShowPage(true)
 
-              }
-              else
-              {
-                  console.log('estou no else')
-                  history.push("/")
-              }
-  
-          }).catch ((err) => {
-            history.push("/")
-            console.log('O erro e aqui ' + err )
-          })
-      }, [])
-      //**Verificando Se o usuario esta autorizado para acessar essa pagina**
+
+  //Verificando Se o usuario esta autorizado para acessar essa pagina
+  const history = useHistory()
+  const [showPage, setShowPage] = useState(false)
+
+  useEffect(() => {
+
+    console.log('MEU TOKEN E ' + cookies.get('tokenJWT'))
+    var token = cookies.get('tokenJWT')
+
+    axios.get(process.env.REACT_APP_SERVER_TO_AUTHENTICATE, {
+      method: 'GET',
+      headers: { 'X-access-token': token }
+    }).then((res) => {
+
+      if (res.data[0].auth && res.data[0].adm === true) {
+        console.log("Voce entrou no sistema como Adiministrador")
+        setShowPage(true)
+
+      }
+      else {
+        console.log('estou no else')
+        history.push("/")
+      }
+
+    }).catch((err) => {
+      history.push("/")
+      console.log('O erro e aqui ' + err)
+    })
+  }, [])
+  //**Verificando Se o usuario esta autorizado para acessar essa pagina**
 
 
   return (
-      <div>
-        {
+
+    <Container>
+
+      <Menu_Area>
+        <Nav_Lateral ativado="2" />
+      </Menu_Area>
+
+      {
         showPage
           ?
-          <Container>
+          <Adm_Area>
+            <div className="User_Box_Info_Area">
+              <User_Box_Info />
+              <hr></hr>
 
-            <Menu_Area>
-                <Nav_Lateral ativado="2" /> 
-            </Menu_Area>
+              <Navegation>
+                <ul>
+                  <Link >
+                    <li>Registros</li>
+                  </Link>
 
-            <Adm_Area>
-                <div className="User_Box_Info_Area">
-                  <User_Box_Info />
-                  <hr></hr>
+                </ul>
+              </Navegation>
 
-                  <Navegation>
-                    <ul>
-                      <Link >
-                        <li>Registros</li>
-                      </Link>
+            </div>
+            <Tabela>
+              <Tabela_Registros />
+            </Tabela>
+          </Adm_Area>
 
-                    </ul>
-                  </Navegation>
-
-                </div>
-                <Tabela> 
-                  <Tabela_Registros />
-                </Tabela>
-            </Adm_Area>
-        </Container> 
-        :<div>
+          : <div>
             <div style={loading}>
               <img src={Loading} alt="loading"></img>
             </div>
-        </div>
-        }
+          </div>
+      }
 
-      </div>
-      
+
+    </Container>
+
+
+
+
+
   );
 }
 

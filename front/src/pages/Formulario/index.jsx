@@ -61,6 +61,7 @@ function Formulario() {
 
     const array_nomes = ["2 Grampos a cavalo", "2 Grampos laterais", "Colorido", "Encadernação com espiral", "Frente e verso", "Reduzido", "preto e branco", "Capa em papel 150g/m2", "Capa em PVC"]
     let array_acabamento = []
+    const [arrayAcabamento, setArrayAcabamento] = useState([])
 
     const [checkedItems, setCheckedItems] = useState(
         {
@@ -92,6 +93,7 @@ function Formulario() {
 
                 let item = array_nomes[indice]
                 array_acabamento.push(item)
+                setArrayAcabamento(array_acabamento)
                 console.log(array_acabamento)
 
             }
@@ -109,7 +111,7 @@ function Formulario() {
     const [aux, setAuxi] = useState(true);
     const [observacao, setObservacao] = useState();
     const [departamento, setDepartamento] = useState();
-    const [coordenador, setCoordernador] = useState();
+    const [responsavel, setResponsavel] = useState();
 
 
 
@@ -177,10 +179,10 @@ function Formulario() {
 
         "departamento": departamento,
 
-        "acabamento": array_acabamento,
+        "acabamento": arrayAcabamento,
         "formato": formatoReq,
         "suporte": suporteReq,
-        "coodernador": coordenador,
+        "coodernador": responsavel,
         "arquivoExemplar": "",
 
     }
@@ -211,7 +213,12 @@ function Formulario() {
 
     function EnviarFormulario() {
 
+
         console.log(data)
+        
+        axios.post('http://localhost:3000/v1/add-requisicao', data)
+            .then((res) => console.log(res))
+            .catch((err) => console.log( err))
 
     }
 
@@ -457,7 +464,7 @@ function Formulario() {
 
                         <form className="form_baixo">
 
-                            <select className="dropdown_form_baixo" onChange={e => setCoordernador(e.target.value)}>
+                            <select className="dropdown_form_baixo" onChange={e => (setResponsavel(e.target.value))}>
                                 <option selected value="">Coordenador</option>
                                 <option value="Sandra Sobrenome"> Sandra Sobrenome</option>
                                 <option value="Alexandre Sobrenome"> Alexandre Sobrenome</option>
