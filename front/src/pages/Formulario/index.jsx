@@ -25,35 +25,35 @@ const loading = {
 function Formulario() {
 
 
-          //Verificando Se o usuario esta autorizado para acessar essa pagina
-          const history = useHistory()
-          const [showPage, setShowPage] = useState(false)
-        
-          useEffect(() => {
-
-            console.log('MEU TOKEN E ' + cookies.get('tokenJWT'))
-            var token = cookies.get('tokenJWT')
-              
-      
-              axios.get(process.env.REACT_APP_SERVER_TO_AUTHENTICATE, {
-                  method: 'GET',
-                  headers:  {'X-access-token': token }         
-              }).then((res) => {
-      
-                  if(res.data[0].auth)
-                  {
-                      console.log('Voce tem acesso')
-                      setShowPage(true)
+        //Verificando Se o usuario esta autorizado para acessar essa pagina
+        const history = useHistory()
+        const [showPage, setShowPage] = useState(false)
     
-                  }
-                  else
-                  {
-                      history.push("/")
-                  }
-      
-              }).catch (() => {history.push("/")})
-          }, [])
-          //**Verificando Se o usuario esta autorizado para acessar essa pagina**
+        useEffect(() => {
+
+        console.log('MEU TOKEN E ' + cookies.get('tokenJWT'))
+        var token = cookies.get('tokenJWT')
+            
+    
+            axios.get(process.env.REACT_APP_SERVER_TO_AUTHENTICATE, {
+                method: 'GET',
+                headers:  {'X-access-token': token }         
+            }).then((res) => {
+    
+                if(res.data[0].auth)
+                {
+                    console.log('Voce tem acesso')
+                    setShowPage(true)
+
+                }
+                else
+                {
+                    history.push("/")
+                }
+    
+            }).catch (() => {history.push("/")})
+        }, [])
+        //**Verificando Se o usuario esta autorizado para acessar essa pagina**
 
     //__________________________________________________________________________________________________________________________________________________________________________________________________________________
 
@@ -467,11 +467,11 @@ function Formulario() {
 
                             <h5 className='titulo_upload'>Upload do exemplar:</h5>
 
-                            <div className="div_upload">
+                            <form className="div_upload" enctype="multipart/form-data">
                                 <img className="img_cloud" src={IconCloud} alt="" />
                                 <p className="text_upload">Arraste e solte um arquivo aqui <br /> ou</p>
                                 <input type="file" multiple="multiple" className="cursor-pointer input_exemplar" id="attachment" name="attachment" />
-                            </div>
+                            </form>
 
                             {<Button fontStyle="italic" fontSize="1.8vw" title="Enviar" width="15vw" />}
 
