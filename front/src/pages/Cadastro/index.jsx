@@ -37,7 +37,7 @@ function Cadastro() {
       const [nif, setNif] = useState()
       const[telefone, setTelefone] = useState()
       const [email, setEmail] = useState()
-      const [administartivo, setAdministartivo] = useState()
+      const [situacao, setSituacao] = useState()
 
 
       let params = {
@@ -46,11 +46,11 @@ function Cadastro() {
           nif: nif,
           telefone: telefone,
           email: email,
-          administartivo: administartivo
+          situacao: situacao
       }
 
       function enviarFormulario() {
-          axios.post('/http://localhost:3000​​​​​​​​/v1/cadastro', params).then(result => {
+          axios.post('/http://localhost:3000​​​​​​​​/v1/funcionarios', params).then(result => {
               console.log(result.data)
             
           })
@@ -147,7 +147,7 @@ function Cadastro() {
     
                     <div class="form-group col-md-6">
                       <label for="inputState">O usuario tera acesso administartivo ?</label>
-                      <select id="inputState" class="form-control" onChange={e => setAdministartivo(e.target.value)}>
+                      <select id="inputState" class="form-control" onChange={e => setSituacao(e.target.value)}>
                         <option selected>nao</option>
                         <option>sim</option>
                       </select>
