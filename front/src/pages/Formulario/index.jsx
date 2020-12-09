@@ -112,9 +112,17 @@ function Formulario() {
     const [observacao, setObservacao] = useState();
     const [departamento, setDepartamento] = useState();
     const [responsavel, setResponsavel] = useState();
+    const [uploadvalues, setUploadValues] = useState();
 
 
 
+
+    function onChangeHandler (event){
+
+        console.log(event.target.files[0])
+    
+    }
+    
 
     if (paginas != null && copias != null && aux == true) {
         setTotalPaginas(paginas * copias)
@@ -474,11 +482,11 @@ function Formulario() {
 
                             <h5 className='titulo_upload'>Upload do exemplar:</h5>
 
-                            <form className="div_upload" enctype="multipart/form-data">
+                            <div className="div_upload">
                                 <img className="img_cloud" src={IconCloud} alt="" />
                                 <p className="text_upload">Arraste e solte um arquivo aqui <br /> ou</p>
-                                <input type="file" multiple="multiple" className="cursor-pointer input_exemplar" id="attachment" name="attachment" />
-                            </form>
+                                <input type="file" className="cursor-pointer input_exemplar" id="attachment" name="attachment" onChange={onChangeHandler}/>
+                            </div>
 
                             {<Button fontStyle="italic" fontSize="1.8vw" title="Enviar" width="15vw" />}
 
