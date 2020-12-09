@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import { Container, Adm_Area, Menu_Area, Info, Navegation } from './styles';
 import { useHistory } from 'react-router-dom'
 import axios from 'axios'
-import Loading from '../../assets/img/loading.gif'
+import Loading from '../../assets/img/loading2.gif'
 import Cookies from 'universal-cookie'
 
 const cookies = new Cookies()
@@ -24,156 +24,157 @@ const loading = {
 }
 
 function Adm_Registros() {
-        //Verificando Se o usuario esta autorizado para acessar essa pagina
-        const history = useHistory()
-        const [showPage, setShowPage] = useState(false)
-      
-        useEffect(() => {
-            
-          console.log('MEU TOKEN E ' + cookies.get('tokenJWT'))
-          let token = cookies.get('tokenJWT')
+  //Verificando Se o usuario esta autorizado para acessar essa pagina
+  const history = useHistory()
+  const [showPage, setShowPage] = useState(false)
 
-            axios.get(process.env.REACT_APP_SERVER_TO_AUTHENTICATE, {
-                method: 'GET',
-                headers:  {'X-access-token': token }       
-            }).then((res) => {
-    
-                if(res.data[0].auth && res.data[0].adm === true)
-                {
-                    console.log('Voce tem acesso adiministrativo')
-                    setShowPage(true)
-  
-                }
-                else
-                {
-                    history.push("/")
-                }
-    
-            }).catch (() => {history.push("/")})
-        }, [])
-        //**Verificando Se o usuario esta autorizado para acessar essa pagina**
+  useEffect(() => {
+
+    console.log('MEU TOKEN E ' + cookies.get('tokenJWT'))
+    let token = cookies.get('tokenJWT')
+
+    axios.get(process.env.REACT_APP_SERVER_TO_AUTHENTICATE, {
+      method: 'GET',
+      headers: { 'X-access-token': token }
+    }).then((res) => {
+
+      if (res.data[0].auth && res.data[0].adm === true) {
+        console.log('Voce tem acesso adiministrativo')
+        setShowPage(true)
+
+      }
+      else {
+        history.push("/")
+      }
+
+    }).catch(() => { history.push("/") })
+  }, [])
+  //**Verificando Se o usuario esta autorizado para acessar essa pagina**
   return (
-    <div>
+    <Container>
+
+      <Menu_Area>
+        <Nav_Lateral ativado="1" />
+      </Menu_Area>
+
       {
         showPage
-          ? <Container>
+          ? <Adm_Area>
+            <div className="User_Box_Info_Area">
+              <User_Box_Info />
+              <hr></hr>
 
-            <Menu_Area>
-              <Nav_Lateral ativado="1" />
-            </Menu_Area>
+              <Navegation>
+                <ul>
+                  <Link >
+                    <li>Perfil adiministrador</li>
+                  </Link>
 
-            <Adm_Area>
-              <div className="User_Box_Info_Area">
-                <User_Box_Info />
-                <hr></hr>
+                </ul>
+              </Navegation>
 
-                <Navegation>
-                  <ul>
-                    <Link >
-                      <li>Perfil adiministrador</li>
-                    </Link>
+            </div>
+            <Info>
+              <div className="left_side">
 
-                  </ul>
-                </Navegation>
+                <div className="Info_item">
+                  <div className="Info_Key"><strong>NIF:</strong></div>
+                  <div className="Info_Valor"></div>
+                </div>
+
+
+                <div className="Info_item">
+                  <div className="Info_Key"><strong>Nome:</strong></div>
+                  <div className="Info_Valor"></div>
+                </div>
+
+
+                <div className="Info_item">
+                  <div className="Info_Key"><strong>Cargo:</strong></div>
+                  <div className="Info_Valor"></div>
+                </div>
 
               </div>
-              <Info>
-                <div className="left_side">
+              <div className="right_side">
 
-                  <div className="Info_item">
-                    <div className="Info_Key"><strong>NIF:</strong></div>
-                    <div className="Info_Valor"></div>
-                  </div>
-
-
-                  <div className="Info_item">
-                    <div className="Info_Key"><strong>Nome:</strong></div>
-                    <div className="Info_Valor"></div>
-                  </div>
-
-
-                  <div className="Info_item">
-                    <div className="Info_Key"><strong>Cargo:</strong></div>
-                    <div className="Info_Valor"></div>
-                  </div>
-
+                <div className="Info_item">
+                  <div className="Info_Key"><strong>Telefone:</strong></div>
+                  <div className="Info_Valor"></div>
                 </div>
-                <div className="right_side">
-
-                  <div className="Info_item">
-                    <div className="Info_Key"><strong>Telefone:</strong></div>
-                    <div className="Info_Valor"></div>
-                  </div>
 
 
-                  <div className="Info_item">
-                    <div className="Info_Key"><strong>Email:</strong></div>
-                    <div className="Info_Valor"></div>
-                  </div>
+                <div className="Info_item">
+                  <div className="Info_Key"><strong>Email:</strong></div>
+                  <div className="Info_Valor"></div>
+                </div>
 
 
 
-                  <div className="password_box2">
-                    <Link to="/historico-adm"><button type="button" class="btn btn-secondary">Historico</button></Link>
-                  </div>
+                <div className="password_box2">
+                  <Link to="/historico-adm"><button type="button" class="btn btn-secondary">Historico</button></Link>
+                </div>
 
-                  <div className="password_box">
+                <div className="password_box">
 
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                      Editar senha
-          </button>
-                  </div>
+                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                    Editar senha
+      </button>
+                </div>
 
-                  {/* Modal  */}
-                  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title" id="exampleModalLabel">Editar senha</h5>
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                          </button>
+                {/* Modal  */}
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Editar senha</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <div className="senha">
+                          <form class="form-inline" style={{ margin: "40px" }}>
+                            <div class="form-group">
+                              <label style={{ marginRight: "30px" }} for="inputPassword6">Senha atual:      </label>
+                              <input style={{ width: "200px" }} type="password" id="inputPassword6" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" />
+                            </div>
+                          </form>
+                          <form class="form-inline" style={{ margin: "40px" }}>
+                            <div class="form-group">
+                              <label style={{ marginRight: "30px" }} for="inputPassword6">Nova senha:     </label>
+                              <input style={{ width: "200px" }} type="password" id="inputPassword6" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" />
+                            </div>
+                          </form>
+                          <form class="form-inline" style={{ margin: "40px" }}>
+                            <div class="form-group">
+                              <label for="inputPassword6">Confimar senha:</label>
+                              <input style={{ width: "200px" }} type="password" id="inputPassword6" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" />
+                            </div>
+                          </form>
                         </div>
-                        <div class="modal-body">
-                          <div className="senha">
-                            <form class="form-inline" style={{ margin: "40px" }}>
-                              <div class="form-group">
-                                <label style={{ marginRight: "30px" }} for="inputPassword6">Senha atual:      </label>
-                                <input style={{ width: "200px" }} type="password" id="inputPassword6" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" />
-                              </div>
-                            </form>
-                            <form class="form-inline" style={{ margin: "40px" }}>
-                              <div class="form-group">
-                                <label style={{ marginRight: "30px" }} for="inputPassword6">Nova senha:     </label>
-                                <input style={{ width: "200px" }} type="password" id="inputPassword6" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" />
-                              </div>
-                            </form>
-                            <form class="form-inline" style={{ margin: "40px" }}>
-                              <div class="form-group">
-                                <label for="inputPassword6">Confimar senha:</label>
-                                <input style={{ width: "200px" }} type="password" id="inputPassword6" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" />
-                              </div>
-                            </form>
-                          </div>
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-primary">Alterar senha</button>
-                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-primary">Alterar senha</button>
                       </div>
                     </div>
                   </div>
-
                 </div>
-              </Info>
-            </Adm_Area>
-          </Container>
+
+              </div>
+            </Info>
+          </Adm_Area>
           : <div>
             <div style={loading}>
               <img src={Loading} alt="loading"></img>
             </div>
           </div>
       }
-    </div>
+
+
+    </Container>
+
+
+
 
 
 

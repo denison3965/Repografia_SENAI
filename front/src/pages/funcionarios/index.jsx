@@ -9,7 +9,7 @@ import AddIcon from '../../assets/img/add.png'
 import { Container, Adm_Area, Menu_Area, Tabela, Navegation, AddUser } from './styles';
 import { useHistory } from 'react-router-dom'
 import axios from 'axios'
-import Loading from '../../assets/img/loading.gif'
+import Loading from '../../assets/img/loading2.gif'
 import Cookies from 'universal-cookie'
 
 const cookies = new Cookies()
@@ -28,83 +28,86 @@ const loading = {
 }
 
 function Funcionarios() {
-        //Verificando Se o usuario esta autorizado para acessar essa pagina
-        const history = useHistory()
-        const [showPage, setShowPage] = useState(false)
-      
-        useEffect(() => {
+  //Verificando Se o usuario esta autorizado para acessar essa pagina
+  const history = useHistory()
+  const [showPage, setShowPage] = useState(false)
 
-          console.log('MEU TOKEN E ' + cookies.get('tokenJWT'))
-          var token = cookies.get('tokenJWT')  
-            
-    
-            axios.get(process.env.REACT_APP_SERVER_TO_AUTHENTICATE, {
-                method: 'GET',
-                headers:  {'X-access-token': token }         
-            }).then((res) => {
-    
-                if(res.data[0].auth && res.data[0].adm === true)
-                {
-                    console.log('Voce tem acesso como adimmistrador')
-                    setShowPage(true)
-  
-                }
-                else
-                {
-                    history.push("/")
-                }
-    
-            }).catch (() => {history.push("/")})
-        }, [])
-        //**Verificando Se o usuario esta autorizado para acessar essa pagina**
+  useEffect(() => {
+
+    console.log('MEU TOKEN E ' + cookies.get('tokenJWT'))
+    var token = cookies.get('tokenJWT')
+
+
+    axios.get(process.env.REACT_APP_SERVER_TO_AUTHENTICATE, {
+      method: 'GET',
+      headers: { 'X-access-token': token }
+    }).then((res) => {
+
+      if (res.data[0].auth && res.data[0].adm === true) {
+        console.log('Voce tem acesso como adimmistrador')
+        setShowPage(true)
+
+      }
+      else {
+        history.push("/")
+      }
+
+    }).catch(() => { history.push("/") })
+  }, [])
+  //**Verificando Se o usuario esta autorizado para acessar essa pagina**
   return (
-    <div>
+
+    <Container>
+      <Menu_Area>
+        <Nav_Lateral ativado="4" />
+      </Menu_Area>
+
       {
         showPage
           ?
-          <Container>
-            <Menu_Area>
-              <Nav_Lateral ativado="4" />
-            </Menu_Area>
+          <Adm_Area>
+            <div className="User_Box_Info_Area">
+              <User_Box_Info />
+              <Link to="/cadastro">
+                <AddUser>
+                  <img src={AddIcon} alt="usuario" />
+                  <p>Adicionar um novo funcionario</p>
+                </AddUser>
+              </Link>
 
-            <Adm_Area>
-              <div className="User_Box_Info_Area">
-                <User_Box_Info />
-                <Link to="/cadastro">
-                  <AddUser>
-                    <img src={AddIcon} alt="usuario" />
-                    <p>Adicionar um novo funcionario</p>
-                  </AddUser>
-                </Link>
+              <hr></hr>
 
-                <hr></hr>
+              <Navegation>
+                <ul>
+                  <Link >
+                    <li>Funcionários cadastrados</li>
+                  </Link>
 
-                <Navegation>
-                  <ul>
-                    <Link >
-                      <li>Funcionários cadastrados</li>
-                    </Link>
+                </ul>
+              </Navegation>
 
-                  </ul>
-                </Navegation>
+            </div>
+            <Tabela>
+              <Tabela_Funcionarios />
+            </Tabela>
 
-              </div>
-              <Tabela>
-                <Tabela_Funcionarios />
-              </Tabela>
+            <Tabela>
+              <Tabela_Funcionatios_Excluidos />
+            </Tabela>
+          </Adm_Area>
 
-              <Tabela>
-                <Tabela_Funcionatios_Excluidos />
-              </Tabela>
-            </Adm_Area>
-          </Container>
           : <div>
             <div style={loading}>
               <img src={Loading} alt="loading"></img>
             </div>
           </div>
       }
-    </div>
+
+
+    </Container>
+
+
+
 
 
 

@@ -6,7 +6,7 @@ import { Container, Adm_Area, Menu_Area, Tabela, Navegation } from './styles';
 import TabelaHistorico from '../../components/Tabela_De_Historico'
 import { useHistory } from 'react-router-dom'
 import axios from 'axios'
-import Loading from '../../assets/img/loading.gif'
+import Loading from '../../assets/img/loading2.gif'
 import Cookies from 'universal-cookie'
 
 const cookies = new Cookies()
@@ -24,78 +24,81 @@ const loading = {
 }
 
 function Adm_Registros() {
-        //Verificando Se o usuario esta autorizado para acessar essa pagina
-        const history = useHistory()
-        const [showPage, setShowPage] = useState(false)
-      
-        useEffect(() => {
+  //Verificando Se o usuario esta autorizado para acessar essa pagina
+  const history = useHistory()
+  const [showPage, setShowPage] = useState(false)
 
-          console.log('MEU TOKEN E ' + cookies.get('tokenJWT'))
-          var token = cookies.get('tokenJWT')
-            
-    
-            axios.get(process.env.REACT_APP_SERVER_TO_AUTHENTICATE, {
-                method: 'GET',
-                headers:  {'X-access-token': token }         
-            }).then((res) => {
-    
-                if(res.data[0].auth && res.data[0].adm === true)
-                {
-                    console.log('Voce tem acesso como adiministrador')
-                    setShowPage(true)
-  
-                }
-                else
-                {
-                    history.push("/")
-                }
-    
-            }).catch (() => {history.push("/")})
-        }, [])
-        //**Verificando Se o usuario esta autorizado para acessar essa pagina**
+  useEffect(() => {
+
+    console.log('MEU TOKEN E ' + cookies.get('tokenJWT'))
+    var token = cookies.get('tokenJWT')
+
+
+    axios.get(process.env.REACT_APP_SERVER_TO_AUTHENTICATE, {
+      method: 'GET',
+      headers: { 'X-access-token': token }
+    }).then((res) => {
+
+      if (res.data[0].auth && res.data[0].adm === true) {
+        console.log('Voce tem acesso como adiministrador')
+        setShowPage(true)
+
+      }
+      else {
+        history.push("/")
+      }
+
+    }).catch(() => { history.push("/") })
+  }, [])
+  //**Verificando Se o usuario esta autorizado para acessar essa pagina**
   return (
-    <div>
+
+    <Container>
+
+      <Menu_Area>
+        <Nav_Lateral ativado="1" />
+      </Menu_Area>
+
+
       {
         showPage
           ?
-          <Container>
+          <Adm_Area>
+            <div className="User_Box_Info_Area">
+              <User_Box_Info />
+              <hr></hr>
 
-            <Menu_Area>
-              <Nav_Lateral ativado="1" />
-            </Menu_Area>
+              <Navegation>
+                <ul>
+                  <Link >
+                    <li>Perfil adiministrador</li>
+                  </Link>
 
-            <Adm_Area>
-              <div className="User_Box_Info_Area">
-                <User_Box_Info />
-                <hr></hr>
+                </ul>
+              </Navegation>
 
-                <Navegation>
-                  <ul>
-                    <Link >
-                      <li>Perfil adiministrador</li>
-                    </Link>
+            </div>
+            <Tabela>
+              <TabelaHistorico />
 
-                  </ul>
-                </Navegation>
+              <div className="password_box">
 
+                <Link to="/perfil-adm"><button type="button" class="btn btn-danger">Voltar</button></Link>
               </div>
-              <Tabela>
-                <TabelaHistorico />
+            </Tabela>
+          </Adm_Area>
 
-                <div className="password_box">
-
-                  <Link to="/perfil-adm"><button type="button" class="btn btn-danger">Voltar</button></Link>
-                </div>
-              </Tabela>
-            </Adm_Area>
-          </Container>
           : <div>
             <div style={loading}>
               <img src={Loading} alt="loading"></img>
             </div>
           </div>
       }
-    </div>
+
+
+    </Container>
+
+
 
 
 
