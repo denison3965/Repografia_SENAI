@@ -33,24 +33,30 @@ function Cadastro() {
       const [showPage, setShowPage] = useState(false)
 
       const [nome, setNome] = useState()
-      const [cargo, setCargo]= useState()
+      const [sobrenome, setSobrenome] = useState()
+      const [id_cargo, setId_cargo]= useState()
       const [nif, setNif] = useState()
       const[telefone, setTelefone] = useState()
       const [email, setEmail] = useState()
-      const [administartivo, setAdministartivo] = useState()
+      const [administrativo, setAdministrativo] = useState()
 
+      var now = new Date
 
       let params = {
           nome: nome,
-          cargo: cargo,
+          sobrenome: sobrenome,
+          id_cargo: id_cargo,
           nif: nif,
           telefone: telefone,
           email: email,
-          administartivo: administartivo
+          administrativo: administrativo,
+          situacao: "ativo",
+          data_criacao: ( now.getDate() + " de " + now.getMonth() + " de " + now.getFullYear() )
       }
 
+
       function enviarFormulario() {
-          axios.post('/http://localhost:3000​​​​​​​​/v1/cadastro', params).then(result => {
+          axios.post('http://localhost:3000​​​​​​​​/v1/funcionarios', params).then(result => {
               console.log(result.data)
             
           })
@@ -125,8 +131,12 @@ function Cadastro() {
                       <input type="text" class="form-control" id="inputNome" placeholder="Ex: Pedro" required  onChange={e => setNome(e.target.value)}/>
                     </div>
                     <div class="form-group col-md-6">
+                      <label for="inputEmail4">Sobrenome</label>
+                      <input type="text" class="form-control" id="inputNome" placeholder="Ex: Alves" required  onChange={e => setSobrenome(e.target.value)}/>
+                    </div>
+                    <div class="form-group col-md-6">
                       <label for="inputPassword4">Cargo</label>
-                      <input type="text" class="form-control" id="inputCargo" placeholder="Ex: Professor"  required  onChange={e => setCargo(e.target.value)}/>
+                      <input type="text" class="form-control" id="inputCargo" placeholder="Ex: Professor"  required  onChange={e => setId_cargo(e.target.value)}/>
                     </div>
                   </div>
                   <div class="form-row">
@@ -144,10 +154,10 @@ function Cadastro() {
                       <label for="inputEmail4">Email</label>
                       <input type="email" class="form-control" id="inputEmail4" placeholder="senia@outlook.com" required onChange={e => setEmail(e.target.value)} />
                     </div>
-    
+                    
                     <div class="form-group col-md-6">
                       <label for="inputState">O usuario tera acesso administartivo ?</label>
-                      <select id="inputState" class="form-control" onChange={e => setAdministartivo(e.target.value)}>
+                      <select id="inputState" class="form-control" onChange={e => setAdministrativo(e.target.value)}>
                         <option selected>nao</option>
                         <option>sim</option>
                       </select>
