@@ -117,11 +117,13 @@ function Formulario() {
 
 
 
-    function onChangeHandler (event){
-
-        console.log(event.target.files[0])
-    
+    function onChangeHandler(event){
+        this.setState({
+          selectedFile: event.target.files[0],
+          loaded: 0,
+        })
     }
+
     
 
     if (paginas != null && copias != null && aux == true) {
