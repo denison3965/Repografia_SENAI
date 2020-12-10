@@ -29,13 +29,13 @@ function  Login() {
       cookies.set('tokenJWT', token, {path: '/'})
       console.log(res.data)
 
-      if (res.data.message == 'Login valido' && res.data.isAd == true) 
+      if (res.data.message == 'Login valido' && res.data.isAd == "sim") 
       {
          history.push("/perfil-adm")
         
       }
 
-      if (res.data.message == 'Login valido' && res.data.isAd == false) 
+      if (res.data.message == 'Login valido' && res.data.isAd == "nao") 
       {
          history.push("/perfil")
         
@@ -60,14 +60,14 @@ function  Login() {
             NIF:
               </label>
         </div>
-        <input type="text" name="nif" className="niftxt_posicao" onChange={(e) => setNif(e.target.value)}/>
+        <input type="number" min="0" name="nif" className="niftxt_posicao" onChange={(e) => setNif(e.target.value)}/>
 
         <div className="senha_posicao">
           <label>
             Senha:
               </label>
         </div>
-        <input type="text" name="senha" className="senhatxt_posicao" onChange={(e) => setPassword(e.target.value)} />
+        <input type="password" name="senha" className="senhatxt_posicao" onChange={(e) => setPassword(e.target.value)} />
 
         <div className="entrar_posicao" onClick={enviarFormulario}>
           {<Button title="Entrar" font-size="3vw" width="100%" height="4.5vh"  />}
