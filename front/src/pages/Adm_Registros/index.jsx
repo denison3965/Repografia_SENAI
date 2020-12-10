@@ -42,7 +42,7 @@ function Adm_Registros() {
       headers: { 'X-access-token': token }
     }).then((res) => {
 
-      if (res.data[0].auth && res.data[0].adm === true) {
+      if (res.data[0].auth && res.data[0].adm == "sim") {
         console.log("Voce entrou no sistema como Adiministrador")
         setShowPage(true)
 
