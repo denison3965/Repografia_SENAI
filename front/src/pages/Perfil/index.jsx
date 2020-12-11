@@ -64,6 +64,21 @@ function Perfil() {
       }).catch(() => { history.push("/") })
    }, [])
    //**Verificando Se o usuario esta autorizado para acessar essa pagina**
+
+
+
+  function fazerSingOut() {
+    axios.post('http://localhost:3000/v1/logout')
+      .then((res) => {
+
+        let nullValue = res.data.token
+
+        //Setando o token de autenticacao para nulo
+        cookies.set('tokenJWT', nullValue, {path: '/'})
+
+        history.push("/")
+      })
+  }
    return (
       <div>
          {
@@ -74,7 +89,7 @@ function Perfil() {
                   <Header />
 
                   <div className="sair">
-                     < div>Sair</div>
+                     <div onClick={() => fazerSingOut()}>SAIR</div>
                   </div>
 
                   <div className="localizacao">
