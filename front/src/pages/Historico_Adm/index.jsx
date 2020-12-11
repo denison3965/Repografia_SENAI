@@ -27,6 +27,7 @@ function Adm_Registros() {
   //Verificando Se o usuario esta autorizado para acessar essa pagina
   const history = useHistory()
   const [showPage, setShowPage] = useState(false)
+  const [infoUser, setInfoUser] = useState({ nome: '', sobrenome: '' })
 
   useEffect(() => {
 
@@ -42,6 +43,18 @@ function Adm_Registros() {
       if (res.data[0].auth && res.data[0].adm === 'sim') {
         console.log('Voce tem acesso como adiministrador')
         setShowPage(true)
+
+
+        //Pegando as informacoes do user pelo nif
+        let url = "http://localhost:3000/v1/buscar-user-nif/" + `${res.data[0].nif}`
+
+        axios.get(url).then(async (res) => {
+
+          await setInfoUser(res.data)
+
+        }).catch((err) => {
+          console.log(err)
+        })
 
       }
       else {
@@ -65,7 +78,7 @@ function Adm_Registros() {
           ?
           <Adm_Area>
             <div className="User_Box_Info_Area">
-              <User_Box_Info />
+            <User_Box_Info nome={infoUser.nome} sobrenome={infoUser.sobrenome}/>
               <hr></hr>
 
               <Navegation>
