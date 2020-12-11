@@ -29,6 +29,9 @@ const loading = {
   
 function Cadastro() {
       //Verificando Se o usuario esta autorizado para acessar essa pagina
+
+      
+
       const history = useHistory()
       const [showPage, setShowPage] = useState(false)
 
@@ -51,11 +54,11 @@ function Cadastro() {
           email: email,
           administrativo: administrativo,
           situacao: "ativo",
-          data_criacao: ( now.getDate() + " de " + now.getMonth() + " de " + now.getFullYear() )
+          data_criacao: ( now.getDate() + "/" + now.getMonth() + "/" + now.getFullYear() )
       }
 
       function enviarFormulario() {
-          params = `nif=${params.nif}&nome=${params.nome}&sobrenome=${params.sobrenome}&email=${params.email}&data_criacao=2020%2F06%2F10&senha=Senai115&administrativo=${params.administrativo}&situacao=ativo` 
+          params = `nif=${params.nif}&nome=${params.nome}&sobrenome=${params.sobrenome}&email=${params.email}&data_criacao=${params.data_criacao}&senha=Senai115&administrativo=${params.administrativo}&situacao=ativo&telefone=${params.telefone}` 
           axios.post('http://localhost:3000/v1/addfuncionarios', params).then(result => {
               console.log(result.data)
             
@@ -146,19 +149,19 @@ function Cadastro() {
                     </div>
                     <div class="form-group col-md-6">
                       <label for="inputPassword4">Telefone</label>
-                      <input type="number" name="telefone" class="form-control" id="inputTelefone" placeholder="Ex: 11 99556-8741" onChange={e => setTelefone(e.target.value)}/>
+                      <input type="number" name="telefone" class="form-control" id="inputTelefone" placeholder="Ex: 11 98741-0000" onChange={e => setTelefone(e.target.value)}/>
                     </div>
                   </div>
                   <div class="form-row">
                     <div class="form-group col-md-6">
                       <label for="inputEmail4">Email</label>
-                      <input type="email" name="email" class="form-control" id="inputEmail4" placeholder="senia@outlook.com" required onChange={e => setEmail(e.target.value)} />
+                      <input type="email" name="email" class="form-control" id="inputEmail4" placeholder="senai@senaisp.com.br" required onChange={e => setEmail(e.target.value)} />
                     </div>
                     
                     <div class="form-group col-md-6">
                       <label for="inputState">O usuario tera acesso administartivo ?</label>
                       <select id="inputState" name="administrativo" class="form-control" onChange={e => setAdministrativo(e.target.value)}>
-                        <option selected value="não">nao</option>
+                        <option selected value="nao">não</option>
                         <option value="sim">sim</option>
                       </select>
                     </div>
