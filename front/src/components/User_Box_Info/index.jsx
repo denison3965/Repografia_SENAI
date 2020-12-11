@@ -3,8 +3,29 @@ import React from 'react';
 import { Container, User_Info, Exit_Area, Titulo } from './styles';
 
 import Avatar from '../../assets/img/avatar.png'
+import axios from 'axios'
+import { useHistory } from 'react-router-dom'
+import Cookies from 'universal-cookie'
+
+const cookies = new Cookies()
 
 function User_Box_Info(props) {
+
+  const history = useHistory()
+
+  function fazerSingOut() {
+    axios.post('http://localhost:3000/v1/logout')
+      .then((res) => {
+
+        let nullValue = res.data.token
+
+        //Setando o token de autenticacao para nulo
+        cookies.set('tokenJWT', nullValue, {path: '/'})
+
+        history.push("/")
+      })
+  }
+
   return (
       <Container>
           <User_Info> 
@@ -13,7 +34,7 @@ function User_Box_Info(props) {
           </User_Info>
 
           <Exit_Area>
-            <div>SAIR</div>
+            <p onClick={() => fazerSingOut()}>SAIR</p>
           </Exit_Area>
       </Container>
   )

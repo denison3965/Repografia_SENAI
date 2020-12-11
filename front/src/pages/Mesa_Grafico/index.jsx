@@ -30,6 +30,8 @@ function Mesa_Grafico() {
   //Verificando Se o usuario esta autorizado para acessar essa pagina
   const history = useHistory()
   const [showPage, setShowPage] = useState(false)
+  const [infoUser, setInfoUser] = useState({ nome: '', sobrenome: '' })
+  
 
   useEffect(() => {
 
@@ -44,6 +46,18 @@ function Mesa_Grafico() {
       if (res.data[0].auth && res.data[0].adm === 'sim') {
         console.log('Voce tem acesso adiministrativo')
         setShowPage(true)
+
+
+        //Pegando as informacoes do user pelo nif
+        let url = "http://localhost:3000/v1/buscar-user-nif/" + `${res.data[0].nif}`
+
+        axios.get(url).then(async (res) => {
+
+          await setInfoUser(res.data)
+
+        }).catch((err) => {
+          console.log(err)
+        })
 
       }
       else {
@@ -67,7 +81,7 @@ function Mesa_Grafico() {
           <InfoBox>
 
             <div className="user_box_info">
-              <User_Box_Info />
+            <User_Box_Info nome={infoUser.nome} sobrenome={infoUser.sobrenome}/>
             </div>
 
 
