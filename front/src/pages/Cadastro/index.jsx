@@ -52,16 +52,10 @@ function Cadastro() {
     email: email,
     administrativo: administrativo,
     situacao: "ativo",
-    data_criacao: (now.getDate() + " de " + now.getMonth() + " de " + now.getFullYear())
+    data_criacao: (now.getDate() + "/" + now.getMonth() + "/" + now.getFullYear())
   }
 
-
-  function enviarFormulario() {
-    axios.post('http://localhost:3000​​​​​​​​/v1/funcionarios', params).then(result => {
-      console.log(result.data)
-
-    })
-  }
+  console.log(params)
 
   useEffect(() => {
 
@@ -166,13 +160,13 @@ function Cadastro() {
                       </div>
                       <div class="form-group col-md-6">
                         <label for="inputPassword4">Telefone</label>
-                        <input type="text" class="form-control" id="inputTelefone" placeholder="Ex: 11 99556-8741" onChange={e => setTelefone(e.target.value)} />
+                        <input type="number" class="form-control" id="inputTelefone" placeholder="Ex: 11 00000-0000" onChange={e => setTelefone(e.target.value)} />
                       </div>
                     </div>
                     <div class="form-row">
                       <div class="form-group col-md-6">
                         <label for="inputEmail4">Email</label>
-                        <input type="email" class="form-control" id="inputEmail4" placeholder="senia@outlook.com" required onChange={e => setEmail(e.target.value)} />
+                        <input type="email" class="form-control" id="inputEmail4" placeholder="senai@senaisp.com.br" required onChange={e => setEmail(e.target.value)} />
                       </div>
 
                       <div class="form-group col-md-6">

@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 window.env = {
   "ALLUSERSPROFILE": "C:\\ProgramData",
   "ANDROID_HOME": "C:\\Android\\Sdk",
@@ -245,6 +244,3 @@ window.env = {
   "_": "C:/Program Files/nodejs/node.exe",
   "_prog": "node"
 };
-=======
-REACT_APP_SERVER_TO_AUTHENTICATE: "http://localhost:3000/v1/teste"
->>>>>>> b49df66b1dd0840014dde2a358e6ca04618c03bb
