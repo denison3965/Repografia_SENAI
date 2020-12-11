@@ -39,7 +39,7 @@ function Cadastro() {
   const [telefone, setTelefone] = useState()
   const [email, setEmail] = useState()
   const [administrativo, setAdministrativo] = useState()
-  const [infoUser, setInfoUser] = useState({nome: '', sobrenome: ''})
+  const [infoUser, setInfoUser] = useState({ nome: '', sobrenome: '' })
 
   var now = new Date
 
@@ -99,42 +99,51 @@ function Cadastro() {
   }, [])
   //**Verificando Se o usuario esta autorizado para acessar essa pagina**
 
-  return (
+  function enviarFormulario() {
+    params = `nif=${params.nif}&nome=${params.nome}&sobrenome=${params.sobrenome}&email=${params.email}&data_criacao=2020%2F06%2F10&senha=Senai115&administrativo=${params.administrativo}&situacao=ativo`
+    axios.post('http://localhost:3000/v1/addfuncionarios', params).then(result => {
+      console.log(result.data)
 
-    <div>
-      {
-        showPage
-          ? <Container>
-            <Nav_Header>
-              <Header />
-            </Nav_Header>
+    })}
 
-            <Area_Cadastro>
-              <div className="User_Box_Info_Area">
-                <User_Box_Info nome={infoUser.nome} sobrenome={infoUser.sobrenome}/>
-                <hr></hr>
+    return (
 
-                <Navegation>
-                  <ul>
-                    <Link to="/funcionarios-cadastrados">
-                      <li>Funcionários cadastrados</li>
-                    </Link>
+      <div>
+        {
+          showPage
+            ? <Container>
+              <Nav_Header>
+                <Header />
+              </Nav_Header>
 
-                    <li>/</li>
+              <Area_Cadastro>
+                <div className="User_Box_Info_Area">
+                  <User_Box_Info nome={infoUser.nome} sobrenome={infoUser.sobrenome} />
+                  <hr></hr>
 
-                    <Link>
-                      <li>Cadastro</li>
-                    </Link>
+                  <Navegation>
+                    <ul>
+                      <Link to="/funcionarios-cadastrados">
+                        <li>Funcionários cadastrados</li>
+                      </Link>
+
+                      <li>/</li>
+
+                      <Link>
+                        <li>Cadastro</li>
+                      </Link>
 
 
-                  </ul>
-                </Navegation>
+                    </ul>
+                  </Navegation>
+                </div>
 
                 <div className="container_cadastro">
                   <div className="top_info">
                     <img src={AddIcon} alt="pessoa" style={{ width: 50, height: 50 }} />
                     <h2>Cadastro</h2>
                   </div>
+
                   <form>
                     <div class="form-row">
                       <div class="form-group col-md-6">
@@ -168,12 +177,11 @@ function Cadastro() {
 
                       <div class="form-group col-md-6">
                         <label for="inputState">O usuario tera acesso administartivo ?</label>
-                        <select id="inputState" class="form-control" onChange={e => setAdministrativo(e.target.value)}>
-                          <option selected>nao</option>
-                          <option>sim</option>
+                        <select id="inputState" name="administrativo" class="form-control" onChange={e => setAdministrativo(e.target.value)}>
+                          <option selected value="nao">nao</option>
+                          <option value="sim">sim</option>
                         </select>
                       </div>
-
                     </div>
                     <div className="area_botao">
 
@@ -186,21 +194,20 @@ function Cadastro() {
                   </form>
                 </div>
 
+              </Area_Cadastro>
+            </Container>
 
+            : <div>
+              <div style={loading}>
+                <img src={Loading} alt="loading"></img>
               </div>
-            </Area_Cadastro>
-          </Container>
-
-          : <div>
-            <div style={loading}>
-              <img src={Loading} alt="loading"></img>
             </div>
-          </div>
-      }]
-    </div>
+        }
+      </div>
 
-  )
-}
+    )
+  }
+
+export default Cadastro
 
 
-export default Cadastro;

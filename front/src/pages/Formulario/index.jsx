@@ -8,6 +8,7 @@ import { useHistory } from 'react-router-dom'
 import Loading from '../../assets/img/loading.gif'
 import Cookies from 'universal-cookie'
 
+
 const cookies = new Cookies()
 
 const loading = {
@@ -122,14 +123,12 @@ function Formulario() {
     const [observacao, setObservacao] = useState();
     const [departamento, setDepartamento] = useState();
     const [responsavel, setResponsavel] = useState();
-    const [uploadvalues, setUploadValues] = useState();
+    
 
-
-
-
-    function onChangeHandler(event) {
-
-        console.log(event.target.files[0])
+    function onChangeHandler(event){
+        
+        const uploadfile =  event.target.files[0];
+        console.log(uploadfile)
 
     }
 
@@ -202,7 +201,7 @@ function Formulario() {
         "formato": formatoReq,
         "suporte": suporteReq,
         "coodernador": responsavel,
-        "arquivoExemplar": "",
+        "arquivoExemplar": '',
 
     }
 
