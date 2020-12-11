@@ -8,6 +8,7 @@ import { useHistory } from 'react-router-dom'
 import Loading from '../../assets/img/loading.gif'
 import Cookies from 'universal-cookie'
 
+
 const cookies = new Cookies()
 
 const loading = {
@@ -112,19 +113,15 @@ function Formulario() {
     const [observacao, setObservacao] = useState();
     const [departamento, setDepartamento] = useState();
     const [responsavel, setResponsavel] = useState();
-    const [uploadvalues, setUploadValues] = useState();
-
-
-
+    
 
     function onChangeHandler(event){
-        this.setState({
-          selectedFile: event.target.files[0],
-          loaded: 0,
-        })
+        
+        const uploadfile =  event.target.files[0];
+        console.log(uploadfile)
+
     }
 
-    
 
     if (paginas != null && copias != null && aux == true) {
         setTotalPaginas(paginas * copias)
@@ -193,7 +190,7 @@ function Formulario() {
         "formato": formatoReq,
         "suporte": suporteReq,
         "coodernador": responsavel,
-        "arquivoExemplar": "",
+        "arquivoExemplar": '',
 
     }
 
