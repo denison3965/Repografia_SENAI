@@ -8,52 +8,63 @@ import { useHistory } from 'react-router-dom'
 import Loading from '../../assets/img/loading.gif'
 import Cookies from 'universal-cookie'
 
+
 const cookies = new Cookies()
 
 const loading = {
-  position: 'fixed',
-  left: 0,
-  right: 0,
-  top: 0,
-  bottom: 0,
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  zIndex: 99,
+    position: 'fixed',
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    zIndex: 99,
 }
 
 function Formulario() {
 
 
-        //Verificando Se o usuario esta autorizado para acessar essa pagina
-        const history = useHistory()
-        const [showPage, setShowPage] = useState(false)
-    
-        useEffect(() => {
+    //Verificando Se o usuario esta autorizado para acessar essa pagina
+    const history = useHistory()
+    const [showPage, setShowPage] = useState(false)
+    const [infoUser, setInfoUser] = useState({nome: '', sobrenome: ''})
+
+    useEffect(() => {
 
         console.log('MEU TOKEN E ' + cookies.get('tokenJWT'))
         var token = cookies.get('tokenJWT')
-            
-    
-            axios.get(process.env.REACT_APP_SERVER_TO_AUTHENTICATE, {
-                method: 'GET',
-                headers:  {'X-access-token': token }         
-            }).then((res) => {
-    
-                if(res.data[0].auth)
-                {
-                    console.log('Voce tem acesso')
-                    setShowPage(true)
 
-                }
-                else
-                {
-                    history.push("/")
-                }
-    
-            }).catch (() => {history.push("/")})
-        }, [])
-        //**Verificando Se o usuario esta autorizado para acessar essa pagina**
+
+        axios.get(process.env.REACT_APP_SERVER_TO_AUTHENTICATE, {
+            method: 'GET',
+            headers: { 'X-access-token': token }
+        }).then((res) => {
+
+            if (res.data[0].auth) {
+                console.log('Voce tem acesso')
+                setShowPage(true)
+
+                //Pegando as informacoes do user pelo nif
+                let url = "http://localhost:3000/v1/buscar-user-nif/" + `${res.data[0].nif}`
+
+                axios.get(url).then(async (res) => {
+
+                    await setInfoUser(res.data)
+
+                }).catch((err) => {
+                    console.log(err)
+                })
+
+            }
+            else {
+                history.push("/")
+            }
+
+        }).catch(() => { history.push("/") })
+    }, [])
+    //**Verificando Se o usuario esta autorizado para acessar essa pagina**
 
     //__________________________________________________________________________________________________________________________________________________________________________________________________________________
 
@@ -112,17 +123,15 @@ function Formulario() {
     const [observacao, setObservacao] = useState();
     const [departamento, setDepartamento] = useState();
     const [responsavel, setResponsavel] = useState();
-    const [uploadvalues, setUploadValues] = useState();
-
-
-
-
-    function onChangeHandler (event){
-
-        console.log(event.target.files[0])
     
+
+    function onChangeHandler(event){
+        
+        const uploadfile =  event.target.files[0];
+        console.log(uploadfile)
+
     }
-    
+
 
     if (paginas != null && copias != null && aux == true) {
         setTotalPaginas(paginas * copias)
@@ -166,10 +175,11 @@ function Formulario() {
 
     const suporteReq = escolhido2();
     const formatoReq = escolhido1();
-    
-    const data = { 
 
-        "nomeSolicitante": "Átila",
+    const data = {
+
+        "nomeSolicitante": infoUser.nome,
+        "nif": infoUser.nif,
         "escolaSolicitante": "1.15",
         "telefone": "0000000",
         "dataSolicitante": dataSolicitante,
@@ -191,7 +201,7 @@ function Formulario() {
         "formato": formatoReq,
         "suporte": suporteReq,
         "coodernador": responsavel,
-        "arquivoExemplar": "",
+        "arquivoExemplar": '',
 
     }
 
@@ -223,10 +233,10 @@ function Formulario() {
 
 
         console.log(data)
-        
+
         axios.post('http://localhost:3000/v1/add-requisicao', data)
             .then((res) => console.log(res))
-            .catch((err) => console.log( err))
+            .catch((err) => console.log(err))
 
     }
 
@@ -251,23 +261,23 @@ function Formulario() {
                                 <div className="div1_informacao">
                                     <div className="div1_p">
                                         <p>Nome do Solicitante:</p>
-                                        <p className="p_resposta">resposta</p>
+                                        <p className="p_resposta">{infoUser.nome + " " + infoUser.sobrenome}</p>
                                     </div>
                                     <div className="div1_p">
                                         <p>Escola solicitante:</p>
-                                        <p className="p_resposta">resposta</p>
+                                        <p className="p_resposta">SENAI 1.15</p>
                                     </div>
                                     <div className="div1_p">
                                         <p>Telefone:</p>
-                                        <p className="p_resposta">resposta</p>
+                                        <p className="p_resposta">{infoUser.telefone}</p>
                                     </div>
                                     <div className="div1_p">
                                         <p>Data de solicitação:</p>
-                                        <p className="p_resposta">resposta</p>
+                                        <p className="p_resposta">{dataSolicitante}</p>
                                     </div>
                                     <div className="div1_p">
                                         <p>Data esperada para a entrega:</p>
-                                        <p className="p_resposta">resposta</p>
+                                        <p className="p_resposta">{dataEntrega}</p>
                                     </div>
 
                                 </div>
@@ -485,7 +495,7 @@ function Formulario() {
                             <div className="div_upload">
                                 <img className="img_cloud" src={IconCloud} alt="" />
                                 <p className="text_upload">Arraste e solte um arquivo aqui <br /> ou</p>
-                                <input type="file" className="cursor-pointer input_exemplar" id="attachment" name="attachment" onChange={onChangeHandler}/>
+                                <input type="file" className="cursor-pointer input_exemplar" id="attachment" name="attachment" onChange={onChangeHandler} />
                             </div>
 
                             {<Button fontStyle="italic" fontSize="1.8vw" title="Enviar" width="15vw" />}

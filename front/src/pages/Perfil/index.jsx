@@ -12,47 +12,73 @@ import Cookies from 'universal-cookie'
 const cookies = new Cookies()
 
 const loading = {
-  position: 'fixed',
-  left: 0,
-  right: 0,
-  top: 0,
-  bottom: 0,
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  zIndex: 99,
+   position: 'fixed',
+   left: 0,
+   right: 0,
+   top: 0,
+   bottom: 0,
+   display: 'flex',
+   justifyContent: 'center',
+   alignItems: 'center',
+   zIndex: 99,
 }
 
 function Perfil() {
-         //Verificando Se o usuario esta autorizado para acessar essa pagina
-         const history = useHistory()
-         const [showPage, setShowPage] = useState(false)
-       
-         useEffect(() => {
+   //Verificando Se o usuario esta autorizado para acessar essa pagina
+   const history = useHistory()
+   const [showPage, setShowPage] = useState(false)
+   const [infoUser, setInfoUser] = useState({nome: '', sobrenome: ''})
 
-            console.log('MEU TOKEN E ' + cookies.get('tokenJWT'))
-            var token = cookies.get('tokenJWT')    
-             
-     
-             axios.get(process.env.REACT_APP_SERVER_TO_AUTHENTICATE, {
-                 method: 'GET',
-                 headers:  {'X-access-token': token }         
-             }).then((res) => {
-     
-                 if(res.data[0].auth)
-                 {
-                     console.log('Voce tem acesso')
-                     setShowPage(true)
-   
-                 }
-                 else
-                 {
-                     history.push("/")
-                 }
-     
-             }).catch (() => {history.push("/")})
-         }, [])
-         //**Verificando Se o usuario esta autorizado para acessar essa pagina**
+   useEffect(() => {
+
+      console.log('MEU TOKEN E ' + cookies.get('tokenJWT'))
+      var token = cookies.get('tokenJWT')
+
+
+      axios.get(process.env.REACT_APP_SERVER_TO_AUTHENTICATE, {
+         method: 'GET',
+         headers: { 'X-access-token': token }
+      }).then((res) => {
+
+         if (res.data[0].auth) {
+            console.log('Voce tem acesso')
+            setShowPage(true)
+
+            //Pegando as informacoes do user pelo nif
+            let url = "http://localhost:3000/v1/buscar-user-nif/" + `${res.data[0].nif}`
+
+            axios.get(url).then(async (res) => {
+
+               await setInfoUser(res.data)
+
+            }).catch((err) => {
+               console.log(err)
+            })
+
+
+         }
+         else {
+            history.push("/")
+         }
+
+      }).catch(() => { history.push("/") })
+   }, [])
+   //**Verificando Se o usuario esta autorizado para acessar essa pagina**
+
+
+
+  function fazerSingOut() {
+    axios.post('http://localhost:3000/v1/logout')
+      .then((res) => {
+
+        let nullValue = res.data.token
+
+        //Setando o token de autenticacao para nulo
+        cookies.set('tokenJWT', nullValue, {path: '/'})
+
+        history.push("/")
+      })
+  }
    return (
       <div>
          {
@@ -63,7 +89,7 @@ function Perfil() {
                   <Header />
 
                   <div className="sair">
-                     < div>Sair</div>
+                     <div onClick={() => fazerSingOut()}>SAIR</div>
                   </div>
 
                   <div className="localizacao">
@@ -80,20 +106,20 @@ function Perfil() {
                      </div>
 
                      <div className="informacoes">
-                        <div className="telefone">Telefone:</div>
-                        <div className="numero">Número:</div>
-                        <div className="nif">NIF:</div>
+                        <div className="telefone">Telefone: {infoUser.telefone}</div>
+                        <div className="numero">Nome: {infoUser.nome} {infoUser.sobrenome}</div>
+                        <div className="nif">NIF: {infoUser.nif}</div>
                      </div>
 
                      <div className="informacao">
-                        <div className="email">e-mail:</div>
+                        <div className="email">e-mail: {infoUser.email}</div>
                         <div className="cargo">Cargo:</div>
                      </div>
 
                      <div className="senha_posicao">
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                            Editar senha
-            </button>
+                        </button>
                      </div>
 
                      {/* Modal  */}

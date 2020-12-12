@@ -22,6 +22,12 @@ export const Exit_Area = styled.div`
   color: #666;
   width:100%;
   flex:1;
+    p{
+      cursor: pointer;
+    }
+    p:hover {
+      color: red
+    }
 
   @media only screen and (max-width: 1400px) {
 

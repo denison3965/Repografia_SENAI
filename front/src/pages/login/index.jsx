@@ -17,6 +17,18 @@ function  Login() {
   const [nif, setNif] = useState('')
   const [password, setPassword] = useState('')
 
+  useEffect(() => {
+    axios.post('http://localhost:3000/v1/logout')
+    .then((res) => {
+
+      let nullValue = res.data.token
+
+      //Setando o token de autenticacao para nulo
+      cookies.set('tokenJWT', nullValue, {path: '/'})
+
+    })
+  },[])
+
   const enviarFormulario = () => {
     console.log( "senha :" +password + "nif" + nif)
     axios.post('http://localhost:3000/v1/login',{
