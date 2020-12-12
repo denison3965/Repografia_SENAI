@@ -111,19 +111,19 @@ function Perfil() {
                                     <form class="form-inline" style={{ margin: "40px" }}>
                                        <div class="form-group">
                                           <label style={{ marginRight: "30px" }} for="inputPassword6">Senha atual:      </label>
-                                          <input style={{ width: "200px" }} type="password" id="inputPassword6" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" />
+                                          <input style={{ width: "200px" }} name="senhaAtual" type="password" id="inputPassword6" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" />
                                        </div>
                                     </form>
                                     <form class="form-inline" style={{ margin: "40px" }}>
                                        <div class="form-group">
                                           <label style={{ marginRight: "30px" }} for="inputPassword6">Nova senha:     </label>
-                                          <input style={{ width: "200px" }} type="password" id="inputPassword6" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" />
+                                          <input style={{ width: "200px" }} name="novaSenha" type="password" id="inputPassword6" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" />
                                        </div>
                                     </form>
                                     <form class="form-inline" style={{ margin: "40px" }}>
                                        <div class="form-group">
                                           <label for="inputPassword6">Confimar senha:</label>
-                                          <input style={{ width: "200px" }} type="password" id="inputPassword6" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" />
+                                          <input style={{ width: "200px" }} name="confirmarSenha" type="password" id="inputPassword6" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" />
                                        </div>
                                     </form>
                                  </div>
