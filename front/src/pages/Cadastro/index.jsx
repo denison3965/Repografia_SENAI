@@ -156,7 +156,7 @@ function Cadastro() {
                     <h2>Cadastro</h2>
                   </div>
 
-                  <form>
+                  <form action="/action_page.php">
                     <div class="form-row">
                       <div class="form-group col-md-6">
                         <label for="inputEmail4">Nome</label>
@@ -164,11 +164,11 @@ function Cadastro() {
                       </div>
                       <div  class="form-group col-md-6"> 
                         <label  for="inputEmail4">Sobrenome</label>
-                        <input  type="text" class="form-control is-invalid" id="inputNome" placeholder="Ex: Alves" required onChange={e => setSobrenome(e.target.value)} />
+                        <input  type="text" class="form-control" id="inputNome" placeholder="Ex: Alves" required onChange={e => setSobrenome(e.target.value)} />
                       </div>
                       <div class="form-group col-md-6">
                         <label for="inputPassword4">Cargo</label>
-                        <Select options={cargos} onChange={e => setId_cargo(e.value)} />
+                        <Select options={cargos} required onChange={e => setId_cargo(e.value)} required />
                       </div>
                     </div>
                     <div class="form-row">
@@ -189,8 +189,8 @@ function Cadastro() {
 
                       <div class="form-group col-md-6">
                         <label for="inputState">O usuario tera acesso administartivo ?</label>
-                        <select id="inputState" name="administrativo" class="form-control" onChange={e => setAdministrativo(e.target.value)}>
-                          <option selected value="nao">não</option>
+                        <select id="inputState" name="administrativo" class="form-control" required onChange={e => setAdministrativo(e.target.value)}>
+                          <option selected value="nao">não</option>  
                           <option value="sim">sim</option>
                           {teste.map((element) => {
                             <option>teste</option>
@@ -200,7 +200,7 @@ function Cadastro() {
                     </div>
                     <div className="area_botao">
 
-                      <button type="button" class="btn btn-success" onClick={enviarFormulario} >Cadastrar</button>
+                      <button type="submit"  class="btn btn-success" onClick={enviarFormulario} >Cadastrar</button>
                       <Link to="/funcionarios-cadastrados"><button type="button" class="btn btn-danger">Voltar</button></Link>
 
                     </div>
