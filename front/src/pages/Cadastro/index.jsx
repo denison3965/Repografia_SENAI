@@ -94,7 +94,7 @@ function Cadastro() {
   //**Verificando Se o usuario esta autorizado para acessar essa pagina**
 
   function enviarFormulario() {
-    params = `nif=${params.nif}&nome=${params.nome}&sobrenome=${params.sobrenome}&email=${params.email}&data_criacao=${params.data_criacao}&senha=Senai115&administrativo=${params.administrativo}&situacao=ativo&telefone=${params.telefone}`
+    params = `nif=${params.nif}&nome=${params.nome}&sobrenome=${params.sobrenome}&email=${params.email}&data_criacao=${params.data_criacao}&administrativo=${params.administrativo}&situacao=ativo&telefone=${params.telefone}`
     axios.post('http://localhost:3000/v1/addfuncionarios', params).then(result => {
       console.log(result.data)
 
@@ -144,9 +144,9 @@ function Cadastro() {
                         <label for="inputEmail4">Nome</label>
                         <input type="text" class="form-control" id="inputNome" placeholder="Ex: Pedro" required onChange={e => setNome(e.target.value)} />
                       </div>
-                      <div class="form-group col-md-6">
-                        <label for="inputEmail4">Sobrenome</label>
-                        <input type="text" class="form-control" id="inputNome" placeholder="Ex: Alves" required onChange={e => setSobrenome(e.target.value)} />
+                      <div  class="form-group col-md-6"> 
+                        <label  for="inputEmail4">Sobrenome</label>
+                        <input  type="text" class="form-control is-invalid" id="inputNome" placeholder="Ex: Alves" required onChange={e => setSobrenome(e.target.value)} />
                       </div>
                       <div class="form-group col-md-6">
                         <label for="inputPassword4">Cargo</label>

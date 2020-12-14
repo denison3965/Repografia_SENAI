@@ -28,7 +28,11 @@ function Adm_Registros() {
   const history = useHistory()
   const [showPage, setShowPage] = useState(false)
   const [infoUser, setInfoUser] = useState({nome: '', sobrenome: ''})
-
+  const [senhaAtual, setSenhaAtual] = useState()
+  const [novaSenha , setNovaSenha] = useState()
+  const [confirmarSenha, setConfirmarSenha] = useState()
+  const [msg_error, setMsgError] = useState()
+  const [msg_acerto, setMsgAcerto] = useState()
   
 
   useEffect(() => {
@@ -72,7 +76,29 @@ function Adm_Registros() {
   }, [])
   //**Verificando Se o usuario esta autorizado para acessar essa pagina**
 
+  //função de alterar senha
+  function EditarSenha(){
+    axios.put('http://localhost:3000/v1/editarSenha', {
+      senhaAtual: senhaAtual,
+      novaSenha: novaSenha,
+      confirmarSenha: confirmarSenha,
+      nif: infoUser.nif
+    })
 
+    .then((res)=>{
+      if(res.data == "Senha alterada com sucesso"){
+         setMsgError(null)
+         setMsgAcerto(res.data)
+      }else{
+         setMsgAcerto(null)
+         setMsgError(res.data)
+      }
+   })
+
+   .catch((err)=> {
+      console.log(err)
+   })
+  }
  
 
   return (
@@ -161,30 +187,40 @@ function Adm_Registros() {
                           <form class="form-inline" style={{ margin: "40px" }}>
                             <div class="form-group">
                               <label style={{ marginRight: "30px" }} for="inputPassword6">Senha atual:      </label>
-                              <input style={{ width: "200px" }} type="password" id="inputPassword6" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" />
+                              <input onChange={(e) => setSenhaAtual(e.target.value)} style={{ width: "200px" }} type="password" id="inputPassword6" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" />
+                              <p>
+                                {senhaAtual}
+                              </p>
                             </div>
                           </form>
                           <form class="form-inline" style={{ margin: "40px" }}>
                             <div class="form-group">
                               <label style={{ marginRight: "30px" }} for="inputPassword6">Nova senha:     </label>
-                              <input style={{ width: "200px" }} type="password" id="inputPassword6" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" />
+                              <input onChange={(e)=> setNovaSenha(e.target.value)} style={{ width: "200px" }} type="password" id="inputPassword6" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" />
+                              {novaSenha}
                             </div>
                           </form>
                           <form class="form-inline" style={{ margin: "40px" }}>
                             <div class="form-group">
-                              <label for="inputPassword6">Confimar senha:</label>
-                              <input style={{ width: "200px" }} type="password" id="inputPassword6" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" />
+                              <label for="inputPassword6">Confimar senha:</label>   
+                              <input  onChange={(e)=>setConfirmarSenha(e.target.value)}  style={{ width: "200px" }} type="password" id="inputPassword6" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" />
+                            <p>
+                              {confirmarSenha}
+                            </p>
                             </div>
                           </form>
+                          <div>
+                            {msg_error!= null ? <div className="alert alert-danger">{msg_error} </div>:null}
+                            {msg_acerto!= null ? <div className="alert alert-success">{msg_acerto} </div>:null}
+                            </div>     
                         </div>
                       </div>
                       <div class="modal-footer">
-                        <button type="button" class="btn btn-primary">Alterar senha</button>
+                        <button onClick={EditarSenha} type="button" class="btn btn-primary">Alterar senha</button>
                       </div>
                     </div>
                   </div>
                 </div>
-
               </div>
             </Info>
           </Adm_Area>
