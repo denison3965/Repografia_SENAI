@@ -12,47 +12,107 @@ import Cookies from 'universal-cookie'
 const cookies = new Cookies()
 
 const loading = {
-  position: 'fixed',
-  left: 0,
-  right: 0,
-  top: 0,
-  bottom: 0,
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  zIndex: 99,
+   position: 'fixed',
+   left: 0,
+   right: 0,
+   top: 0,
+   bottom: 0,
+   display: 'flex',
+   justifyContent: 'center',
+   alignItems: 'center',
+   zIndex: 99,
 }
 
 function Perfil() {
-         //Verificando Se o usuario esta autorizado para acessar essa pagina
-         const history = useHistory()
-         const [showPage, setShowPage] = useState(false)
-       
-         useEffect(() => {
+   //Verificando Se o usuario esta autorizado para acessar essa pagina
+   const history = useHistory()
+   const [showPage, setShowPage] = useState(false)
+   const [infoUser, setInfoUser] = useState({nome: '', sobrenome: ''})
+   const [senhaAtual, setSenhaAtual] = useState()
+   const [novaSenha , setNovaSenha] = useState()
+   const [confirmarSenha, setConfirmarSenha] = useState()
+   const [msg_error, setMsgError] = useState()
+   const [msg_acerto, setMsgAcerto] = useState()
 
-            console.log('MEU TOKEN E ' + cookies.get('tokenJWT'))
-            var token = cookies.get('tokenJWT')    
-             
-     
-             axios.get(process.env.REACT_APP_SERVER_TO_AUTHENTICATE, {
-                 method: 'GET',
-                 headers:  {'X-access-token': token }         
-             }).then((res) => {
-     
-                 if(res.data[0].auth)
-                 {
-                     console.log('Voce tem acesso')
-                     setShowPage(true)
+   useEffect(() => {
+
+      console.log('MEU TOKEN E ' + cookies.get('tokenJWT'))
+      var token = cookies.get('tokenJWT')
+
+
+      axios.get(process.env.REACT_APP_SERVER_TO_AUTHENTICATE, {
+         method: 'GET',
+         headers: { 'X-access-token': token }
+      }).then((res) => {
+
+         if (res.data[0].auth) {
+            console.log('Voce tem acesso')
+            setShowPage(true)
+
+            //Pegando as informacoes do user pelo nif
+            let url = "http://localhost:3000/v1/buscar-user-nif/" + `${res.data[0].nif}`
+
+            axios.get(url).then(async (res) => {
+
+               await setInfoUser(res.data)
+
+               
+            }).catch((err) => {
+               console.log(err)
+            })
+
+
+         }
+         else {
+            history.push("/")
+         }
+
+      }).catch(() => { history.push("/") })
+   }, [])
+   //**Verificando Se o usuario esta autorizado para acessar essa pagina**
+
+   console.log(infoUser)
+
+  function fazerSingOut() {
+    axios.post('http://localhost:3000/v1/logout')
+      .then((res) => {
+
+        let nullValue = res.data.token
+
+        //Setando o token de autenticacao para nulo
+        cookies.set('tokenJWT', nullValue, {path: '/'})
+
+        history.push("/")
+      })
+  }
+
+  //confirmação de editar a senha 
+  function editarSenha(){
+   axios.put('http://localhost:3000/v1/editarSenha', {
+      senhaAtual: senhaAtual,
+      novaSenha: novaSenha,
+      confirmarSenha: confirmarSenha,
+      nif: infoUser.nif
+   }) 
    
-                 }
-                 else
-                 {
-                     history.push("/")
-                 }
-     
-             }).catch (() => {history.push("/")})
-         }, [])
-         //**Verificando Se o usuario esta autorizado para acessar essa pagina**
+   .then((res)=>{
+      if(res.data == "Senha alterada com sucesso"){
+         setMsgError(null)
+         setMsgAcerto(res.data)
+      }else{
+         setMsgAcerto(null)
+         setMsgError(res.data)
+      }
+   })
+
+   .catch((err)=> {
+      console.log(err)
+   })
+  }
+  
+
+
+
    return (
       <div>
          {
@@ -63,7 +123,7 @@ function Perfil() {
                   <Header />
 
                   <div className="sair">
-                     < div>Sair</div>
+                     <div onClick={() => fazerSingOut()}>SAIR</div>
                   </div>
 
                   <div className="localizacao">
@@ -80,20 +140,20 @@ function Perfil() {
                      </div>
 
                      <div className="informacoes">
-                        <div className="telefone">Telefone:</div>
-                        <div className="numero">Número:</div>
-                        <div className="nif">NIF:</div>
+                        <div className="telefone">Telefone: {infoUser.telefone}</div>
+                        <div className="numero">Nome: {infoUser.nome} {infoUser.sobrenome}</div>
+                        <div className="nif">NIF: {infoUser.nif}</div>
                      </div>
 
                      <div className="informacao">
-                        <div className="email">e-mail:</div>
+                        <div className="email">e-mail: {infoUser.email}</div>
                         <div className="cargo">Cargo:</div>
                      </div>
 
                      <div className="senha_posicao">
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                            Editar senha
-            </button>
+                        </button>
                      </div>
 
                      {/* Modal  */}
@@ -111,25 +171,39 @@ function Perfil() {
                                     <form class="form-inline" style={{ margin: "40px" }}>
                                        <div class="form-group">
                                           <label style={{ marginRight: "30px" }} for="inputPassword6">Senha atual:      </label>
-                                          <input style={{ width: "200px" }} type="password" id="inputPassword6" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" />
-                                       </div>
+                                          <input onChange={(e) => setSenhaAtual(e.target.value)} style={{ width: "200px" }} name="senhaAtual" type="password" id="inputPassword6" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" />
+                                          <p>
+                                             {senhaAtual}
+                                          </p>
+                                       </div> 
                                     </form>
                                     <form class="form-inline" style={{ margin: "40px" }}>
                                        <div class="form-group">
                                           <label style={{ marginRight: "30px" }} for="inputPassword6">Nova senha:     </label>
-                                          <input style={{ width: "200px" }} type="password" id="inputPassword6" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" />
+                                          <input onChange={(e)=> setNovaSenha(e.target.value)} style={{ width: "200px" }} name="novaSenha" type="password" id="inputPassword6" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" />
+                                          <p>
+                                             {novaSenha}
+                                          </p>
                                        </div>
                                     </form>
                                     <form class="form-inline" style={{ margin: "40px" }}>
                                        <div class="form-group">
                                           <label for="inputPassword6">Confimar senha:</label>
-                                          <input style={{ width: "200px" }} type="password" id="inputPassword6" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" />
+                                          <input onChange={(e)=>setConfirmarSenha(e.target.value)} style={{ width: "200px" }} name="confirmarSenha" type="password" id="inputPassword6" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" />
+                                          <p>
+                                             {confirmarSenha}
+                                          </p>
                                        </div>
                                     </form>
+                                    <div>
+                                      {msg_error!= null ? <div className="alert alert-danger">{msg_error} </div>:null}
+                                      {msg_acerto!= null ? <div className="alert alert-success">{msg_acerto} </div>:null}
+                                    </div>                        
+                                     
                                  </div>
                               </div>
                               <div class="modal-footer">
-                                 <button type="button" class="btn btn-primary">Alterar senha</button>
+                                 <button onClick={editarSenha} type="button" class="btn btn-primary">Alterar senha</button>
                               </div>
                            </div>
                         </div>

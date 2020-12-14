@@ -28,7 +28,7 @@ function Adm_Registros() {
   const history = useHistory()
   const [showPage, setShowPage] = useState(false)
   const [infoUser, setInfoUser] = useState({nome: '', sobrenome: ''})
-  let info 
+
   
 
   useEffect(() => {
@@ -43,6 +43,7 @@ function Adm_Registros() {
       headers: { 'X-access-token': token }
     }).then((res) => {
 
+      console.log(res)
       //Se o usuario for adm e estiver autenticado 
       if (res.data[0].auth && res.data[0].adm === "sim") {
         console.log('Voce tem acesso adiministrativo')
@@ -63,7 +64,7 @@ function Adm_Registros() {
       }
       //Se nao voltar para login
       else {
-        // history.push("/")
+        history.push("/")
         console.log("estou aqui")
       }
 
@@ -71,7 +72,7 @@ function Adm_Registros() {
   }, [])
   //**Verificando Se o usuario esta autorizado para acessar essa pagina**
 
-  console.log()
+
  
 
   return (
@@ -103,13 +104,13 @@ function Adm_Registros() {
 
                 <div className="Info_item">
                   <div className="Info_Key"><strong>NIF:</strong></div>
-                  <div className="Info_Valor"></div>
+                  <div className="Info_Valor">{infoUser.nif}</div>
                 </div>
 
 
                 <div className="Info_item">
                   <div className="Info_Key"><strong>Nome:</strong></div>
-                  <div className="Info_Valor"></div>
+                  <div className="Info_Valor">{infoUser.nome + " " + infoUser.sobrenome}</div>
                 </div>
 
 
@@ -123,13 +124,13 @@ function Adm_Registros() {
 
                 <div className="Info_item">
                   <div className="Info_Key"><strong>Telefone:</strong></div>
-                  <div className="Info_Valor"></div>
+                  <div className="Info_Valor">{infoUser.telefone}</div>
                 </div>
 
 
                 <div className="Info_item">
                   <div className="Info_Key"><strong>Email:</strong></div>
-                  <div className="Info_Valor"></div>
+                  <div className="Info_Valor">{infoUser.email}</div>
                 </div>
 
 
