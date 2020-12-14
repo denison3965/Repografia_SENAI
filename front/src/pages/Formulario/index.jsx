@@ -70,7 +70,8 @@ function Formulario() {
 
     // Logica para pegar as checkBox que foram selecionadas
 
-    const array_nomes = ["2 Grampos a cavalo", "2 Grampos laterais", "Colorido", "Encadernação com espiral", "Frente e verso", "Reduzido", "preto e branco", "Capa em papel 150g/m2", "Capa em PVC"]
+    //const array_nomes = ["2 Grampos a cavalo", "2 Grampos laterais", "Colorido", "Encadernação com espiral", "Frente e verso", "Reduzido", "preto e branco", "Capa em papel 150g/m2", "Capa em PVC"]
+    const array_nomes = [1,2,3,4,5,6,7,8,9]
     let array_acabamento = []
     const [arrayAcabamento, setArrayAcabamento] = useState([])
 

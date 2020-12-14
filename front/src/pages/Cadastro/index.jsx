@@ -7,6 +7,7 @@ import { useHistory } from 'react-router-dom'
 import axios from 'axios'
 import Loading from '../../assets/img/loading.gif'
 import Cookies from 'universal-cookie'
+import Select from 'react-select'
 
 import { Container, Nav_Header, Area_Cadastro, Navegation } from './styles';
 
@@ -40,6 +41,8 @@ function Cadastro() {
   const [email, setEmail] = useState()
   const [administrativo, setAdministrativo] = useState()
   const [infoUser, setInfoUser] = useState({ nome: '', sobrenome: '' })
+  const [cargos, setCargos] = useState([1,2,3,4])
+  const [teste, useTeste] = useState([1,2,3,4])
 
   var now = new Date
 
@@ -84,6 +87,19 @@ function Cadastro() {
           console.log(err)
         })
 
+        //Pegando os cargos para listar
+        axios.get("http://localhost:3000/v1/pegar-cargos").then(async(res) => {
+          const dados = res.data
+
+          const options = dados.map(d => ({
+            "value" : d.id_cargo,
+            "label" : d.nome
+          }))
+
+          setCargos(options)
+          
+        })
+        
       }
       else {
         history.push("/")
@@ -93,8 +109,10 @@ function Cadastro() {
   }, [])
   //**Verificando Se o usuario esta autorizado para acessar essa pagina**
 
+  console.log(cargos)
+
   function enviarFormulario() {
-    params = `nif=${params.nif}&nome=${params.nome}&sobrenome=${params.sobrenome}&email=${params.email}&data_criacao=${params.data_criacao}&administrativo=${params.administrativo}&situacao=ativo&telefone=${params.telefone}`
+    params = `nif=${params.nif}&nome=${params.nome}&sobrenome=${params.sobrenome}&email=${params.email}&data_criacao=${params.data_criacao}&senha=Senai115&administrativo=${params.administrativo}&situacao=ativo&telefone=${params.telefone}&id_cargo=${params.id_cargo}`
     axios.post('http://localhost:3000/v1/addfuncionarios', params).then(result => {
       console.log(result.data)
 
@@ -150,7 +168,7 @@ function Cadastro() {
                       </div>
                       <div class="form-group col-md-6">
                         <label for="inputPassword4">Cargo</label>
-                        <input type="text" class="form-control" id="inputCargo" placeholder="Ex: Professor" required onChange={e => setId_cargo(e.target.value)} />
+                        <Select options={cargos} onChange={e => setId_cargo(e.value)} />
                       </div>
                     </div>
                     <div class="form-row">
@@ -174,6 +192,9 @@ function Cadastro() {
                         <select id="inputState" name="administrativo" class="form-control" onChange={e => setAdministrativo(e.target.value)}>
                           <option selected value="nao">não</option>
                           <option value="sim">sim</option>
+                          {teste.map((element) => {
+                            <option>teste</option>
+                          })}
                         </select>
                       </div>
                     </div>
