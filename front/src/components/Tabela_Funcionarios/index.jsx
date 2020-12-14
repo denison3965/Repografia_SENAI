@@ -20,7 +20,20 @@ export class Tabela_Funcionarios extends Component {
       perPage: 5,
       currentPage: 0,
       search: '',
-      crumbs: ['Inicio', 'Registros']
+      UserParaEditar: '',
+      UserParaDeletar: '',
+      UserParaResetarSenha: '',
+      NomeParaDeletar: '',
+      crumbs: ['Inicio', 'Registros'],
+
+      //States para guardar os valores do campo 
+      UserName: '',
+      UserSobreNome: '',
+      UserCargo: '',
+      UserNif: '',
+      UserTelefone: '',
+      UserEmail: '',
+      UserAdm: ''
 
 
     }
@@ -44,7 +57,7 @@ export class Tabela_Funcionarios extends Component {
 
   };
 
-  //Caregar mais pessoas quando mudas de paginacao
+  //Caregar mais pessoas quando mudar de paginacao
   loadMoreData() {
     const data = this.state.orgtableData;
 
@@ -116,19 +129,64 @@ export class Tabela_Funcionarios extends Component {
     }
   }
 
-  // setarSenha(nif) {
-  //   let res = window.confirm(`Tem certeza que deseja restaurar a senha do funcionario ${nif.target.name} ?     Se sim a senha sera restaurada para 'senai115'`)
+  //Setar nome e nif do usuario selecionado para executar alguma acao  deletar
+  handleNameNif_delete(nif, name) {
+    this.setState({
+      UserParaDeletar: nif,
+      NomeParaDeletar: name
+    })
+  }
 
-  //   if (res) {
-  //     //Setar senha para 'senai115' no banco de dados usando o nif.target.alt para acessar o nif
-  //     alert(`senha do usuario ${nif.target.name} foi restaurada para 'senai115' com sucesso`)
-  //   }
-  // }
+  //Setar nome e nif do usuario selecionado para executar alguma acao  resetar senha
+  handleNameNif_resetarSenha(nif) {
+    this.setState({
+      UserParaResetarSenha: nif
+    })
+  }
 
-  // editarUser(nif) {
-  //   let res = window.confirm(`Tem certeza que deseja editar o usuario ${nif.target.name} ?`)
+  //Setar nome e nif do usuario selecionado para executar alguma acao  editar usuario
+  handleNameNif_edit(nif) {
+    //setando valores do usuario para editar
+    let url = `http://localhost:3000/v1/buscar-user-nif/${nif}`
+    axios.get(url).then((res) => {
 
-  // }
+      this.setState({
+
+        UserName: res.data.nome,
+        UserSobreNome: res.data.sobrenome,
+        UserCargo: res.data.id_cargo,
+        UserNif: res.data.nif,
+        UserTelefone: res.data.telefone,
+        UserEmail: res.data.email,
+        UserAdm: res.data.administrativo
+      })
+    })
+
+    this.setState({
+      UserParaEditar: nif
+    })
+  }
+
+
+
+  handleEcluirUser(nif) {
+    alert("Usuario" + nif + "Excluido com sucesso")
+    // EXCLUIR AQUI !!!!!
+  }
+
+  handleResetarSenha(nif) {
+    alert("Usuario" + nif + "teve a senha restaurada com sucesso")
+    // RESETAR SENHA AQUI !!!!!
+  }
+
+  handleEditUser(nif) {
+    alert("Usuario" + nif + "foi editado com sucesso")
+
+
+    // EDITAR AQUI AQUI !!!!!
+  }
+
+
 
 
   render() {
@@ -170,13 +228,13 @@ export class Tabela_Funcionarios extends Component {
                 <div className="senha">
                   <form class="form-inline" style={{ margin: "40px" }}>
                     <div class="modal-body">
-                      <p>Tem certeza que deseja excluir o usuario ?</p>
+                      <p>Tem certeza que deseja excluir o usuario {this.state.NomeParaDeletar} ?</p>
                     </div>
                   </form>
                 </div>
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-primary">Excluir Usuário</button>
+                <button type="button" class="btn btn-primary" onClick={() => this.handleEcluirUser(this.state.UserParaDeletar)}>Excluir Usuário</button>
               </div>
             </div>
           </div>
@@ -204,7 +262,7 @@ export class Tabela_Funcionarios extends Component {
                 </div>
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-primary">Restaurar Senha</button>
+                <button type="button" class="btn btn-primary" onClick={() => this.handleResetarSenha(this.state.UserParaResetarSenha)}>Restaurar Senha</button>
               </div>
             </div>
           </div>
@@ -227,46 +285,57 @@ export class Tabela_Funcionarios extends Component {
                   <form class="form-inline" style={{ margin: "40px" }}>
                     <div class="form-group">
                       <label style={{ marginRight: "30px" }} for="inputPassword6">Editar Nome:      </label>
-                      <input style={{ width: "200px" }} id="inputPassword6" class="form-control mx-sm-3" />
+                      <input style={{ width: "200px" }} id="inputPassword6" defaultValue={this.state.UserName} class="form-control mx-sm-3" />
                     </div>
                   </form>
+
+                  <form class="form-inline" style={{ margin: "40px" }}>
+                    <div class="form-group">
+                      <label style={{ marginRight: "30px" }} for="inputPassword6">Sobrenome:        </label>
+                      <input style={{ width: "200px" }} id="inputPassword6" defaultValue={this.state.UserSobreNome} class="form-control mx-sm-3" />
+                    </div>
+                  </form>
+                  
                   <form class="form-inline" style={{ margin: "40px" }}>
                     <div class="form-group">
                       <label style={{ marginRight: "30px" }} for="inputPassword6">Editar Cargo:     </label>
-                      <input style={{ width: "200px" }} id="inputPassword6" class="form-control mx-sm-3" />
+                      <select id="inputStateCargo" class="form-control">
+                        <option >Instrutor de ensino II</option>
+                        <option>Instrutor de ensino I</option>
+                      </select>
                     </div>
                   </form>
                   <form class="form-inline" style={{ margin: "40px" }}>
                     <div class="form-group">
                       <label style={{ marginRight: "45px" }} for="inputPassword6">Editar NIF:      </label>
-                      <input style={{ width: "200px" }} id="inputPassword6" class="form-control mx-sm-3" />
+                      <input style={{ width: "200px" }} id="inputPassword6" class="form-control mx-sm-3" defaultValue={this.state.UserNif} />
                     </div>
                   </form>
                   <form class="form-inline" style={{ margin: "40px" }}>
                     <div class="form-group">
                       <label style={{ marginRight: "13px" }} for="inputPassword6">Editar Telefone:      </label>
-                      <input style={{ width: "200px" }} id="inputPassword6" class="form-control mx-sm-3" />
+                      <input style={{ width: "200px" }} id="inputPassword6" class="form-control mx-sm-3" defaultValue={this.state.UserTelefone}/>
                     </div>
                   </form>
                   <form class="form-inline" style={{ margin: "40px" }}>
                     <div class="form-group">
                       <label style={{ marginRight: "13px" }} for="inputPassword6">Editar Email:      </label>
-                      <input style={{ width: "200px" }} id="inputPassword6" class="form-control mx-sm-3" />
+                      <input style={{ width: "200px" }} id="inputPassword6" class="form-control mx-sm-3" defaultValue={this.state.UserEmail} />
                     </div>
                   </form>
                   <form class="form-inline" style={{ margin: "40px" }}>
                     <div class="form-group col-md-6">
                       <label for="inputState">O usuario tera acesso administartivo ?</label>
                       <select id="inputState" class="form-control">
-                        <option selected>nao</option>
-                        <option>sim</option>
+                        <option selected={this.state.UserAdm == 'nao'?true:false}>nao</option>
+                        <option selected={this.state.UserAdm == 'nao'?false:true}>sim</option>
                       </select>
                     </div>
                   </form>
                 </div>
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-primary">Alterar Usuário</button>
+                <button type="button" class="btn btn-primary" onClick={() => this.handleEditUser(this.state.UserParaEditar)}>Alterar Usuário</button>
               </div>
             </div>
           </div>
@@ -312,11 +381,11 @@ export class Tabela_Funcionarios extends Component {
                     <td>{element.telefone}</td>
                     <td>{element.administrativo}</td>
                     <td>{element.data_criacao}</td>
-                    <td><img data-toggle="modal" data-target="#exampleModal3" src={IconExcluir} alt={element.nif} name={element.nome} style={{ height: '20x', width: '20px', marginLeft: '15px', cursor: 'pointer' }} /></td>
+                    <td><img data-toggle="modal" data-target="#exampleModal3" src={IconExcluir} onClick={() => this.handleNameNif_delete(element.nif, element.nome)} alt={element.nif} name={element.nome} style={{ height: '20x', width: '20px', marginLeft: '15px', cursor: 'pointer' }} /></td>
                     {/*Estou passando o nif da pessoa a ser excluida pelo alt da imagem */}
-                    <td><img data-toggle="modal" data-target="#exampleModal2" src={IconSenha} alt={element.nif} name={element.nome} style={{ height: '20x', width: '20px', marginLeft: '50px', cursor: 'pointer' }} /></td>
+                    <td><img data-toggle="modal" data-target="#exampleModal2" src={IconSenha} onClick={() => this.handleNameNif_resetarSenha(element.nif)} alt={element.nif} name={element.nome} style={{ height: '20x', width: '20px', marginLeft: '50px', cursor: 'pointer' }} /></td>
 
-                    <td><img data-toggle="modal" data-target="#exampleModal" src={IconCaneta} alt={element.nif} name={element.nome} style={{ height: '20x', width: '20px', marginLeft: '10px', cursor: 'pointer' }} /></td>
+                    <td><img data-toggle="modal" data-target="#exampleModal" src={IconCaneta} onClick={() => this.handleNameNif_edit(element.nif)} alt={element.nif} name={element.nome} style={{ height: '20x', width: '20px', marginLeft: '10px', cursor: 'pointer' }} /></td>
 
 
                   </tr>
