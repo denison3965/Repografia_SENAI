@@ -112,7 +112,7 @@ function Cadastro() {
   console.log(cargos)
 
   function enviarFormulario() {
-    params = `nif=${params.nif}&nome=${params.nome}&sobrenome=${params.sobrenome}&email=${params.email}&data_criacao=${params.data_criacao}&senha=Senai115&administrativo=${params.administrativo}&situacao=ativo&telefone=${params.telefone}`
+    params = `nif=${params.nif}&nome=${params.nome}&sobrenome=${params.sobrenome}&email=${params.email}&data_criacao=${params.data_criacao}&senha=Senai115&administrativo=${params.administrativo}&situacao=ativo&telefone=${params.telefone}&id_cargo=${params.id_cargo}`
     axios.post('http://localhost:3000/v1/addfuncionarios', params).then(result => {
       console.log(result.data)
 
