@@ -191,13 +191,8 @@ function Cadastro() {
 
                       <div class="form-group col-md-6">
                         <label for="inputState">O usuario tera acesso administartivo ?</label>
-<<<<<<< HEAD
-                        <select id="inputState" name="administrativo" class="form-control" onChange={e => (setAdministrativo(e.target.value))}>
-                          <option selected value="nao">não</option>
-=======
                         <select id="inputState" name="administrativo" class="form-control" required onChange={e => setAdministrativo(e.target.value)}>
                           <option selected value="nao">não</option>  
->>>>>>> 75a74db451abd13569d2327cf6b11c0ff4d8d2ff
                           <option value="sim">sim</option>
                         </select>
                       </div>
