@@ -176,7 +176,7 @@ function Cadastro() {
                   <h2>Cadastro</h2>
                 </div>
 
-                <form action="/action_page.php">
+                <form >
                   <div class="form-row">
                     <div class="form-group col-md-6">
                       <label for="inputEmail4">Nome</label>
