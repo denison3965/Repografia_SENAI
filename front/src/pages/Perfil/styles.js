@@ -4,48 +4,26 @@ export const Container = styled.div`
   width: 100vw;
   height: 100vh;
   background-color: #FFFFFF;
-  hr{
-      background-color: #c11b04;
-  }
+
+       hr{
+          margin-top: 50px;
+          margin-left:30px;
+          margin-right:30px;
+          margin-bottom: 30px;
+          }
   .sair{
-    position: relative;
-    margin-top: 4px;
-    left: 90vw;
-    width: 5vw;
     color: #666666;
-    background-color: #FFFFFF;
     text-align: center;
-    font-size: 20px;
+    font-size: 17px;
     cursor: pointer;
+  }
+  .sair:hover{
+    color: #c11b04
   }
   .localizacao{
-    position: relative;
-  }
-  .seu_perfil{
-    position: relative;
-    left: 10vw;
-    background-color: #D5ECF2;
-    border: none;
-    border-radius: 5px;
-    color: #666666;
-    padding: 5px 11px;
-    text-align: center;
-    display: inline-block;
-    font-size: 25px;
-    cursor: pointer;
-  }
-  .seu_historico{
-    position: relative;
-    left: 20vw;
-    background-color: #D5ECF2;
-    border: none;
-    border-radius: 5px;
-    color: #666666;
-    padding: 5px 11px;
-    text-align: center;
-    display: inline-block;
-    font-size: 25px;
-    cursor: pointer;
+    display:flex;
+    justify-content: space-between;
+    margin: 20px;
   }
   .informacoes{
     position: absolute;

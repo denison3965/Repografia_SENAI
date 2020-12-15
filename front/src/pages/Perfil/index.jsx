@@ -27,9 +27,9 @@ function Perfil() {
    //Verificando Se o usuario esta autorizado para acessar essa pagina
    const history = useHistory()
    const [showPage, setShowPage] = useState(false)
-   const [infoUser, setInfoUser] = useState({nome: '', sobrenome: ''})
+   const [infoUser, setInfoUser] = useState({ nome: '', sobrenome: '' })
    const [senhaAtual, setSenhaAtual] = useState()
-   const [novaSenha , setNovaSenha] = useState()
+   const [novaSenha, setNovaSenha] = useState()
    const [confirmarSenha, setConfirmarSenha] = useState()
    const [msg_error, setMsgError] = useState()
    const [msg_acerto, setMsgAcerto] = useState()
@@ -56,7 +56,7 @@ function Perfil() {
 
                await setInfoUser(res.data)
 
-               
+
             }).catch((err) => {
                console.log(err)
             })
@@ -73,43 +73,43 @@ function Perfil() {
 
    console.log(infoUser)
 
-  function fazerSingOut() {
-    axios.post('http://localhost:3000/v1/logout')
-      .then((res) => {
+   function fazerSingOut() {
+      axios.post('http://localhost:3000/v1/logout')
+         .then((res) => {
 
-        let nullValue = res.data.token
+            let nullValue = res.data.token
 
-        //Setando o token de autenticacao para nulo
-        cookies.set('tokenJWT', nullValue, {path: '/'})
+            //Setando o token de autenticacao para nulo
+            cookies.set('tokenJWT', nullValue, { path: '/' })
 
-        history.push("/")
+            history.push("/")
+         })
+   }
+
+   //confirmação de editar a senha 
+   function editarSenha() {
+      axios.put('http://localhost:3000/v1/editarSenha', {
+         senhaAtual: senhaAtual,
+         novaSenha: novaSenha,
+         confirmarSenha: confirmarSenha,
+         nif: infoUser.nif
       })
-  }
 
-  //confirmação de editar a senha 
-  function editarSenha(){
-   axios.put('http://localhost:3000/v1/editarSenha', {
-      senhaAtual: senhaAtual,
-      novaSenha: novaSenha,
-      confirmarSenha: confirmarSenha,
-      nif: infoUser.nif
-   }) 
-   
-   .then((res)=>{
-      if(res.data == "Senha alterada com sucesso"){
-         setMsgError(null)
-         setMsgAcerto(res.data)
-      }else{
-         setMsgAcerto(null)
-         setMsgError(res.data)
-      }
-   })
+         .then((res) => {
+            if (res.data == "Senha alterada com sucesso") {
+               setMsgError(null)
+               setMsgAcerto(res.data)
+            } else {
+               setMsgAcerto(null)
+               setMsgError(res.data)
+            }
+         })
 
-   .catch((err)=> {
-      console.log(err)
-   })
-  }
-  
+         .catch((err) => {
+            console.log(err)
+         })
+   }
+
 
 
 
@@ -122,13 +122,9 @@ function Perfil() {
 
                   <Header />
 
-                  <div className="sair">
-                     <div onClick={() => fazerSingOut()}>SAIR</div>
-                  </div>
-
                   <div className="localizacao">
-                     <div className="seu_perfil">Seu Perfil</div>
-                     <Link to="/historico"><div className="seu_historico">Seu Histórico</div></Link>
+                     <Link to="/historico"><div type="button" className="btn btn-secondary">Seu Histórico</div></Link>
+                     <div className="sair" onClick={() => fazerSingOut()}>SAIR</div>
                   </div>
 
                   <hr />
@@ -175,12 +171,12 @@ function Perfil() {
                                           <p>
                                              {senhaAtual}
                                           </p>
-                                       </div> 
+                                       </div>
                                     </form>
                                     <form class="form-inline" style={{ margin: "40px" }}>
                                        <div class="form-group">
                                           <label style={{ marginRight: "30px" }} for="inputPassword6">Nova senha:     </label>
-                                          <input onChange={(e)=> setNovaSenha(e.target.value)} style={{ width: "200px" }} name="novaSenha" type="password" id="inputPassword6" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" />
+                                          <input onChange={(e) => setNovaSenha(e.target.value)} style={{ width: "200px" }} name="novaSenha" type="password" id="inputPassword6" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" />
                                           <p>
                                              {novaSenha}
                                           </p>
@@ -189,17 +185,17 @@ function Perfil() {
                                     <form class="form-inline" style={{ margin: "40px" }}>
                                        <div class="form-group">
                                           <label for="inputPassword6">Confimar senha:</label>
-                                          <input onChange={(e)=>setConfirmarSenha(e.target.value)} style={{ width: "200px" }} name="confirmarSenha" type="password" id="inputPassword6" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" />
+                                          <input onChange={(e) => setConfirmarSenha(e.target.value)} style={{ width: "200px" }} name="confirmarSenha" type="password" id="inputPassword6" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" />
                                           <p>
                                              {confirmarSenha}
                                           </p>
                                        </div>
                                     </form>
                                     <div>
-                                      {msg_error!= null ? <div className="alert alert-danger">{msg_error} </div>:null}
-                                      {msg_acerto!= null ? <div className="alert alert-success">{msg_acerto} </div>:null}
-                                    </div>                        
-                                     
+                                       {msg_error != null ? <div className="alert alert-danger">{msg_error} </div> : null}
+                                       {msg_acerto != null ? <div className="alert alert-success">{msg_acerto} </div> : null}
+                                    </div>
+
                                  </div>
                               </div>
                               <div class="modal-footer">

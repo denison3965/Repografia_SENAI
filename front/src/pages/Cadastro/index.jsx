@@ -158,19 +158,19 @@ function Cadastro() {
                     <h2>Cadastro</h2>
                   </div>
 
-                  <form>
+                  <form action="/action_page.php">
                     <div class="form-row">
                       <div class="form-group col-md-6">
                         <label for="inputEmail4">Nome</label>
                         <input type="text" class="form-control" id="inputNome" placeholder="Ex: Pedro" required onChange={e => setNome(e.target.value)} />
                       </div>
-                      <div class="form-group col-md-6">
-                        <label for="inputEmail4">Sobrenome</label>
-                        <input type="text" class="form-control" id="inputNome" placeholder="Ex: Alves" required onChange={e => setSobrenome(e.target.value)} />
+                      <div  class="form-group col-md-6"> 
+                        <label  for="inputEmail4">Sobrenome</label>
+                        <input  type="text" class="form-control" id="inputNome" placeholder="Ex: Alves" required onChange={e => setSobrenome(e.target.value)} />
                       </div>
                       <div class="form-group col-md-6">
                         <label for="inputPassword4">Cargo</label>
-                        <Select options={cargos} onChange={e => setId_cargo(e.value)} />
+                        <Select options={cargos} isSearchable required onChange={e => setId_cargo(e.value)}  />
                       </div>
                     </div>
                     <div class="form-row">
@@ -191,18 +191,20 @@ function Cadastro() {
 
                       <div class="form-group col-md-6">
                         <label for="inputState">O usuario tera acesso administartivo ?</label>
+<<<<<<< HEAD
                         <select id="inputState" name="administrativo" class="form-control" onChange={e => (setAdministrativo(e.target.value))}>
                           <option selected value="nao">não</option>
+=======
+                        <select id="inputState" name="administrativo" class="form-control" required onChange={e => setAdministrativo(e.target.value)}>
+                          <option selected value="nao">não</option>  
+>>>>>>> 75a74db451abd13569d2327cf6b11c0ff4d8d2ff
                           <option value="sim">sim</option>
-                          {teste.map((element) => {
-                            <option>teste</option>
-                          })}
                         </select>
                       </div>
                     </div>
                     <div className="area_botao">
 
-                      <button type="button" class="btn btn-success" onClick={enviarFormulario} >Cadastrar</button>
+                      <button type="submit"  class="btn btn-success" onClick={enviarFormulario} >Cadastrar</button>
                       <Link to="/funcionarios-cadastrados"><button type="button" class="btn btn-danger">Voltar</button></Link>
 
                     </div>
