@@ -116,7 +116,7 @@ function Adm_Registros() {
 
                 <div className="Info_item">
                   <div className="Info_Key"><strong>Cargo:</strong></div>
-                  <div className="Info_Valor"></div>
+                  <div className="Info_Valor">{infoUser.nome_cargo}</div>
                 </div>
 
               </div>

@@ -417,24 +417,24 @@ function Formulario() {
                                     <div className="div_checkbox">
 
                                         <div className="custom-control custom-radio container">
-                                            <input type="radio" className="custom-control-input check_radio" id="radio1" name="groupOfDefaultRadios" value="A3" />
+                                            <input type="radio" className="custom-control-input check_radio" id="radio1" name="groupOfDefaultRadios" value={1} />
                                             <label className="custom-control-label" for="radio1"> <p className="p_radio">A3</p> </label>
                                         </div>
 
                                         <div className="custom-control custom-radio container">
-                                            <input type="radio" className="custom-control-input" id="radio2" name="groupOfDefaultRadios" value="A4" />
+                                            <input type="radio" className="custom-control-input" id="radio2" name="groupOfDefaultRadios" value={2} />
                                             <label className="custom-control-label" for="radio2"> <p className="p_radio">A4</p> </label>
                                         </div>
                                     </div>
 
                                     <div className="div_checkbox">
                                         <div className="custom-control custom-radio container">
-                                            <input type="radio" className="custom-control-input" id="radio3" name="groupOfDefaultRadios" value="A5" />
+                                            <input type="radio" className="custom-control-input" id="radio3" name="groupOfDefaultRadios" value={3} />
                                             <label className="custom-control-label" for="radio3"> <p className="p_radio">A5</p> </label>
                                         </div>
 
                                         <div className="custom-control custom-radio container">
-                                            <input type="radio" className="custom-control-input" id="radio4" name="groupOfDefaultRadios" value="Outros (colocar em OBS)" />
+                                            <input type="radio" className="custom-control-input" id="radio4" name="groupOfDefaultRadios" value={4} />
                                             <label className="custom-control-label" for="radio4"> <p className="p_radio">Outros (colocar em OBS)</p> </label>
                                         </div>
 
@@ -448,24 +448,24 @@ function Formulario() {
                                     <div className="div_checkbox">
 
                                         <div className="custom-control custom-radio container">
-                                            <input type="radio" className="custom-control-input" id="radio5" name="groupOfDefaultRadios2" value="Zipdrive" />
+                                            <input type="radio" className="custom-control-input" id="radio5" name="groupOfDefaultRadios2" value={1} />
                                             <label className="custom-control-label" for="radio5"> <p className="p_radio">Zipdrive</p> </label>
                                         </div>
 
                                         <div className="custom-control custom-radio container">
-                                            <input type="radio" className="custom-control-input" id="radio6" name="groupOfDefaultRadios2" value="Papel" />
+                                            <input type="radio" className="custom-control-input" id="radio6" name="groupOfDefaultRadios2" value={2} />
                                             <label className="custom-control-label" for="radio6"> <p className="p_radio">Papel</p> </label>
                                         </div>
                                     </div>
 
                                     <div className="div_checkbox">
                                         <div className="custom-control custom-radio container">
-                                            <input type="radio" className="custom-control-input" id="radio7" name="groupOfDefaultRadios2" value="E-mail" />
+                                            <input type="radio" className="custom-control-input" id="radio7" name="groupOfDefaultRadios2" value={3} />
                                             <label className="custom-control-label" for="radio7"> <p className="p_radio">E-mail</p> </label>
                                         </div>
 
                                         <div className="custom-control custom-radio container">
-                                            <input type="radio" className="custom-control-input" id="radio8" name="groupOfDefaultRadios2" value="Outros (colocar em OBS)" />
+                                            <input type="radio" className="custom-control-input" id="radio8" name="groupOfDefaultRadios2" value={4} />
                                             <label className="custom-control-label" for="radio8"> <p className="p_radio">Outros (colocar em OBS)</p> </label>
                                         </div>
 
