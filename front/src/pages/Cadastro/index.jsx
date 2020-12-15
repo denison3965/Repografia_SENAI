@@ -37,9 +37,9 @@ function Cadastro() {
   const [sobrenome, setSobrenome] = useState()
   const [id_cargo, setId_cargo] = useState()
   const [nif, setNif] = useState()
-  const [telefone, setTelefone] = useState()
+  const [telefone, setTelefone] = useState(null)
   const [email, setEmail] = useState()
-  const [administrativo, setAdministrativo] = useState()
+  const [administrativo, setAdministrativo] = useState('nao')
   const [infoUser, setInfoUser] = useState({ nome: '', sobrenome: '' })
   const [cargos, setCargos] = useState([1, 2, 3, 4])
   const [teste, useTeste] = useState([1, 2, 3, 4])
@@ -93,8 +93,8 @@ function Cadastro() {
           const dados = res.data
 
           const options = dados.map(d => ({
-            "value": d.id_cargo,
-            "label": d.nome
+            "value" : d.id_cargo,
+            "label" : d.nome_cargo
           }))
 
           setCargos(options)
@@ -111,6 +111,8 @@ function Cadastro() {
   //**Verificando Se o usuario esta autorizado para acessar essa pagina*//
 
   function enviarFormulario() {
+
+
     params = `nif=${params.nif}&nome=${params.nome}&sobrenome=${params.sobrenome}&email=${params.email}&data_criacao=${params.data_criacao}&senha=Senai115&administrativo=${params.administrativo}&situacao=ativo&telefone=${params.telefone}&id_cargo=${params.id_cargo}`
     axios.post('http://localhost:3000/v1/addfuncionarios', params).then(result => {
       console.log(result.data)
