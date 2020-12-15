@@ -96,6 +96,10 @@ export const Container = styled.div`
     top: 7%;
     z-index: 999;
   }
+  .hidden{
+    visibility: hidden;
+    background-color: red;
+  }
 `;
 
 
