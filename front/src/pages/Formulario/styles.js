@@ -418,6 +418,11 @@ export const Container = styled.div`
         position: absolute;
         margin-left: 91%;
     }
+
+    .sair--button:hover{
+        color: #c11b04
+    }
+
     .div_pai--button{
         width: 100%;
         padding: 2vw;

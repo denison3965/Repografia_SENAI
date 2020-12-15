@@ -7,6 +7,7 @@ import axios from 'axios'
 import { useHistory } from 'react-router-dom'
 import Loading from '../../assets/img/loading.gif'
 import Cookies from 'universal-cookie'
+import { Link } from 'react-router-dom'
 
 
 const cookies = new Cookies()
@@ -70,7 +71,8 @@ function Formulario() {
 
     // Logica para pegar as checkBox que foram selecionadas
 
-    const array_nomes = ["2 Grampos a cavalo", "2 Grampos laterais", "Colorido", "Encadernação com espiral", "Frente e verso", "Reduzido", "preto e branco", "Capa em papel 150g/m2", "Capa em PVC"]
+    //const array_nomes = ["2 Grampos a cavalo", "2 Grampos laterais", "Colorido", "Encadernação com espiral", "Frente e verso", "Reduzido", "preto e branco", "Capa em papel 150g/m2", "Capa em PVC"]
+    const array_nomes = [1,2,3,4,5,6,7,8,9]
     let array_acabamento = []
     const [arrayAcabamento, setArrayAcabamento] = useState([])
 
@@ -249,7 +251,7 @@ function Formulario() {
                         <Header />
                         <h3 className="titulo_do_formulario" onClick={EnviarFormulario}>Solicitação de Serviços Reprográficos</h3>
                         <div className="div_pai--button">
-                            <div className="sair--button"><p>Voltar</p></div>
+                            <Link to="/"><div className="sair--button"><p>Sair</p></div> </Link>                           
                         </div>
 
 

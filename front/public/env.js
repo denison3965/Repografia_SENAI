@@ -1,15 +1,23 @@
 window.env = {
+  "ACLOCAL_PATH": "C:\\Program Files\\Git\\mingw64\\share\\aclocal;C:\\Program Files\\Git\\usr\\share\\aclocal",
   "ALLUSERSPROFILE": "C:\\ProgramData",
+<<<<<<< HEAD
   "ANDROID_HOME": "C:\\Android\\Sdk",
   "APPDATA": "C:\\Users\\elian\\AppData\\Roaming",
   "ChocolateyInstall": "C:\\ProgramData\\chocolatey",
   "ChocolateyLastPathUpdate": "132490198176910571",
   "CHROME_CRASHPAD_PIPE_NAME": "\\\\.\\pipe\\crashpad_1868_FRJLMAUBVLTCQFLO",
   "CLASSPATH": ".;",
+=======
+  "APPDATA": "C:\\Users\\Bertoldo\\AppData\\Roaming",
+  "APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL": "true",
+  "CHROME_CRASHPAD_PIPE_NAME": "\\\\.\\pipe\\crashpad_12292_ETEVYNJSKFKTJKTE",
+>>>>>>> 6978a994792eb3541730e2952b83f7bd3be54690
   "COLORTERM": "truecolor",
-  "CommonProgramFiles": "C:\\Program Files\\Common Files",
+  "COMMONPROGRAMFILES": "C:\\Program Files\\Common Files",
   "CommonProgramFiles(x86)": "C:\\Program Files (x86)\\Common Files",
   "CommonProgramW6432": "C:\\Program Files\\Common Files",
+<<<<<<< HEAD
   "COMPUTERNAME": "DESKTOP-8GGC3SA",
   "ComSpec": "C:\\Windows\\system32\\cmd.exe",
   "dp0": "C:\\Users\\elian\\Desktop\\Repografia_SENAI\\front\\node_modules\\.bin\\",
@@ -23,6 +31,36 @@ window.env = {
   "LANG": "pt_BR.UTF-8",
   "LOCALAPPDATA": "C:\\Users\\elian\\AppData\\Local",
   "LOGONSERVER": "\\\\DESKTOP-8GGC3SA",
+=======
+  "COMPUTERNAME": "DESKTOP-77OTFT9",
+  "COMSPEC": "C:\\WINDOWS\\system32\\cmd.exe",
+  "CONFIG_SITE": "C:/Program Files/Git/mingw64/etc/config.site",
+  "DISPLAY": "needs-to-be-defined",
+  "dp0": "C:\\Users\\Bertoldo\\Desktop\\POJETO\\Repografia_SENAI\\front\\node_modules\\.bin\\",
+  "DriverData": "C:\\Windows\\System32\\Drivers\\DriverData",
+  "EXEPATH": "C:\\Program Files\\Git",
+  "FPS_BROWSER_APP_PROFILE_STRING": "Internet Explorer",
+  "FPS_BROWSER_USER_PROFILE_STRING": "Default",
+  "GIT_ASKPASS": "d:\\Microsoft VS Code\\resources\\app\\extensions\\git\\dist\\askpass.sh",
+  "HOME": "C:\\Users\\Bertoldo",
+  "HOMEDRIVE": "C:",
+  "HOMEPATH": "\\Users\\Bertoldo",
+  "HOSTNAME": "DESKTOP-77OTFT9",
+  "INFOPATH": "C:\\Program Files\\Git\\usr\\local\\info;C:\\Program Files\\Git\\usr\\share\\info;C:\\Program Files\\Git\\usr\\info;C:\\Program Files\\Git\\share\\info",
+  "INIT_CWD": "C:\\Users\\Bertoldo\\Desktop\\POJETO\\Repografia_SENAI\\front",
+  "LANG": "pt_BR.UTF-8",
+  "LC_CTYPE": "pt_BR.UTF-8",
+  "LOCALAPPDATA": "C:\\Users\\Bertoldo\\AppData\\Local",
+  "LOGONSERVER": "\\\\DESKTOP-77OTFT9",
+  "MANPATH": "C:\\Program Files\\Git\\mingw64\\local\\man;C:\\Program Files\\Git\\mingw64\\share\\man;C:\\Program Files\\Git\\usr\\local\\man;C:\\Program Files\\Git\\usr\\share\\man;C:\\Program Files\\Git\\usr\\man;C:\\Program Files\\Git\\share\\man",
+  "MINGW_CHOST": "x86_64-w64-mingw32",
+  "MINGW_PACKAGE_PREFIX": "mingw-w64-x86_64",
+  "MINGW_PREFIX": "C:/Program Files/Git/mingw64",
+  "MSYSTEM": "MINGW64",
+  "MSYSTEM_CARCH": "x86_64",
+  "MSYSTEM_CHOST": "x86_64-w64-mingw32",
+  "MSYSTEM_PREFIX": "C:/Program Files/Git/mingw64",
+>>>>>>> 6978a994792eb3541730e2952b83f7bd3be54690
   "NODE": "C:\\Program Files\\nodejs\\node.exe",
   "NODE_EXE": "C:\\Program Files\\nodejs\\\\node.exe",
   "NPM_CLI_JS": "C:\\Program Files\\nodejs\\\\node_modules\\npm\\bin\\npm-cli.js",
@@ -38,7 +76,11 @@ window.env = {
   "npm_config_bin_links": "true",
   "npm_config_browser": "",
   "npm_config_ca": "",
+<<<<<<< HEAD
   "npm_config_cache": "C:\\Users\\elian\\AppData\\Roaming\\npm-cache",
+=======
+  "npm_config_cache": "C:\\Users\\Bertoldo\\AppData\\Roaming\\npm-cache",
+>>>>>>> 6978a994792eb3541730e2952b83f7bd3be54690
   "npm_config_cache_lock_retries": "10",
   "npm_config_cache_lock_stale": "60000",
   "npm_config_cache_lock_wait": "10000",
@@ -65,8 +107,13 @@ window.env = {
   "npm_config_git": "git",
   "npm_config_git_tag_version": "true",
   "npm_config_global": "",
+<<<<<<< HEAD
   "npm_config_globalconfig": "C:\\Users\\elian\\AppData\\Roaming\\npm\\etc\\npmrc",
   "npm_config_globalignorefile": "C:\\Users\\elian\\AppData\\Roaming\\npm\\etc\\npmignore",
+=======
+  "npm_config_globalconfig": "C:\\Users\\Bertoldo\\AppData\\Roaming\\npm\\etc\\npmrc",
+  "npm_config_globalignorefile": "C:\\Users\\Bertoldo\\AppData\\Roaming\\npm\\etc\\npmignore",
+>>>>>>> 6978a994792eb3541730e2952b83f7bd3be54690
   "npm_config_global_style": "",
   "npm_config_group": "",
   "npm_config_ham_it_up": "",
@@ -79,7 +126,11 @@ window.env = {
   "npm_config_init_author_name": "",
   "npm_config_init_author_url": "",
   "npm_config_init_license": "ISC",
+<<<<<<< HEAD
   "npm_config_init_module": "C:\\Users\\elian\\.npm-init.js",
+=======
+  "npm_config_init_module": "C:\\Users\\Bertoldo\\.npm-init.js",
+>>>>>>> 6978a994792eb3541730e2952b83f7bd3be54690
   "npm_config_init_version": "1.0.0",
   "npm_config_json": "",
   "npm_config_key": "",
@@ -94,7 +145,11 @@ window.env = {
   "npm_config_metrics_registry": "https://registry.npmjs.org/",
   "npm_config_node_gyp": "C:\\Program Files\\nodejs\\node_modules\\npm\\node_modules\\node-gyp\\bin\\node-gyp.js",
   "npm_config_node_options": "",
+<<<<<<< HEAD
   "npm_config_node_version": "14.15.0",
+=======
+  "npm_config_node_version": "14.15.1",
+>>>>>>> 6978a994792eb3541730e2952b83f7bd3be54690
   "npm_config_noproxy": "",
   "npm_config_offline": "",
   "npm_config_onload_script": "",
@@ -106,7 +161,11 @@ window.env = {
   "npm_config_parseable": "",
   "npm_config_prefer_offline": "",
   "npm_config_prefer_online": "",
+<<<<<<< HEAD
   "npm_config_prefix": "C:\\Users\\elian\\AppData\\Roaming\\npm",
+=======
+  "npm_config_prefix": "C:\\Users\\Bertoldo\\AppData\\Roaming\\npm",
+>>>>>>> 6978a994792eb3541730e2952b83f7bd3be54690
   "npm_config_preid": "",
   "npm_config_production": "",
   "npm_config_progress": "true",
@@ -130,7 +189,7 @@ window.env = {
   "npm_config_searchopts": "",
   "npm_config_searchstaleness": "900",
   "npm_config_send_metrics": "",
-  "npm_config_shell": "C:\\Windows\\system32\\cmd.exe",
+  "npm_config_shell": "C:\\WINDOWS\\system32\\cmd.exe",
   "npm_config_shrinkwrap": "true",
   "npm_config_sign_git_commit": "",
   "npm_config_sign_git_tag": "",
@@ -140,15 +199,24 @@ window.env = {
   "npm_config_tag": "latest",
   "npm_config_tag_version_prefix": "v",
   "npm_config_timing": "",
+<<<<<<< HEAD
   "npm_config_tmp": "C:\\Users\\elian\\AppData\\Local\\Temp",
+=======
+  "npm_config_tmp": "C:\\Users\\Bertoldo\\AppData\\Local\\Temp",
+>>>>>>> 6978a994792eb3541730e2952b83f7bd3be54690
   "npm_config_umask": "0000",
   "npm_config_unicode": "",
   "npm_config_unsafe_perm": "true",
   "npm_config_update_notifier": "true",
   "npm_config_usage": "",
   "npm_config_user": "",
+<<<<<<< HEAD
   "npm_config_userconfig": "C:\\Users\\elian\\.npmrc",
   "npm_config_user_agent": "npm/6.14.8 node/v14.15.0 win32 x64",
+=======
+  "npm_config_userconfig": "C:\\Users\\Bertoldo\\.npmrc",
+  "npm_config_user_agent": "npm/6.14.8 node/v14.15.1 win32 x64",
+>>>>>>> 6978a994792eb3541730e2952b83f7bd3be54690
   "npm_config_version": "",
   "npm_config_versions": "",
   "npm_config_viewer": "browser",
@@ -177,6 +245,7 @@ window.env = {
   "npm_package_dependencies_react_paginate": "^6.5.0",
   "npm_package_dependencies_react_router_dom": "^5.2.0",
   "npm_package_dependencies_react_scripts": "4.0.1",
+  "npm_package_dependencies_react_select": "^3.1.1",
   "npm_package_dependencies_react_simple_hook_modal": "^1.1.0",
   "npm_package_dependencies_styled_components": "^5.2.1",
   "npm_package_dependencies_universal_cookie": "^4.0.4",
@@ -197,6 +266,7 @@ window.env = {
   "npm_package_scripts_start": "react-dotenv && react-scripts start",
   "npm_package_scripts_test": "react-scripts test",
   "npm_package_version": "0.1.0",
+<<<<<<< HEAD
   "NPM_PREFIX_NPM_CLI_JS": "C:\\Users\\elian\\AppData\\Roaming\\npm\\node_modules\\npm\\bin\\npm-cli.js",
   "NUMBER_OF_PROCESSORS": "2",
   "OneDrive": "C:\\Users\\elian\\OneDrive",
@@ -204,20 +274,36 @@ window.env = {
   "ORIGINAL_XDG_CURRENT_DESKTOP": "undefined",
   "OS": "Windows_NT",
   "Path": "C:\\Program Files\\nodejs\\node_modules\\npm\\node_modules\\npm-lifecycle\\node-gyp-bin;C:\\Users\\elian\\Desktop\\Repografia_SENAI\\front\\node_modules\\.bin;C:\\Python27\\;C:\\Python27\\Scripts;C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Windows\\System32\\OpenSSH\\;C:\\Program Files\\Git\\cmd;C:\\Program Files\\dotnet\\;C:\\Program Files\\Microsoft SQL Server\\130\\Tools\\Binn\\;C:\\Program Files\\Microsoft SQL Server\\Client SDK\\ODBC\\170\\Tools\\Binn\\;C:\\ProgramData\\chocolatey\\bin;C:\\Program Files\\nodejs\\;C:\\Program Files\\Java\\jdk1.8.0_211\\bin;%ANDROID_HOME%\\emulator;%ANDROID_HOME%\\tools;%ANDROID_HOME%\\tools\\bin;%ANDROID_HOME%\\platform-tools;C:\\Program Files\\MySQL\\MySQL Shell 8.0\\bin\\;C:\\Users\\elian\\AppData\\Local\\Microsoft\\WindowsApps;;C:\\Users\\elian\\AppData\\Local\\Programs\\Microsoft VS Code\\bin;C:\\Users\\elian\\.dotnet\\tools;C:\\Users\\elian\\AppData\\Roaming\\npm",
+=======
+  "NPM_PREFIX_NPM_CLI_JS": "C:\\Users\\Bertoldo\\AppData\\Roaming\\npm\\node_modules\\npm\\bin\\npm-cli.js",
+  "NUMBER_OF_PROCESSORS": "6",
+  "OneDrive": "C:\\Users\\Bertoldo\\OneDrive",
+  "ORIGINAL_PATH": "C:\\Program Files\\Git\\mingw64\\bin;C:\\Program Files\\Git\\usr\\bin;C:\\Users\\Bertoldo\\bin;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0;C:\\WINDOWS\\System32\\OpenSSH;C:\\Program Files\\nodejs;C:\\Program Files\\Git\\cmd;C:\\Program Files\\MySQL\\MySQL Shell 8.0\\bin;C:\\Users\\Bertoldo\\AppData\\Local\\Microsoft\\WindowsApps;D:\\Microsoft VS Code\\bin;C:\\Users\\Bertoldo\\AppData\\Roaming\\npm",
+  "ORIGINAL_TEMP": "C:/Users/Bertoldo/AppData/Local/Temp",
+  "ORIGINAL_TMP": "C:/Users/Bertoldo/AppData/Local/Temp",
+  "ORIGINAL_XDG_CURRENT_DESKTOP": "undefined",
+  "OS": "Windows_NT",
+  "Path": "C:\\Program Files\\nodejs\\node_modules\\npm\\node_modules\\npm-lifecycle\\node-gyp-bin;C:\\Users\\Bertoldo\\Desktop\\POJETO\\Repografia_SENAI\\front\\node_modules\\.bin;C:\\Users\\Bertoldo\\bin;C:\\Program Files\\Git\\mingw64\\bin;C:\\Program Files\\Git\\usr\\local\\bin;C:\\Program Files\\Git\\usr\\bin;C:\\Program Files\\Git\\usr\\bin;C:\\Program Files\\Git\\mingw64\\bin;C:\\Program Files\\Git\\usr\\bin;C:\\Users\\Bertoldo\\bin;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0;C:\\WINDOWS\\System32\\OpenSSH;C:\\Program Files\\nodejs;C:\\Program Files\\Git\\cmd;C:\\Program Files\\MySQL\\MySQL Shell 8.0\\bin;C:\\Users\\Bertoldo\\AppData\\Local\\Microsoft\\WindowsApps;D:\\Microsoft VS Code\\bin;C:\\Users\\Bertoldo\\AppData\\Roaming\\npm;C:\\Program Files\\Git\\usr\\bin\\vendor_perl;C:\\Program Files\\Git\\usr\\bin\\core_perl",
+  "PATH": "C:\\Program Files\\nodejs\\node_modules\\npm\\node_modules\\npm-lifecycle\\node-gyp-bin;C:\\Users\\Bertoldo\\Desktop\\POJETO\\Repografia_SENAI\\front\\node_modules\\.bin;C:\\Users\\Bertoldo\\bin;C:\\Program Files\\Git\\mingw64\\bin;C:\\Program Files\\Git\\usr\\local\\bin;C:\\Program Files\\Git\\usr\\bin;C:\\Program Files\\Git\\usr\\bin;C:\\Program Files\\Git\\mingw64\\bin;C:\\Program Files\\Git\\usr\\bin;C:\\Users\\Bertoldo\\bin;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0;C:\\WINDOWS\\System32\\OpenSSH;C:\\Program Files\\nodejs;C:\\Program Files\\Git\\cmd;C:\\Program Files\\MySQL\\MySQL Shell 8.0\\bin;C:\\Users\\Bertoldo\\AppData\\Local\\Microsoft\\WindowsApps;D:\\Microsoft VS Code\\bin;C:\\Users\\Bertoldo\\AppData\\Roaming\\npm;C:\\Program Files\\Git\\usr\\bin\\vendor_perl;C:\\Program Files\\Git\\usr\\bin\\core_perl",
+>>>>>>> 6978a994792eb3541730e2952b83f7bd3be54690
   "PATHEXT": ".COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JSE;.WSF;.WSH;.MSC;.CPL",
+  "PKG_CONFIG_PATH": "C:\\Program Files\\Git\\mingw64\\lib\\pkgconfig;C:\\Program Files\\Git\\mingw64\\share\\pkgconfig",
+  "PLINK_PROTOCOL": "ssh",
   "PROCESSOR_ARCHITECTURE": "AMD64",
   "PROCESSOR_IDENTIFIER": "Intel64 Family 6 Model 61 Stepping 4, GenuineIntel",
   "PROCESSOR_LEVEL": "6",
   "PROCESSOR_REVISION": "3d04",
   "ProgramData": "C:\\ProgramData",
-  "ProgramFiles": "C:\\Program Files",
+  "PROGRAMFILES": "C:\\Program Files",
   "ProgramFiles(x86)": "C:\\Program Files (x86)",
   "ProgramW6432": "C:\\Program Files",
   "PROMPT": "$P$G",
   "PSModulePath": "C:\\Users\\elian\\Documents\\WindowsPowerShell\\Modules;C:\\Program Files\\WindowsPowerShell\\Modules;C:\\Windows\\system32\\WindowsPowerShell\\v1.0\\Modules",
   "PUBLIC": "C:\\Users\\Public",
+  "PWD": "C:/Users/Bertoldo/Desktop/POJETO/Repografia_SENAI/front",
   "REACT_APP_SERVER_TO_AUTHENTICATE": "http://localhost:3000/v1/teste",
   "SESSIONNAME": "Console",
+<<<<<<< HEAD
   "SystemDrive": "C:",
   "SystemRoot": "C:\\Windows",
   "TEMP": "C:\\Users\\elian\\AppData\\Local\\Temp",
@@ -233,5 +319,27 @@ window.env = {
   "VSCODE_GIT_ASKPASS_NODE": "C:\\Users\\elian\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe",
   "VSCODE_GIT_IPC_HANDLE": "\\\\.\\pipe\\vscode-git-3702a40600-sock",
   "windir": "C:\\Windows",
+=======
+  "SHELL": "C:\\Program Files\\Git\\usr\\bin\\bash.exe",
+  "SHLVL": "2",
+  "SSH_ASKPASS": "C:/Program Files/Git/mingw64/libexec/git-core/git-gui--askpass",
+  "SYSTEMDRIVE": "C:",
+  "SYSTEMROOT": "C:\\WINDOWS",
+  "TEMP": "C:\\Users\\Bertoldo\\AppData\\Local\\Temp",
+  "TERM": "xterm",
+  "TERM_PROGRAM": "vscode",
+  "TERM_PROGRAM_VERSION": "1.51.1",
+  "TMP": "C:\\Users\\Bertoldo\\AppData\\Local\\Temp",
+  "TMPDIR": "C:\\Users\\Bertoldo\\AppData\\Local\\Temp",
+  "USERDOMAIN": "DESKTOP-77OTFT9",
+  "USERDOMAIN_ROAMINGPROFILE": "DESKTOP-77OTFT9",
+  "USERNAME": "Bertoldo",
+  "USERPROFILE": "C:\\Users\\Bertoldo",
+  "VSCODE_GIT_ASKPASS_MAIN": "d:\\Microsoft VS Code\\resources\\app\\extensions\\git\\dist\\askpass-main.js",
+  "VSCODE_GIT_ASKPASS_NODE": "D:\\Microsoft VS Code\\Code.exe",
+  "VSCODE_GIT_IPC_HANDLE": "\\\\.\\pipe\\vscode-git-05fd3e513b-sock",
+  "WINDIR": "C:\\WINDOWS",
+  "_": "D:/Microsoft VS Code/Code.exe",
+>>>>>>> 6978a994792eb3541730e2952b83f7bd3be54690
   "_prog": "node"
 };

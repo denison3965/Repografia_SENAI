@@ -7,6 +7,7 @@ import { useHistory } from 'react-router-dom'
 import axios from 'axios'
 import Loading from '../../assets/img/loading.gif'
 import Cookies from 'universal-cookie'
+import Select from 'react-select'
 
 import { Container, Nav_Header, Area_Cadastro, Navegation } from './styles';
 
@@ -40,6 +41,8 @@ function Cadastro() {
   const [email, setEmail] = useState()
   const [administrativo, setAdministrativo] = useState()
   const [infoUser, setInfoUser] = useState({ nome: '', sobrenome: '' })
+  const [cargos, setCargos] = useState([1,2,3,4])
+  const [teste, useTeste] = useState([1,2,3,4])
 
   var now = new Date
 
@@ -84,6 +87,19 @@ function Cadastro() {
           console.log(err)
         })
 
+        //Pegando os cargos para listar
+        axios.get("http://localhost:3000/v1/pegar-cargos").then(async(res) => {
+          const dados = res.data
+
+          const options = dados.map(d => ({
+            "value" : d.id_cargo,
+            "label" : d.nome
+          }))
+
+          setCargos(options)
+          
+        })
+        
       }
       else {
         history.push("/")
@@ -93,8 +109,10 @@ function Cadastro() {
   }, [])
   //**Verificando Se o usuario esta autorizado para acessar essa pagina**
 
+  console.log(cargos)
+
   function enviarFormulario() {
-    params = `nif=${params.nif}&nome=${params.nome}&sobrenome=${params.sobrenome}&email=${params.email}&data_criacao=${params.data_criacao}&senha=Senai115&administrativo=${params.administrativo}&situacao=ativo&telefone=${params.telefone}`
+    params = `nif=${params.nif}&nome=${params.nome}&sobrenome=${params.sobrenome}&email=${params.email}&data_criacao=${params.data_criacao}&senha=Senai115&administrativo=${params.administrativo}&situacao=ativo&telefone=${params.telefone}&id_cargo=${params.id_cargo}`
     axios.post('http://localhost:3000/v1/addfuncionarios', params).then(result => {
       console.log(result.data)
 
@@ -138,19 +156,19 @@ function Cadastro() {
                     <h2>Cadastro</h2>
                   </div>
 
-                  <form>
+                  <form action="/action_page.php">
                     <div class="form-row">
                       <div class="form-group col-md-6">
                         <label for="inputEmail4">Nome</label>
                         <input type="text" class="form-control" id="inputNome" placeholder="Ex: Pedro" required onChange={e => setNome(e.target.value)} />
                       </div>
-                      <div class="form-group col-md-6">
-                        <label for="inputEmail4">Sobrenome</label>
-                        <input type="text" class="form-control" id="inputNome" placeholder="Ex: Alves" required onChange={e => setSobrenome(e.target.value)} />
+                      <div  class="form-group col-md-6"> 
+                        <label  for="inputEmail4">Sobrenome</label>
+                        <input  type="text" class="form-control" id="inputNome" placeholder="Ex: Alves" required onChange={e => setSobrenome(e.target.value)} />
                       </div>
                       <div class="form-group col-md-6">
                         <label for="inputPassword4">Cargo</label>
-                        <input type="text" class="form-control" id="inputCargo" placeholder="Ex: Professor" required onChange={e => setId_cargo(e.target.value)} />
+                        <Select options={cargos} isSearchable required onChange={e => setId_cargo(e.value)}  />
                       </div>
                     </div>
                     <div class="form-row">
@@ -171,15 +189,15 @@ function Cadastro() {
 
                       <div class="form-group col-md-6">
                         <label for="inputState">O usuario tera acesso administartivo ?</label>
-                        <select id="inputState" name="administrativo" class="form-control" onChange={e => setAdministrativo(e.target.value)}>
-                          <option selected value="nao">não</option>
+                        <select id="inputState" name="administrativo" class="form-control" required onChange={e => setAdministrativo(e.target.value)}>
+                          <option selected value="nao">não</option>  
                           <option value="sim">sim</option>
                         </select>
                       </div>
                     </div>
                     <div className="area_botao">
 
-                      <button type="button" class="btn btn-success" onClick={enviarFormulario} >Cadastrar</button>
+                      <button type="submit"  class="btn btn-success" onClick={enviarFormulario} >Cadastrar</button>
                       <Link to="/funcionarios-cadastrados"><button type="button" class="btn btn-danger">Voltar</button></Link>
 
                     </div>
