@@ -168,7 +168,7 @@ function Cadastro() {
                       </div>
                       <div class="form-group col-md-6">
                         <label for="inputPassword4">Cargo</label>
-                        <Select options={cargos} required onChange={e => setId_cargo(e.value)} required />
+                        <Select options={cargos} isSearchable required onChange={e => setId_cargo(e.value)}  />
                       </div>
                     </div>
                     <div class="form-row">
@@ -192,9 +192,6 @@ function Cadastro() {
                         <select id="inputState" name="administrativo" class="form-control" required onChange={e => setAdministrativo(e.target.value)}>
                           <option selected value="nao">não</option>  
                           <option value="sim">sim</option>
-                          {teste.map((element) => {
-                            <option>teste</option>
-                          })}
                         </select>
                       </div>
                     </div>

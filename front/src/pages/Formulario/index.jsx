@@ -7,6 +7,7 @@ import axios from 'axios'
 import { useHistory } from 'react-router-dom'
 import Loading from '../../assets/img/loading.gif'
 import Cookies from 'universal-cookie'
+import { Link } from 'react-router-dom'
 
 
 const cookies = new Cookies()
@@ -250,7 +251,7 @@ function Formulario() {
                         <Header />
                         <h3 className="titulo_do_formulario" onClick={EnviarFormulario}>Solicitação de Serviços Reprográficos</h3>
                         <div className="div_pai--button">
-                            <div className="sair--button"><p>Voltar</p></div>
+                            <Link to="/"><div className="sair--button"><p>Sair</p></div> </Link>                           
                         </div>
 
 
