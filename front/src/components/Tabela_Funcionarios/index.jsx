@@ -194,7 +194,7 @@ export class Tabela_Funcionarios extends Component {
 
 
   handleEcluirUser(nif) {
-    alert("Usuario" + nif + "Excluido com sucesso")
+    alert("Usuario " + nif + " Excluido com sucesso")
 
     axios.put('http://localhost:3000/v1/excluirfuncionarios', {
       nif: this.state.UserParaDeletar,
