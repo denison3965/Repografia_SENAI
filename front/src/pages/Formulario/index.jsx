@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Container } from './styles';
 import Header from '../../components/Header';
-import Button from '../../components/Button'
 import IconCloud from '../../assets/img/iconcloud.png'
 import axios from 'axios'
 import { useHistory } from 'react-router-dom'
@@ -31,7 +30,12 @@ function Formulario() {
     //Verificando Se o usuario esta autorizado para acessar essa pagina
     const history = useHistory()
     const [showPage, setShowPage] = useState(false)
-    const [infoUser, setInfoUser] = useState({nome: '', sobrenome: ''})
+    const [infoUser, setInfoUser] = useState({ nome: '', sobrenome: '' })
+
+    //tratamento de errro 
+    const [msg_error, setMsgError] = useState()
+    const [msg_acerto, setMsgAcerto] = useState()
+
 
     const [listaDepartamento, setListaDepartamento] = useState([])
     const [optionsDepartamento, setOptionsDepartamento] = useState([]) 
@@ -97,7 +101,7 @@ function Formulario() {
     // Logica para pegar as checkBox que foram selecionadas
 
     //const array_nomes = ["2 Grampos a cavalo", "2 Grampos laterais", "Colorido", "Encadernação com espiral", "Frente e verso", "Reduzido", "preto e branco", "Capa em papel 150g/m2", "Capa em PVC"]
-    const array_nomes = [1,2,3,4,5,6,7,8,9]
+    const array_nomes = [1, 2, 3, 4, 5, 6, 7, 8, 9]
     let array_acabamento = []
     const [arrayAcabamento, setArrayAcabamento] = useState([])
 
@@ -150,11 +154,11 @@ function Formulario() {
     const [observacao, setObservacao] = useState();
     const [departamento, setDepartamento] = useState();
     const [responsavel, setResponsavel] = useState();
-    
 
-    function onChangeHandler(event){
-        
-        const uploadfile =  event.target.files[0];
+
+    function onChangeHandler(event) {
+
+        const uploadfile = event.target.files[0];
         console.log(uploadfile)
 
     }
@@ -257,8 +261,6 @@ function Formulario() {
     }
 
     function EnviarFormulario() {
-
-
         console.log(data)
 
         axios.post('http://localhost:3000/v1/add-requisicao', data)
@@ -276,7 +278,7 @@ function Formulario() {
                         <Header />
                         <h3 className="titulo_do_formulario" onClick={EnviarFormulario}>Solicitação de Serviços Reprográficos</h3>
                         <div className="div_pai--button">
-                            <Link to="/"><div className="sair--button"><p>Sair</p></div> </Link>                           
+                            <Link to="/"><div className="sair--button"><p>Sair</p></div> </Link>
                         </div>
 
 
@@ -525,7 +527,31 @@ function Formulario() {
                                 <input type="file" className="cursor-pointer input_exemplar" id="attachment" name="attachment" onChange={onChangeHandler} />
                             </div>
 
-                            {<Button fontStyle="italic" fontSize="1.8vw" title="Enviar" width="15vw" />}
+                            <button style={{width: "150px"}} type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">Enviar</button>
+
+
+                            {/* Modal  */}
+                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel"></h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            {/* <div>
+                                                {msg_error != null ? <div className="alert alert-danger">{msg_error} </div> : null}
+                                                {msg_acerto != null ? <div className="alert alert-success">{msg_acerto} </div> : null}
+                                            </div> */}
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Sair</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
                         </form>
 

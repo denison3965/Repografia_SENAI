@@ -195,6 +195,12 @@ export class Tabela_Funcionarios extends Component {
 
   handleEcluirUser(nif) {
     alert("Usuario" + nif + "Excluido com sucesso")
+
+    axios.put('http://localhost:3000/v1/excluirfuncionarios', {
+      nif: this.state.UserParaDeletar,
+    }).then((res) => {
+      console.log(res)
+    })
     // EXCLUIR AQUI !!!!!
   }
 
@@ -226,7 +232,6 @@ export class Tabela_Funcionarios extends Component {
         menssage: res.data
       })
     })
-
 
     // EDITAR AQUI AQUI !!!!!
   }
@@ -330,6 +335,7 @@ export class Tabela_Funcionarios extends Component {
           register.data_criacao.indexOf(this.state.search) !== -1
       }
     )
+
 
     return (
       <Container>
