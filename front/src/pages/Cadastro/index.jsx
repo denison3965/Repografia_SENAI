@@ -37,7 +37,7 @@ function Cadastro() {
   const [sobrenome, setSobrenome] = useState()
   const [id_cargo, setId_cargo] = useState()
   const [nif, setNif] = useState()
-  const [telefone, setTelefone] = useState(null)
+  const [telefone, setTelefone] = useState("1156423400")
   const [email, setEmail] = useState()
   const [administrativo, setAdministrativo] = useState('nao')
   const [infoUser, setInfoUser] = useState({ nome: '', sobrenome: '' })
