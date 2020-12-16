@@ -70,7 +70,7 @@ function Formulario() {
 
                     const options = res.data.map(d => ({
                         "value" : d.id_departamento,
-                        "label" : d.nome
+                        "label" : d.nome_departamento
                       }))
 
 
@@ -316,7 +316,7 @@ function Formulario() {
                                 <div className="div2_informacao">
                                     <div className="div2_p_input">
                                         <p>Fornecedor:</p>
-                                        <p className="p_resposta">{fornecedor.nome}</p>
+                                        <p className="p_resposta">{fornecedor.nome_fornecedor}</p>
                                     </div>
                                     <div className="div2_p_input">
                                         <p>Número:</p>
