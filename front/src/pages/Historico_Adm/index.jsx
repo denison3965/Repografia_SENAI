@@ -51,6 +51,7 @@ function Adm_Registros() {
         axios.get(url).then(async (res) => {
 
           await setInfoUser(res.data)
+          console.log(res.data)
 
         }).catch((err) => {
           console.log(err)
@@ -60,6 +61,7 @@ function Adm_Registros() {
       else {
         history.push("/")
       }
+
 
     }).catch(() => { history.push("/") })
   }, [])
@@ -92,7 +94,8 @@ function Adm_Registros() {
 
             </div>
             <Tabela>
-              <TabelaHistorico />
+              
+              <TabelaHistorico nif={infoUser.nif} />
 
               <div className="password_box">
 
