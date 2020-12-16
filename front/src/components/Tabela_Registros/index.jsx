@@ -2,7 +2,7 @@ import React, { Component, useState } from 'react';
 import ReactPaginate from 'react-paginate'
 import SaibaMais from '../SaibaMais'
 import { Container, Info, Tabela, Title, Pesquisa, Input  } from './styles';
-
+import axios from 'axios'
 
 
 
@@ -62,6 +62,9 @@ export class Tabela_Registros extends Component {
   getData() {
 
     //Aqui vai o fetch para a api pegar os registros no banco de dados
+
+    // axios.get() 
+
     var data = [
       {
         nomedarequisicao : 'qualquer coisa C#',
@@ -79,216 +82,6 @@ export class Tabela_Registros extends Component {
         observacao: 'Vou levar a apostila ai a tarde',
         acabamento: ' Encadernamento com espiral, Capa em pvc, frente e verso'
       },
-      {
-        nomedarequisicao : 'qualquer coisa C#',
-        nomedosolicitante: 'Danilo',
-        departamento: 'Informatica',
-        cc: '20150102',
-        arquivo: 'apostila.pdf',
-        copias: 30,
-        paginas: 30,
-        totalpaginas: 900,
-        coordenador: 'Sergio',
-        avaliado: 'Nao',
-        data: '26/11/2020',
-        dataentrega: '04/12/2020',
-        observacao: 'Vou levar a apostila ai a tarde',
-        acabamento: ' Encadernamento com espiral, Capa em pvc, frente e verso'
-      },
-      {
-        nomedarequisicao : 'qualquer coisa C#',
-        nomedosolicitante: 'Danilo',
-        departamento: 'Informatica',
-        cc: '20150102',
-        arquivo: 'apostila.pdf',
-        copias: 30,
-        paginas: 30,
-        totalpaginas: 900,
-        coordenador: 'Sergio',
-        avaliado: 'Nao',
-        data: '23/11/2020',
-        dataentrega: '04/12/2020',
-        observacao: 'Vou levar a apostila ai a tarde',
-        acabamento: ' Encadernamento com espiral, Capa em pvc, frente e verso'
-      },
-      {
-        nomedarequisicao : 'qualquer coisa C#',
-        nomedosolicitante: 'Milton',
-        departamento: 'Informatica',
-        cc: '20150102',
-        arquivo: 'apostila.pdf',
-        copias: 30,
-        paginas: 30,
-        totalpaginas: 900,
-        coordenador: 'Sergio',
-        avaliado: 'Nao',
-        data: '24/11/2020',
-        dataentrega: '04/12/2020',
-        observacao: 'Vou levar a apostila ai a tarde',
-        acabamento: ' Encadernamento com espiral, Capa em pvc, frente e verso'
-      },
-      {
-        nomedarequisicao : 'qualquer coisa C#',
-        nomedosolicitante: 'Atila',
-        departamento: 'Informatica',
-        cc: '20150102',
-        arquivo: 'apostila.pdf',
-        copias: 30,
-        paginas: 30,
-        totalpaginas: 900,
-        coordenador: 'Sergio',
-        avaliado: 'Nao',
-        data: '24/11/2020',
-        dataentrega: '04/12/2020',
-        observacao: 'Vou levar a apostila ai a tarde',
-        acabamento: ' Encadernamento com espiral, Capa em pvc, frente e verso'
-      },
-      {
-        nomedarequisicao : 'qualquer coisa C#',
-        nomedosolicitante: 'Atila',
-        departamento: 'Informatica',
-        cc: '20150102',
-        arquivo: 'apostila.pdf',
-        copias: 30,
-        paginas: 30,
-        totalpaginas: 900,
-        coordenador: 'Sergio',
-        avaliado: 'Nao',
-        data: '24/11/2020',
-        dataentrega: '04/12/2020',
-        observacao: 'Vou levar a apostila ai a tarde',
-        acabamento: ' Encadernamento com espiral, Capa em pvc, frente e verso'
-      },
-      {
-        nomedarequisicao : 'qualquer coisa C#',
-        nomedosolicitante: 'Atila',
-        departamento: 'Informatica',
-        cc: '20150102',
-        arquivo: 'apostila.pdf',
-        copias: 30,
-        paginas: 30,
-        totalpaginas: 900,
-        coordenador: 'Sergio',
-        avaliado: 'Nao',
-        data: '24/11/2020',
-        dataentrega: '04/12/2020',
-        observacao: 'Vou levar a apostila ai a tarde',
-        acabamento: ' Encadernamento com espiral, Capa em pvc, frente e verso'
-      },
-      {
-        nomedarequisicao : 'qualquer coisa C#',
-        nomedosolicitante: 'Atila',
-        departamento: 'Informatica',
-        cc: '20150102',
-        arquivo: 'apostila.pdf',
-        copias: 30,
-        paginas: 30,
-        totalpaginas: 900,
-        coordenador: 'Sergio',
-        avaliado: 'Nao',
-        data: '24/11/2020',
-        dataentrega: '04/12/2020',
-        observacao: 'Vou levar a apostila ai a tarde',
-        acabamento: ' Encadernamento com espiral, Capa em pvc, frente e verso'
-      },
-      {
-        nomedarequisicao : 'qualquer coisa C#',
-        nomedosolicitante: 'Atila',
-        departamento: 'Informatica',
-        cc: '20150102',
-        arquivo: 'apostila.pdf',
-        copias: 30,
-        paginas: 30,
-        totalpaginas: 900,
-        coordenador: 'Sergio',
-        avaliado: 'Nao',
-        data: '24/11/2020',
-        dataentrega: '04/12/2020',
-        observacao: 'Vou levar a apostila ai a tarde',
-        acabamento: ' Encadernamento com espiral, Capa em pvc, frente e verso'
-      },
-      {
-        nomedarequisicao : 'qualquer coisa C#',
-        nomedosolicitante: 'Atila',
-        departamento: 'Informatica',
-        cc: '20150102',
-        arquivo: 'apostila.pdf',
-        copias: 30,
-        paginas: 30,
-        totalpaginas: 900,
-        coordenador: 'Sergio',
-        avaliado: 'Nao',
-        data: '24/11/2020',
-        dataentrega: '04/12/2020',
-        observacao: 'Vou levar a apostila ai a tarde',
-        acabamento: ' Encadernamento com espiral, Capa em pvc, frente e verso'
-      },
-      {
-        nomedarequisicao : 'qualquer coisa C#',
-        nomedosolicitante: 'Atila',
-        departamento: 'Informatica',
-        cc: '20150102',
-        arquivo: 'apostila.pdf',
-        copias: 30,
-        paginas: 30,
-        totalpaginas: 900,
-        coordenador: 'Sergio',
-        avaliado: 'Nao',
-        data: '24/11/2020',
-        dataentrega: '04/12/2020',
-        observacao: 'Vou levar a apostila ai a tarde',
-        acabamento: ' Encadernamento com espiral, Capa em pvc, frente e verso'
-      },
-      {
-        nomedarequisicao : 'qualquer coisa C#',
-        nomedosolicitante: 'Atila',
-        departamento: 'Informatica',
-        cc: '20150102',
-        arquivo: 'apostila.pdf',
-        copias: 30,
-        paginas: 30,
-        totalpaginas: 900,
-        coordenador: 'Sergio',
-        avaliado: 'Nao',
-        data: '24/11/2020',
-        dataentrega: '04/12/2020',
-        observacao: 'Vou levar a apostila ai a tarde',
-        acabamento: ' Encadernamento com espiral, Capa em pvc, frente e verso'
-      },
-      {
-        nomedarequisicao : 'fdsfdsdfsdfdsf',
-        nomedosolicitante: 'Atila',
-        departamento: 'Informatica',
-        cc: '20150102',
-        arquivo: 'apostila.pdf',
-        copias: 30,
-        paginas: 30,
-        totalpaginas: 900,
-        coordenador: 'Sergio',
-        avaliado: 'Nao',
-        data: '24/11/2020',
-        dataentrega: '04/12/2020',
-        observacao: 'Vou levar a apostila ai a tarde',
-        acabamento: ' Encadernamento com espiral, Capa em pvc, frente e verso'
-      },
-      {
-        nomedarequisicao : 'teste',
-        nomedosolicitante: 'Atila',
-        departamento: 'Informatica',
-        cc: '20150102',
-        arquivo: 'apostila.pdf',
-        copias: 30,
-        paginas: 30,
-        totalpaginas: 900,
-        coordenador: 'Sergio',
-        avaliado: 'Nao',
-        data: '24/11/2020',
-        dataentrega: '04/12/2020',
-        observacao: 'Vou levar a apostila ai a tarde',
-        acabamento: ' Encadernamento com espiral, Capa em pvc, frente e verso'
-      },
-
-      
     ]
 
     // slice = de quanto a quanto sera exibido na tela
