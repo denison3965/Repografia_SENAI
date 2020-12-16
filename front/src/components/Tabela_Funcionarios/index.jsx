@@ -6,6 +6,7 @@ import IconExcluir from '../../assets/img/excluir.png'
 import IconSenha from '../../assets/img/senha.png'
 import IconCaneta from '../../assets/img/caneta.png'
 import axios from 'axios'
+import Select from 'react-select'
 
 export class Tabela_Funcionarios extends Component {
 
@@ -17,7 +18,7 @@ export class Tabela_Funcionarios extends Component {
       offset: 0,
       tableData: [],
       orgtableData: [],
-      perPage: 5,
+      perPage: 15,
       currentPage: 0,
       search: '',
       UserParaEditar: '',
@@ -33,7 +34,14 @@ export class Tabela_Funcionarios extends Component {
       UserNif: '',
       UserTelefone: '',
       UserEmail: '',
-      UserAdm: ''
+      UserAdm: '',
+      IdCargo: '',
+
+      OpitionsCargo: [],
+
+      showMenssage: false,
+      menssage: ''
+
 
 
     }
@@ -73,6 +81,21 @@ export class Tabela_Funcionarios extends Component {
   componentDidMount() {
     this.getData();
 
+    //Pegando os cargos para listar
+    axios.get("http://localhost:3000/v1/pegar-cargos").then(async (res) => {
+      const dados = res.data
+
+      const options = dados.map(d => ({
+        "value": d.id_cargo,
+        "label": d.nome_cargo
+      }))
+
+      this.setState({
+        OpitionsCargo: options
+      })
+
+    })
+
   }
 
   getData() {
@@ -84,6 +107,7 @@ export class Tabela_Funcionarios extends Component {
 
         //Retirando todos os usuarios inativos e deixando apenas os ativos para serem listados
         let infoArray = res.data
+        console.log(infoArray)
 
         let userInativos = infoArray.filter((elemnt) => {
 
@@ -171,6 +195,12 @@ export class Tabela_Funcionarios extends Component {
 
   handleEcluirUser(nif) {
     alert("Usuario" + nif + "Excluido com sucesso")
+
+    axios.put('http://localhost:3000/v1/excluirfuncionarios', {
+      nif: this.state.UserParaDeletar,
+    }).then((res) => {
+      console.log(res)
+    })
     // EXCLUIR AQUI !!!!!
   }
 
@@ -180,11 +210,106 @@ export class Tabela_Funcionarios extends Component {
   }
 
   handleEditUser(nif) {
-    alert("Usuario" + nif + "foi editado com sucesso")
 
+
+
+    axios.put('http://localhost:3000/v1/editar-funcionario', {
+
+      nome: this.state.UserName,
+      sobrenome: this.state.UserSobreNome,
+      id_cargo: this.state.UserCargo,
+      nifEditar: this.state.UserNif,
+      telefone: this.state.UserTelefone,
+      email: this.state.UserEmail,
+      administrativo: this.state.UserAdm,
+      nif: this.state.UserParaEditar,
+
+    }).then((res) => {
+      console.log(res)
+
+      this.setState({
+        showMenssage: true,
+        menssage: res.data
+      })
+    })
 
     // EDITAR AQUI AQUI !!!!!
   }
+
+  refreshPage(){ 
+    window.location.reload(); 
+  }
+
+  handleChangeCargo(e) {
+    this.setState({ IdCargo: e.value })
+  }
+
+  handleChangeUserName(e) {
+    this.setState({ UserName: e.target.value })
+  }
+
+  handleChangeUserSobrenome(e) {
+    this.setState({ UserSobreNome: e.target.value })
+  }
+
+  handleChangeUserCargo(e) {
+    console.log(e)
+    this.setState({ UserCargo: e.value })
+  }
+
+  handleChangeUserNifEdit(e) {
+    this.setState({ UserNif: e.target.value })
+  }
+
+  handleChangeUserNifEdit(e) {
+    this.setState({ UserNif: e.target.value })
+  }
+
+  handleChangeUserTelefone(e) {
+    this.setState({ UserTelefone: e.target.value })
+  }
+
+  handleChangeUserEmail(e) {
+    this.setState({ UserEmail: e.target.value })
+  }
+
+  handleChangeUserAdm(e) {
+    this.setState({ UserAdm: e.target.value })
+  }
+
+
+
+
+
+  handleResetarInputs(e) {
+
+
+
+
+    if (e.target !== e.currentTarget) {
+      return
+    }
+
+    if (e.target === e.currentTarget) {
+
+      this.myFormRef.reset();
+
+      this.setState({
+
+        UserName: '',
+        UserSobreNome: '',
+        UserCargo: '',
+        UserNif: '',
+        UserTelefone: '',
+        UserEmail: '',
+        UserAdm: ''
+      })
+
+
+
+    }
+  }
+
 
 
 
@@ -210,6 +335,7 @@ export class Tabela_Funcionarios extends Component {
           register.data_criacao.indexOf(this.state.search) !== -1
       }
     )
+
 
     return (
       <Container>
@@ -271,68 +397,81 @@ export class Tabela_Funcionarios extends Component {
 
 
         {/* Modal Ação  */}
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
+        <div class="modal fade" onClick={e => this.handleResetarInputs(e)} id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document" >
+            <div class="modal-content" >
               <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Editar Usuário</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
+                <button onClick={e => this.handleResetarInputs(e)} type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true"  >&times;</span>
                 </button>
               </div>
               <div class="modal-body">
-                <div className="nome">
-                  <form class="form-inline" style={{ margin: "40px" }}>
+                <form ref={(el) => this.myFormRef = el} className="nome">
+                  <div class="form-inline" style={{ margin: "40px" }}>
                     <div class="form-group">
-                      <label style={{ marginRight: "30px" }} for="inputPassword6">Editar Nome:      </label>
-                      <input style={{ width: "200px" }} id="inputPassword6" defaultValue={this.state.UserName} class="form-control mx-sm-3" />
+                      <label style={{ marginRight: "30px" }} for="nomeUser">Editar Nome:      </label>
+                      <input style={{ width: "200px" }} id="nomeUser" defaultValue={this.state.UserName} onChange={(e) => { this.handleChangeUserName(e) }} class="form-control mx-sm-3" />
                     </div>
-                  </form>
+                  </div>
 
-                  <form class="form-inline" style={{ margin: "40px" }}>
+                  <div class="form-inline" style={{ margin: "40px" }}>
                     <div class="form-group">
-                      <label style={{ marginRight: "30px" }} for="inputPassword6">Sobrenome:        </label>
-                      <input style={{ width: "200px" }} id="inputPassword6" defaultValue={this.state.UserSobreNome} class="form-control mx-sm-3" />
+                      <label style={{ marginRight: "30px" }} for="sobrenomeUser">Sobrenome:        </label>
+                      <input style={{ width: "200px" }} id="sobrenomeUser" defaultValue={this.state.UserSobreNome} onChange={(e) => { this.handleChangeUserSobrenome(e) }} class="form-control mx-sm-3" />
                     </div>
-                  </form>
-                  
-                  <form class="form-inline" style={{ margin: "40px" }}>
+                  </div>
+
+                  <div class="form-inline" style={{ margin: "40px" }}>
                     <div class="form-group">
                       <label style={{ marginRight: "30px" }} for="inputPassword6">Editar Cargo:     </label>
-                      <select id="inputStateCargo" class="form-control">
-                        <option >Instrutor de ensino II</option>
-                        <option>Instrutor de ensino I</option>
-                      </select>
+                      <div style={{ width: 250 }}>
+                        <Select style={{ width: "200px" }} options={this.state.OpitionsCargo}
+                          onChange={
+                            (e) => {
+                              this.handleChangeCargo(this)
+                              this.handleChangeUserCargo(e)
+                            }} />
+
+                      </div>
                     </div>
-                  </form>
-                  <form class="form-inline" style={{ margin: "40px" }}>
+                  </div>
+                  <div class="form-inline" style={{ margin: "40px" }}>
                     <div class="form-group">
-                      <label style={{ marginRight: "45px" }} for="inputPassword6">Editar NIF:      </label>
-                      <input style={{ width: "200px" }} id="inputPassword6" class="form-control mx-sm-3" defaultValue={this.state.UserNif} />
+                      <label style={{ marginRight: "45px" }} for="nifUser">Editar NIF:      </label>
+                      <input style={{ width: "200px" }} id="nifUser" class="form-control mx-sm-3" onChange={(e) => { this.handleChangeUserNifEdit(e) }} defaultValue={this.state.UserNif} />
                     </div>
-                  </form>
-                  <form class="form-inline" style={{ margin: "40px" }}>
+                  </div>
+                  <div class="form-inline" style={{ margin: "40px" }}>
                     <div class="form-group">
-                      <label style={{ marginRight: "13px" }} for="inputPassword6">Editar Telefone:      </label>
-                      <input style={{ width: "200px" }} id="inputPassword6" class="form-control mx-sm-3" defaultValue={this.state.UserTelefone}/>
+                      <label style={{ marginRight: "13px" }} for="telefoneUser">Editar Telefone:      </label>
+                      <input style={{ width: "200px" }} id="telefoneUser" class="form-control mx-sm-3" onChange={(e) => { this.handleChangeUserTelefone(e) }} defaultValue={this.state.UserTelefone} />
                     </div>
-                  </form>
-                  <form class="form-inline" style={{ margin: "40px" }}>
+                  </div>
+                  <div class="form-inline" style={{ margin: "40px" }}>
                     <div class="form-group">
-                      <label style={{ marginRight: "13px" }} for="inputPassword6">Editar Email:      </label>
-                      <input style={{ width: "200px" }} id="inputPassword6" class="form-control mx-sm-3" defaultValue={this.state.UserEmail} />
+                      <label style={{ marginRight: "13px" }} for="emailUser">Editar Email:      </label>
+                      <input style={{ width: "200px" }} id="emailUser" class="form-control mx-sm-3" onChange={(e) => { this.handleChangeUserEmail(e) }} defaultValue={this.state.UserEmail} />
                     </div>
-                  </form>
-                  <form class="form-inline" style={{ margin: "40px" }}>
+                  </div>
+                  <div class="form-inline" style={{ margin: "40px" }}>
                     <div class="form-group col-md-6">
                       <label for="inputState">O usuario tera acesso administartivo ?</label>
-                      <select id="inputState" class="form-control">
-                        <option selected={this.state.UserAdm == 'nao'?true:false}>nao</option>
-                        <option selected={this.state.UserAdm == 'nao'?false:true}>sim</option>
+                      <select id="inputState" class="form-control" onChange={(e) => { this.handleChangeUserAdm(e) }}>
+                        <option selected={this.state.UserAdm == 'nao' ? true : false}>nao</option>
+                        <option selected={this.state.UserAdm == 'nao' ? false : true}>sim</option>
                       </select>
                     </div>
-                  </form>
-                </div>
+                  </div>
+                  <div class="form-inline" style={{ margin: "40px" }}>
+                    {this.state.showMenssage == true ?
+                      <div class="alert alert-success" role="alert">
+                        {this.state.menssage} <br></br>
+                        <button type="button" onClick={() => this.refreshPage()} class="btn btn-primary">Atualizar página</button>
+                      </div> : <></>}
+
+                  </div>
+                </form>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-primary" onClick={() => this.handleEditUser(this.state.UserParaEditar)}>Alterar Usuário</button>
@@ -376,7 +515,7 @@ export class Tabela_Funcionarios extends Component {
                     <td>{element.nif}</td>
                     <td>{element.nome}</td>
                     <td>{element.sobrenome}</td>
-                    <td>{element.cargo}</td>
+                    <td>{element.nome_cargo}</td>
                     <td>{element.email}</td>
                     <td>{element.telefone}</td>
                     <td>{element.administrativo}</td>

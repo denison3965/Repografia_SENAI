@@ -37,12 +37,14 @@ function Cadastro() {
   const [sobrenome, setSobrenome] = useState()
   const [id_cargo, setId_cargo] = useState()
   const [nif, setNif] = useState()
-  const [telefone, setTelefone] = useState()
+  const [telefone, setTelefone] = useState(null)
   const [email, setEmail] = useState()
-  const [administrativo, setAdministrativo] = useState()
+  const [administrativo, setAdministrativo] = useState('nao')
   const [infoUser, setInfoUser] = useState({ nome: '', sobrenome: '' })
-  const [cargos, setCargos] = useState([1,2,3,4])
-  const [teste, useTeste] = useState([1,2,3,4])
+  const [cargos, setCargos] = useState([1, 2, 3, 4])
+  const [msg_error, setMsgError] = useState()
+  const [msg_acerto, setMsgAcerto] = useState()
+
 
   var now = new Date
 
@@ -58,7 +60,6 @@ function Cadastro() {
     data_criacao: (now.getDate() + "/" + now.getMonth() + "/" + now.getFullYear())
   }
 
-  console.log(params)
 
   useEffect(() => {
 
@@ -72,7 +73,6 @@ function Cadastro() {
     }).then((res) => {
 
       if (res.data[0].auth && res.data[0].adm === 'sim') {
-        console.log('Voce tem acesso como adiministrador')
         setShowPage(true)
 
 
@@ -88,18 +88,18 @@ function Cadastro() {
         })
 
         //Pegando os cargos para listar
-        axios.get("http://localhost:3000/v1/pegar-cargos").then(async(res) => {
+        axios.get("http://localhost:3000/v1/pegar-cargos").then(async (res) => {
           const dados = res.data
 
           const options = dados.map(d => ({
-            "value" : d.id_cargo,
-            "label" : d.nome
+            "value": d.id_cargo,
+            "label": d.nome_cargo
           }))
 
           setCargos(options)
-          
+
         })
-        
+
       }
       else {
         history.push("/")
@@ -109,115 +109,147 @@ function Cadastro() {
   }, [])
   //**Verificando Se o usuario esta autorizado para acessar essa pagina**
 
-  console.log(cargos)
 
   function enviarFormulario() {
     params = `nif=${params.nif}&nome=${params.nome}&sobrenome=${params.sobrenome}&email=${params.email}&data_criacao=${params.data_criacao}&senha=Senai115&administrativo=${params.administrativo}&situacao=ativo&telefone=${params.telefone}&id_cargo=${params.id_cargo}`
     axios.post('http://localhost:3000/v1/addfuncionarios', params).then(result => {
-      console.log(result.data)
 
-    })}
+      if (result.data == "OBS: Funcionario existente !!") {
+        setMsgAcerto(null)
+        setMsgError(result.data)
+      } else {
+        setMsgError(null)
+        setMsgAcerto(result.data)
+      }
+    }).catch((err) => {
+      console.log(err)
+    })
 
-    return (
-
-      <div>
-        {
-          showPage
-            ? <Container>
-              <Nav_Header>
-                <Header />
-              </Nav_Header>
-
-              <Area_Cadastro>
-                <div className="User_Box_Info_Area">
-                  <User_Box_Info nome={infoUser.nome} sobrenome={infoUser.sobrenome} />
-                  <hr></hr>
-
-                  <Navegation>
-                    <ul>
-                      <Link to="/funcionarios-cadastrados">
-                        <li>Funcionários cadastrados</li>
-                      </Link>
-
-                      <li>/</li>
-
-                      <Link>
-                        <li>Cadastro</li>
-                      </Link>
-
-
-                    </ul>
-                  </Navegation>
-                </div>
-
-                <div className="container_cadastro">
-                  <div className="top_info">
-                    <img src={AddIcon} alt="pessoa" style={{ width: 50, height: 50 }} />
-                    <h2>Cadastro</h2>
-                  </div>
-
-                  <form action="/action_page.php">
-                    <div class="form-row">
-                      <div class="form-group col-md-6">
-                        <label for="inputEmail4">Nome</label>
-                        <input type="text" class="form-control" id="inputNome" placeholder="Ex: Pedro" required onChange={e => setNome(e.target.value)} />
-                      </div>
-                      <div  class="form-group col-md-6"> 
-                        <label  for="inputEmail4">Sobrenome</label>
-                        <input  type="text" class="form-control" id="inputNome" placeholder="Ex: Alves" required onChange={e => setSobrenome(e.target.value)} />
-                      </div>
-                      <div class="form-group col-md-6">
-                        <label for="inputPassword4">Cargo</label>
-                        <Select options={cargos} isSearchable required onChange={e => setId_cargo(e.value)}  />
-                      </div>
-                    </div>
-                    <div class="form-row">
-                      <div class="form-group col-md-6">
-                        <label for="inputEmail4">NIF</label>
-                        <input type="text" class="form-control" id="inputNif" placeholder="Ex: 0000000" required onChange={e => setNif(e.target.value)} />
-                      </div>
-                      <div class="form-group col-md-6">
-                        <label for="inputPassword4">Telefone</label>
-                        <input type="number" class="form-control" id="inputTelefone" placeholder="Ex: 11 00000-0000" onChange={e => setTelefone(e.target.value)} />
-                      </div>
-                    </div>
-                    <div class="form-row">
-                      <div class="form-group col-md-6">
-                        <label for="inputEmail4">Email</label>
-                        <input type="email" class="form-control" id="inputEmail4" placeholder="senai@senaisp.com.br" required onChange={e => setEmail(e.target.value)} />
-                      </div>
-
-                      <div class="form-group col-md-6">
-                        <label for="inputState">O usuario tera acesso administartivo ?</label>
-                        <select id="inputState" name="administrativo" class="form-control" required onChange={e => setAdministrativo(e.target.value)}>
-                          <option selected value="nao">não</option>  
-                          <option value="sim">sim</option>
-                        </select>
-                      </div>
-                    </div>
-                    <div className="area_botao">
-
-                      <button type="submit"  class="btn btn-success" onClick={enviarFormulario} >Cadastrar</button>
-                      <Link to="/funcionarios-cadastrados"><button type="button" class="btn btn-danger">Voltar</button></Link>
-
-                    </div>
-
-
-                  </form>
-                </div>
-
-              </Area_Cadastro>
-            </Container>
-
-            : <div>
-              <div style={loading}>
-                <img src={Loading} alt="loading"></img>
-              </div>
-            </div>
-        }
-      </div>
-
-    )
   }
 
+  return (
+
+    <div>
+      {
+        showPage
+          ? <Container>
+            <Nav_Header>
+              <Header />
+            </Nav_Header>
+
+            <Area_Cadastro>
+              <div className="User_Box_Info_Area">
+                <User_Box_Info nome={infoUser.nome} sobrenome={infoUser.sobrenome} />
+                <hr></hr>
+
+                <Navegation>
+                  <ul>
+                    <Link to="/funcionarios-cadastrados">
+                      <li>Funcionários cadastrados</li>
+                    </Link>
+
+                    <li>/</li>
+
+                    <Link>
+                      <li>Cadastro</li>
+                    </Link>
+
+
+                  </ul>
+                </Navegation>
+              </div>
+
+              <div className="container_cadastro">
+                <div className="top_info">
+                  <img src={AddIcon} alt="pessoa" style={{ width: 50, height: 50 }} />
+                  <h2>Cadastro</h2>
+                </div>
+
+                <form class="needs-validation" novalidate>
+                  <div class="form-row">
+                    <div class="form-group col-md-6">
+                      <label for="inputEmail4">Nome</label>
+                      <input type="text" class="form-control" id="inputNome" placeholder="Ex: Pedro" required onChange={e => setNome(e.target.value)} />
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label for="inputEmail4">Sobrenome</label>
+                      <input type="text" class="form-control" id="inputNome" placeholder="Ex: Alves" required onChange={e => setSobrenome(e.target.value)} />
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label for="inputPassword4">Cargo</label>
+                      <Select options={cargos} isSearchable required onChange={e => setId_cargo(e.value)} />
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group col-md-6">
+                      <label for="inputEmail4">NIF</label>
+                      <input type="text" class="form-control" id="inputNif" placeholder="Ex: 0000000" required onChange={e => setNif(e.target.value)} />
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label for="inputPassword4">Telefone</label>
+                      <input type="number" class="form-control" id="inputTelefone" placeholder="Ex: 11 00000-0000" required onChange={e => setTelefone(e.target.value)} />
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group col-md-6">
+                      <label for="inputEmail4">Email</label>
+                      <input type="email" class="form-control" id="inputEmail4" placeholder="senai@senaisp.com.br" required onChange={e => setEmail(e.target.value)} />
+                    </div>
+
+                    <div class="form-group col-md-6">
+                      <label for="inputState">O usuario tera acesso administartivo ?</label>
+                      <select id="inputState" name="administrativo" class="form-control" required onChange={e => setAdministrativo(e.target.value)}>
+                        <option selected value="nao">não</option>
+                        <option value="sim">sim</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div className="area_botao">
+
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal" onClick={enviarFormulario} >Cadastrar</button>
+                    <Link to="/funcionarios-cadastrados"><button type="button" class="btn btn-danger">Voltar</button></Link>
+                  </div>
+
+
+                  {/* Modal */}
+                  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel"></h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <div>
+                            {msg_error != null ? <div className="alert alert-danger">{msg_error} </div> : null}
+                            {msg_acerto != null ? <div className="alert alert-success">{msg_acerto} </div> : null}
+                          </div>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Sair</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+
+            </Area_Cadastro>
+          </Container>
+
+          : <div>
+            <div style={loading}>
+              <img src={Loading} alt="loading"></img>
+            </div>
+          </div>
+      }
+    </div>
+
+  )
+}
+
 export default Cadastro
+
+
