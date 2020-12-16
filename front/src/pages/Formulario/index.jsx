@@ -264,9 +264,13 @@ function Formulario() {
         console.log(data)
 
         axios.post('http://localhost:3000/v1/add-requisicao', data)
-            .then((res) => console.log(res))
-            .catch((err) => console.log(err))
+            .then((res) => {
 
+                console.log(res)
+                
+            }).catch((err) => {
+                console.log(err)
+            })
     }
 
 
@@ -276,7 +280,7 @@ function Formulario() {
                 showPage
                     ? <Container>
                         <Header />
-                        <h3 className="titulo_do_formulario" onClick={EnviarFormulario}>Solicitação de Serviços Reprográficos</h3>
+                        <h3 className="titulo_do_formulario">Solicitação de Serviços Reprográficos</h3>
                         <div className="div_pai--button">
                             <Link to="/"><div className="sair--button"><p>Sair</p></div> </Link>
                         </div>
@@ -527,7 +531,7 @@ function Formulario() {
                                 <input type="file" className="cursor-pointer input_exemplar" id="attachment" name="attachment" onChange={onChangeHandler} />
                             </div>
 
-                            <button style={{width: "150px"}} type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">Enviar</button>
+                            <button style={{width: "150px"}} onClick={EnviarFormulario} type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">Enviar</button>
 
 
                             {/* Modal  */}
@@ -541,10 +545,10 @@ function Formulario() {
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            {/* <div>
+                                            <div>
                                                 {msg_error != null ? <div className="alert alert-danger">{msg_error} </div> : null}
                                                 {msg_acerto != null ? <div className="alert alert-success">{msg_acerto} </div> : null}
-                                            </div> */}
+                                            </div>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Sair</button>
