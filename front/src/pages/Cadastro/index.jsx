@@ -42,9 +42,9 @@ function Cadastro() {
   const [administrativo, setAdministrativo] = useState('nao')
   const [infoUser, setInfoUser] = useState({ nome: '', sobrenome: '' })
   const [cargos, setCargos] = useState([1, 2, 3, 4])
-  const [teste, useTeste] = useState([1, 2, 3, 4])
   const [msg_error, setMsgError] = useState()
   const [msg_acerto, setMsgAcerto] = useState()
+
 
   var now = new Date
 
@@ -60,7 +60,6 @@ function Cadastro() {
     data_criacao: (now.getDate() + "/" + now.getMonth() + "/" + now.getFullYear())
   }
 
-  console.log(params)
 
   useEffect(() => {
 
@@ -93,8 +92,8 @@ function Cadastro() {
           const dados = res.data
 
           const options = dados.map(d => ({
-            "value" : d.id_cargo,
-            "label" : d.nome_cargo
+            "value": d.id_cargo,
+            "label": d.nome_cargo
           }))
 
           setCargos(options)
@@ -108,34 +107,24 @@ function Cadastro() {
 
     }).catch(() => { history.push("/") })
   }, [])
-  //**Verificando Se o usuario esta autorizado para acessar essa pagina*//
+  //**Verificando Se o usuario esta autorizado para acessar essa pagina**
+
 
   function enviarFormulario() {
-
-
     params = `nif=${params.nif}&nome=${params.nome}&sobrenome=${params.sobrenome}&email=${params.email}&data_criacao=${params.data_criacao}&senha=Senai115&administrativo=${params.administrativo}&situacao=ativo&telefone=${params.telefone}&id_cargo=${params.id_cargo}`
     axios.post('http://localhost:3000/v1/addfuncionarios', params).then(result => {
-      console.log(result.data)
 
-    })
-  }
-
-  function validarNif() {
-    axios.post('http://localhost:3000/v1/addfuncionarios', {
-      nif: nif
-    })
-    .then((res) => {
-      if (res.data == "Ops!!") {
-         setMsgError(null)
-         setMsgAcerto(res.data)
+      if (result.data == "OBS: Funcionario existente !!") {
+        setMsgAcerto(null)
+        setMsgError(result.data)
       } else {
-         setMsgAcerto(null)
-         setMsgError(res.data)
+        setMsgError(null)
+        setMsgAcerto(result.data)
       }
-   })
-   .catch((err) => {
+    }).catch((err) => {
       console.log(err)
-   })
+    })
+
   }
 
   return (
@@ -176,7 +165,7 @@ function Cadastro() {
                   <h2>Cadastro</h2>
                 </div>
 
-                <form >
+                <form class="needs-validation" novalidate>
                   <div class="form-row">
                     <div class="form-group col-md-6">
                       <label for="inputEmail4">Nome</label>
@@ -195,11 +184,10 @@ function Cadastro() {
                     <div class="form-group col-md-6">
                       <label for="inputEmail4">NIF</label>
                       <input type="text" class="form-control" id="inputNif" placeholder="Ex: 0000000" required onChange={e => setNif(e.target.value)} />
-                      <p>{nif}</p>
                     </div>
                     <div class="form-group col-md-6">
                       <label for="inputPassword4">Telefone</label>
-                      <input type="number" class="form-control" id="inputTelefone" placeholder="Ex: 11 00000-0000" onChange={e => setTelefone(e.target.value)} />
+                      <input type="number" class="form-control" id="inputTelefone" placeholder="Ex: 11 00000-0000" required onChange={e => setTelefone(e.target.value)} />
                     </div>
                   </div>
                   <div class="form-row">
@@ -217,16 +205,18 @@ function Cadastro() {
                     </div>
                   </div>
                   <div className="area_botao">
-                    <button type="submit" class="btn btn-success" data-toggle="modal" data-target="#exampleModal" onClick={enviarFormulario, validarNif} >Cadastrar</button>
+
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal" onClick={enviarFormulario} >Cadastrar</button>
                     <Link to="/funcionarios-cadastrados"><button type="button" class="btn btn-danger">Voltar</button></Link>
                   </div>
+
 
                   {/* Modal */}
                   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                       <div class="modal-content">
                         <div class="modal-header">
-                          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                          <h5 class="modal-title" id="exampleModalLabel"></h5>
                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                           </button>
@@ -238,8 +228,7 @@ function Cadastro() {
                           </div>
                         </div>
                         <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                          <button type="button" class="btn btn-primary">Save changes</button>
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Sair</button>
                         </div>
                       </div>
                     </div>
@@ -262,3 +251,5 @@ function Cadastro() {
 }
 
 export default Cadastro
+
+
