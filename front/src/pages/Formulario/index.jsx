@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Container } from './styles';
 import Header from '../../components/Header';
-import Button from '../../components/Button'
 import IconCloud from '../../assets/img/iconcloud.png'
 import axios from 'axios'
 import { useHistory } from 'react-router-dom'
 import Loading from '../../assets/img/loading.gif'
 import Cookies from 'universal-cookie'
 import { Link } from 'react-router-dom'
+import Select from 'react-select'
 
 
 const cookies = new Cookies()
@@ -30,7 +30,17 @@ function Formulario() {
     //Verificando Se o usuario esta autorizado para acessar essa pagina
     const history = useHistory()
     const [showPage, setShowPage] = useState(false)
-    const [infoUser, setInfoUser] = useState({nome: '', sobrenome: ''})
+    const [infoUser, setInfoUser] = useState({ nome: '', sobrenome: '' })
+
+    //tratamento de errro 
+    const [msg_error, setMsgError] = useState()
+    const [msg_acerto, setMsgAcerto] = useState()
+
+
+    const [listaDepartamento, setListaDepartamento] = useState([])
+    const [optionsDepartamento, setOptionsDepartamento] = useState([]) 
+
+    const [fornecedor, setFornecedor] = useState([])
 
     useEffect(() => {
 
@@ -58,6 +68,25 @@ function Formulario() {
                     console.log(err)
                 })
 
+                //Pegando lista de departamento
+
+                axios.get('http://localhost:3000/v1/pegar-departamento').then((res) => {
+
+                    const options = res.data.map(d => ({
+                        "value" : d.id_departamento,
+                        "label" : d.nome_departamento
+                      }))
+
+
+                    setOptionsDepartamento(options)  
+                    setListaDepartamento(res.data)
+                })
+
+                //Pegando fornecedor
+                axios.get('http://localhost:3000/v1/pegar-fornecedor').then((res) => {
+                    
+                    setFornecedor(res.data[0])
+                })
             }
             else {
                 history.push("/")
@@ -72,7 +101,7 @@ function Formulario() {
     // Logica para pegar as checkBox que foram selecionadas
 
     //const array_nomes = ["2 Grampos a cavalo", "2 Grampos laterais", "Colorido", "Encadernação com espiral", "Frente e verso", "Reduzido", "preto e branco", "Capa em papel 150g/m2", "Capa em PVC"]
-    const array_nomes = [1,2,3,4,5,6,7,8,9]
+    const array_nomes = [1, 2, 3, 4, 5, 6, 7, 8, 9]
     let array_acabamento = []
     const [arrayAcabamento, setArrayAcabamento] = useState([])
 
@@ -125,11 +154,11 @@ function Formulario() {
     const [observacao, setObservacao] = useState();
     const [departamento, setDepartamento] = useState();
     const [responsavel, setResponsavel] = useState();
-    
 
-    function onChangeHandler(event){
-        
-        const uploadfile =  event.target.files[0];
+
+    function onChangeHandler(event) {
+
+        const uploadfile = event.target.files[0];
         console.log(uploadfile)
 
     }
@@ -188,7 +217,7 @@ function Formulario() {
         "dataEntrega": dataEntrega,
 
 
-        "fornecedor": "Copiadora Módulo LTDA",
+        "fornecedor": fornecedor.id_fornecedor,
         "numero": numeroReq,
         "nomeRequisicao": nomeReq,
         "paginas": paginas,
@@ -232,8 +261,6 @@ function Formulario() {
     }
 
     function EnviarFormulario() {
-
-
         console.log(data)
 
         axios.post('http://localhost:3000/v1/add-requisicao', data)
@@ -251,7 +278,7 @@ function Formulario() {
                         <Header />
                         <h3 className="titulo_do_formulario" onClick={EnviarFormulario}>Solicitação de Serviços Reprográficos</h3>
                         <div className="div_pai--button">
-                            <Link to="/"><div className="sair--button"><p>Sair</p></div> </Link>                           
+                            <Link to="/"><div className="sair--button"><p>Sair</p></div> </Link>
                         </div>
 
 
@@ -291,11 +318,11 @@ function Formulario() {
                                 <div className="div2_informacao">
                                     <div className="div2_p_input">
                                         <p>Fornecedor:</p>
-                                        <p className="p_resposta">Copiadora Módulo LTDA</p>
+                                        <p className="p_resposta">{fornecedor.nome_fornecedor}</p>
                                     </div>
                                     <div className="div2_p_input">
                                         <p>Número:</p>
-                                        <p className="p_resposta">2020-X</p>
+                                        <p className="p_resposta"></p>
                                     </div>
                                     <div className="div2_p_input">
                                         <p>Nome da requisição:</p>
@@ -335,17 +362,17 @@ function Formulario() {
                         </form>
 
                         <form className="form_direita">
-                            <div className="div_dropdown_form_direita">
-                                <select className="dropdown_form_direita" onChange={(e) => setDepartamento(e.target.value)}>
-                                    <option selected value="">Área de Atuação</option>
-                                    <option value="CT">CT</option>
-                                    <option value="CAI">CAI</option>
-                                    <option value="PC">PC</option>
-                                    <option value="CST">CST</option>
-                                    <option value="Pós Graduação">Pós Graduação</option>
-                                </select>
+                            <div  className="div_dropdown_form_direita">
+                                <div className="campo_select">
+                                    <Select style={{width : "500px"}} options={optionsDepartamento} isSearchable required onChange={(e) => setDepartamento(e.value)}  />
+                                </div>
+
                                 <div className="dropdown_form_direita">
-                                    <p>{departamento}</p>
+                                    <p>{listaDepartamento.map((element) => {
+                                        if (element.id_departamento == departamento){
+                                            return element.centro_custo
+                                        }
+                                    })}</p>
                                 </div>
                             </div>
 
@@ -418,24 +445,24 @@ function Formulario() {
                                     <div className="div_checkbox">
 
                                         <div className="custom-control custom-radio container">
-                                            <input type="radio" className="custom-control-input check_radio" id="radio1" name="groupOfDefaultRadios" value="A3" />
+                                            <input type="radio" className="custom-control-input check_radio" id="radio1" name="groupOfDefaultRadios" value={1} />
                                             <label className="custom-control-label" for="radio1"> <p className="p_radio">A3</p> </label>
                                         </div>
 
                                         <div className="custom-control custom-radio container">
-                                            <input type="radio" className="custom-control-input" id="radio2" name="groupOfDefaultRadios" value="A4" />
+                                            <input type="radio" className="custom-control-input" id="radio2" name="groupOfDefaultRadios" value={2} />
                                             <label className="custom-control-label" for="radio2"> <p className="p_radio">A4</p> </label>
                                         </div>
                                     </div>
 
                                     <div className="div_checkbox">
                                         <div className="custom-control custom-radio container">
-                                            <input type="radio" className="custom-control-input" id="radio3" name="groupOfDefaultRadios" value="A5" />
+                                            <input type="radio" className="custom-control-input" id="radio3" name="groupOfDefaultRadios" value={3} />
                                             <label className="custom-control-label" for="radio3"> <p className="p_radio">A5</p> </label>
                                         </div>
 
                                         <div className="custom-control custom-radio container">
-                                            <input type="radio" className="custom-control-input" id="radio4" name="groupOfDefaultRadios" value="Outros (colocar em OBS)" />
+                                            <input type="radio" className="custom-control-input" id="radio4" name="groupOfDefaultRadios" value={4} />
                                             <label className="custom-control-label" for="radio4"> <p className="p_radio">Outros (colocar em OBS)</p> </label>
                                         </div>
 
@@ -449,24 +476,24 @@ function Formulario() {
                                     <div className="div_checkbox">
 
                                         <div className="custom-control custom-radio container">
-                                            <input type="radio" className="custom-control-input" id="radio5" name="groupOfDefaultRadios2" value="Zipdrive" />
+                                            <input type="radio" className="custom-control-input" id="radio5" name="groupOfDefaultRadios2" value={1} />
                                             <label className="custom-control-label" for="radio5"> <p className="p_radio">Zipdrive</p> </label>
                                         </div>
 
                                         <div className="custom-control custom-radio container">
-                                            <input type="radio" className="custom-control-input" id="radio6" name="groupOfDefaultRadios2" value="Papel" />
+                                            <input type="radio" className="custom-control-input" id="radio6" name="groupOfDefaultRadios2" value={2} />
                                             <label className="custom-control-label" for="radio6"> <p className="p_radio">Papel</p> </label>
                                         </div>
                                     </div>
 
                                     <div className="div_checkbox">
                                         <div className="custom-control custom-radio container">
-                                            <input type="radio" className="custom-control-input" id="radio7" name="groupOfDefaultRadios2" value="E-mail" />
+                                            <input type="radio" className="custom-control-input" id="radio7" name="groupOfDefaultRadios2" value={3} />
                                             <label className="custom-control-label" for="radio7"> <p className="p_radio">E-mail</p> </label>
                                         </div>
 
                                         <div className="custom-control custom-radio container">
-                                            <input type="radio" className="custom-control-input" id="radio8" name="groupOfDefaultRadios2" value="Outros (colocar em OBS)" />
+                                            <input type="radio" className="custom-control-input" id="radio8" name="groupOfDefaultRadios2" value={4} />
                                             <label className="custom-control-label" for="radio8"> <p className="p_radio">Outros (colocar em OBS)</p> </label>
                                         </div>
 
@@ -500,7 +527,31 @@ function Formulario() {
                                 <input type="file" className="cursor-pointer input_exemplar" id="attachment" name="attachment" onChange={onChangeHandler} />
                             </div>
 
-                            {<Button fontStyle="italic" fontSize="1.8vw" title="Enviar" width="15vw" />}
+                            <button style={{width: "150px"}} type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">Enviar</button>
+
+
+                            {/* Modal  */}
+                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel"></h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            {/* <div>
+                                                {msg_error != null ? <div className="alert alert-danger">{msg_error} </div> : null}
+                                                {msg_acerto != null ? <div className="alert alert-success">{msg_acerto} </div> : null}
+                                            </div> */}
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Sair</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
                         </form>
 

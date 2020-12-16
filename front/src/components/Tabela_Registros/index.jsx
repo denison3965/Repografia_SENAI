@@ -1,8 +1,8 @@
 import React, { Component, useState } from 'react';
 import ReactPaginate from 'react-paginate'
 import SaibaMais from '../SaibaMais'
-import { Container, Info, Tabela, Title, Pesquisa, Input  } from './styles';
-
+import { Container, Info, Tabela, Title, Pesquisa, Input } from './styles';
+import axios from 'axios'
 
 
 
@@ -12,11 +12,11 @@ export class Tabela_Registros extends Component {
   constructor(props) {
     super(props)
 
-    this.state ={
+    this.state = {
       offset: 0,
       tableData: [],
       orgtableData: [],
-      perPage:5,
+      perPage: 5,
       currentPage: 0,
       search: '',
 
@@ -25,7 +25,7 @@ export class Tabela_Registros extends Component {
 
   }
 
-  
+
 
   //funcao para fazer a ppaginacao funciona
   handlePageClick = (e) => {
@@ -33,28 +33,28 @@ export class Tabela_Registros extends Component {
     const offset = selectedPage * this.state.perPage;
 
     this.setState({
-        currentPage: selectedPage,
-        offset: offset
+      currentPage: selectedPage,
+      offset: offset
     }, () => {
-        this.loadMoreData()
+      this.loadMoreData()
     });
 
   };
 
   //Caregar mais pessoas quando mudas de paginacao
   loadMoreData() {
-		const data = this.state.orgtableData;
-		
-		const slice = data.slice(this.state.offset, this.state.offset + this.state.perPage)
-		this.setState({
-			pageCount: Math.ceil(data.length / this.state.perPage),
-			tableData:slice
-		})
-	
-    }
+    const data = this.state.orgtableData;
+
+    const slice = data.slice(this.state.offset, this.state.offset + this.state.perPage)
+    this.setState({
+      pageCount: Math.ceil(data.length / this.state.perPage),
+      tableData: slice
+    })
+
+  }
 
 
-  componentDidMount(){
+  componentDidMount() {
     this.getData();
 
   }
@@ -62,289 +62,85 @@ export class Tabela_Registros extends Component {
   getData() {
 
     //Aqui vai o fetch para a api pegar os registros no banco de dados
-    var data = [
-      {
-        nomedarequisicao : 'qualquer coisa C#',
-        nomedosolicitante: 'Atila',
-        departamento: 'Informatica',
-        cc: '20150102',
-        arquivo: 'apostila.pdf',
-        copias: 30,
-        paginas: 30,
-        totalpaginas: 900,
-        coordenador: 'Sergio',
-        avaliado: 'Nao',
-        data: '21/11/2020',
-        dataentrega: '04/12/2020',
-        observacao: 'Vou levar a apostila ai a tarde',
-        acabamento: ' Encadernamento com espiral, Capa em pvc, frente e verso'
-      },
-      {
-        nomedarequisicao : 'qualquer coisa C#',
-        nomedosolicitante: 'Danilo',
-        departamento: 'Informatica',
-        cc: '20150102',
-        arquivo: 'apostila.pdf',
-        copias: 30,
-        paginas: 30,
-        totalpaginas: 900,
-        coordenador: 'Sergio',
-        avaliado: 'Nao',
-        data: '26/11/2020',
-        dataentrega: '04/12/2020',
-        observacao: 'Vou levar a apostila ai a tarde',
-        acabamento: ' Encadernamento com espiral, Capa em pvc, frente e verso'
-      },
-      {
-        nomedarequisicao : 'qualquer coisa C#',
-        nomedosolicitante: 'Danilo',
-        departamento: 'Informatica',
-        cc: '20150102',
-        arquivo: 'apostila.pdf',
-        copias: 30,
-        paginas: 30,
-        totalpaginas: 900,
-        coordenador: 'Sergio',
-        avaliado: 'Nao',
-        data: '23/11/2020',
-        dataentrega: '04/12/2020',
-        observacao: 'Vou levar a apostila ai a tarde',
-        acabamento: ' Encadernamento com espiral, Capa em pvc, frente e verso'
-      },
-      {
-        nomedarequisicao : 'qualquer coisa C#',
-        nomedosolicitante: 'Milton',
-        departamento: 'Informatica',
-        cc: '20150102',
-        arquivo: 'apostila.pdf',
-        copias: 30,
-        paginas: 30,
-        totalpaginas: 900,
-        coordenador: 'Sergio',
-        avaliado: 'Nao',
-        data: '24/11/2020',
-        dataentrega: '04/12/2020',
-        observacao: 'Vou levar a apostila ai a tarde',
-        acabamento: ' Encadernamento com espiral, Capa em pvc, frente e verso'
-      },
-      {
-        nomedarequisicao : 'qualquer coisa C#',
-        nomedosolicitante: 'Atila',
-        departamento: 'Informatica',
-        cc: '20150102',
-        arquivo: 'apostila.pdf',
-        copias: 30,
-        paginas: 30,
-        totalpaginas: 900,
-        coordenador: 'Sergio',
-        avaliado: 'Nao',
-        data: '24/11/2020',
-        dataentrega: '04/12/2020',
-        observacao: 'Vou levar a apostila ai a tarde',
-        acabamento: ' Encadernamento com espiral, Capa em pvc, frente e verso'
-      },
-      {
-        nomedarequisicao : 'qualquer coisa C#',
-        nomedosolicitante: 'Atila',
-        departamento: 'Informatica',
-        cc: '20150102',
-        arquivo: 'apostila.pdf',
-        copias: 30,
-        paginas: 30,
-        totalpaginas: 900,
-        coordenador: 'Sergio',
-        avaliado: 'Nao',
-        data: '24/11/2020',
-        dataentrega: '04/12/2020',
-        observacao: 'Vou levar a apostila ai a tarde',
-        acabamento: ' Encadernamento com espiral, Capa em pvc, frente e verso'
-      },
-      {
-        nomedarequisicao : 'qualquer coisa C#',
-        nomedosolicitante: 'Atila',
-        departamento: 'Informatica',
-        cc: '20150102',
-        arquivo: 'apostila.pdf',
-        copias: 30,
-        paginas: 30,
-        totalpaginas: 900,
-        coordenador: 'Sergio',
-        avaliado: 'Nao',
-        data: '24/11/2020',
-        dataentrega: '04/12/2020',
-        observacao: 'Vou levar a apostila ai a tarde',
-        acabamento: ' Encadernamento com espiral, Capa em pvc, frente e verso'
-      },
-      {
-        nomedarequisicao : 'qualquer coisa C#',
-        nomedosolicitante: 'Atila',
-        departamento: 'Informatica',
-        cc: '20150102',
-        arquivo: 'apostila.pdf',
-        copias: 30,
-        paginas: 30,
-        totalpaginas: 900,
-        coordenador: 'Sergio',
-        avaliado: 'Nao',
-        data: '24/11/2020',
-        dataentrega: '04/12/2020',
-        observacao: 'Vou levar a apostila ai a tarde',
-        acabamento: ' Encadernamento com espiral, Capa em pvc, frente e verso'
-      },
-      {
-        nomedarequisicao : 'qualquer coisa C#',
-        nomedosolicitante: 'Atila',
-        departamento: 'Informatica',
-        cc: '20150102',
-        arquivo: 'apostila.pdf',
-        copias: 30,
-        paginas: 30,
-        totalpaginas: 900,
-        coordenador: 'Sergio',
-        avaliado: 'Nao',
-        data: '24/11/2020',
-        dataentrega: '04/12/2020',
-        observacao: 'Vou levar a apostila ai a tarde',
-        acabamento: ' Encadernamento com espiral, Capa em pvc, frente e verso'
-      },
-      {
-        nomedarequisicao : 'qualquer coisa C#',
-        nomedosolicitante: 'Atila',
-        departamento: 'Informatica',
-        cc: '20150102',
-        arquivo: 'apostila.pdf',
-        copias: 30,
-        paginas: 30,
-        totalpaginas: 900,
-        coordenador: 'Sergio',
-        avaliado: 'Nao',
-        data: '24/11/2020',
-        dataentrega: '04/12/2020',
-        observacao: 'Vou levar a apostila ai a tarde',
-        acabamento: ' Encadernamento com espiral, Capa em pvc, frente e verso'
-      },
-      {
-        nomedarequisicao : 'qualquer coisa C#',
-        nomedosolicitante: 'Atila',
-        departamento: 'Informatica',
-        cc: '20150102',
-        arquivo: 'apostila.pdf',
-        copias: 30,
-        paginas: 30,
-        totalpaginas: 900,
-        coordenador: 'Sergio',
-        avaliado: 'Nao',
-        data: '24/11/2020',
-        dataentrega: '04/12/2020',
-        observacao: 'Vou levar a apostila ai a tarde',
-        acabamento: ' Encadernamento com espiral, Capa em pvc, frente e verso'
-      },
-      {
-        nomedarequisicao : 'qualquer coisa C#',
-        nomedosolicitante: 'Atila',
-        departamento: 'Informatica',
-        cc: '20150102',
-        arquivo: 'apostila.pdf',
-        copias: 30,
-        paginas: 30,
-        totalpaginas: 900,
-        coordenador: 'Sergio',
-        avaliado: 'Nao',
-        data: '24/11/2020',
-        dataentrega: '04/12/2020',
-        observacao: 'Vou levar a apostila ai a tarde',
-        acabamento: ' Encadernamento com espiral, Capa em pvc, frente e verso'
-      },
-      {
-        nomedarequisicao : 'fdsfdsdfsdfdsf',
-        nomedosolicitante: 'Atila',
-        departamento: 'Informatica',
-        cc: '20150102',
-        arquivo: 'apostila.pdf',
-        copias: 30,
-        paginas: 30,
-        totalpaginas: 900,
-        coordenador: 'Sergio',
-        avaliado: 'Nao',
-        data: '24/11/2020',
-        dataentrega: '04/12/2020',
-        observacao: 'Vou levar a apostila ai a tarde',
-        acabamento: ' Encadernamento com espiral, Capa em pvc, frente e verso'
-      },
-      {
-        nomedarequisicao : 'teste',
-        nomedosolicitante: 'Atila',
-        departamento: 'Informatica',
-        cc: '20150102',
-        arquivo: 'apostila.pdf',
-        copias: 30,
-        paginas: 30,
-        totalpaginas: 900,
-        coordenador: 'Sergio',
-        avaliado: 'Nao',
-        data: '24/11/2020',
-        dataentrega: '04/12/2020',
-        observacao: 'Vou levar a apostila ai a tarde',
-        acabamento: ' Encadernamento com espiral, Capa em pvc, frente e verso'
-      },
 
-      
-    ]
+    axios.get('http://localhost:3000/v1/pegar-requisicao').then((res) => {
+      let data_requisicao = res.data
 
-    // slice = de quanto a quanto sera exibido na tela
-    // slice = data.slice(15, 15 + 5) 
-    //slice = 20, ou seja na pagina ira commecar a listar pelo numero 20
-    var slice = data.slice(this.state.offset, this.state.offset + this.state.perPage)
-    console.log(slice)
+      // slice = de quanto a quanto sera exibido na tela
+      // slice = data.slice(15, 15 + 5) 
+      //slice = 20, ou seja na pagina ira commecar a listar pelo numero 20
+      var slice = data_requisicao.slice(this.state.offset, this.state.offset + this.state.perPage)
 
-    this.setState({
-      pageCount: Math.ceil(data.length / this.state.perPage),
-      orgtableData: data,
-      tableData: slice
+      this.setState({
+        pageCount: Math.ceil(data_requisicao.length / this.state.perPage),
+        orgtableData: data_requisicao,
+        tableData: slice
+      })
     })
 
-  }
- 
-  updateSearch(event) {
-    this.setState({search: event.target.value.substr(0,20)})
-  }
-  
+    // var data = [
+    //   {
+    //     nomedarequisicao : 'qualquer coisa C#',
+    //     nomedosolicitante: 'Atila',
+    //     departamento: 'Informatica',
+    //     cc: '20150102',
+    //     arquivo: 'apostila.pdf',
+    //     copias: 30,
+    //     paginas: 30,
+    //     totalpaginas: 900,
+    //     coordenador: 'Sergio',
+    //     avaliado: 'Nao',
+    //     data: '21/11/2020',
+    //     dataentrega: '04/12/2020',
+    //     observacao: 'Vou levar a apostila ai a tarde',
+    //     acabamento: ' Encadernamento com espiral, Capa em pvc, frente e verso'
+    //   },
+    // ]
 
-  render(){
+
+
+  }
+
+  updateSearch(event) {
+    this.setState({ search: event.target.value.substr(0, 20) })
+  }
+
+
+  render() {
 
     let filterRegister = this.state.tableData.filter(
       (register) => {
-        return register.nomedosolicitante.toLowerCase().indexOf(this.state.search) !== -1 ||
-               register.nomedosolicitante.indexOf(this.state.search) !== -1 ||
-               register.data.toLowerCase().indexOf(this.state.search) !== -1 ||
-               register.coordenador.toLowerCase().indexOf(this.state.search) !== -1 ||
-               register.coordenador.indexOf(this.state.search) !== -1 ||
-               register.departamento.toLowerCase().indexOf(this.state.search) !== -1 ||
-               register.departamento.indexOf(this.state.search) !== -1 ||
-               register.cc.toLowerCase().indexOf(this.state.search) !== -1 ||
-               register.avaliado.toLowerCase().indexOf(this.state.search) !== -1 ||
-               register.avaliado.indexOf(this.state.search) !== -1
-               
+        return register.nome.toLowerCase().indexOf(this.state.search) !== -1 ||
+          register.nome.indexOf(this.state.search) !== -1 ||
+          register.nome_requisicao.toLowerCase().indexOf(this.state.search) !== -1 ||
+          register.nome_requisicao.indexOf(this.state.search) !== -1 ||
+          register.data_envio.indexOf(this.state.search) !== -1 ||
+          register.data_entrega.indexOf(this.state.search) !== -1 ||
+          register.nome_departamento.toLowerCase().indexOf(this.state.search) !== -1 ||
+          register.nome_departamento.indexOf(this.state.search) !== -1 ||
+          register.centro_custo.toLowerCase().indexOf(this.state.search) !== -1 
+
       }
     )
 
-    return(
+    return (
       <Container>
 
         <Info>
           <Title>Registros</Title>
           <Pesquisa>
             <p>pesquisa:</p>
-            <Input 
-            value={this.state.search}
-            onChange={this.updateSearch.bind(this)}
-            placeholder="Ex: Danilo"/>  
+            <Input
+              value={this.state.search}
+              onChange={this.updateSearch.bind(this)}
+              placeholder="Ex: Danilo" />
           </Pesquisa>
         </Info>
         <Tabela>
           <table className="table table-striped">
             <thead>
               <tr>
+                <th scope="col"><strong>numero</strong></th>
                 <th scope="col"><strong>nome da requisicao</strong></th>
                 <th scope="col"><strong>solicitante</strong></th>
                 <th scope="col"><strong>departamento</strong></th>
@@ -352,56 +148,55 @@ export class Tabela_Registros extends Component {
                 <th scope="col"><strong>paginas</strong></th>
                 <th scope="col"><strong>cópias</strong></th>
                 <th scope="col"><strong>total de paginas</strong> </th>
-                <th scope="col"><strong>cordenador</strong></th>
-                <th scope="col"><strong>avaliado</strong></th>
                 <th scope="col"><strong>data do pedido</strong></th>
+                <th scope="col"><strong>data de entrega</strong></th>
                 <th scope="col"></th>
               </tr>
             </thead>
             <tbody>
-              
+
               {
                 filterRegister.map((element) => (
                   <tr>
-                    <td>{element.nomedarequisicao}</td>
-                    <td>{element.nomedosolicitante}</td>
-                    <td>{element.departamento}</td>
-                    <td>{element.cc}</td>
-                    <td>{element.paginas}</td>
-                    <td>{element.copias}</td>
-                    <td>{element.totalpaginas}</td>
-                    <td>{element.coordenador}</td>
-                    <td>{element.avaliado}</td>
-                    <td>{element.data}</td>
-                    <td><SaibaMais caminho="detalhes"data={element.nomedarequisicao}/></td>
-                    
+                    <td>{element.id_requisicao}</td>
+                    <td>{element.nome_requisicao}</td>
+                    <td>{element.nome}</td>
+                    <td>{element.nome_departamento}</td>
+                    <td>{element.centro_custo}</td>
+                    <td>{element.num_paginas}</td>
+                    <td>{element.num_copias}</td>
+                    <td>{element.total_paginas}</td>
+                    <td>{element.data_envio}</td>
+                    <td>{element.data_entrega}</td>
+                    <td><SaibaMais caminho="detalhes" data={element.nomedarequisicao} /></td>
+
 
                   </tr>
-                            
-                  ))
-                }
 
-                                            
+                ))
+              }
+
+
             </tbody>
           </table>
         </Tabela>
         <ReactPaginate
-        previousLabel={"prev"}
-        nextLabel={"next"}
-        breakLabel={"..."}
-        breakClassName={"break-me"}
-        pageCount={this.state.pageCount}
-        marginPagesDisplayed={2}
-        pageRangeDisplayed={5}
-        onPageChange={this.handlePageClick}
-        containerClassName={"pagination"}
-        subContainerClassName={"pages pagination"}
-        activeClassName={"active"}/>
+          previousLabel={"prev"}
+          nextLabel={"next"}
+          breakLabel={"..."}
+          breakClassName={"break-me"}
+          pageCount={this.state.pageCount}
+          marginPagesDisplayed={2}
+          pageRangeDisplayed={5}
+          onPageChange={this.handlePageClick}
+          containerClassName={"pagination"}
+          subContainerClassName={"pages pagination"}
+          activeClassName={"active"} />
 
         <hr></hr>
-        <p style={{color: "#ccc", fontSize: "15px"}}>@SENAI Suíço-Brasileira "Paulo Ernesto Tolle"</p>
+        <p style={{ color: "#ccc", fontSize: "15px" }}>@SENAI Suíço-Brasileira "Paulo Ernesto Tolle"</p>
 
-    </Container>
+      </Container>
     )
   }
 }
