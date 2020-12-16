@@ -17,12 +17,44 @@ export class Tabela_Funcionarios_Excluidos extends Component {
         perPage:5,
         currentPage: 0,
         search: '',
+        UserParaRestaurar: '',
+        NomeParaRestaurar: '',
+
         crumbs: ['Inicio', 'Registros']
         
   
       }
       this.handlePageClick = this.handlePageClick.bind(this);
   
+    }
+
+    //Metodo para restaurar funcionario
+    restaurarUser(nif) {
+      let res = window.confirm(`Tem certeza que deseja restaurar o usuario ${nif.target.name} ?`)
+
+      if (res) {
+        //Fazer a restauração do usuario usando o nif.target.alt para acessar o nif
+        alert('Usuario restaurado com sucesso')
+      }
+    }
+
+    //Setar nome e nif do usuario selecionado para executar alguma acao  deletar
+    NameNif_restore(nif, name) {
+      this.setState({
+        UserParaRestaurar: nif,
+        NomeParaRestaurar: name
+      })
+    }
+
+    click_RestaurarUser(nif) {
+      alert("Usuario " + nif + " Restaurado com sucesso")
+
+      axios.put('http://localhost:3000/v1/restaurarfuncionario', {
+        nif: this.state.UserParaRestaurar,
+      }).then((res) => {
+        console.log(res)
+      })
+      // RESTAURAR AQUI !!!!!
     }
   
     
@@ -155,7 +187,7 @@ export class Tabela_Funcionarios_Excluidos extends Component {
                      </div>
                   </div>
                   <div class="modal-footer">
-                     <button type="button" class="btn btn-primary">Restaurar Usuário</button>
+                     <button type="button" class="btn btn-primary" onClick={() => this.click_RestaurarUser(this.state.UserParaRestaurar)}>Restaurar Usuário</button>
                   </div>
                </div>
             </div>
@@ -203,7 +235,7 @@ export class Tabela_Funcionarios_Excluidos extends Component {
                       <td>{element.administrativo}</td>
                       <td>{element.data_criacao}</td>
                       <td>{element.data_suspensao}</td>
-                      <td><img data-toggle="modal" data-target="#exampleModal4" src={IconVoltar} alt={element.nif} name={element.nome} style={{width: 25, height: 25, marginLeft: 50, cursor: 'pointer'}} /></td>
+                      <td><img data-toggle="modal" data-target="#exampleModal4" src={IconVoltar} onClick={() => this.NameNif_restore(element.nif, element.nome)} alt={element.nif} name={element.nome} style={{width: 25, height: 25, marginLeft: 50, cursor: 'pointer'}} /></td>
                       
   
                     </tr>
