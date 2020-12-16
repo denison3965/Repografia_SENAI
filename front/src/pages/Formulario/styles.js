@@ -315,17 +315,19 @@ export const Container = styled.div`
 
     .div_dropdown_form_direita{
         width: 40vw;
-        height: 14.2vh;
-        margin-left: -6vw;
-        margin-bottom: 3vh;
-        margin-top: -25vh;
-        display:flex;
-        flex-wrap: wrap;
+        display: flex;
         flex-direction: row;
+        margin-left: -12%;
+        margin-top: -250px;
+
 
     }
+    .campo_select{
+        width: 250px;
+        flex: 2;
+        padding-top:35px;
+    }
     .dropdown_form_direita p{
-        flex:1;
         height:100%;
         display: flex;
         justify-content: center;
@@ -333,8 +335,8 @@ export const Container = styled.div`
 
     }
     .dropdown_form_direita{
-        width: 15vw;
-        height: 9vh;
+        flex:1;
+        height: 35px;
         margin: 5%;
         margin-left: 2.7vw;
         border: solid;

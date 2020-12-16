@@ -7,6 +7,7 @@ import { useHistory } from 'react-router-dom'
 import Loading from '../../assets/img/loading.gif'
 import Cookies from 'universal-cookie'
 import { Link } from 'react-router-dom'
+import Select from 'react-select'
 
 
 const cookies = new Cookies()
@@ -36,6 +37,11 @@ function Formulario() {
     const [msg_acerto, setMsgAcerto] = useState()
 
 
+    const [listaDepartamento, setListaDepartamento] = useState([])
+    const [optionsDepartamento, setOptionsDepartamento] = useState([]) 
+
+    const [fornecedor, setFornecedor] = useState([])
+
     useEffect(() => {
 
         console.log('MEU TOKEN E ' + cookies.get('tokenJWT'))
@@ -62,6 +68,25 @@ function Formulario() {
                     console.log(err)
                 })
 
+                //Pegando lista de departamento
+
+                axios.get('http://localhost:3000/v1/pegar-departamento').then((res) => {
+
+                    const options = res.data.map(d => ({
+                        "value" : d.id_departamento,
+                        "label" : d.nome_departamento
+                      }))
+
+
+                    setOptionsDepartamento(options)  
+                    setListaDepartamento(res.data)
+                })
+
+                //Pegando fornecedor
+                axios.get('http://localhost:3000/v1/pegar-fornecedor').then((res) => {
+                    
+                    setFornecedor(res.data[0])
+                })
             }
             else {
                 history.push("/")
@@ -192,7 +217,7 @@ function Formulario() {
         "dataEntrega": dataEntrega,
 
 
-        "fornecedor": "Copiadora Módulo LTDA",
+        "fornecedor": fornecedor.id_fornecedor,
         "numero": numeroReq,
         "nomeRequisicao": nomeReq,
         "paginas": paginas,
@@ -293,11 +318,11 @@ function Formulario() {
                                 <div className="div2_informacao">
                                     <div className="div2_p_input">
                                         <p>Fornecedor:</p>
-                                        <p className="p_resposta">Copiadora Módulo LTDA</p>
+                                        <p className="p_resposta">{fornecedor.nome_fornecedor}</p>
                                     </div>
                                     <div className="div2_p_input">
                                         <p>Número:</p>
-                                        <p className="p_resposta">2020-X</p>
+                                        <p className="p_resposta"></p>
                                     </div>
                                     <div className="div2_p_input">
                                         <p>Nome da requisição:</p>
@@ -337,17 +362,17 @@ function Formulario() {
                         </form>
 
                         <form className="form_direita">
-                            <div className="div_dropdown_form_direita">
-                                <select className="dropdown_form_direita" onChange={(e) => setDepartamento(e.target.value)}>
-                                    <option selected value="">Área de Atuação</option>
-                                    <option value="CT">CT</option>
-                                    <option value="CAI">CAI</option>
-                                    <option value="PC">PC</option>
-                                    <option value="CST">CST</option>
-                                    <option value="Pós Graduação">Pós Graduação</option>
-                                </select>
+                            <div  className="div_dropdown_form_direita">
+                                <div className="campo_select">
+                                    <Select style={{width : "500px"}} options={optionsDepartamento} isSearchable required onChange={(e) => setDepartamento(e.value)}  />
+                                </div>
+
                                 <div className="dropdown_form_direita">
-                                    <p>{departamento}</p>
+                                    <p>{listaDepartamento.map((element) => {
+                                        if (element.id_departamento == departamento){
+                                            return element.centro_custo
+                                        }
+                                    })}</p>
                                 </div>
                             </div>
 
