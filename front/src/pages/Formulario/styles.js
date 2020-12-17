@@ -69,6 +69,7 @@ export const Container = styled.div`
         margin-bottom: 2.2%;
         text-align: center; 
         font-weight: bold;
+        font-size: 1.2vw;
     }
 
     .inf_solicitacao{
