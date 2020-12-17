@@ -376,7 +376,7 @@ function Formulario() {
                                     <Select style={{ width: "500px" }} options={optionsDepartamento} isSearchable required onChange={(e) => setDepartamento(e.value)} />
                                 </div>
 
-                                <div className="dropdown_form_direita">
+                                <div className="campo_CC">
                                     <p>{listaDepartamento.map((element) => {
                                         if (element.id_departamento == departamento) {
                                             return element.centro_custo
