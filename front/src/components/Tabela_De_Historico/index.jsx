@@ -79,7 +79,7 @@ export class Tabela_De_Historico extends Component {
         axios.get(url).then(async (res) => {
 
 
-
+          
 
           this.setState({
             User_info: res.data
@@ -194,7 +194,7 @@ export class Tabela_De_Historico extends Component {
                     <td>{element.total_paginas}</td>
                     <td>{element.data_envio}</td>
                     <td>{element.data_entrega}</td>
-                    <td><SaibaMais caminho="detalhes" data={element.id_requisicao} /></td>
+                    <td><SaibaMais caminho="detalhes-historicos" data={element.id_requisicao} /></td>
 
                   </tr>
 
