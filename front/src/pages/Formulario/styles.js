@@ -1,7 +1,5 @@
 import styled from 'styled-components';
 
-
-
 export const Container = styled.div`
     display: flex;
     flex-wrap:wrap;
@@ -11,7 +9,6 @@ export const Container = styled.div`
     p {
         font-weight: 300;
     }
-
     .titulo_do_formulario{
         color: #fff;
         position: absolute;
@@ -20,7 +17,6 @@ export const Container = styled.div`
         font-weight: 300;
         font-style: italic;
     }
-
     .form_esquerda{
         width: 50%;
         max-width: 50%;
@@ -57,7 +53,6 @@ export const Container = styled.div`
         align-items: center;
         background: hidden;
     }
-
    .div_titulo_form{
         width: 100%;
         height: min-content;
@@ -71,9 +66,7 @@ export const Container = styled.div`
         margin-bottom: 2.2%;
         text-align: center; 
         font-weight: bold;
-        font-size: 1.2vw;
     }
-
     .inf_solicitacao{
         width:40vw;
         height:66vh;
@@ -94,7 +87,6 @@ export const Container = styled.div`
         width: 100%;
         height: 100%
     }
-
     .div1_p{
         display:flex;
         width:100%;
@@ -105,8 +97,6 @@ export const Container = styled.div`
     .p_resposta{
         margin-left: 1vw;
     }
-
-
     .inf_requisicao{
         width:40vw;
         height: 100vh;
@@ -120,13 +110,11 @@ export const Container = styled.div`
         font-size: 1.2vw;
         background-color: var(--color-azulMaisClaro);
     }
-
     .div2_informacao{
         padding: 1vw;
         width: 100%;
         height: 57%;
     }
-
     .div2_p_input{
         display:flex;
         width:98%;
@@ -165,7 +153,6 @@ export const Container = styled.div`
         height: 24vh;
         resize: none;
     }
-
     .acabamento{
         width:40vw;
         height: 138vh;
@@ -176,7 +163,6 @@ export const Container = styled.div`
         margin-left: -6vw;
         background-color: var(--color-azulMaisClaro);
     }
-
     .acabamento_sub_titulo_form{
         width: 100%;
         height: min-content;
@@ -184,7 +170,6 @@ export const Container = styled.div`
         border-bottom: solid;
         border-width: 1px;
     }
-
     .div1_acabamento{
         width:100%;
         min-width: 100%;
@@ -194,7 +179,6 @@ export const Container = styled.div`
         padding-top: 4vh;
         
     }
-
     .div2_acabamento{
         width:100%;
         min-width: 100%;
@@ -203,7 +187,6 @@ export const Container = styled.div`
         padding-top: 9vh;
         padding-left: 4vw;
     }
-
     .div3_acabamento{
         width:100%;
         min-width: 100%;
@@ -211,11 +194,7 @@ export const Container = styled.div`
         min-height: 23%;
         padding-top: 8vh;
         padding-left: 4vw;
-
-        display: flex;
     }
-
-
     .container {
         width: 50%;
         display: block;
@@ -224,7 +203,6 @@ export const Container = styled.div`
         cursor: pointer;
         font-size: 1.2vw;
     }
-
     .container_radio{
         width: 40%;
         display: block;
@@ -233,7 +211,6 @@ export const Container = styled.div`
         cursor: pointer;
         font-size: 1.2vw;
     }
-
     .container_input_checkbox {
         position: absolute;
         opacity: 0;
@@ -241,7 +218,6 @@ export const Container = styled.div`
         height: 0;
         width: 0;
     }
-
     .checkmark {
         position: absolute;
         top: 0;
@@ -253,25 +229,20 @@ export const Container = styled.div`
         border-width: 1px;
         border-radius: 20%;
     }
-
     .container:hover input ~ .checkmark {
         background-color: #ccc;
     }
-
     .container input:checked ~ .checkmark {
         background-color: #2196F3;
     }
-
     .checkmark:after {
         content: "";
         position: absolute;
         display: none;
     }
-
     .container input:checked ~ .checkmark:after {
         display: block;
     }
-
     .container .checkmark:after {
         left: 9px;
         top: 5px;
@@ -283,7 +254,6 @@ export const Container = styled.div`
         -ms-transform: rotate(45deg);
         transform: rotate(45deg);
     }
-
     .div_checkbox{
         display: flex;
         width: 100%;
@@ -291,20 +261,9 @@ export const Container = styled.div`
         height: min-content;
         padding: 0.8vw;
     }
-    .div_checkbox2{
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        max-width: 100%;
-        height: min-content;
-        padding: 0.8vw;
-
-    }
-
     .container input[type='radio'] {
         display: none;
     }
-
     .container input[type='radio']:checked + label::before{
         transition: 1.5s;
     }
@@ -314,7 +273,6 @@ export const Container = styled.div`
         margin-right: 0;
         vertical-align: middle;
     }
-
     .container label::before {
         border-radius: 20%;
         border: 1px solid;
@@ -322,20 +280,16 @@ export const Container = styled.div`
         height: 25px;
         width: 25px;
     }
-
     .p_radio{
         margin-top: 0.5vh;
         margin-left: 1vw;
     }
-
     .div_dropdown_form_direita{
         width: 40vw;
         display: flex;
         flex-direction: row;
         margin-left: -12%;
         margin-top: -250px;
-
-
     }
     .campo_select{
         width: 250px;
@@ -347,7 +301,6 @@ export const Container = styled.div`
         display: flex;
         justify-content: center;
         align-items: center;
-
     }
     .campo_CC{
         flex:1;
@@ -435,11 +388,9 @@ export const Container = styled.div`
         position: absolute;
         margin-left: 91%;
     }
-
     .sair--button:hover{
         color: #c11b04
     }
-
     .div_pai--button{
         width: 100%;
         padding: 2vw;
