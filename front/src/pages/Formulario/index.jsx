@@ -38,7 +38,7 @@ function Formulario() {
 
 
     const [listaDepartamento, setListaDepartamento] = useState([])
-    const [optionsDepartamento, setOptionsDepartamento] = useState([]) 
+    const [optionsDepartamento, setOptionsDepartamento] = useState([])
 
     const [fornecedor, setFornecedor] = useState([])
 
@@ -73,18 +73,18 @@ function Formulario() {
                 axios.get('http://localhost:3000/v1/pegar-departamento').then((res) => {
 
                     const options = res.data.map(d => ({
-                        "value" : d.id_departamento,
-                        "label" : d.nome_departamento
-                      }))
+                        "value": d.id_departamento,
+                        "label": d.nome_departamento
+                    }))
 
 
-                    setOptionsDepartamento(options)  
+                    setOptionsDepartamento(options)
                     setListaDepartamento(res.data)
                 })
 
                 //Pegando fornecedor
                 axios.get('http://localhost:3000/v1/pegar-fornecedor').then((res) => {
-                    
+
                     setFornecedor(res.data[0])
                 })
             }
@@ -146,14 +146,14 @@ function Formulario() {
     // **Logica para pegar as checkBox que foram selecionadas**  
 
 
-    const [nomeReq, setNomeReq] = useState();
+    const [nomeReq, setNomeReq] = useState(null);
     const [paginas, setPaginas] = useState(null);
     const [copias, setCopias] = useState(null);
-    const [totalPaginas, setTotalPaginas] = useState();
+    const [totalPaginas, setTotalPaginas] = useState(null);
     const [aux, setAuxi] = useState(true);
-    const [observacao, setObservacao] = useState();
-    const [departamento, setDepartamento] = useState();
-    const [responsavel, setResponsavel] = useState();
+    const [observacao, setObservacao] = useState(null);
+    const [departamento, setDepartamento] = useState(null);
+    const [responsavel, setResponsavel] = useState(null);
 
 
     function onChangeHandler(event) {
@@ -204,8 +204,8 @@ function Formulario() {
 
     var numeroReq = gerarNumeroRequisicao();
 
-    const suporteReq = escolhido2();
-    const formatoReq = escolhido1();
+    const suporteReq = escolhido2('');
+    const formatoReq = escolhido1('');
 
     const data = {
 
@@ -262,12 +262,17 @@ function Formulario() {
 
     function EnviarFormulario() {
         console.log(data)
-
         axios.post('http://localhost:3000/v1/add-requisicao', data)
             .then((res) => {
-
-                console.log(res)
                 
+            if(res.data === 'Requisição feita com sucesso !'){
+                setMsgError(null)
+                setMsgAcerto(res.data)
+            }
+            else{
+                setMsgAcerto(null)
+                setMsgError(res.data)
+            }
             }).catch((err) => {
                 console.log(err)
             })
@@ -366,14 +371,14 @@ function Formulario() {
                         </form>
 
                         <form className="form_direita">
-                            <div  className="div_dropdown_form_direita">
+                            <div className="div_dropdown_form_direita">
                                 <div className="campo_select">
-                                    <Select style={{width : "500px"}} options={optionsDepartamento} isSearchable required onChange={(e) => setDepartamento(e.value)}  />
+                                    <Select style={{ width: "500px" }} options={optionsDepartamento} isSearchable required onChange={(e) => setDepartamento(e.value)} />
                                 </div>
 
                                 <div className="dropdown_form_direita">
                                     <p>{listaDepartamento.map((element) => {
-                                        if (element.id_departamento == departamento){
+                                        if (element.id_departamento == departamento) {
                                             return element.centro_custo
                                         }
                                     })}</p>
@@ -531,7 +536,7 @@ function Formulario() {
                                 <input type="file" className="cursor-pointer input_exemplar" id="attachment" name="attachment" onChange={onChangeHandler} />
                             </div>
 
-                            <button style={{width: "150px"}} onClick={EnviarFormulario} type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">Enviar</button>
+                            <button style={{ width: "150px" }} onClick={EnviarFormulario} type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">Enviar</button>
 
 
                             {/* Modal  */}
