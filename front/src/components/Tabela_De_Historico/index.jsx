@@ -2,6 +2,10 @@ import React, { Component, useState } from 'react';
 import ReactPaginate from 'react-paginate'
 import SaibaMais from '../SaibaMais'
 import { Container, Info, Tabela, Title, Pesquisa, Input } from './styles';
+import axios from 'axios'
+import Cookies from 'universal-cookie'
+
+const cookies = new Cookies()
 
 
 
@@ -19,6 +23,9 @@ export class Tabela_De_Historico extends Component {
       perPage: 5,
       currentPage: 0,
       search: '',
+
+      User_info: {},
+      Requisicoes: {}
 
     }
     this.handlePageClick = this.handlePageClick.bind(this);
@@ -55,49 +62,71 @@ export class Tabela_De_Historico extends Component {
 
 
   componentDidMount() {
-    this.getData();
 
-  }
+    var token = cookies.get('tokenJWT')
 
-  getData() {
+    //Requisicao para pegar as informmacoes do usuarios para pegar apenas as requisicoes dele
+    axios.get(process.env.REACT_APP_SERVER_TO_AUTHENTICATE, {
+      method: 'GET',
+      headers: { 'X-access-token': token }
+    }).then((res) => {
 
-    //Aqui vai o fetch para a api pegar os registros no banco de dados
-    var data = [
 
-      {
-        nomedarequisicao: 'Python apostila',
-        nomedosolicitante: 'Atila',
-        departamento: 'Informatica',
-        cc: '20150102',
-        arquivo: 'apostila.pdf',
-        copias: 30,
-        paginas: 30,
-        totalpaginas: 900,
-        coordenador: 'Sergio',
-        avaliado: 'Nao',
-        data: '21/11/2020',
-        feedback: 'em espera',
-        dataentrega: '04/12/2020',
-        observacao: 'Vou levar a apostila ai a tarde',
-        acabamento: ' Encadernamento com espiral, Capa em pvc, frente e verso'
+      if (res.data[0].auth) {
+        //Pegando as informacoes do user pelo nif
+        let url = "http://localhost:3000/v1/buscar-user-nif/" + `${res.data[0].nif}`
+
+        axios.get(url).then(async (res) => {
+
+
+
+
+          this.setState({
+            User_info: res.data
+          })
+
+          //Aqui vai o fetch para a api pegar os registros no banco de dados
+
+
+          let url = `http://localhost:3000/v1/pegar-requisicao/${this.state.User_info.nif}`
+
+          axios.get(url).then((result) => {
+
+            console.log(result)
+            this.setState({
+              Requisicoes: result.data
+            })
+
+            console.log("ola aquii")
+            console.log(result.data)
+            // slice = de quanto a quanto sera exibido na tela
+            // slice = data.slice(15, 15 + 5) 
+            //slice = 20, ou seja na pagina ira commecar a listar pelo numero 20
+            var slice = result.data.slice(this.state.offset, this.state.offset + this.state.perPage)
+            console.log(slice)
+  
+            this.setState({
+              pageCount: Math.ceil(result.data.length / this.state.perPage),
+              orgtableData: result.data,
+              tableData: slice
+            })
+
+
+          })
+
+
+
+
+        }).catch((err) => {
+          console.log(err)
+        })
       }
-
-    ]
-
-
-    // slice = de quanto a quanto sera exibido na tela
-    // slice = data.slice(15, 15 + 5) 
-    //slice = 20, ou seja na pagina ira commecar a listar pelo numero 20
-    var slice = data.slice(this.state.offset, this.state.offset + this.state.perPage)
-    console.log(slice)
-
-    this.setState({
-      pageCount: Math.ceil(data.length / this.state.perPage),
-      orgtableData: data,
-      tableData: slice
     })
 
+
+
   }
+
 
   updateSearch(event) {
     this.setState({ search: event.target.value.substr(0, 20) })
@@ -108,18 +137,15 @@ export class Tabela_De_Historico extends Component {
 
     let filterRegister = this.state.tableData.filter(
       (register) => {
-        return register.nomedosolicitante.toLowerCase().indexOf(this.state.search) !== -1 ||
-        register.nomedosolicitante.indexOf(this.state.search) !== -1 ||
-          register.data.toLowerCase().indexOf(this.state.search) !== -1 ||
-          register.coordenador.toLowerCase().indexOf(this.state.search) !== -1 ||
-          register.coordenador.indexOf(this.state.search) !== -1 ||
-          register.departamento.toLowerCase().indexOf(this.state.search) !== -1 ||
-          register.departamento.indexOf(this.state.search) !== -1 ||
-          register.cc.toLowerCase().indexOf(this.state.search) !== -1 ||
-          register.nomedarequisicao.toLowerCase().indexOf(this.state.search) !== -1 ||
-          register.nomedarequisicao.indexOf(this.state.search) !== -1 ||
-          register.feedback.toLowerCase().indexOf(this.state.search) !== -1 ||
-          register.feedback.indexOf(this.state.search) !== -1
+        return register.nome.toLowerCase().indexOf(this.state.search) !== -1 ||
+          register.nome.indexOf(this.state.search) !== -1 ||
+          register.nome_requisicao.toLowerCase().indexOf(this.state.search) !== -1 ||
+          register.nome_requisicao.indexOf(this.state.search) !== -1 ||
+          register.data_envio.indexOf(this.state.search) !== -1 ||
+          register.data_entrega.indexOf(this.state.search) !== -1 ||
+          register.nome_departamento.toLowerCase().indexOf(this.state.search) !== -1 ||
+          register.nome_departamento.indexOf(this.state.search) !== -1 ||
+          register.centro_custo.toLowerCase().indexOf(this.state.search) !== -1 
       }
     )
 
@@ -140,6 +166,7 @@ export class Tabela_De_Historico extends Component {
           <table className="table table-striped">
             <thead>
               <tr>
+                <th scope="col"><strong>numero</strong></th>
                 <th scope="col"><strong>nome da requisicao</strong></th>
                 <th scope="col"><strong>solicitante</strong></th>
                 <th scope="col"><strong>departamento</strong></th>
@@ -147,34 +174,32 @@ export class Tabela_De_Historico extends Component {
                 <th scope="col"><strong>paginas</strong></th>
                 <th scope="col"><strong>cópias</strong></th>
                 <th scope="col"><strong>total de paginas</strong> </th>
-                <th scope="col"><strong>cordenador</strong></th>
-                <th scope="col"><strong>Feadback</strong></th>
                 <th scope="col"><strong>data do pedido</strong></th>
+                <th scope="col"><strong>data de entrega</strong></th>
                 <th scope="col"></th>
               </tr>
             </thead>
             <tbody>
 
-            {
+              {
                 filterRegister.map((element) => (
                   <tr>
-                    <td>{element.nomedarequisicao}</td>
-                    <td>{element.nomedosolicitante}</td>
-                    <td>{element.departamento}</td>
-                    <td>{element.cc}</td>
-                    <td>{element.paginas}</td>
-                    <td>{element.copias}</td>
-                    <td>{element.totalpaginas}</td>
-                    <td>{element.coordenador}</td>
-                    <td>{element.feedback}</td>
-                    <td>{element.data}</td>
-                    <td><SaibaMais caminho="detalhes-historicos" data={element.nomedarequisicao}/></td>
-                    
+                    <td>{element.id_requisicao}</td>
+                    <td>{element.nome_requisicao}</td>
+                    <td>{element.nome}</td>
+                    <td>{element.nome_departamento}</td>
+                    <td>{element.centro_custo}</td>
+                    <td>{element.num_paginas}</td>
+                    <td>{element.num_copias}</td>
+                    <td>{element.total_paginas}</td>
+                    <td>{element.data_envio}</td>
+                    <td>{element.data_entrega}</td>
+                    <td><SaibaMais caminho="detalhes" data={element.id_requisicao} /></td>
 
                   </tr>
-                            
-                  ))
-                }
+
+                ))
+              }
 
 
             </tbody>
