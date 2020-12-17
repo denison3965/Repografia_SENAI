@@ -35,7 +35,6 @@ function Detalhes(props) {
   //Verificando Se o usuario esta autorizado para acessar essa pagina
   const history = useHistory()
   const [showPage, setShowPage] = useState(false)
-
   useEffect(() => {
 
     console.log('MEU TOKEN E ' + cookies.get('tokenJWT'))
@@ -54,6 +53,18 @@ function Detalhes(props) {
       else {
         history.push("/")
       }
+
+/*       //Pegando as informacoes do user pelo nif
+      let url = "http://localhost:3000/v1/pegar-requisicao/"+`${res.data[0].id_requisicao}`
+
+      axios.get(url).then(async(res) => {
+          
+          await setRegistro(res.data)
+          console.log("DEU CERTO")
+
+      }).catch((err) => {
+          console.log(err)
+      }) */
 
     }).catch(() => { history.push("/") })
   }, [])
@@ -90,7 +101,7 @@ function Detalhes(props) {
               <div className="left-side">
                 <div className="registro_item">
                   <div className="registro_chave"><strong>Numero da requisicao:</strong></div>
-                  <div className="registro_valor"> </div>
+                  <div className="registro_valor">{registro.id_requisicao}</div>
                 </div>
 
                 <div className="registro_item">
