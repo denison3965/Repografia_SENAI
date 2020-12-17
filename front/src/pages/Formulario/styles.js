@@ -37,8 +37,8 @@ export const Container = styled.div`
     .form_direita{
         width: 50%;
         max-width: 50%;
-        height: 76%;
-        max-height: 76%;
+        height: 79%;
+        max-height: 79%;
         display:flex;
         flex-wrap: wrap;
         flex-direction: column;
@@ -71,6 +71,7 @@ export const Container = styled.div`
         margin-bottom: 2.2%;
         text-align: center; 
         font-weight: bold;
+        font-size: 1.2vw;
     }
 
     .inf_solicitacao{
@@ -339,16 +340,16 @@ export const Container = styled.div`
     .campo_select{
         width: 250px;
         flex: 2;
-        padding-top:35px;
+        padding-top:3.9vh;
     }
-    .dropdown_form_direita p{
+    .campo_CC p{
         height:100%;
         display: flex;
         justify-content: center;
         align-items: center;
 
     }
-    .dropdown_form_direita{
+    .campo_CC{
         flex:1;
         height: 35px;
         margin: 5%;
@@ -357,7 +358,7 @@ export const Container = styled.div`
         border-width: 1px;
         border-radius: 2px;
         margin-bottom: 5vh;
-        font-size:20px;
+        font-size: 1.2vw;
         background-color: var(--color-azulMaisClaro);
     }
     .dropdown_form_baixo{
@@ -369,15 +370,15 @@ export const Container = styled.div`
         border-width: 1px;
         border-radius: 2px;
         margin-bottom: 5vh;
-        font-size:20px;
+        font-size: 1.2vw;
         background-color: var(--color-azulMaisClaro);
     }
     .div_assinatura{
         width: 40vw;
-        height: 20vh;
+        height: 25vh;
         margin-left: -6vw;
         display: flex;
-        margin-bottom: -22vh;
+        margin-bottom: -27vh;
     }
     .assinatura{
         font-size: 2vw;
@@ -394,23 +395,23 @@ export const Container = styled.div`
     }
     .titulo_upload{
         width: 70vw;
-        font-size: 2vw;
+        font-size: 1.2vw;
         background-color:white;
         text-align: center;
         margin-left: -1.5vw;
     }
     .text_upload{
-        font-size: 1.5vw;
+        font-size: 1.2vw;
         position: absolute;
         margin-top: 9%;
-        margin-left: 25%;
+        margin-left: 26.4%;
     }
     .input_exemplar{
         position: absolute;
         text-align: center;
         margin-left: 3.5vw;
         font-family: inherit;
-        font-size: 1.3vw;
+        font-size: 1.2vw;
         line-height: inherit;
         display: block;
         padding-top:32.7vh;
@@ -419,7 +420,7 @@ export const Container = styled.div`
         padding-left: 17.5vw;
     }
     .img_cloud{
-        margin-left: -2.5%;
+        margin-left: -3.2%;
         margin-top: 3%;
         margin-bottom:3%;
         width: 5vw;

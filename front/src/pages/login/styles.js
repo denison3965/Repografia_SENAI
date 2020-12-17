@@ -100,6 +100,19 @@ export const Container = styled.div`
     visibility: hidden;
     background-color: red;
   }
+  #LoginErrorDiv{
+    position: relative;
+    left: 15%;
+    height: 5vh;
+    width: 38.5vw;
+    top: 77%;
+    display: none;
+
+    font-family: Roboto;
+    font-size: 2.5vh;
+    line-height: 21px;
+    text-align: center;
+  }
 `;
 
 
