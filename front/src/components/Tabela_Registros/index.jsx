@@ -168,7 +168,7 @@ export class Tabela_Registros extends Component {
                     <td>{element.total_paginas}</td>
                     <td>{element.data_envio}</td>
                     <td>{element.data_entrega}</td>
-                    <td><SaibaMais caminho="detalhes" data={element.nomedarequisicao} /></td>
+                    <td><SaibaMais caminho="detalhes" data={element.id_requisicao} /></td>
 
 
                   </tr>

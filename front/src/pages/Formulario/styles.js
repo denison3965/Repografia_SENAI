@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+
+
 export const Container = styled.div`
     display: flex;
     flex-wrap:wrap;
@@ -208,7 +210,10 @@ export const Container = styled.div`
         min-height: 23%;
         padding-top: 8vh;
         padding-left: 4vw;
+
+        display: flex;
     }
+
 
     .container {
         width: 50%;
@@ -284,6 +289,15 @@ export const Container = styled.div`
         max-width: 100%;
         height: min-content;
         padding: 0.8vw;
+    }
+    .div_checkbox2{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        max-width: 100%;
+        height: min-content;
+        padding: 0.8vw;
+
     }
 
     .container input[type='radio'] {
