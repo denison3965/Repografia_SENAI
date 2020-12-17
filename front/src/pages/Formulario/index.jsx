@@ -8,6 +8,7 @@ import Loading from '../../assets/img/loading.gif'
 import Cookies from 'universal-cookie'
 import { Link } from 'react-router-dom'
 import Select from 'react-select'
+import PDF from '../../components/PDF'
 
 
 const cookies = new Cookies()
@@ -154,6 +155,7 @@ function Formulario() {
     const [observacao, setObservacao] = useState();
     const [departamento, setDepartamento] = useState();
     const [responsavel, setResponsavel] = useState();
+    const [InfoReqToPDF, setInfoReqToPDF] = useState({});
 
 
     function onChangeHandler(event) {
@@ -236,6 +238,8 @@ function Formulario() {
 
     }
 
+    
+
 
     function escolhido1() {
         var formato = '';
@@ -262,6 +266,7 @@ function Formulario() {
 
     function EnviarFormulario() {
         console.log(data)
+        setInfoReqToPDF(data)
 
         axios.post('http://localhost:3000/v1/add-requisicao', data)
             .then((res) => console.log(res))
@@ -509,6 +514,8 @@ function Formulario() {
 
                         </form>
 
+                        
+
                         <form className="form_baixo">
 
                             <select className="dropdown_form_baixo" onChange={e => (setResponsavel(e.target.value))}>
@@ -554,6 +561,11 @@ function Formulario() {
                             </div>
 
                         </form>
+                    
+                        <div style={{display: 'none'}}>
+                            <PDF />
+                        </div>
+                        
 
 
                     </Container>
