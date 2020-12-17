@@ -52,6 +52,16 @@ function  Login() {
          history.push("/perfil")
         
       }
+        if (res.data.message == 'Usuario nao encontado na base de dados')
+        {
+        var erroLogin = document.getElementById("LoginErrorDiv");
+          if (erroLogin.style.display === "none" || erroLogin.style.display === "" ) {
+            erroLogin.style.display = "block";
+          }else {
+            erroLogin.style.display = "none";
+          }
+        }
+      
 
       // if (res.data.message == 'Login invalido!')
       // {
@@ -146,6 +156,10 @@ function  Login() {
               </div>
             </div>
           </div>
+        </div>
+
+        <div class="alert alert-danger" role="alert" id="LoginErrorDiv">
+          Nif ou Senha Inválido!
         </div>
 
       </form>
