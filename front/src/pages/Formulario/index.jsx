@@ -374,13 +374,10 @@ function Formulario() {
                                             <Select style={{ width: "500px" }} options={optionsDepartamento} isSearchable required onChange={(e) => setDepartamento(e.value)} />
                                         </div>
 
-                                        <div className="dropdown_form_direita">
+                                        <div className="campo_CC">
                                             <p>{listaDepartamento.map((element) => {
                                                 if (element.id_departamento == departamento) {
-                                                    
                                                     return element.centro_custo
-
-                                                    
                                                 }
                                             })}</p>
                                         </div>
@@ -451,34 +448,34 @@ function Formulario() {
                                         <div className="acabamento_sub_titulo_form"><p className="titulo_form">Formato</p></div>
 
                                         <div className="div3_acabamento">
-                                            <div className="div_checkbox2" style={{ fontSize: 25 }}>
+                                            <div className="div_checkbox">
 
-                                                <div class="form-check" style={{ marginBottom: 50 }} >
+                                                <div class="form-check container" style={{ marginBottom: 1 }} >
                                                     <input style={{ height: 20, width: 20, marginLeft: -30 }} class="form-check-input" onClick={(e) => setasValorFormato(e)} type="radio" name="exampleRadios2" id="exampleRadios1" value={1} />
                                                     <label class="form-check-label" for="exampleRadios1">
-                                                        A3
+                                                        <p className="p_radio">A3</p>
                                                     </label>
                                                 </div>
-                                                <div class="form-check" style={{ fontSize: 25 }}>
+                                                <div class="form-check container">
                                                     <input style={{ height: 20, width: 20, marginLeft: -30 }} class="form-check-input" onClick={(e) => setasValorFormato(e)} type="radio" name="exampleRadios2" id="exampleRadios2" value={3} />
                                                     <label class="form-check-label" for="exampleRadios2">
-                                                        A5
+                                                        <p className="p_radio">A5</p>
                                                         </label>
                                                 </div>
                                             </div>
 
-                                            <div className="div_checkbox2" style={{ fontSize: 25 }}>
-                                                <div class="form-check" style={{ marginBottom: 50 }}>
+                                            <div className="div_checkbox container">
+                                                <div class="form-check container" style={{ marginBottom: 1 }}>
                                                     <input style={{ height: 20, width: 20, marginLeft: -30 }} class="form-check-input" onClick={(e) => setasValorFormato(e)} type="radio" name="exampleRadios2" id="exampleRadios3" value={2} />
                                                     <label class="form-check-label" for="exampleRadios3">
-                                                        A4
-                                                            </label>
+                                                        <p className="p_radio">A4</p>
+                                                    </label>
                                                 </div>
 
-                                                <div class="form-check" style={{ fontSize: 25 }}>
+                                                <div class="form-check container">
                                                     <input style={{ height: 20, width: 20, marginLeft: -30 }} class="form-check-input" onClick={(e) => setasValorFormato(e)} type="radio" name="exampleRadios2" id="exampleRadios4" value={4} />
                                                     <label class="form-check-label" for="exampleRadios4">
-                                                        Outros (Colocar em OBS )
+                                                        <p className="p_radio">Outros (Colocar em OBS )</p>
                                                     </label>
                                                 </div>
 
@@ -490,40 +487,38 @@ function Formulario() {
 
                                         <div className="div3_acabamento">
 
-                                            <div className="div_checkbox2" style={{ fontSize: 25 }}>
+                                            <div className="div_checkbox">
 
 
 
-                                                <div class="form-check" style={{ marginBottom: 50 }} >
+                                                <div class="form-check container" style={{ marginBottom: 1 }} >
                                                     <input style={{ height: 20, width: 20, marginLeft: -30 }} class="form-check-input" onClick={(e) => setasValorSupporte(e)} type="radio" name="exampleRadios" id="exampleRadios5" value={1} />
                                                     <label class="form-check-label" for="exampleRadios5">
-                                                        Zipdrive
+                                                        <p className="p_radio">Zipdrive</p>
                                                     </label>
                                                 </div>
-                                                <div class="form-check" style={{ fontSize: 25 }}>
+                                                <div class="form-check container">
                                                     <input style={{ height: 20, width: 20, marginLeft: -30 }} class="form-check-input" onClick={(e) => setasValorSupporte(e)} type="radio" name="exampleRadios" id="exampleRadios6" value={2} />
                                                     <label class="form-check-label" for="exampleRadios6">
-                                                        Papel
-                                                        </label>
+                                                        <p className="p_radio">Papel</p>
+                                                    </label>
                                                 </div>
                                             </div>
 
-                                            <div className="div_checkbox2" style={{ fontSize: 25 }}>
-                                                <div class="form-check" style={{ marginBottom: 50 }}>
+                                            <div className="div_checkbox">
+                                                <div class="form-check container" style={{ marginBottom: 1 }}>
                                                     <input style={{ height: 20, width: 20, marginLeft: -30 }} class="form-check-input" onClick={(e) => setasValorSupporte(e)} type="radio" name="exampleRadios" id="exampleRadios7" value={3} />
                                                     <label class="form-check-label" for="exampleRadios7">
-                                                        Email
-                                                            </label>
-                                                </div>
-
-                                                <div class="form-check" style={{ fontSize: 25 }}>
-                                                    <input style={{ height: 20, width: 20, marginLeft: -30 }} class="form-check-input" onClick={(e) => setasValorSupporte(e)} type="radio" name="exampleRadios" id="exampleRadios8" value={4} />
-                                                    <label class="form-check-label" for="exampleRadios8">
-                                                        Outros (Colocar em OBS )
+                                                        <p className="p_radio">Email</p>
                                                     </label>
                                                 </div>
-                                                <p>bdsb</p>
-                                                <p>{radioSuporte}</p>
+
+                                                <div class="form-check container">
+                                                    <input style={{ height: 20, width: 20, marginLeft: -30 }} class="form-check-input" onClick={(e) => setasValorSupporte(e)} type="radio" name="exampleRadios" id="exampleRadios8" value={4} />
+                                                    <label class="form-check-label" for="exampleRadios8">
+                                                        <p className="p_radio">Outros (Colocar em OBS )</p>
+                                                    </label>
+                                                </div>
 
                                             </div>
                                         </div>

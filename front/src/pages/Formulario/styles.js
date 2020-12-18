@@ -203,14 +203,7 @@ export const Container = styled.div`
         cursor: pointer;
         font-size: 1.2vw;
     }
-    .container_radio{
-        width: 40%;
-        display: block;
-        position: relative;
-        padding-left: 35px;
-        cursor: pointer;
-        font-size: 1.2vw;
-    }
+    
     .container_input_checkbox {
         position: absolute;
         opacity: 0;
@@ -261,28 +254,10 @@ export const Container = styled.div`
         height: min-content;
         padding: 0.8vw;
     }
-    .container input[type='radio'] {
-        display: none;
-    }
-    .container input[type='radio']:checked + label::before{
-        transition: 1.5s;
-    }
-    .container label,  .container label::before{
-        cursor: pointer;
-        display: inline-block;
-        margin-right: 0;
-        vertical-align: middle;
-    }
-    .container label::before {
-        border-radius: 20%;
-        border: 1px solid;
-        content: '';
-        height: 25px;
-        width: 25px;
-    }
     .p_radio{
         margin-top: 0.5vh;
-        margin-left: 1vw;
+        font-size: 1.2vw;
+        text-align: center;
     }
     .div_dropdown_form_direita{
         width: 40vw;
