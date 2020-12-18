@@ -41,7 +41,6 @@ function Formulario() {
     const [optionsDepartamento, setOptionsDepartamento] = useState([])
 
     const [fornecedor, setFornecedor] = useState([])
-    const [printPDF, setPrintPDF] = useState(false)
 
     useEffect(() => {
 
@@ -155,7 +154,7 @@ function Formulario() {
     const [observacao, setObservacao] = useState(null);
     const [departamento, setDepartamento] = useState(null);
     const [responsavel, setResponsavel] = useState(null);
-    const [InfoReqToPDF, setInfoReqToPDF] = useState({});
+    const [numeroReq, setNumeroReq] = useState(null)
 
 
     function onChangeHandler(event) {
@@ -195,16 +194,9 @@ function Formulario() {
     var dataEntrega = pegarDataEntrega();
 
 
-    function gerarNumeroRequisicao() {
-        var dataAtual = new Date();
-        var tempo = new Date(dataAtual);
-        var dataAtual = tempo.getFullYear();
-        return (`${dataAtual}`)
 
-        /* Continuar lógica após a construção do banco de dados */
-    }
 
-    var numeroReq = gerarNumeroRequisicao();
+    
 
 
     //Logica para pegar o radio marcado
@@ -220,6 +212,8 @@ function Formulario() {
     function setasValorFormato(e) {
         setRadioFormato(e.target.value)
     }
+
+     
 
     const data = {
 
@@ -252,27 +246,75 @@ function Formulario() {
     }
 
 
+     
 
     function EnviarFormulario() {
+        
+
+        //Enviar Informmacoes para gravar no banco de dados
+        axios.post('http://localhost:3000/v1/add-requisicao', data)
+            .then((res) => {   
+
+            if(res.data.message === 'Requisição feita com sucesso !'){
+                setMsgError(null)
+
+                console.log(res.data.numeroReq)
+
+   
+                data.numero = res.data.numeroReq
+                setNumeroReq(res.data.numeroReq)
+
+
+                setMsgAcerto(res.data.message)
+                
+                
+                
+
+            }
+            else{
+                setMsgAcerto(null)
+                setMsgError(res.data.message)
+            }
+            }).catch((err) => {
+                console.log(err)
+            })
+        
+
+        
+    }
+
+    function imprimirPdf() {
+
         console.log(data)
-        setInfoReqToPDF(data)
 
-        setPrintPDF(true)
 
-        // axios.post('http://localhost:3000/v1/add-requisicao', data)
-        //     .then((res) => {
+        //Gerando pdf
+        axios.post('http://localhost:3000/v1/criar-pdf-requisicao',data).then((result) => {
+            console.log(result.data.filename)
 
-        //     if(res.data === 'Requisição feita com sucesso !'){
-        //         setMsgError(null)
-        //         setMsgAcerto(res.data)
-        //     }
-        //     else{
-        //         setMsgAcerto(null)
-        //         setMsgError(res.data)
-        //     }
-        //     }).catch((err) => {
-        //         console.log(err)
-        //     })
+            //Pegando o nome do arquivo que esta dentro de uma url
+                let url = result.data.filename
+
+                let array_url = url.split('/')
+
+                let nome_pdf = array_url[array_url.length - 1];
+
+            console.log(nome_pdf)
+
+            //Pegando pdf do servidor e imprimindo ele
+            axios({
+                url: `http://localhost:3000/v1/pegar-pdf-requisicao/${nome_pdf}`, //your url
+                method: 'GET',
+                responseType: 'blob', // important
+              }).then((response) => {
+                 const url = window.URL.createObjectURL(new Blob([response.data]));
+                 const link = document.createElement('a');
+                 link.href = url;
+                 link.setAttribute('download', 'file.pdf'); //or any other extension
+                 document.body.appendChild(link);
+                 link.click();
+              });
+        })
     }
 
 
@@ -287,7 +329,7 @@ function Formulario() {
                             <Link to="/"><div className="sair--button"><p>Sair</p></div> </Link>
                         </div>
 
-                        {false == false ?
+                        
                             <Container>
                                 <form className="form_esquerda">
 
@@ -573,7 +615,11 @@ function Formulario() {
                                                 <div class="modal-body">
                                                     <div>
                                                         {msg_error != null ? <div className="alert alert-danger">{msg_error} </div> : null}
-                                                        {msg_acerto != null ? <div className="alert alert-success">{msg_acerto} </div> : null}
+                                                        {msg_acerto != null ? <div className="alert alert-success" style={{display: 'flex', flexDirection:'column', justifyContent:'center', alignItems: 'center'}}>
+                                                            {msg_acerto}
+                                                            
+                                                            <button type="button" onClick={() => imprimirPdf()} class="btn btn-primary" style={{margin: 15}}>Imprimir</button>
+                                                            </div> : null}
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
@@ -585,7 +631,6 @@ function Formulario() {
 
                                 </form>
                             </Container>
-                            : <></>}
 
                     </Container>
 
