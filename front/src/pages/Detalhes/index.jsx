@@ -35,6 +35,7 @@ function Detalhes(props) {
   //Verificando Se o usuario esta autorizado para acessar essa pagina
   const history = useHistory()
   const [showPage, setShowPage] = useState(false)
+  const [infoUser, setInfoUser] = useState({id_requisicao: '', nome_requisicao: '', nif: '', num_paginas: '', num_copias: '', total_paginas: '', observacao: '', data_envio: '', data_entrega: '', id_fornecedor: '', id_formato: '', id_suporte: '', id_departamento: '', id_arquivo: '', id_feedback: '', id_funcionario: ''})
   useEffect(() => {
 
     console.log('MEU TOKEN E ' + cookies.get('tokenJWT'))
@@ -48,23 +49,26 @@ function Detalhes(props) {
       if (res.data[0].auth) {
         console.log('Voce tem acesso')
         setShowPage(true)
+        
+        //Pegando as informacoes do user pela requisição
+        let url = `http://localhost:3000/v1/pegar-requisicao/${registro}`
 
+        axios.get(url).then(async(result) => {
+            
+            await setInfoUser(result.data[0])
+            
+            console.log(result.data[0])
+            
+
+        }).catch((err) => {
+            console.log(err)
+        }) 
       }
       else {
         history.push("/")
       }
 
-/*       //Pegando as informacoes do user pelo nif
-      let url = "http://localhost:3000/v1/pegar-requisicao/"+`${res.data[0].id_requisicao}`
-
-      axios.get(url).then(async(res) => {
-          
-          await setRegistro(res.data)
-          console.log("DEU CERTO")
-
-      }).catch((err) => {
-          console.log(err)
-      }) */
+      
 
     }).catch(() => { history.push("/") })
   }, [])
@@ -77,9 +81,9 @@ function Detalhes(props) {
 
   useEffect(() => {
     setRegistro(props.location.state.registro[0])
-
   }, [])
 
+  console.log(infoUser)
 
   return (
 
@@ -101,55 +105,55 @@ function Detalhes(props) {
               <div className="left-side">
                 <div className="registro_item">
                   <div className="registro_chave"><strong>Numero da requisicao:</strong></div>
-                  <div className="registro_valor">{registro.id_requisicao}</div>
+                  <div className="registro_valor">{infoUser.id_requisicao}</div>
                 </div>
 
                 <div className="registro_item">
                   <div className="registro_chave"><strong>Nome da requisicao :</strong></div>
-                  <div className="registro_valor"> </div>
+                  <div className="registro_valor">{infoUser.nome_requisicao}</div>
                 </div>
 
                 <div className="registro_item">
                   <div className="registro_chave"><strong>Nome do solicitante: </strong></div>
-                  <div className="registro_valor"> </div>
+                  <div className="registro_valor">{infoUser.nome_fornecedor}</div>
                 </div>
 
                 <div className="registro_item">
                   <div className="registro_chave"><strong>cc:</strong></div>
-                  <div className="registro_valor"> </div>
+                  <div className="registro_valor">{infoUser.centro_custo}</div>
                 </div>
 
                 <div className="registro_item">
                   <div className="registro_chave"><strong>Departamento:</strong></div>
-                  <div className="registro_valor"> </div>
+                  <div className="registro_valor">{infoUser.id_departamento}</div>
                 </div>
 
                 <div className="registro_item">
                   <div className="registro_chave"><strong>Arquivo solicitado para copia: </strong></div>
-                  <div className="registro_valor"> </div>
-                </div>
-
-                <div className="registro_item">
-                  <div className="registro_chave"><strong>Cópias:</strong></div>
                   <div className="registro_valor_img">
                     <img src={Baixar} alt="impressora" style={{ width: 20, height: 20 }} />
-                    <p> apostila.pdf</p>
+                    <p>{infoUser.nome_arquivo}: {infoUser.url}</p>
                   </div>
                 </div>
 
                 <div className="registro_item">
+                  <div className="registro_chave"><strong>Cópias:</strong></div>
+                  <div className="registro_valor">{infoUser.num_copias}</div> 
+                </div>
+
+                <div className="registro_item">
                   <div className="registro_chave"><strong>Paginas do documento:</strong></div>
-                  <div className="registro_valor"> </div>
+                  <div className="registro_valor">{infoUser.num_paginas}</div>
                 </div>
 
                 <div className="registro_item">
                   <div className="registro_chave"><strong>Total de paginas:</strong> </div>
-                  <div className="registro_valor"> </div>
+                  <div className="registro_valor">{infoUser.total_paginas}</div>
                 </div>
 
                 <div className="registro_item">
                   <div className="registro_chave"><strong>Coordenador: </strong></div>
-                  <div className="registro_valor"> </div>
+                  <div className="registro_valor">{infoUser.cargo_funcionario}</div>
                 </div>
 
               </div>
@@ -157,27 +161,27 @@ function Detalhes(props) {
 
                 <div className="registro_item">
                   <div className="registro_chave"><strong>Avaliado:</strong></div>
-                  <div className="registro_valor"> </div>
+                  <div className="registro_valor">{infoUser.feedback}</div>
                 </div>
 
                 <div className="registro_item">
                   <div className="registro_chave"><strong>Data do pedido:</strong></div>
-                  <div className="registro_valor"> </div>
+                  <div className="registro_valor">{infoUser.data_envio}</div>
                 </div>
 
                 <div className="registro_item">
                   <div className="registro_chave"><strong>Data prevista pata entrega:</strong></div>
-                  <div className="registro_valor"> </div>
+                  <div className="registro_valor">{infoUser.data_entrega}</div>
                 </div>
 
                 <div className="registro_item">
                   <div className="registro_chave"><span style={{ color: 'red', textTransform: '' }}>Observação:</span></div>
-                  <div className="registro_valor"> </div>
+                  <div className="registro_valor">{infoUser.observacao}</div>
                 </div>
 
                 <div className="registro_item">
                   <div className="registro_chave"><strong>Acabamento:</strong></div>
-                  <div className="registro_valor"> </div>
+                  <div className="registro_valor">{infoUser.tipo_formato}</div>
                 </div>
 
                 <div className="registro_item">

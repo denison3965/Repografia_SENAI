@@ -259,20 +259,20 @@ function Formulario() {
 
         setPrintPDF(true)
 
-        // axios.post('http://localhost:3000/v1/add-requisicao', data)
-        //     .then((res) => {
+        axios.post('http://localhost:3000/v1/add-requisicao', data)
+            .then((res) => {
 
-        //     if(res.data === 'Requisição feita com sucesso !'){
-        //         setMsgError(null)
-        //         setMsgAcerto(res.data)
-        //     }
-        //     else{
-        //         setMsgAcerto(null)
-        //         setMsgError(res.data)
-        //     }
-        //     }).catch((err) => {
-        //         console.log(err)
-        //     })
+            if(res.data === 'Requisição feita com sucesso !'){
+                setMsgError(null)
+                setMsgAcerto(res.data)
+            }
+            else{
+                setMsgAcerto(null)
+                setMsgError(res.data)
+            }
+            }).catch((err) => {
+                console.log(err)
+            })
     }
 
 
