@@ -155,12 +155,15 @@ function Formulario() {
     const [departamento, setDepartamento] = useState(null);
     const [responsavel, setResponsavel] = useState(null);
     const [numeroReq, setNumeroReq] = useState(null)
+    const [fileUploaed, setFileUploaed] = useState(null)
 
 
     function onChangeHandler(event) {
 
         const uploadfile = event.target.files[0];
+        console.log("OLHA AQUI")
         console.log(uploadfile)
+        setFileUploaed(uploadfile)
 
     }
 
@@ -214,7 +217,9 @@ function Formulario() {
     }
 
      
-
+    const data_to_upload_file = {
+        "file": fileUploaed,
+    }
     const data = {
 
         "nomeSolicitante": infoUser.nome,
@@ -241,7 +246,6 @@ function Formulario() {
         "formato": radioFormato,
         "suporte": radioSuporte,
         "coodernador": responsavel,
-        "arquivoExemplar": '',
 
     }
 
@@ -266,6 +270,17 @@ function Formulario() {
 
 
                 setMsgAcerto(res.data.message)
+
+                console.log(data_to_upload_file)
+
+                const myFile = new FormData();
+                myFile.append('file', fileUploaed)
+                myFile.append('id_requisicao', res.data.numeroReq)
+
+                //Gravar o arquivo exemplar no banco
+                axios.post('http://localhost:3000/v1/file-requisicao', myFile).then(() => {
+
+                })
                 
                 
                 
@@ -591,7 +606,7 @@ function Formulario() {
                                     <div className="div_upload">
                                         <img className="img_cloud" src={IconCloud} alt="" />
                                         <p className="text_upload">Arraste e solte um arquivo aqui <br /> ou</p>
-                                        <input type="file" className="cursor-pointer input_exemplar" id="attachment" name="attachment" onChange={onChangeHandler} />
+                                        <input type="file" className="cursor-pointer input_exemplar" id="attachment" name="file" onChange={onChangeHandler} />
                                     </div>
 
                                     <button style={{ width: "150px" }} onClick={EnviarFormulario} type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">Enviar</button>

@@ -143,7 +143,7 @@ function Perfil() {
 
                      <div className="informacao">
                         <div className="email">e-mail: {infoUser.email}</div>
-                        <div className="cargo">Cargo:</div>
+                        <div className="cargo">Cargo: {infoUser.nome_cargo}</div>
                      </div>
 
                      <div className="senha_posicao">

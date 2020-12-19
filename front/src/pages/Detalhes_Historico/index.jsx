@@ -71,6 +71,27 @@ function DetalhesHistorico(props) {
 
   }, [])
 
+  function baixarPDF () {
+
+    
+    let nome_pdf = `${registro}-requisicao.pdf`
+    console.log(nome_pdf)
+
+    //Pegando pdf do servidor e imprimindo ele
+    axios({
+      url: `http://localhost:3000/v1/pegar-pdf-requisicao/${nome_pdf}`, //your url
+      method: 'GET',
+      responseType: 'blob', // important
+    }).then((response) => {
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', 'file.pdf'); //or any other extension
+      document.body.appendChild(link);
+      link.click();
+    });
+  }
+
 
   return (
     <div>
@@ -171,7 +192,7 @@ function DetalhesHistorico(props) {
                     <div className="registro_chave"><strong>Imprimir:</strong></div>
                     <div className="registro_valor_img">
                       <img src={Impressao} alt="impressora" style={{ width: 25, height: 25 }} />
-                      <p> Click aqui para impremir</p>
+                      <button style={{marginLeft: 15}} onClick={() => baixarPDF()} type="button" class="btn btn-primary">Click aqui para imprimir</button>
                     </div>
                   </div>
 
@@ -225,3 +246,18 @@ function DetalhesHistorico(props) {
 }
 
 export default DetalhesHistorico;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -16,7 +16,7 @@ export class Tabela_Registros extends Component {
       offset: 0,
       tableData: [],
       orgtableData: [],
-      perPage: 5,
+      perPage: 10,
       currentPage: 0,
       search: '',
 
