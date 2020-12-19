@@ -35,10 +35,21 @@ function Detalhes(props) {
   //Verificando Se o usuario esta autorizado para acessar essa pagina
   const history = useHistory()
   const [showPage, setShowPage] = useState(false)
-  const [infoReq, setinfoReq] = useState({ id_requisicao: '', nome_requisicao: '', nif: '', num_paginas: '', num_copias: '', total_paginas: '', observacao: '', data_envio: '', data_entrega: '', id_fornecedor: '', id_formato: '', id_suporte: '', id_departamento: '', id_arquivo: '', id_feedback: '', id_funcionario: '' })
+  const [infoReq, setInfoReq] = useState({ id_requisicao: '', nome_arquivo: '', nome_requisicao: '', nif: '', num_paginas: '', num_copias: '', total_paginas: '', observacao: '', data_envio: '', data_entrega: '', id_fornecedor: '', id_formato: '', id_suporte: '', id_departamento: '', id_arquivo: '', id_feedback: '', id_funcionario: '', })
   const [infoUser, setInfoUser] = useState({ nome: '', sobrenome: '' })
 
+
+
+
+  //pegando o node do registro a ser mostrado ( tem que pegar o id depois )
+  console.log(props.location.state.registro[0])
+
+  const [registro, setRegistro] = useState('')
+  const [nomeArquivo, setNomeArquivo] = useState('')
+
   useEffect(() => {
+    setRegistro(props.location.state.registro[0])
+
 
     console.log('MEU TOKEN E ' + cookies.get('tokenJWT'))
     var token = cookies.get('tokenJWT')
@@ -53,11 +64,14 @@ function Detalhes(props) {
         setShowPage(true)
 
         //Pegando as informacoes do user pela requisição
-        let url = `http://localhost:3000/v1/pegar-requisicao/${registro}`
+        let url = `http://localhost:3000/v1/pegar-uma-requisicao/${props.location.state.registro[0]}`
+
+        console.log(url)
+        console.log(props.location.state.registro[0])
 
         axios.get(url).then(async (result) => {
 
-          await setinfoReq(result.data[0])
+          await setInfoReq(result.data[0])
 
           console.log(result.data[0])
 
@@ -87,29 +101,41 @@ function Detalhes(props) {
 
 
     }).catch(() => { history.push("/") })
+
+
   }, [])
+
   //**Verificando Se o usuario esta autorizado para acessar essa pagina**
 
-  //pegando o node do registro a ser mostrado ( tem que pegar o id depois )
-  console.log(props.location.state.registro[0])
-
-  const [registro, setRegistro] = useState('')
-
-  useEffect(() => {
-    setRegistro(props.location.state.registro[0])
 
 
-  }, [])
+  function baixarPDF() {
 
-  function baixarPDF () {
 
-    
     let nome_pdf = `${registro}-requisicao.pdf`
     console.log(nome_pdf)
 
     //Pegando pdf do servidor e imprimindo ele
     axios({
       url: `http://localhost:3000/v1/pegar-pdf-requisicao/${nome_pdf}`, //your url
+      method: 'GET',
+      responseType: 'blob', // important
+    }).then((response) => {
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', 'file.pdf'); //or any other extension
+      document.body.appendChild(link);
+      link.click();
+    });
+  }
+
+  function baixarArquivo() {
+
+
+    //Pegando arquivo do servidor e imprimindo ele
+    axios({
+      url: `http://localhost:3000/v1/pegar-arquivo/${infoReq.nome_arquivo}`, //your url
       method: 'GET',
       responseType: 'blob', // important
     }).then((response) => {
@@ -171,7 +197,7 @@ function Detalhes(props) {
                   <div className="registro_chave"><strong>Arquivo solicitado para copia: </strong></div>
                   <div className="registro_valor_img">
                     <img src={Baixar} alt="impressora" style={{ width: 20, height: 20 }} />
-                    <p>{infoReq.nome_arquivo}: {infoReq.url}</p>
+                    <p className="baixar_arquivo" onClick={() => baixarArquivo()}>Baixar arquivo</p>
                   </div>
                 </div>
 
@@ -227,7 +253,7 @@ function Detalhes(props) {
                   <div className="registro_chave"><strong>Imprimir:</strong></div>
                   <div className="registro_valor_img">
                     <img src={Impressao} alt="impressora" style={{ width: 25, height: 25 }} />
-                    <button style={{marginLeft: 15}} onClick={() => baixarPDF()} type="button" class="btn btn-primary">Click aqui para imprimir</button>
+                    <button style={{ marginLeft: 15 }} onClick={() => baixarPDF()} type="button" class="btn btn-primary">Click aqui para imprimir</button>
                   </div>
                 </div>
 
