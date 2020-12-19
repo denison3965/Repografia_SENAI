@@ -32,44 +32,71 @@ const loading = {
 
 function DetalhesHistorico(props) {
 
-      //Verificando Se o usuario esta autorizado para acessar essa pagina
-      const history = useHistory()
-      const [showPage, setShowPage] = useState(false)
-    
-      useEffect(() => {
-          
-        console.log('MEU TOKEN E ' + cookies.get('tokenJWT'))
-        var token = cookies.get('tokenJWT')
-  
-          axios.get(process.env.REACT_APP_SERVER_TO_AUTHENTICATE, {
-              method: 'GET',
-              headers:  {'X-access-token': token }         
-          }).then((res) => {
-  
-              if(res.data[0].auth)
-              {
-                  console.log('Voce tem acesso')
-                  setShowPage(true)
+  //Verificando Se o usuario esta autorizado para acessar essa pagina
+  const history = useHistory()
+  const [showPage, setShowPage] = useState(false)
 
-              }
-              else
-              {
-                  history.push("/")
-              }
-  
-          }).catch (() => {history.push("/")})
-      }, [])
-      //**Verificando Se o usuario esta autorizado para acessar essa pagina**
+
+  useEffect(() => {
+
+    console.log('MEU TOKEN E ' + cookies.get('tokenJWT'))
+    var token = cookies.get('tokenJWT')
+
+    axios.get(process.env.REACT_APP_SERVER_TO_AUTHENTICATE, {
+      method: 'GET',
+      headers: { 'X-access-token': token }
+    }).then((res) => {
+
+      if (res.data[0].auth) {
+        console.log('Voce tem acesso')
+        setShowPage(true)
+
+      }
+      else {
+        history.push("/")
+      }
+
+    }).catch(() => { history.push("/") })
+  }, [])
+  //**Verificando Se o usuario esta autorizado para acessar essa pagina**
 
   //pegando o node do registro a ser mostrado ( tem que pegar o id depois )
   console.log(props.location.state.registro[0])
 
   const [registro, setRegistro] = useState('')
+  const [valorFeedback, setValorFeedback] = useState()
+  const [msg_error, setMsgError] = useState()
+  const [msg_acerto, setMsgAcerto] = useState()
 
   useEffect(() => {
     setRegistro(props.location.state.registro[0])
 
   }, [])
+
+  //enviando feedback 
+  function setarValorFeedback(e) {
+    setValorFeedback(e.target.value)
+    console.log(e.target.value)
+  }
+
+  function EnviarFeedback() {
+    axios.put('http://localhost:3000/v1/atualizarFeedback', {
+      feedback: valorFeedback,
+      id_requisicao: registro
+    })
+      .then((res) => {
+        if (res.data === 'Feedback enviado com sucesso !!') {
+          setMsgError(null)
+          setMsgAcerto(res.data)
+         
+        }
+        else{
+          setMsgAcerto(null)
+          setMsgError(res.data)
+        }
+      })
+  }
+
 
 
   return (
@@ -182,22 +209,25 @@ function DetalhesHistorico(props) {
                   <div className="">
 
                     <div className="custom-control custom-radio">
-                      <input type="radio" id="customRadio1" name="customRadio" className="custom-control-input" />
+                      <input type="radio" id="customRadio1" name="customRadio" onClick={(e) => setarValorFeedback(e)} className="custom-control-input" value={1} />
                       <label className="custom-control-label" for="customRadio1">Chegou!!!!</label>
+                      <p>{valorFeedback}</p>
                     </div>
                     <div className="custom-control custom-radio">
-                      <input type="radio" id="customRadio2" name="customRadio" className="custom-control-input" />
+                      <input type="radio" id="customRadio2" name="customRadio" onClick={(e) => setarValorFeedback(e)} className="custom-control-input" value={2} />
                       <label className="custom-control-label" for="customRadio2">Chegou, porém com uma qualidade ruim</label>
+                      <p>{valorFeedback}</p>
                     </div>
                     <div className="custom-control custom-radio mb-3">
-                      <input type="radio" id="customRadio3" name="customRadio" className="custom-control-input" />
+                      <input type="radio" id="customRadio3" name="customRadio" onClick={(e) => setarValorFeedback(e)} className="custom-control-input" value={3} />
                       <label className="custom-control-label" for="customRadio3">Não Chegou</label>
+                      <p>{valorFeedback}</p>
                     </div>
 
                   </div>
 
 
-                  <button type="button" class="btn btn-primary">Enviar</button>
+                  <button onClick={EnviarFeedback} type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Enviar</button>
                 </div>
 
                 <div className="cancelar">
@@ -210,6 +240,28 @@ function DetalhesHistorico(props) {
               <p>basta pegar a variavel registro que tera o codigo do regidtro a ser mostrado e fazer um fetch para ppegar o respectivo registro</p>
 
             </Adm_Area>
+            {/* Modal  */}
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <div>
+                      {msg_error != null ? <div className="alert alert-danger">{msg_error} </div> : null}
+                      {msg_acerto != null ? <div className="alert alert-success">{msg_acerto} </div> : null}
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Sair</button>
+                  </div>
+                </div>
+              </div>
+            </div>
 
           </Container>
           : <div>
