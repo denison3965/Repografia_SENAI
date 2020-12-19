@@ -286,9 +286,6 @@ function Formulario() {
     function imprimirPdf() {
 
         console.log(data)
-        setInfoReqToPDF(data)
-
-        setPrintPDF(true)
 
         axios.post('http://localhost:3000/v1/add-requisicao', data)
             .then((res) => {

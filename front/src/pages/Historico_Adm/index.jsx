@@ -30,8 +30,6 @@ function Adm_Registros() {
   const [infoUser, setInfoUser] = useState({ nome: '', sobrenome: '' })
 
   useEffect(() => {
-
-    console.log('MEU TOKEN E ' + cookies.get('tokenJWT'))
     var token = cookies.get('tokenJWT')
 
 
@@ -41,7 +39,6 @@ function Adm_Registros() {
     }).then((res) => {
 
       if (res.data[0].auth && res.data[0].adm === 'sim') {
-        console.log('Voce tem acesso como adiministrador')
         setShowPage(true)
 
 
@@ -66,6 +63,10 @@ function Adm_Registros() {
     }).catch(() => { history.push("/") })
   }, [])
   //**Verificando Se o usuario esta autorizado para acessar essa pagina**
+
+
+
+  
   return (
 
     <Container>

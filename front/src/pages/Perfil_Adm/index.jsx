@@ -47,7 +47,6 @@ function Adm_Registros() {
       headers: { 'X-access-token': token }
     }).then((res) => {
 
-      console.log(res)
       //Se o usuario for adm e estiver autenticado 
       if (res.data[0].auth && res.data[0].adm === "sim") {
         console.log('Voce tem acesso adiministrativo')

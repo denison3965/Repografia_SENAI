@@ -84,10 +84,13 @@ function DetalhesHistorico(props) {
       feedback: valorFeedback,
       id_requisicao: registro
     })
+   
       .then((res) => {
         if (res.data === 'Feedback enviado com sucesso !!') {
           setMsgError(null)
           setMsgAcerto(res.data)
+
+          console.log(res.data)
          
         }
         else{
