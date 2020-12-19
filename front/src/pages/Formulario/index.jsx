@@ -302,6 +302,21 @@ function Formulario() {
 
         console.log(data)
 
+        axios.post('http://localhost:3000/v1/add-requisicao', data)
+            .then((res) => {
+
+                if (res.data === 'Requisição feita com sucesso !') {
+                    setMsgError(null)
+                    setMsgAcerto(res.data)
+                }
+                else {
+                    setMsgAcerto(null)
+                    setMsgError(res.data)
+                }
+            }).catch((err) => {
+                console.log(err)
+            })
+
 
         //Gerando pdf
         axios.post('http://localhost:3000/v1/criar-pdf-requisicao',data).then((result) => {
@@ -610,7 +625,6 @@ function Formulario() {
                                     </div>
 
                                     <button style={{ width: "150px" }} onClick={EnviarFormulario} type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">Enviar</button>
-
 
                                     {/* Modal  */}
                                     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
