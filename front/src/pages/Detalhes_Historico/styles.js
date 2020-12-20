@@ -56,6 +56,10 @@ export const Information = styled.div`
             p {
               margin-left: 10px
             }
+            .baixar_arquivo:hover{
+              color: red;
+              cursor: pointer;
+            }
           }
   }
 

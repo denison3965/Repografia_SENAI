@@ -67,21 +67,132 @@ function DetalhesHistorico(props) {
   const [valorFeedback, setValorFeedback] = useState()
   const [msg_error, setMsgError] = useState()
   const [msg_acerto, setMsgAcerto] = useState()
+  const [infoReq, setInfoReq] = useState({ id_requisicao: '', nome_arquivo: '', nome_requisicao: '', nif: '', num_paginas: '', num_copias: '', total_paginas: '', observacao: '', data_envio: '', data_entrega: '', id_fornecedor: '', id_formato: '', id_suporte: '', id_departamento: '', id_arquivo: '', id_feedback: '', id_funcionario: '', })
+  const [infoUser, setInfoUser] = useState({ nome: '', sobrenome: '' })
+  const [dataEnvioMilli, setDataEnvioMilli] = useState()
+  const [dataEnvioMais7, setDataEnvioMais7] = useState()
+  const [dataEnvioMais1, setDataEnvioMais1] = useState()
+  const [dataDeHoje, setDataDeHoje] = useState()
 
   useEffect(() => {
     setRegistro(props.location.state.registro[0])
 
+    console.log('MEU TOKEN E ' + cookies.get('tokenJWT'))
+    var token = cookies.get('tokenJWT')
+
+    axios.get(process.env.REACT_APP_SERVER_TO_AUTHENTICATE, {
+      method: 'GET',
+      headers: { 'X-access-token': token }
+    }).then((res) => {
+
+      if (res.data[0].auth) {
+        console.log('Voce tem acesso')
+        setShowPage(true)
+
+        //Pegando as informacoes do user pela requisição
+        let url = `http://localhost:3000/v1/pegar-uma-requisicao/${props.location.state.registro[0]}`
+
+        console.log(url)
+        console.log(props.location.state.registro[0])
+
+        axios.get(url).then(async (result) => {
+
+          await setInfoReq(result.data[0])
+
+          console.log(result.data[0])
+
+          console.log(infoReq)
+
+          //Setando dadas para fazer a regra de negocio do feedback e cancelar
+
+          //Funcao para converter data em PT/BR para ENG
+          function dateToEN(date) {
+            return date.split('/').reverse().join('-');
+          }
+
+          //Pegando a data de envio e convertendo para mmilisegundos
+          let dataEnvioMilli = Date.parse(dateToEN(result.data[0].data_envio));
+
+          //Pegando a data de envio em milisegundos e somando mais 7 dias em milisegundos
+          let dataEnvioMais7 = dataEnvioMilli + 604800000
+
+          //Pegando a data de envio em milisegundos e somando mais 1 dia em milisegundos
+          let dataEnvioMais1 = dataEnvioMilli + 86400000
+
+          console.log("Estou aquiiiiiiiii")
+
+
+          setDataEnvioMilli(dataEnvioMilli)
+          setDataEnvioMais7(dataEnvioMais7)
+          setDataEnvioMais1(dataEnvioMais1)
+
+          //Pegando a data de hole em milisegundos
+          var dataDeHoje = Date.now();
+          setDataDeHoje(dataDeHoje)
+
+
+          console.log(dataEnvioMilli)
+          console.log(dataEnvioMais7)
+
+          //*__Setando dadas para fazer a regra de negocio do feedback e cancelar__*
+
+
+        }).catch((err) => {
+          console.log(err)
+        })
+
+
+        //Pegando as informacoes do user pelo nif
+        let url2 = "http://localhost:3000/v1/buscar-user-nif/" + `${res.data[0].nif}`
+
+        axios.get(url2).then(async (res) => {
+
+          await setInfoUser(res.data)
+
+
+
+        }).catch((err) => {
+          console.log(err)
+        })
+      }
+      else {
+        history.push("/")
+      }
+
+
+
+    }).catch(() => { history.push("/") })
+
+
   }, [])
 
-  function baixarPDF () {
+  function baixarPDF() {
 
-    
+
     let nome_pdf = `${registro}-requisicao.pdf`
     console.log(nome_pdf)
 
     //Pegando pdf do servidor e imprimindo ele
     axios({
       url: `http://localhost:3000/v1/pegar-pdf-requisicao/${nome_pdf}`, //your url
+      method: 'GET',
+      responseType: 'blob', // important
+    }).then((response) => {
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', 'file.pdf'); //or any other extension
+      document.body.appendChild(link);
+      link.click();
+    });
+  }
+
+  function baixarArquivo() {
+
+
+    //Pegando arquivo do servidor e imprimindo ele
+    axios({
+      url: `http://localhost:3000/v1/pegar-arquivo/${infoReq.nome_arquivo}`, //your url
       method: 'GET',
       responseType: 'blob', // important
     }).then((response) => {
@@ -105,21 +216,23 @@ function DetalhesHistorico(props) {
       feedback: valorFeedback,
       id_requisicao: registro
     })
-   
+
       .then((res) => {
         if (res.data === 'Feedback enviado com sucesso !!') {
           setMsgError(null)
           setMsgAcerto(res.data)
 
           console.log(res.data)
-         
+
         }
-        else{
+        else {
           setMsgAcerto(null)
           setMsgError(res.data)
         }
       })
   }
+
+
 
 
 
@@ -139,55 +252,55 @@ function DetalhesHistorico(props) {
                 <div className="left-side">
                   <div className="registro_item">
                     <div className="registro_chave"><strong>Numero da requisicao:</strong></div>
-                    <div className="registro_valor"> </div>
+                    <div className="registro_valor">{infoReq.id_requisicao} </div>
                   </div>
 
                   <div className="registro_item">
                     <div className="registro_chave"><strong>Nome da requisicao :</strong></div>
-                    <div className="registro_valor"> </div>
+                    <div className="registro_valor">{infoReq.nome_requisicao}</div>
                   </div>
 
                   <div className="registro_item">
                     <div className="registro_chave"><strong>Nome do solicitante: </strong></div>
-                    <div className="registro_valor"> </div>
+                    <div className="registro_valor">{infoReq.nome_fornecedor} </div>
                   </div>
 
                   <div className="registro_item">
                     <div className="registro_chave"><strong>cc:</strong></div>
-                    <div className="registro_valor"> </div>
+                    <div className="registro_valor">{infoReq.centro_custo}</div>
                   </div>
 
                   <div className="registro_item">
                     <div className="registro_chave"><strong>Departamento:</strong></div>
-                    <div className="registro_valor"> </div>
+                    <div className="registro_valor">{infoReq.id_departamento}</div>
                   </div>
 
                   <div className="registro_item">
                     <div className="registro_chave"><strong>Arquivo solicitado para copia: </strong></div>
-                    <div className="registro_valor"> </div>
-                  </div>
-
-                  <div className="registro_item">
-                    <div className="registro_chave"><strong>Cópias:</strong></div>
                     <div className="registro_valor_img">
                       <img src={Baixar} alt="impressora" style={{ width: 20, height: 20 }} />
-                      <p> apostila.pdf</p>
+                      <p className="baixar_arquivo" onClick={() => baixarArquivo()}>Baixar arquivo</p>
                     </div>
                   </div>
 
                   <div className="registro_item">
+                    <div className="registro_chave"><strong>Cópias:</strong></div>
+                    <div className="registro_valor">{infoReq.num_copias}</div>
+                  </div>
+
+                  <div className="registro_item">
                     <div className="registro_chave"><strong>Paginas do documento:</strong></div>
-                    <div className="registro_valor"> </div>
+                    <div className="registro_valor">{infoReq.num_paginas}</div>
                   </div>
 
                   <div className="registro_item">
                     <div className="registro_chave"><strong>Total de paginas:</strong> </div>
-                    <div className="registro_valor"> </div>
+                    <div className="registro_valor">{infoReq.total_paginas}</div>
                   </div>
 
                   <div className="registro_item">
                     <div className="registro_chave"><strong>Coordenador: </strong></div>
-                    <div className="registro_valor"> </div>
+                    <div className="registro_valor">{infoReq.total_paginas}</div>
                   </div>
 
                 </div>
@@ -195,73 +308,84 @@ function DetalhesHistorico(props) {
 
                   <div className="registro_item">
                     <div className="registro_chave"><strong>Avaliado:</strong></div>
-                    <div className="registro_valor"> </div>
+                    <div className="registro_valor">{infoReq.feedback}</div>
                   </div>
 
                   <div className="registro_item">
                     <div className="registro_chave"><strong>Data do pedido:</strong></div>
-                    <div className="registro_valor"> </div>
+                    <div className="registro_valor">{infoReq.data_envio}</div>
                   </div>
 
                   <div className="registro_item">
                     <div className="registro_chave"><strong>Data prevista pata entrega:</strong></div>
-                    <div className="registro_valor"> </div>
+                    <div className="registro_valor">{infoReq.data_entrega}</div>
                   </div>
 
                   <div className="registro_item">
                     <div className="registro_chave"><span style={{ color: 'red', textTransform: '' }}>Observação:</span></div>
-                    <div className="registro_valor"> </div>
+                    <div className="registro_valor">{infoReq.observacao}</div>
                   </div>
 
                   <div className="registro_item">
                     <div className="registro_chave"><strong>Acabamento:</strong></div>
-                    <div className="registro_valor"> </div>
+                    <div className="registro_valor">{infoReq.tipo_formato}</div>
                   </div>
 
                   <div className="registro_item">
                     <div className="registro_chave"><strong>Imprimir:</strong></div>
                     <div className="registro_valor_img">
                       <img src={Impressao} alt="impressora" style={{ width: 25, height: 25 }} />
-                      <button style={{marginLeft: 15}} onClick={() => baixarPDF()} type="button" class="btn btn-primary">Click aqui para imprimir</button>
+                      <button style={{ marginLeft: 15 }} onClick={() => baixarPDF()} type="button" class="btn btn-primary">Click aqui para imprimir</button>
                     </div>
                   </div>
 
                 </div>
-                <div className="feedback">
-                  <p><strong>Seu feedback?</strong></p>
+                {dataDeHoje > dataEnvioMais7 ?
+                  <div className="feedback">
+                    <p><strong>Seu feedback?</strong></p>
 
-                  <div className="">
+                    <div className="">
 
-                    <div className="custom-control custom-radio">
-                      <input type="radio" id="customRadio1" name="customRadio" onClick={(e) => setarValorFeedback(e)} className="custom-control-input" value={1} />
-                      <label className="custom-control-label" for="customRadio1">Chegou!!!!</label>
-                      <p>{valorFeedback}</p>
-                    </div>
-                    <div className="custom-control custom-radio">
-                      <input type="radio" id="customRadio2" name="customRadio" onClick={(e) => setarValorFeedback(e)} className="custom-control-input" value={2} />
-                      <label className="custom-control-label" for="customRadio2">Chegou, porém com uma qualidade ruim</label>
-                      <p>{valorFeedback}</p>
-                    </div>
-                    <div className="custom-control custom-radio mb-3">
-                      <input type="radio" id="customRadio3" name="customRadio" onClick={(e) => setarValorFeedback(e)} className="custom-control-input" value={3} />
-                      <label className="custom-control-label" for="customRadio3">Não Chegou</label>
-                      <p>{valorFeedback}</p>
+                      <div className="custom-control custom-radio">
+                        <input type="radio" id="customRadio1" name="customRadio" onClick={(e) => setarValorFeedback(e)} className="custom-control-input" value={1} />
+                        <label className="custom-control-label" for="customRadio1">Chegou!!!!</label>
+                        <p>{valorFeedback}</p>
+                      </div>
+                      <div className="custom-control custom-radio">
+                        <input type="radio" id="customRadio2" name="customRadio" onClick={(e) => setarValorFeedback(e)} className="custom-control-input" value={2} />
+                        <label className="custom-control-label" for="customRadio2">Chegou, porém com uma qualidade ruim</label>
+                        <p>{valorFeedback}</p>
+                      </div>
+                      <div className="custom-control custom-radio mb-3">
+                        <input type="radio" id="customRadio3" name="customRadio" onClick={(e) => setarValorFeedback(e)} className="custom-control-input" value={3} />
+                        <label className="custom-control-label" for="customRadio3">Não Chegou</label>
+                        <p>{valorFeedback}</p>
+                      </div>
+
                     </div>
 
+
+                    <button onClick={EnviarFeedback} type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Enviar</button>
+                  </div> :
+                  <div className="feedback" style={{ height: 200 }}>
+                    <p><strong>Seu Feedback ainda não está disponível, so apenas depois de 7 dias</strong></p>
                   </div>
+                }
 
+                {dataDeHoje < dataEnvioMais1 ?
+                  <div className="cancelar">
+                    <p><strong>Deseja cancelar esse pedido ?</strong></p>
+                    <button type="button" class="btn btn-light">Cancelar</button>
+                  </div> :
+                  <div className="cancelar">
+                    <p><strong>Você não pode mais cancelar o pedido</strong></p>
+                  </div>
+                }
 
-                  <button onClick={EnviarFeedback} type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Enviar</button>
-                </div>
-
-                <div className="cancelar">
-                  <p><strong>Deseja cancelar esse pedido ?</strong></p>
-                  <button type="button" class="btn btn-light">Cancelar</button>
-                </div>
               </Information>
 
-              <p>{registro}</p>
-              <p>basta pegar a variavel registro que tera o codigo do regidtro a ser mostrado e fazer um fetch para ppegar o respectivo registro</p>
+              {/* <p>{registro}</p>
+              <p>basta pegar a variavel registro que tera o codigo do regidtro a ser mostrado e fazer um fetch para ppegar o respectivo registro</p> */}
 
             </Adm_Area>
             {/* Modal  */}

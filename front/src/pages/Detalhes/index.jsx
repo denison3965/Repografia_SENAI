@@ -45,7 +45,7 @@ function Detalhes(props) {
   console.log(props.location.state.registro[0])
 
   const [registro, setRegistro] = useState('')
-  const [nomeArquivo, setNomeArquivo] = useState('')
+
 
   useEffect(() => {
     setRegistro(props.location.state.registro[0])
@@ -218,7 +218,7 @@ function Detalhes(props) {
 
                 <div className="registro_item">
                   <div className="registro_chave"><strong>Coordenador: </strong></div>
-                  <div className="registro_valor">{infoReq.cargo_funcionario}</div>
+                  <div className="registro_valor">{infoReq.total_paginas}</div>
                 </div>
 
               </div>
@@ -261,8 +261,8 @@ function Detalhes(props) {
 
             </Information>
 
-            <p>{registro}</p>
-            <p>basta pegar a variavel registro que tera o codigo do regidtro a ser mostrado e fazer um fetch para ppegar o respectivo registro</p>
+            {/* <p>{registro}</p>
+            <p>basta pegar a variavel registro que tera o codigo do regidtro a ser mostrado e fazer um fetch para ppegar o respectivo registro</p> */}
 
           </Adm_Area>
 
