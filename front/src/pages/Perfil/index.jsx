@@ -50,7 +50,7 @@ function Perfil() {
             setShowPage(true)
 
             //Pegando as informacoes do user pelo nif
-            let url = "http://localhost:3000/v1/buscar-user-nif/" + `${res.data[0].nif}`
+            let url = `${process.env.REACT_APP_SERVER_BASE}/buscar-user-nif/${res.data[0].nif}`
 
             axios.get(url).then(async (res) => {
 
@@ -74,7 +74,7 @@ function Perfil() {
    console.log(infoUser)
 
    function fazerSingOut() {
-      axios.post('http://localhost:3000/v1/logout')
+      axios.post(`${process.env.REACT_APP_SERVER_BASE}/logout`)
          .then((res) => {
 
             let nullValue = res.data.token
@@ -88,7 +88,7 @@ function Perfil() {
 
    //confirmação de editar a senha 
    function editarSenha() {
-      axios.put('http://localhost:3000/v1/editarSenha', {
+      axios.put(`${process.env.REACT_APP_SERVER_BASE}/editarSenha`, {
          senhaAtual: senhaAtual,
          novaSenha: novaSenha,
          confirmarSenha: confirmarSenha,
@@ -143,7 +143,7 @@ function Perfil() {
 
                      <div className="informacao">
                         <div className="email">e-mail: {infoUser.email}</div>
-                        <div className="cargo">Cargo:</div>
+                        <div className="cargo">Cargo: {infoUser.nome_cargo}</div>
                      </div>
 
                      <div className="senha_posicao">

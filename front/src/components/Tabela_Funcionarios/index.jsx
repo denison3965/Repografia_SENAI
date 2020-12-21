@@ -83,7 +83,7 @@ export class Tabela_Funcionarios extends Component {
     this.getData();
 
     //Pegando os cargos para listar
-    axios.get("http://localhost:3000/v1/pegar-cargos").then(async (res) => {
+    axios.get(`${process.env.REACT_APP_SERVER_BASE}/pegar-cargos`).then(async (res) => {
       const dados = res.data
 
       const options = dados.map(d => ({
@@ -103,7 +103,7 @@ export class Tabela_Funcionarios extends Component {
 
     //Aqui vai o fetch para a api pegar os registros no banco de dados
 
-    axios.get('http://localhost:3000/v1/pegar-funcionarios')
+    axios.get(`${process.env.REACT_APP_SERVER_BASE}/pegar-funcionarios`)
       .then((res) => {
 
         //Retirando todos os usuarios inativos e deixando apenas os ativos para serem listados
@@ -139,6 +139,9 @@ export class Tabela_Funcionarios extends Component {
 
 
   }
+  refreshPage(){ 
+    window.location.reload(); 
+  }
 
   updateSearch(event) {
     this.setState({ search: event.target.value.substr(0, 20) })
@@ -173,7 +176,7 @@ export class Tabela_Funcionarios extends Component {
   //Setar nome e nif do usuario selecionado para executar alguma acao  editar usuario
   handleNameNif_edit(nif) {
     //setando valores do usuario para editar
-    let url = `http://localhost:3000/v1/buscar-user-nif/${nif}`
+    let url = `${process.env.REACT_APP_SERVER_BASE}/buscar-user-nif/${nif}`
     axios.get(url).then((res) => {
 
       this.setState({
@@ -198,26 +201,24 @@ export class Tabela_Funcionarios extends Component {
   handleEcluirUser(nif) {
     alert("Usuario " + nif + " Excluido com sucesso")
 
-    axios.put('http://localhost:3000/v1/excluirfuncionarios', {
+    axios.put(`${process.env.REACT_APP_SERVER_BASE}/excluirfuncionarios`, {
       nif: this.state.UserParaDeletar,
     }).then((res) => {
       console.log(res)
     })
     // EXCLUIR AQUI !!!!!
+    window.location.reload(); 
   }
   c
   handleResetarSenha(nif) {
-    console.log(this.state.UserNif)
-    axios.put('http://localhost:3000/v1/resetarSenha', {
-      senha: 'senai115',
-      UserNif: this.state.UserNif
+   
+
+    axios.put(`${process.env.REACT_APP_SERVER_BASE}/resetarSenha`, {
+      nif: nif
     }).then((res) => {
-       console.log(res)
-      if(res.data === "Senha restaurada com sucesso !!"){
-        alert("Usuario" + '-' + nif + '-' + "teve a senha restaurada com sucesso")
-      }
-    }).catch((err)=>{
-      console.log(err)
+      alert("Usuario" + nif + "teve a senha restaurada para 'senai115'")
+    }).catch ((err) => {
+      alert("Houve um erro ao restaurar a senha do funcionario")
     })
     // RESETAR SENHA AQUI !!!!!
 
@@ -226,7 +227,9 @@ export class Tabela_Funcionarios extends Component {
 
   handleEditUser(nif) {
 
-    axios.put('http://localhost:3000/v1/editar-funcionario', {
+
+
+    axios.put(`${process.env.REACT_APP_SERVER_BASE}/editar-funcionario`, {
 
       nome: this.state.UserName,
       sobrenome: this.state.UserSobreNome,
@@ -249,9 +252,7 @@ export class Tabela_Funcionarios extends Component {
     // EDITAR AQUI AQUI !!!!!
   }
 
-  refreshPage(){ 
-    window.location.reload(); 
-  }
+
 
   handleChangeCargo(e) {
     this.setState({ IdCargo: e.value })

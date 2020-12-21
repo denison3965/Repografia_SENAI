@@ -58,7 +58,7 @@ function Formulario() {
                 setShowPage(true)
 
                 //Pegando as informacoes do user pelo nif
-                let url = "http://localhost:3000/v1/buscar-user-nif/" + `${res.data[0].nif}`
+                let url = `${process.env.REACT_APP_SERVER_BASE}/buscar-user-nif/${res.data[0].nif}`
 
                 axios.get(url).then(async (res) => {
 
@@ -70,7 +70,7 @@ function Formulario() {
 
                 //Pegando lista de departamento
 
-                axios.get('http://localhost:3000/v1/pegar-departamento').then((res) => {
+                axios.get(`${process.env.REACT_APP_SERVER_BASE}/pegar-departamento`).then((res) => {
 
                     const options = res.data.map(d => ({
                         "value": d.id_departamento,
@@ -83,7 +83,7 @@ function Formulario() {
                 })
 
                 //Pegando fornecedor
-                axios.get('http://localhost:3000/v1/pegar-fornecedor').then((res) => {
+                axios.get(`${process.env.REACT_APP_SERVER_BASE}/pegar-fornecedor`).then((res) => {
 
                     setFornecedor(res.data[0])
                 })
@@ -155,12 +155,15 @@ function Formulario() {
     const [departamento, setDepartamento] = useState(null);
     const [responsavel, setResponsavel] = useState(null);
     const [numeroReq, setNumeroReq] = useState(null)
+    const [fileUploaed, setFileUploaed] = useState(null)
 
 
     function onChangeHandler(event) {
 
         const uploadfile = event.target.files[0];
+        console.log("OLHA AQUI")
         console.log(uploadfile)
+        setFileUploaed(uploadfile)
 
     }
 
@@ -196,7 +199,7 @@ function Formulario() {
 
 
 
-    
+
 
 
     //Logica para pegar o radio marcado
@@ -213,8 +216,10 @@ function Formulario() {
         setRadioFormato(e.target.value)
     }
 
-     
 
+    const data_to_upload_file = {
+        "file": fileUploaed,
+    }
     const data = {
 
         "nomeSolicitante": infoUser.nome,
@@ -241,58 +246,72 @@ function Formulario() {
         "formato": radioFormato,
         "suporte": radioSuporte,
         "coodernador": responsavel,
-        "arquivoExemplar": '',
 
     }
 
 
-     
+
 
     function EnviarFormulario() {
-        
 
+        let numero_teste
         //Enviar Informmacoes para gravar no banco de dados
-        axios.post('http://localhost:3000/v1/add-requisicao', data)
-            .then((res) => {   
-
-            if(res.data.message === 'Requisição feita com sucesso !'){
-                setMsgError(null)
-
-                console.log(res.data.numeroReq)
-
-   
-                data.numero = res.data.numeroReq
-                setNumeroReq(res.data.numeroReq)
-
-
-                setMsgAcerto(res.data.message)
-                
-                
-                
-
-            }
-            else{
-                setMsgAcerto(null)
-                setMsgError(res.data.message)
-            }
-            }).catch((err) => {
-                console.log(err)
-            })
-        
-
-        
-    }
-
-    function imprimirPdf() {
-
-        console.log(data)
-
         axios.post('http://localhost:3000/v1/add-requisicao', data)
             .then((res) => {
 
                 if (res.data.message === 'Requisição feita com sucesso !') {
                     setMsgError(null)
+                    console.log(res.data)
+
+
+                    data.numero = res.data.numeroReq
+                    numero_teste = res.data.numeroReq
+                    setNumeroReq(res.data.numeroReq)
+
+
                     setMsgAcerto(res.data.message)
+
+                    console.log(data_to_upload_file)
+
+                    const myFile = new FormData();
+                    myFile.append('file', fileUploaed)
+                    myFile.append('id_requisicao', res.data.numeroReq)
+
+                    //Gravar o arquivo exemplar no banco
+                    axios.post('http://localhost:3000/v1/file-requisicao', myFile).then((res) => {
+                        console.log(res)
+                    })
+                    data.numero = numero_teste
+                    console.log(data.numero)
+
+                    //Gerando pdf
+                    axios.post('http://localhost:3000/v1/criar-pdf-requisicao', data).then((result) => {
+                        console.log(result.data.filename)
+
+                        //Pegando o nome do arquivo que esta dentro de uma url
+                        let url = result.data.filename
+
+                        let array_url = url.split('/')
+
+                        let nome_pdf = array_url[array_url.length - 1];
+
+                        console.log(nome_pdf)
+
+                        //Pegando pdf do servidor e imprimindo ele
+                        axios({
+                            url: `http://localhost:3000/v1/pegar-pdf-requisicao/${nome_pdf}`, //your url
+                            method: 'GET',
+                            responseType: 'blob', // important
+                        }).then((response) => {
+                            const url = window.URL.createObjectURL(new Blob([response.data]));
+                            const link = document.createElement('a');
+                            link.href = url;
+                            link.setAttribute('download', 'file.pdf'); //or any other extension
+                            document.body.appendChild(link);
+                            link.click();
+                        });
+                    })
+
                 }
                 else {
                     setMsgAcerto(null)
@@ -301,37 +320,7 @@ function Formulario() {
             }).catch((err) => {
                 console.log(err)
             })
-
-
-        //Gerando pdf
-        axios.post('http://localhost:3000/v1/criar-pdf-requisicao',data).then((result) => {
-            console.log(result.data.filename)
-
-            //Pegando o nome do arquivo que esta dentro de uma url
-                let url = result.data.filename
-
-                let array_url = url.split('/')
-
-                let nome_pdf = array_url[array_url.length - 1];
-
-            console.log(nome_pdf)
-
-            //Pegando pdf do servidor e imprimindo ele
-            axios({
-                url: `http://localhost:3000/v1/pegar-pdf-requisicao/${nome_pdf}`, //your url
-                method: 'GET',
-                responseType: 'blob', // important
-              }).then((response) => {
-                 const url = window.URL.createObjectURL(new Blob([response.data]));
-                 const link = document.createElement('a');
-                 link.href = url;
-                 link.setAttribute('download', 'file.pdf'); //or any other extension
-                 document.body.appendChild(link);
-                 link.click();
-              });
-        })
     }
-
 
     return (
         <div>
@@ -344,302 +333,299 @@ function Formulario() {
                             <Link to="/"><div className="sair--button"><p>Sair</p></div> </Link>
                         </div>
 
-                        
-                            <Container>
-                                <form className="form_esquerda">
 
-                                    <div className="inf_solicitacao">
-                                        <div className="div_titulo_form"><p className="titulo_form">Informações da solicitação</p></div>
+                        <Container>
+                            <form className="form_esquerda">
 
-                                        <div className="div1_informacao">
-                                            <div className="div1_p">
-                                                <p>Nome do Solicitante:</p>
-                                                <p className="p_resposta">{infoUser.nome + " " + infoUser.sobrenome}</p>
-                                            </div>
-                                            <div className="div1_p">
-                                                <p>Escola solicitante:</p>
-                                                <p className="p_resposta">SENAI 1.15</p>
-                                            </div>
-                                            <div className="div1_p">
-                                                <p>Telefone:</p>
-                                                <p className="p_resposta">{infoUser.telefone}</p>
-                                            </div>
-                                            <div className="div1_p">
-                                                <p>Data de solicitação:</p>
-                                                <p className="p_resposta">{dataSolicitante}</p>
-                                            </div>
-                                            <div className="div1_p">
-                                                <p>Data esperada para a entrega:</p>
-                                                <p className="p_resposta">{dataEntrega}</p>
-                                            </div>
+                                <div className="inf_solicitacao">
+                                    <div className="div_titulo_form"><p className="titulo_form">Informações da solicitação</p></div>
 
+                                    <div className="div1_informacao">
+                                        <div className="div1_p">
+                                            <p>Nome do Solicitante:</p>
+                                            <p className="p_resposta">{infoUser.nome + " " + infoUser.sobrenome}</p>
                                         </div>
-                                    </div>
-
-                                    <div className="inf_requisicao">
-                                        <div className="div_titulo_form"><p className="titulo_form">Informações da requisição</p></div>
-
-                                        <div className="div2_informacao">
-                                            <div className="div2_p_input">
-                                                <p>Fornecedor:</p>
-                                                <p className="p_resposta">{fornecedor.nome_fornecedor}</p>
-                                            </div>
-                                            <div className="div2_p_input">
-                                                <p>Número:</p>
-                                                <p className="p_resposta"></p>
-                                            </div>
-                                            <div className="div2_p_input">
-                                                <p>Nome da requisição:</p>
-                                                <input onChange={e => setNomeReq(e.target.value)} placeholder="Título da sua requisição..." maxlength="50" className="div2_input_text" type="text" />
-                                            </div>
-
-                                            <div className="div2_p_input">
-                                                <p>Páginas:</p>
-                                                <input onChange={
-                                                    function (e) {
-                                                        setPaginas(e.target.value)
-                                                        setAuxi(true)
-                                                    }
-                                                } placeholder="0" className="div2_input_number" type="number" />
-                                            </div>
-                                            <div className="div2_p_input">
-                                                <p>Cópias:</p>
-                                                <input onChange={
-                                                    function (e) {
-                                                        setCopias(e.target.value)
-                                                        setAuxi(true)
-                                                    }
-                                                } placeholder="0" className="div2_input_number" type="number" />
-                                            </div>
-                                            <div className="div2_p_input">
-                                                <p>Total de páginas:</p>
-                                                <p className="p_resposta">{totalPaginas}</p>
-                                            </div>
+                                        <div className="div1_p">
+                                            <p>Escola solicitante:</p>
+                                            <p className="p_resposta">SENAI 1.15</p>
                                         </div>
-                                        <div className="div_OBS">
-                                            <p className="div_OBS_titulo">Observação:</p>
-                                            <textarea onChange={e => setObservacao(e.target.value)} className="div_OBS_input" placeholder="Escreva uma breve observação (não obrigatório)..." maxlength="255"></textarea>
+                                        <div className="div1_p">
+                                            <p>Telefone:</p>
+                                            <p className="p_resposta">{infoUser.telefone}</p>
+                                        </div>
+                                        <div className="div1_p">
+                                            <p>Data de solicitação:</p>
+                                            <p className="p_resposta">{dataSolicitante}</p>
+                                        </div>
+                                        <div className="div1_p">
+                                            <p>Data esperada para a entrega:</p>
+                                            <p className="p_resposta">{dataEntrega}</p>
                                         </div>
 
                                     </div>
+                                </div>
 
-                                </form>
+                                <div className="inf_requisicao">
+                                    <div className="div_titulo_form"><p className="titulo_form">Informações da requisição</p></div>
 
-                                <form className="form_direita">
-                                    <div className="div_dropdown_form_direita">
-                                        <div className="campo_select">
-                                            <Select style={{ width: "500px" }} options={optionsDepartamento} isSearchable required onChange={(e) => setDepartamento(e.value)} />
+                                    <div className="div2_informacao">
+                                        <div className="div2_p_input">
+                                            <p>Fornecedor:</p>
+                                            <p className="p_resposta">{fornecedor.nome_fornecedor}</p>
+                                        </div>
+                                        <div className="div2_p_input">
+                                            <p>Número:</p>
+                                            <p className="p_resposta"></p>
+                                        </div>
+                                        <div className="div2_p_input">
+                                            <p>Nome da requisição:</p>
+                                            <input onChange={e => setNomeReq(e.target.value)} placeholder="Título da sua requisição..." maxlength="50" className="div2_input_text" type="text" />
                                         </div>
 
-                                        <div className="campo_CC">
-                                            <p>{listaDepartamento.map((element) => {
-                                                if (element.id_departamento == departamento) {
-                                                    return element.centro_custo
+                                        <div className="div2_p_input">
+                                            <p>Páginas:</p>
+                                            <input onChange={
+                                                function (e) {
+                                                    setPaginas(e.target.value)
+                                                    setAuxi(true)
                                                 }
-                                            })}</p>
+                                            } placeholder="0" className="div2_input_number" type="number" />
+                                        </div>
+                                        <div className="div2_p_input">
+                                            <p>Cópias:</p>
+                                            <input onChange={
+                                                function (e) {
+                                                    setCopias(e.target.value)
+                                                    setAuxi(true)
+                                                }
+                                            } placeholder="0" className="div2_input_number" type="number" />
+                                        </div>
+                                        <div className="div2_p_input">
+                                            <p>Total de páginas:</p>
+                                            <p className="p_resposta">{totalPaginas}</p>
                                         </div>
                                     </div>
+                                    <div className="div_OBS">
+                                        <p className="div_OBS_titulo">Observação:</p>
+                                        <textarea onChange={e => setObservacao(e.target.value)} className="div_OBS_input" placeholder="Escreva uma breve observação (não obrigatório)..." maxlength="255"></textarea>
+                                    </div>
 
-                                    <div className="acabamento">
-                                        <div className="div_titulo_form"><p className="titulo_form">Acabamento</p></div>
-                                        <div className="div1_acabamento">
+                                </div>
 
-                                            <div className="div_checkbox">
-                                                <label className="container">2 Grampos a cavalo
+                            </form>
+
+                            <form className="form_direita">
+                                <div className="div_dropdown_form_direita">
+                                    <div className="campo_select">
+                                        <Select style={{ width: "500px" }} options={optionsDepartamento} isSearchable required onChange={(e) => setDepartamento(e.value)} />
+                                    </div>
+
+                                    <div className="campo_CC">
+                                        <p>{listaDepartamento.map((element) => {
+                                            if (element.id_departamento == departamento) {
+                                                return element.centro_custo
+                                            }
+                                        })}</p>
+                                    </div>
+                                </div>
+
+                                <div className="acabamento">
+                                    <div className="div_titulo_form"><p className="titulo_form">Acabamento</p></div>
+                                    <div className="div1_acabamento">
+
+                                        <div className="div_checkbox">
+                                            <label className="container">2 Grampos a cavalo
                                                     <input className="container_input_checkbox" type="checkbox" name="2 Grampos a cavalo" onChange={handleChange} />
-                                                    <span className="checkmark"></span>
-                                                </label>
-                                                <label className="container">Encadernação com espiral
+                                                <span className="checkmark"></span>
+                                            </label>
+                                            <label className="container">Encadernação com espiral
                                                     <input className="container_input_checkbox" type="checkbox" name="Encadernação com espiral" onChange={handleChange} />
-                                                    <span className="checkmark"></span>
-                                                </label>
-                                            </div>
+                                                <span className="checkmark"></span>
+                                            </label>
+                                        </div>
 
 
-                                            <div className="div_checkbox">
-                                                <label className="container">2 Grampos laterais
+                                        <div className="div_checkbox">
+                                            <label className="container">2 Grampos laterais
                                                     <input className="container_input_checkbox" type="checkbox" name="2 Grampos laterais" onChange={handleChange} />
-                                                    <span className="checkmark"></span>
-                                                </label>
-                                                <label className="container">Capa em PVC
+                                                <span className="checkmark"></span>
+                                            </label>
+                                            <label className="container">Capa em PVC
                                                      <input className="container_input_checkbox" type="checkbox" name="Capa em PVC" onChange={handleChange} />
-                                                    <span className="checkmark"></span>
-                                                </label>
-                                            </div>
+                                                <span className="checkmark"></span>
+                                            </label>
+                                        </div>
 
-                                            <div className="div_checkbox">
-                                                <label className="container">Reduzido
+                                        <div className="div_checkbox">
+                                            <label className="container">Reduzido
                                                     <input className="container_input_checkbox" type="checkbox" name="Reduzido" onChange={handleChange} />
-                                                    <span className="checkmark"></span>
-                                                </label>
-                                                <label className="container">Capa em papel 150g/m2
+                                                <span className="checkmark"></span>
+                                            </label>
+                                            <label className="container">Capa em papel 150g/m2
                                                     <input className="container_input_checkbox" type="checkbox" name="Capa em papel 150g/m2" onChange={handleChange} />
-                                                    <span className="checkmark"></span>
-                                                </label>
-                                            </div>
+                                                <span className="checkmark"></span>
+                                            </label>
+                                        </div>
 
-                                            <div className="div_checkbox">
-                                                <label className="container" >Preto e branco
+                                        <div className="div_checkbox">
+                                            <label className="container" >Preto e branco
                                                     <input className="container_input_checkbox" type="checkbox" name="preto e branco" onChange={handleChange} />
-                                                    <span className="checkmark"></span>
-                                                </label>
-                                                <label className="container">Colorido
+                                                <span className="checkmark"></span>
+                                            </label>
+                                            <label className="container">Colorido
                                                     <input className="container_input_checkbox" type="checkbox" name="Colorido" onChange={handleChange} />
-                                                    <span className="checkmark"></span>
-                                                </label>
-                                            </div>
+                                                <span className="checkmark"></span>
+                                            </label>
+                                        </div>
 
-                                            <div className="div_checkbox">
-                                                <label className="container">Frente e verso
+                                        <div className="div_checkbox">
+                                            <label className="container">Frente e verso
                                                     <input className="container_input_checkbox" type="checkbox" name="Frente e verso" onChange={handleChange} />
-                                                    <span className="checkmark"></span>
+                                                <span className="checkmark"></span>
+                                            </label>
+                                            <label className="container">
+                                                <input className="container_input_checkbox" type="checkbox" />
+                                            </label>
+                                        </div>
+
+
+                                    </div>
+
+                                    <div className="acabamento_sub_titulo_form"><p className="titulo_form">Formato</p></div>
+
+                                    <div className="div3_acabamento">
+                                        <div className="div_checkbox">
+
+                                            <div class="form-check container" style={{ marginBottom: 1 }} >
+                                                <input style={{ height: 20, width: 20, marginLeft: -30 }} class="form-check-input" onClick={(e) => setasValorFormato(e)} type="radio" name="exampleRadios2" id="exampleRadios1" value={1} />
+                                                <label class="form-check-label" for="exampleRadios1">
+                                                    <p className="p_radio">A3</p>
                                                 </label>
-                                                <label className="container">
-                                                    <input className="container_input_checkbox" type="checkbox" />
+                                            </div>
+                                            <div class="form-check container">
+                                                <input style={{ height: 20, width: 20, marginLeft: -30 }} class="form-check-input" onClick={(e) => setasValorFormato(e)} type="radio" name="exampleRadios2" id="exampleRadios2" value={3} />
+                                                <label class="form-check-label" for="exampleRadios2">
+                                                    <p className="p_radio">A5</p>
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <div className="div_checkbox container">
+                                            <div class="form-check container" style={{ marginBottom: 1 }}>
+                                                <input style={{ height: 20, width: 20, marginLeft: -30 }} class="form-check-input" onClick={(e) => setasValorFormato(e)} type="radio" name="exampleRadios2" id="exampleRadios3" value={2} />
+                                                <label class="form-check-label" for="exampleRadios3">
+                                                    <p className="p_radio">A4</p>
                                                 </label>
                                             </div>
 
-
-                                        </div>
-
-                                        <div className="acabamento_sub_titulo_form"><p className="titulo_form">Formato</p></div>
-
-                                        <div className="div3_acabamento">
-                                            <div className="div_checkbox">
-
-                                                <div class="form-check container" style={{ marginBottom: 1 }} >
-                                                    <input style={{ height: 20, width: 20, marginLeft: -30 }} class="form-check-input" onClick={(e) => setasValorFormato(e)} type="radio" name="exampleRadios2" id="exampleRadios1" value={1} />
-                                                    <label class="form-check-label" for="exampleRadios1">
-                                                        <p className="p_radio">A3</p>
-                                                    </label>
-                                                </div>
-                                                <div class="form-check container">
-                                                    <input style={{ height: 20, width: 20, marginLeft: -30 }} class="form-check-input" onClick={(e) => setasValorFormato(e)} type="radio" name="exampleRadios2" id="exampleRadios2" value={3} />
-                                                    <label class="form-check-label" for="exampleRadios2">
-                                                        <p className="p_radio">A5</p>
-                                                        </label>
-                                                </div>
-                                            </div>
-
-                                            <div className="div_checkbox container">
-                                                <div class="form-check container" style={{ marginBottom: 1 }}>
-                                                    <input style={{ height: 20, width: 20, marginLeft: -30 }} class="form-check-input" onClick={(e) => setasValorFormato(e)} type="radio" name="exampleRadios2" id="exampleRadios3" value={2} />
-                                                    <label class="form-check-label" for="exampleRadios3">
-                                                        <p className="p_radio">A4</p>
-                                                    </label>
-                                                </div>
-
-                                                <div class="form-check container">
-                                                    <input style={{ height: 20, width: 20, marginLeft: -30 }} class="form-check-input" onClick={(e) => setasValorFormato(e)} type="radio" name="exampleRadios2" id="exampleRadios4" value={4} />
-                                                    <label class="form-check-label" for="exampleRadios4">
-                                                        <p className="p_radio">Outros (Colocar em OBS )</p>
-                                                    </label>
-                                                </div>
-
+                                            <div class="form-check container">
+                                                <input style={{ height: 20, width: 20, marginLeft: -30 }} class="form-check-input" onClick={(e) => setasValorFormato(e)} type="radio" name="exampleRadios2" id="exampleRadios4" value={4} />
+                                                <label class="form-check-label" for="exampleRadios4">
+                                                    <p className="p_radio">Outros (Colocar em OBS )</p>
+                                                </label>
                                             </div>
 
                                         </div>
 
-                                        <div className="acabamento_sub_titulo_form"><p className="titulo_form">Suporte</p></div>
+                                    </div>
 
-                                        <div className="div3_acabamento">
+                                    <div className="acabamento_sub_titulo_form"><p className="titulo_form">Suporte</p></div>
 
-                                            <div className="div_checkbox">
+                                    <div className="div3_acabamento">
+
+                                        <div className="div_checkbox">
 
 
 
-                                                <div class="form-check container" style={{ marginBottom: 1 }} >
-                                                    <input style={{ height: 20, width: 20, marginLeft: -30 }} class="form-check-input" onClick={(e) => setasValorSupporte(e)} type="radio" name="exampleRadios" id="exampleRadios5" value={1} />
-                                                    <label class="form-check-label" for="exampleRadios5">
-                                                        <p className="p_radio">Zipdrive</p>
-                                                    </label>
-                                                </div>
-                                                <div class="form-check container">
-                                                    <input style={{ height: 20, width: 20, marginLeft: -30 }} class="form-check-input" onClick={(e) => setasValorSupporte(e)} type="radio" name="exampleRadios" id="exampleRadios6" value={2} />
-                                                    <label class="form-check-label" for="exampleRadios6">
-                                                        <p className="p_radio">Papel</p>
-                                                    </label>
-                                                </div>
+                                            <div class="form-check container" style={{ marginBottom: 1 }} >
+                                                <input style={{ height: 20, width: 20, marginLeft: -30 }} class="form-check-input" onClick={(e) => setasValorSupporte(e)} type="radio" name="exampleRadios" id="exampleRadios5" value={1} />
+                                                <label class="form-check-label" for="exampleRadios5">
+                                                    <p className="p_radio">Zipdrive</p>
+                                                </label>
+                                            </div>
+                                            <div class="form-check container">
+                                                <input style={{ height: 20, width: 20, marginLeft: -30 }} class="form-check-input" onClick={(e) => setasValorSupporte(e)} type="radio" name="exampleRadios" id="exampleRadios6" value={2} />
+                                                <label class="form-check-label" for="exampleRadios6">
+                                                    <p className="p_radio">Papel</p>
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <div className="div_checkbox">
+                                            <div class="form-check container" style={{ marginBottom: 1 }}>
+                                                <input style={{ height: 20, width: 20, marginLeft: -30 }} class="form-check-input" onClick={(e) => setasValorSupporte(e)} type="radio" name="exampleRadios" id="exampleRadios7" value={3} />
+                                                <label class="form-check-label" for="exampleRadios7">
+                                                    <p className="p_radio">Email</p>
+                                                </label>
                                             </div>
 
-                                            <div className="div_checkbox">
-                                                <div class="form-check container" style={{ marginBottom: 1 }}>
-                                                    <input style={{ height: 20, width: 20, marginLeft: -30 }} class="form-check-input" onClick={(e) => setasValorSupporte(e)} type="radio" name="exampleRadios" id="exampleRadios7" value={3} />
-                                                    <label class="form-check-label" for="exampleRadios7">
-                                                        <p className="p_radio">Email</p>
-                                                    </label>
-                                                </div>
+                                            <div class="form-check container">
+                                                <input style={{ height: 20, width: 20, marginLeft: -30 }} class="form-check-input" onClick={(e) => setasValorSupporte(e)} type="radio" name="exampleRadios" id="exampleRadios8" value={4} />
+                                                <label class="form-check-label" for="exampleRadios8">
+                                                    <p className="p_radio">Outros (Colocar em OBS )</p>
+                                                </label>
+                                            </div>
 
-                                                <div class="form-check container">
-                                                    <input style={{ height: 20, width: 20, marginLeft: -30 }} class="form-check-input" onClick={(e) => setasValorSupporte(e)} type="radio" name="exampleRadios" id="exampleRadios8" value={4} />
-                                                    <label class="form-check-label" for="exampleRadios8">
-                                                        <p className="p_radio">Outros (Colocar em OBS )</p>
-                                                    </label>
-                                                </div>
+                                        </div>
+                                    </div>
+                                </div>
 
+                                <div className="div_assinatura">
+                                    <p className="assinatura">Assinatura ______________________________</p>
+                                </div>
+
+
+
+                            </form>
+
+
+
+                            <form className="form_baixo">
+
+                                <select className="dropdown_form_baixo" onChange={e => (setResponsavel(e.target.value))}>
+                                    <option selected value="">Coordenador</option>
+                                    <option value="Sandra Sobrenome"> Sandra Sobrenome</option>
+                                    <option value="Alexandre Sobrenome"> Alexandre Sobrenome</option>
+                                    <option value="Fulano Sobrenome"> Fulano Sobrenome</option>
+                                    <option value="Ciclano Sobrenome"> Ciclano Sobrenome</option>
+                                </select>
+
+                                <h5 className='titulo_upload'>Upload do exemplar:</h5>
+
+                                <div className="div_upload">
+                                    <img className="img_cloud" src={IconCloud} alt="" />
+                                    <p className="text_upload">Arraste e solte um arquivo aqui <br /> ou</p>
+                                    <input type="file" className="cursor-pointer input_exemplar" id="attachment" name="file" onChange={onChangeHandler} />
+                                </div>
+
+                                <button style={{ width: "150px" }} onClick={EnviarFormulario} type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">Enviar</button>
+
+                                {/* Modal  */}
+                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel"></h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div>
+                                                    {msg_error != null ? <div className="alert alert-danger">{msg_error} </div> : null}
+                                                    {msg_acerto != null ? <div className="alert alert-success" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                                                    </div> : null}
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Sair</button>
                                             </div>
                                         </div>
                                     </div>
+                                </div>
 
-                                    <div className="div_assinatura">
-                                        <p className="assinatura">Assinatura ______________________________</p>
-                                    </div>
-
-
-
-                                </form>
-
-
-
-                                <form className="form_baixo">
-
-                                    <select className="dropdown_form_baixo" onChange={e => (setResponsavel(e.target.value))}>
-                                        <option selected value="">Coordenador</option>
-                                        <option value="Sandra Sobrenome"> Sandra Sobrenome</option>
-                                        <option value="Alexandre Sobrenome"> Alexandre Sobrenome</option>
-                                        <option value="Fulano Sobrenome"> Fulano Sobrenome</option>
-                                        <option value="Ciclano Sobrenome"> Ciclano Sobrenome</option>
-                                    </select>
-
-                                    <h5 className='titulo_upload'>Upload do exemplar:</h5>
-
-                                    <div className="div_upload">
-                                        <img className="img_cloud" src={IconCloud} alt="" />
-                                        <p className="text_upload">Arraste e solte um arquivo aqui <br /> ou</p>
-                                        <input type="file" className="cursor-pointer input_exemplar" id="attachment" name="attachment" onChange={onChangeHandler} />
-                                    </div>
-
-                                    <button style={{ width: "150px" }} onClick={EnviarFormulario} type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">Enviar</button>
-
-                                    {/* Modal  */}
-                                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel"></h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <div>
-                                                        {msg_error != null ? <div className="alert alert-danger">{msg_error} </div> : null}
-                                                        {msg_acerto != null ? <div className="alert alert-success" style={{display: 'flex', flexDirection:'column', justifyContent:'center', alignItems: 'center'}}>
-                                                            {msg_acerto}
-                                                            
-                                                            <button type="button" onClick={() => imprimirPdf()} class="btn btn-primary" style={{margin: 15}}>Imprimir</button>
-                                                            </div> : null}
-                                                    </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Sair</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </form>
-                            </Container>
+                            </form>
+                        </Container>
 
                     </Container>
 

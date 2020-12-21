@@ -35,8 +35,21 @@ function Detalhes(props) {
   //Verificando Se o usuario esta autorizado para acessar essa pagina
   const history = useHistory()
   const [showPage, setShowPage] = useState(false)
-  const [infoUser, setInfoUser] = useState({id_requisicao: '', nome_requisicao: '', nif: '', num_paginas: '', num_copias: '', total_paginas: '', observacao: '', data_envio: '', data_entrega: '', id_fornecedor: '', id_formato: '', id_suporte: '', id_departamento: '', id_arquivo: '', id_feedback: '', id_funcionario: ''})
+  const [infoReq, setInfoReq] = useState({ id_requisicao: '', nome_arquivo: '', nome_requisicao: '', nif: '', num_paginas: '', num_copias: '', total_paginas: '', observacao: '', data_envio: '', data_entrega: '', id_fornecedor: '', id_formato: '', id_suporte: '', id_departamento: '', id_arquivo: '', id_feedback: '', id_funcionario: '', })
+  const [infoUser, setInfoUser] = useState({ nome: '', sobrenome: '' })
+
+
+
+
+  //pegando o node do registro a ser mostrado ( tem que pegar o id depois )
+  console.log(props.location.state.registro[0])
+
+  const [registro, setRegistro] = useState('')
+
+
   useEffect(() => {
+    setRegistro(props.location.state.registro[0])
+
 
     console.log('MEU TOKEN E ' + cookies.get('tokenJWT'))
     var token = cookies.get('tokenJWT')
@@ -49,41 +62,93 @@ function Detalhes(props) {
       if (res.data[0].auth) {
         console.log('Voce tem acesso')
         setShowPage(true)
-        
-        //Pegando as informacoes do user pela requisição
-        let url = `http://localhost:3000/v1/pegar-requisicao/${registro}`
 
-        axios.get(url).then(async(result) => {
-            
-            await setInfoUser(result.data[0])
-            
-            console.log(result.data[0])
-            
+        //Pegando as informacoes do user pela requisição
+        let url = `${process.env.REACT_APP_SERVER_BASE}/pegar-uma-requisicao/${props.location.state.registro[0]}`
+
+        console.log(url)
+        console.log(props.location.state.registro[0])
+
+        axios.get(url).then(async (result) => {
+
+          await setInfoReq(result.data[0])
+
+          console.log(result.data[0])
+
 
         }).catch((err) => {
-            console.log(err)
-        }) 
+          console.log(err)
+        })
+
+
+        //Pegando as informacoes do user pelo nif
+        let url2 = `${process.env.REACT_APP_SERVER_BASE}/buscar-user-nif/${res.data[0].nif}`
+
+        axios.get(url2).then(async (res) => {
+
+          await setInfoUser(res.data)
+
+
+        }).catch((err) => {
+          console.log(err)
+        })
+
       }
       else {
         history.push("/")
       }
 
-      
+
 
     }).catch(() => { history.push("/") })
+
+
   }, [])
+
   //**Verificando Se o usuario esta autorizado para acessar essa pagina**
 
-  //pegando o node do registro a ser mostrado ( tem que pegar o id depois )
-  console.log(props.location.state.registro[0])
 
-  const [registro, setRegistro] = useState('')
 
-  useEffect(() => {
-    setRegistro(props.location.state.registro[0])
-  }, [])
+  function baixarPDF() {
 
-  console.log(infoUser)
+
+    let nome_pdf = `${registro}-requisicao.pdf`
+    console.log(nome_pdf)
+
+    //Pegando pdf do servidor e imprimindo ele
+    axios({
+      url: `${process.env.REACT_APP_SERVER_BASE}/pegar-pdf-requisicao/${nome_pdf}`, //your url
+      method: 'GET',
+      responseType: 'blob', // important
+    }).then((response) => {
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', 'file.pdf'); //or any other extension
+      document.body.appendChild(link);
+      link.click();
+    });
+  }
+
+  function baixarArquivo() {
+
+
+    //Pegando arquivo do servidor e imprimindo ele
+    axios({
+      url: `${process.env.REACT_APP_SERVER_BASE}/pegar-arquivo/${infoReq.nome_arquivo}`, //your url
+      method: 'GET',
+      responseType: 'blob', // important
+    }).then((response) => {
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', 'file.pdf'); //or any other extension
+      document.body.appendChild(link);
+      link.click();
+    });
+  }
+
+  console.log(infoReq)
 
   return (
 
@@ -97,7 +162,7 @@ function Detalhes(props) {
           ?
           <Adm_Area>
             <div className="User_Box_Info_Area">
-              <User_Box_Info />
+              <User_Box_Info nome={infoUser.nome} sobrenome={infoUser.sobrenome} />
               <hr></hr>
             </div>
 
@@ -105,55 +170,55 @@ function Detalhes(props) {
               <div className="left-side">
                 <div className="registro_item">
                   <div className="registro_chave"><strong>Numero da requisicao:</strong></div>
-                  <div className="registro_valor">{infoUser.id_requisicao}</div>
+                  <div className="registro_valor">{infoReq.id_requisicao}</div>
                 </div>
 
                 <div className="registro_item">
                   <div className="registro_chave"><strong>Nome da requisicao :</strong></div>
-                  <div className="registro_valor">{infoUser.nome_requisicao}</div>
+                  <div className="registro_valor">{infoReq.nome_requisicao}</div>
                 </div>
 
                 <div className="registro_item">
                   <div className="registro_chave"><strong>Nome do solicitante: </strong></div>
-                  <div className="registro_valor">{infoUser.nome_fornecedor}</div>
+                  <div className="registro_valor">{infoReq.nome_fornecedor}</div>
                 </div>
 
                 <div className="registro_item">
                   <div className="registro_chave"><strong>cc:</strong></div>
-                  <div className="registro_valor">{infoUser.centro_custo}</div>
+                  <div className="registro_valor">{infoReq.centro_custo}</div>
                 </div>
 
                 <div className="registro_item">
                   <div className="registro_chave"><strong>Departamento:</strong></div>
-                  <div className="registro_valor">{infoUser.id_departamento}</div>
+                  <div className="registro_valor">{infoReq.id_departamento}</div>
                 </div>
 
                 <div className="registro_item">
                   <div className="registro_chave"><strong>Arquivo solicitado para copia: </strong></div>
                   <div className="registro_valor_img">
                     <img src={Baixar} alt="impressora" style={{ width: 20, height: 20 }} />
-                    <p>{infoUser.nome_arquivo}: {infoUser.url}</p>
+                    <p className="baixar_arquivo" onClick={() => baixarArquivo()}>Baixar arquivo</p>
                   </div>
                 </div>
 
                 <div className="registro_item">
                   <div className="registro_chave"><strong>Cópias:</strong></div>
-                  <div className="registro_valor">{infoUser.num_copias}</div> 
+                  <div className="registro_valor">{infoReq.num_copias}</div>
                 </div>
 
                 <div className="registro_item">
                   <div className="registro_chave"><strong>Paginas do documento:</strong></div>
-                  <div className="registro_valor">{infoUser.num_paginas}</div>
+                  <div className="registro_valor">{infoReq.num_paginas}</div>
                 </div>
 
                 <div className="registro_item">
                   <div className="registro_chave"><strong>Total de paginas:</strong> </div>
-                  <div className="registro_valor">{infoUser.total_paginas}</div>
+                  <div className="registro_valor">{infoReq.total_paginas}</div>
                 </div>
 
                 <div className="registro_item">
                   <div className="registro_chave"><strong>Coordenador: </strong></div>
-                  <div className="registro_valor">{infoUser.cargo_funcionario}</div>
+                  <div className="registro_valor">{infoReq.total_paginas}</div>
                 </div>
 
               </div>
@@ -161,34 +226,34 @@ function Detalhes(props) {
 
                 <div className="registro_item">
                   <div className="registro_chave"><strong>Avaliado:</strong></div>
-                  <div className="registro_valor">{infoUser.feedback}</div>
+                  <div className="registro_valor">{infoReq.feedback}</div>
                 </div>
 
                 <div className="registro_item">
                   <div className="registro_chave"><strong>Data do pedido:</strong></div>
-                  <div className="registro_valor">{infoUser.data_envio}</div>
+                  <div className="registro_valor">{infoReq.data_envio}</div>
                 </div>
 
                 <div className="registro_item">
                   <div className="registro_chave"><strong>Data prevista pata entrega:</strong></div>
-                  <div className="registro_valor">{infoUser.data_entrega}</div>
+                  <div className="registro_valor">{infoReq.data_entrega}</div>
                 </div>
 
                 <div className="registro_item">
                   <div className="registro_chave"><span style={{ color: 'red', textTransform: '' }}>Observação:</span></div>
-                  <div className="registro_valor">{infoUser.observacao}</div>
+                  <div className="registro_valor">{infoReq.observacao}</div>
                 </div>
 
                 <div className="registro_item">
                   <div className="registro_chave"><strong>Acabamento:</strong></div>
-                  <div className="registro_valor">{infoUser.tipo_formato}</div>
+                  <div className="registro_valor">{infoReq.tipo_formato}</div>
                 </div>
 
                 <div className="registro_item">
                   <div className="registro_chave"><strong>Imprimir:</strong></div>
                   <div className="registro_valor_img">
                     <img src={Impressao} alt="impressora" style={{ width: 25, height: 25 }} />
-                    <p> Click aqui para impremir</p>
+                    <button style={{ marginLeft: 15 }} onClick={() => baixarPDF()} type="button" class="btn btn-primary">Click aqui para imprimir</button>
                   </div>
                 </div>
 
@@ -196,8 +261,8 @@ function Detalhes(props) {
 
             </Information>
 
-            <p>{registro}</p>
-            <p>basta pegar a variavel registro que tera o codigo do regidtro a ser mostrado e fazer um fetch para ppegar o respectivo registro</p>
+            {/* <p>{registro}</p>
+            <p>basta pegar a variavel registro que tera o codigo do regidtro a ser mostrado e fazer um fetch para ppegar o respectivo registro</p> */}
 
           </Adm_Area>
 

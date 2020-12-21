@@ -53,8 +53,13 @@ export const Information = styled.div`
             margin-left: 2vw;
             display: flex;
             p {
-              margin-left: 10px
+              margin-left: 10px;
             }
+          
+          }
+          .baixar_arquivo:hover{
+            color: red;
+            cursor: pointer;
           }
         }
 
