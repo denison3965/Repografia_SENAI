@@ -340,7 +340,7 @@ function DetalhesHistorico(props) {
                   </div>
 
                 </div>
-                {dataDeHoje > dataEnvioMais7 ?
+                {dataDeHoje > 1 ?
                   <div className="feedback">
                     <p><strong>Seu feedback?</strong></p>
 

@@ -258,7 +258,7 @@ function Formulario() {
 
 
         //Enviar Informmacoes para gravar no banco de dados
-        axios.post('http://localhost:3000/v1/add-requisicao', data)
+        axios.post(`${process.env.REACT_APP_SERVER_BASE}/add-requisicao`, data)
             .then((res) => {
 
                 if (res.data.message === 'Requisição feita com sucesso !') {
@@ -282,7 +282,7 @@ function Formulario() {
                     myFile.append('id_requisicao', res.data.numeroReq)
 
                     //Gravar o arquivo exemplar no banco
-                    axios.post('http://localhost:3000/v1/file-requisicao', myFile).then((res) => {
+                    axios.post(`${process.env.REACT_APP_SERVER_BASE}/file-requisicao`, myFile).then((res) => {
                         console.log(res)
                     })
 
@@ -291,7 +291,7 @@ function Formulario() {
                     console.log(data.numero)
 
                     //Gerando pdf
-                    axios.post('http://localhost:3000/v1/criar-pdf-requisicao', data).then((result) => {
+                    axios.post(`${process.env.REACT_APP_SERVER_BASE}/criar-pdf-requisicao`, data).then((result) => {
                         console.log(result.data.filename)
 
                         //Pegando o nome do arquivo que esta dentro de uma url
@@ -305,7 +305,7 @@ function Formulario() {
 
                         //Pegando pdf do servidor e imprimindo ele
                         axios({
-                            url: `http://localhost:3000/v1/pegar-pdf-requisicao/${nome_pdf}`, //your url
+                            url: `${process.env.REACT_APP_SERVER_BASE}/pegar-pdf-requisicao/${nome_pdf}`, //your url
                             method: 'GET',
                             responseType: 'blob', // important
                         }).then((response) => {
@@ -323,7 +323,7 @@ function Formulario() {
                 }
                 else {
                     setMsgAcerto(null)
-                    setMsgError(res.data.message)
+                    setMsgError(res.data)
                 }
             }).catch((err) => {
                 console.log(err)
@@ -332,7 +332,6 @@ function Formulario() {
 
         // axios.post('http://localhost:3000/v1/add-requisicao', data)
         //     .then((res) => {
-
         //         if (res.data.message === 'Requisição feita com sucesso !') {
         //             setMsgError(null)
         //             setMsgAcerto(res.data.message)
