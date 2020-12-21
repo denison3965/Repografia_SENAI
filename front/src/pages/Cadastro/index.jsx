@@ -77,7 +77,7 @@ function Cadastro() {
 
 
         //Pegando as informacoes do user pelo nif
-        let url = "http://localhost:3000/v1/buscar-user-nif/" + `${res.data[0].nif}`
+        let url = `${process.env.REACT_APP_SERVER_BASE}/buscar-user-nif/${res.data[0].nif}`
 
         axios.get(url).then(async (res) => {
 
@@ -88,7 +88,7 @@ function Cadastro() {
         })
 
         //Pegando os cargos para listar
-        axios.get("http://localhost:3000/v1/pegar-cargos").then(async (res) => {
+        axios.get(`${process.env.REACT_APP_SERVER_BASE}/pegar-cargos`).then(async (res) => {
           const dados = res.data
 
           const options = dados.map(d => ({
@@ -112,7 +112,7 @@ function Cadastro() {
 
   function enviarFormulario() {
     params = `nif=${params.nif}&nome=${params.nome}&sobrenome=${params.sobrenome}&email=${params.email}&data_criacao=${params.data_criacao}&senha=Senai115&administrativo=${params.administrativo}&situacao=ativo&telefone=${params.telefone}&id_cargo=${params.id_cargo}`
-    axios.post('http://localhost:3000/v1/addfuncionarios', params).then(result => {
+    axios.post(`${process.env.REACT_APP_SERVER_BASE}/addfuncionarios`, params).then(result => {
 
       if (result.data == "OBS: Funcionario existente !!") {
         setMsgAcerto(null)

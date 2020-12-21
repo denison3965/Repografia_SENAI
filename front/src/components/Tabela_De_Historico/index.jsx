@@ -74,7 +74,7 @@ export class Tabela_De_Historico extends Component {
 
       if (res.data[0].auth) {
         //Pegando as informacoes do user pelo nif
-        let url = "http://localhost:3000/v1/buscar-user-nif/" + `${res.data[0].nif}`
+        let url = `${process.env.REACT_APP_SERVER_BASE}/buscar-user-nif/`+ `${res.data[0].nif}`
 
         axios.get(url).then(async (res) => {
 
@@ -88,7 +88,7 @@ export class Tabela_De_Historico extends Component {
           //Aqui vai o fetch para a api pegar os registros no banco de dados
 
 
-          let url = `http://localhost:3000/v1/pegar-requisicao/${this.state.User_info.nif}`
+          let url = `${process.env.REACT_APP_SERVER_BASE}/pegar-requisicao/${this.state.User_info.nif}`
 
           axios.get(url).then((result) => {
 

@@ -58,7 +58,7 @@ function Formulario() {
                 setShowPage(true)
 
                 //Pegando as informacoes do user pelo nif
-                let url = "http://localhost:3000/v1/buscar-user-nif/" + `${res.data[0].nif}`
+                let url = `${process.env.REACT_APP_SERVER_BASE}/buscar-user-nif/${res.data[0].nif}`
 
                 axios.get(url).then(async (res) => {
 
@@ -70,7 +70,7 @@ function Formulario() {
 
                 //Pegando lista de departamento
 
-                axios.get('http://localhost:3000/v1/pegar-departamento').then((res) => {
+                axios.get(`${process.env.REACT_APP_SERVER_BASE}/pegar-departamento`).then((res) => {
 
                     const options = res.data.map(d => ({
                         "value": d.id_departamento,
@@ -83,7 +83,7 @@ function Formulario() {
                 })
 
                 //Pegando fornecedor
-                axios.get('http://localhost:3000/v1/pegar-fornecedor').then((res) => {
+                axios.get(`${process.env.REACT_APP_SERVER_BASE}/pegar-fornecedor`).then((res) => {
 
                     setFornecedor(res.data[0])
                 })

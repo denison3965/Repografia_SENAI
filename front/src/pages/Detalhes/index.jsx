@@ -64,7 +64,7 @@ function Detalhes(props) {
         setShowPage(true)
 
         //Pegando as informacoes do user pela requisição
-        let url = `http://localhost:3000/v1/pegar-uma-requisicao/${props.location.state.registro[0]}`
+        let url = `${process.env.REACT_APP_SERVER_BASE}/pegar-uma-requisicao/${props.location.state.registro[0]}`
 
         console.log(url)
         console.log(props.location.state.registro[0])
@@ -82,7 +82,7 @@ function Detalhes(props) {
 
 
         //Pegando as informacoes do user pelo nif
-        let url2 = "http://localhost:3000/v1/buscar-user-nif/" + `${res.data[0].nif}`
+        let url2 = `${process.env.REACT_APP_SERVER_BASE}/buscar-user-nif/${res.data[0].nif}`
 
         axios.get(url2).then(async (res) => {
 
@@ -117,7 +117,7 @@ function Detalhes(props) {
 
     //Pegando pdf do servidor e imprimindo ele
     axios({
-      url: `http://localhost:3000/v1/pegar-pdf-requisicao/${nome_pdf}`, //your url
+      url: `${process.env.REACT_APP_SERVER_BASE}/pegar-pdf-requisicao/${nome_pdf}`, //your url
       method: 'GET',
       responseType: 'blob', // important
     }).then((response) => {
@@ -135,7 +135,7 @@ function Detalhes(props) {
 
     //Pegando arquivo do servidor e imprimindo ele
     axios({
-      url: `http://localhost:3000/v1/pegar-arquivo/${infoReq.nome_arquivo}`, //your url
+      url: `${process.env.REACT_APP_SERVER_BASE}/pegar-arquivo/${infoReq.nome_arquivo}`, //your url
       method: 'GET',
       responseType: 'blob', // important
     }).then((response) => {

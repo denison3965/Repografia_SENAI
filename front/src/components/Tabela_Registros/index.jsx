@@ -63,7 +63,8 @@ export class Tabela_Registros extends Component {
 
     //Aqui vai o fetch para a api pegar os registros no banco de dados
 
-    axios.get('http://localhost:3000/v1/pegar-requisicao').then((res) => {
+    console.log(`${process.env.REACT_APP_SERVER_BASE}/pegar-requisicao`)
+    axios.get(`${process.env.REACT_APP_SERVER_BASE}/pegar-requisicao`).then((res) => {
       let data_requisicao = res.data
 
       // slice = de quanto a quanto sera exibido na tela

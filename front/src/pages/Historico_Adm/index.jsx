@@ -43,7 +43,7 @@ function Adm_Registros() {
 
 
         //Pegando as informacoes do user pelo nif
-        let url = "http://localhost:3000/v1/buscar-user-nif/" + `${res.data[0].nif}`
+        let url = `${process.env.REACT_APP_SERVER_BASE}/buscar-user-nif/${res.data[0].nif}`
 
         axios.get(url).then(async (res) => {
 

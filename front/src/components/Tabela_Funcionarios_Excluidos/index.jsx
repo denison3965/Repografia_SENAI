@@ -35,6 +35,7 @@ export class Tabela_Funcionarios_Excluidos extends Component {
       if (res) {
         //Fazer a restauração do usuario usando o nif.target.alt para acessar o nif
         alert('Usuario restaurado com sucesso')
+        
       }
     }
 
@@ -47,12 +48,14 @@ export class Tabela_Funcionarios_Excluidos extends Component {
     }
 
     click_RestaurarUser(nif) {
-      alert("Usuario " + nif + " Restaurado com sucesso")
+
 
       axios.put('http://localhost:3000/v1/restaurarfuncionario', {
         nif: this.state.UserParaRestaurar,
       }).then((res) => {
         console.log(res)
+        alert("Usuario " + nif + " Restaurado com sucesso")
+        window.location.reload(); 
       })
       // RESTAURAR AQUI !!!!!
     }
@@ -93,7 +96,7 @@ export class Tabela_Funcionarios_Excluidos extends Component {
   
     getData() {
   
-      axios.get('http://localhost:3000/v1/pegar-funcionarios')
+      axios.get(`${process.env.REACT_APP_SERVER_BASE}/pegar-funcionarios`)
       .then((res) => {
         // slice = de quanto a quanto sera exibido na tela
         // slice = data.slice(15, 15 + 5) 

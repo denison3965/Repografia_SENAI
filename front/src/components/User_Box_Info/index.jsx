@@ -14,7 +14,7 @@ function User_Box_Info(props) {
   const history = useHistory()
 
   function fazerSingOut() {
-    axios.post('http://localhost:3000/v1/logout')
+    axios.post(`${process.env.REACT_APP_SERVER_BASE}/logout`)
       .then((res) => {
 
         let nullValue = res.data.token

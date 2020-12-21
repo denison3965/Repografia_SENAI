@@ -18,7 +18,7 @@ function  Login() {
   const [password, setPassword] = useState('')
 
   useEffect(() => {
-    axios.post('http://localhost:3000/v1/logout')
+    axios.post(`${process.env.REACT_APP_SERVER_BASE}/logout`)
     .then((res) => {
 
       let nullValue = res.data.token
@@ -31,7 +31,7 @@ function  Login() {
 
   const enviarFormulario = () => {
     console.log( "senha :" +password + "nif" + nif)
-    axios.post('http://localhost:3000/v1/login',{
+    axios.post(`${process.env.REACT_APP_SERVER_BASE}/login`,{
       nif: nif,
       password: password
     })

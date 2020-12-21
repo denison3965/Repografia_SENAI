@@ -54,7 +54,7 @@ function Adm_Registros() {
         console.log(res.data[0])
 
         //Pegando as informacoes do user pelo nif
-        let url = "http://localhost:3000/v1/buscar-user-nif/"+`${res.data[0].nif}`
+        let url = `${process.env.REACT_APP_SERVER_BASE}/buscar-user-nif/${res.data[0].nif}`
 
         axios.get(url).then(async(res) => {
             
@@ -77,7 +77,7 @@ function Adm_Registros() {
 
   //função de alterar senha
   function EditarSenha(){
-    axios.put('http://localhost:3000/v1/editarSenha', {
+    axios.put(`${process.env.REACT_APP_SERVER_BASE}/editarSenha`, {
       senhaAtual: senhaAtual,
       novaSenha: novaSenha,
       confirmarSenha: confirmarSenha,

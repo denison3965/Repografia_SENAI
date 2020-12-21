@@ -21,14 +21,10 @@ function Nav_Lateral(props) {
         setAtivado(props.ativado)
     },[])
 
-    function teste () {
-        
-        axios.get("http://localhost:3000/v1/denison").then((res) => console.log(res))
-    }
   return (
       <Container>
         <div className="Nav_Lateral_top_side">
-            <div class="Nav_Latera_Logo" onClick={teste}>
+            <div class="Nav_Latera_Logo">
                 <Logo width="150px" height="40px" />
             </div>
 

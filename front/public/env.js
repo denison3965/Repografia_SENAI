@@ -69,7 +69,7 @@ window.env = {
   "npm_package_browserslist_development_0": "last 1 chrome version",
   "npm_package_dependencies_react_simple_hook_modal": "^1.1.0",
   "npm_package_dependencies_axios": "^0.21.0",
-  "PATH": "/tmp/yarn--1608481196443-0.13341037834328628:/home/deny/Desktop/Projetos/Reppografia_SENAI/front/node_modules/.bin:/home/deny/.config/yarn/link/node_modules/.bin:/home/deny/.yarn/bin:/usr/libexec/lib/node_modules/npm/bin/node-gyp-bin:/usr/lib/node_modules/npm/bin/node-gyp-bin:/usr/bin/node_modules/npm/bin/node-gyp-bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/deny/Android/Sdk/emulator:/home/deny/Android/Sdk/tools:/home/deny/Android/Sdk/tools/bin:/home/deny/Android/Sdk/platform-tools:/home/deny/Android/Sdk/emulator:/home/deny/Android/Sdk/tools:/home/deny/Android/Sdk/tools/bin:/home/deny/Android/Sdk/platform-tools",
+  "PATH": "/tmp/yarn--1608522524192-0.9894157217941182:/home/deny/Desktop/Projetos/Reppografia_SENAI/front/node_modules/.bin:/home/deny/.config/yarn/link/node_modules/.bin:/home/deny/.yarn/bin:/usr/libexec/lib/node_modules/npm/bin/node-gyp-bin:/usr/lib/node_modules/npm/bin/node-gyp-bin:/usr/bin/node_modules/npm/bin/node-gyp-bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/deny/Android/Sdk/emulator:/home/deny/Android/Sdk/tools:/home/deny/Android/Sdk/tools/bin:/home/deny/Android/Sdk/platform-tools:/home/deny/Android/Sdk/emulator:/home/deny/Android/Sdk/tools:/home/deny/Android/Sdk/tools/bin:/home/deny/Android/Sdk/platform-tools",
   "NODE": "/usr/bin/node",
   "SESSION_MANAGER": "local/deny-desktop:@/tmp/.ICE-unix/1654,unix/deny-desktop:/tmp/.ICE-unix/1654",
   "INVOCATION_ID": "6e3ca50caab946a3849478046467a59b",
@@ -139,5 +139,6 @@ window.env = {
   "INIT_CWD": "/home/deny/Desktop/Projetos/Reppografia_SENAI/front",
   "npm_package_dependencies_react_paginate": "^6.5.0",
   "npm_package_dependencies_react": "^17.0.1",
-  "REACT_APP_SERVER_TO_AUTHENTICATE": "http://localhost:3000/v1/teste"
+  "REACT_APP_SERVER_TO_AUTHENTICATE": "http://localhost:3000/v1/teste",
+  "REACT_APP_SERVER_BASE": "http://localhost:3000/v1"
 };
