@@ -247,6 +247,8 @@ function Formulario() {
         "suporte": radioSuporte,
         "coodernador": responsavel,
 
+        "status" : "ativo"
+
     }
 
 
