@@ -76,9 +76,7 @@ function DetalhesHistorico(props) {
   //enviando feedback 
   function setarValorFeedback(e) {
     setValorFeedback(e.target.value)
-    console.log(e.target.value)
   }
-
   function EnviarFeedback() {
     axios.put('http://localhost:3000/v1/atualizarFeedback', {
       feedback: valorFeedback,
@@ -88,10 +86,7 @@ function DetalhesHistorico(props) {
       .then((res) => {
         if (res.data === 'Feedback enviado com sucesso !!') {
           setMsgError(null)
-          setMsgAcerto(res.data)
-
-          console.log(res.data)
-         
+          setMsgAcerto(res.data)    
         }
         else{
           setMsgAcerto(null)
@@ -100,7 +95,22 @@ function DetalhesHistorico(props) {
       })
   }
 
-
+  function CancelarRequisicao(){
+    axios.put('http://localhost:3000/v1/AtualizarStatus', {
+     status: 'cancelado', 
+     id_requisicao: registro
+  })
+    .then((res) => {
+    if (res.data === 'Cancelamento feio com sucesso !!') {
+      setMsgError(null)
+      setMsgAcerto(res.data)    
+    }
+    else{
+      setMsgAcerto(null)
+      setMsgError(res.data)
+    }
+  })
+  }
 
   return (
     <div>
@@ -214,17 +224,14 @@ function DetalhesHistorico(props) {
                     <div className="custom-control custom-radio">
                       <input type="radio" id="customRadio1" name="customRadio" onClick={(e) => setarValorFeedback(e)} className="custom-control-input" value={1} />
                       <label className="custom-control-label" for="customRadio1">Chegou!!!!</label>
-                      <p>{valorFeedback}</p>
                     </div>
                     <div className="custom-control custom-radio">
                       <input type="radio" id="customRadio2" name="customRadio" onClick={(e) => setarValorFeedback(e)} className="custom-control-input" value={2} />
                       <label className="custom-control-label" for="customRadio2">Chegou, porém com uma qualidade ruim</label>
-                      <p>{valorFeedback}</p>
                     </div>
                     <div className="custom-control custom-radio mb-3">
                       <input type="radio" id="customRadio3" name="customRadio" onClick={(e) => setarValorFeedback(e)} className="custom-control-input" value={3} />
                       <label className="custom-control-label" for="customRadio3">Não Chegou</label>
-                      <p>{valorFeedback}</p>
                     </div>
 
                   </div>
@@ -235,7 +242,7 @@ function DetalhesHistorico(props) {
 
                 <div className="cancelar">
                   <p><strong>Deseja cancelar esse pedido ?</strong></p>
-                  <button type="button" class="btn btn-light">Cancelar</button>
+                  <button onClick={CancelarRequisicao} type="button" class="btn btn-light" data-toggle="modal" data-target="#exampleModal">Cancelar</button>
                 </div>
               </Information>
 
@@ -243,7 +250,7 @@ function DetalhesHistorico(props) {
               <p>basta pegar a variavel registro que tera o codigo do regidtro a ser mostrado e fazer um fetch para ppegar o respectivo registro</p>
 
             </Adm_Area>
-            {/* Modal  */}
+            {/* Modal  para enviar feedback */}
             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
               <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -266,6 +273,28 @@ function DetalhesHistorico(props) {
               </div>
             </div>
 
+            {/* Modal para cancelar requisicao */}
+             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+             <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <div>
+                      {msg_error != null ? <div className="alert alert-danger">{msg_error} </div> : null}
+                      {msg_acerto != null ? <div className="alert alert-success">{msg_acerto} </div> : null}
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Sair</button>
+                  </div>
+                </div>
+              </div>
+            </div> 
           </Container>
           : <div>
             <div style={loading}>

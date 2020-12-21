@@ -290,13 +290,13 @@ function Formulario() {
         axios.post('http://localhost:3000/v1/add-requisicao', data)
             .then((res) => {
 
-                if (res.data === 'Requisição feita com sucesso !') {
+                if (res.data.message === 'Requisição feita com sucesso !') {
                     setMsgError(null)
-                    setMsgAcerto(res.data)
+                    setMsgAcerto(res.data.message)
                 }
                 else {
                     setMsgAcerto(null)
-                    setMsgError(res.data)
+                    setMsgError(res.data.message)
                 }
             }).catch((err) => {
                 console.log(err)
