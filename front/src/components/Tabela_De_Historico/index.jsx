@@ -171,8 +171,7 @@ export class Tabela_De_Historico extends Component {
                 <th scope="col"><strong>solicitante</strong></th>
                 <th scope="col"><strong>departamento</strong></th>
                 <th scope="col"><strong>cc</strong></th>
-                <th scope="col"><strong>paginas</strong></th>
-                <th scope="col"><strong>cópias</strong></th>
+                <th scope="col"><strong>status</strong></th>
                 <th scope="col"><strong>total de paginas</strong> </th>
                 <th scope="col"><strong>data do pedido</strong></th>
                 <th scope="col"><strong>data de entrega</strong></th>
@@ -189,8 +188,7 @@ export class Tabela_De_Historico extends Component {
                     <td>{element.nome}</td>
                     <td>{element.nome_departamento}</td>
                     <td>{element.centro_custo}</td>
-                    <td>{element.num_paginas}</td>
-                    <td>{element.num_copias}</td>
+                    <td style={element.status == 'cancelado'? {color:'red'}:{color: 'green'}}>{element.status}</td>
                     <td>{element.total_paginas}</td>
                     <td>{element.data_envio}</td>
                     <td>{element.data_entrega}</td>
