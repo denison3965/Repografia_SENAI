@@ -262,7 +262,7 @@ function Formulario() {
             .then((res) => {
 
                 if (res.data.message === 'Requisição feita com sucesso !') {
-                    setMsgError(null)
+                     setMsgError(null)
                     console.log(res.data)
 
 
@@ -316,7 +316,7 @@ function Formulario() {
 
                 }
                 else {
-                    setMsgAcerto(null)
+                     setMsgAcerto(null)
                     setMsgError(res.data)
                 }
             }).catch((err) => {
@@ -614,8 +614,9 @@ function Formulario() {
                                             </div>
                                             <div class="modal-body">
                                                 <div>
-                                                    {msg_error != null ? <div className="alert alert-danger">{msg_error} </div> : null}
+                                                    {msg_error != null ? <div className="alert alert-danger">{msg_error} </div> : null}                                                  
                                                     {msg_acerto != null ? <div className="alert alert-success" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                                                    {msg_acerto}
                                                     </div> : null}
                                                 </div>
                                             </div>
