@@ -257,16 +257,12 @@ function Formulario() {
     function EnviarFormulario() {
 
         let numero_teste
-
-
         //Enviar Informmacoes para gravar no banco de dados
         axios.post(`${process.env.REACT_APP_SERVER_BASE}/add-requisicao`, data)
             .then((res) => {
 
                 if (res.data.message === 'Requisição feita com sucesso !') {
                     setMsgError(null)
-
-                    console.log("Olha aquiiiiiiiiiiiiiiiiiii")
                     console.log(res.data)
 
 
@@ -287,8 +283,6 @@ function Formulario() {
                     axios.post(`${process.env.REACT_APP_SERVER_BASE}/file-requisicao`, myFile).then((res) => {
                         console.log(res)
                     })
-
-                    console.log("ESTOU AQUIIIIIIIIIIIIIIIII")
                     data.numero = numero_teste
                     console.log(data.numero)
 
@@ -320,8 +314,6 @@ function Formulario() {
                         });
                     })
 
-
-
                 }
                 else {
                     setMsgAcerto(null)
@@ -330,30 +322,7 @@ function Formulario() {
             }).catch((err) => {
                 console.log(err)
             })
-        console.log(data)
-
-        // axios.post('http://localhost:3000/v1/add-requisicao', data)
-        //     .then((res) => {
-        //         if (res.data.message === 'Requisição feita com sucesso !') {
-        //             setMsgError(null)
-        //             setMsgAcerto(res.data.message)
-        //         }
-        //         else {
-        //             setMsgAcerto(null)
-        //             setMsgError(res.data.message)
-        //         }
-        //     }).catch((err) => {
-        //         console.log(err)
-        //     })
-
-
-
-
-
-
     }
-
-
 
     return (
         <div>
@@ -647,8 +616,6 @@ function Formulario() {
                                                 <div>
                                                     {msg_error != null ? <div className="alert alert-danger">{msg_error} </div> : null}
                                                     {msg_acerto != null ? <div className="alert alert-success" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-                                                        {msg_acerto}
-
                                                     </div> : null}
                                                 </div>
                                             </div>

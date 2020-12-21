@@ -208,9 +208,7 @@ function DetalhesHistorico(props) {
   //enviando feedback 
   function setarValorFeedback(e) {
     setValorFeedback(e.target.value)
-    console.log(e.target.value)
   }
-
   function EnviarFeedback() {
     axios.put(`${process.env.REACT_APP_SERVER_BASE}/atualizarFeedback`, {
       feedback: valorFeedback,
@@ -220,10 +218,7 @@ function DetalhesHistorico(props) {
       .then((res) => {
         if (res.data === 'Feedback enviado com sucesso !!') {
           setMsgError(null)
-          setMsgAcerto(res.data)
-
-          console.log(res.data)
-
+          setMsgAcerto(res.data)    
         }
         else {
           setMsgAcerto(null)
@@ -232,7 +227,22 @@ function DetalhesHistorico(props) {
       })
   }
 
-
+  function CancelarRequisicao(){
+    axios.put('http://localhost:3000/v1/AtualizarStatus', {
+     status: 'cancelado', 
+     id_requisicao: registro
+  })
+    .then((res) => {
+    if (res.data === 'Cancelamento feio com sucesso !!') {
+      setMsgError(null)
+      setMsgAcerto(res.data)    
+    }
+    else{
+      setMsgAcerto(null)
+      setMsgError(res.data)
+    }
+  })
+  }
 
 
 
@@ -375,7 +385,7 @@ function DetalhesHistorico(props) {
                 {dataDeHoje < dataEnvioMais1 ?
                   <div className="cancelar">
                     <p><strong>Deseja cancelar esse pedido ?</strong></p>
-                    <button type="button" class="btn btn-light">Cancelar</button>
+                    <button onClick={CancelarRequisicao}  data-toggle="modal" data-target="#exampleModal" type="button" class="btn btn-light">Cancelar</button>
                   </div> :
                   <div className="cancelar">
                     <p><strong>Você não pode mais cancelar o pedido</strong></p>
@@ -388,7 +398,7 @@ function DetalhesHistorico(props) {
               <p>basta pegar a variavel registro que tera o codigo do regidtro a ser mostrado e fazer um fetch para ppegar o respectivo registro</p> */}
 
             </Adm_Area>
-            {/* Modal  */}
+            {/* Modal  para enviar feedback */}
             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
               <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -411,6 +421,28 @@ function DetalhesHistorico(props) {
               </div>
             </div>
 
+            {/* Modal para cancelar requisicao */}
+             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+             <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <div>
+                      {msg_error != null ? <div className="alert alert-danger">{msg_error} </div> : null}
+                      {msg_acerto != null ? <div className="alert alert-success">{msg_acerto} </div> : null}
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Sair</button>
+                  </div>
+                </div>
+              </div>
+            </div> 
           </Container>
           : <div>
             <div style={loading}>

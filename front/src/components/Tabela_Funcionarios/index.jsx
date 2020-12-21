@@ -25,6 +25,7 @@ export class Tabela_Funcionarios extends Component {
       UserParaDeletar: '',
       UserParaResetarSenha: '',
       NomeParaDeletar: '',
+      NomeParaRestuarSenha: '',
       crumbs: ['Inicio', 'Registros'],
 
       //States para guardar os valores do campo 
@@ -165,9 +166,10 @@ export class Tabela_Funcionarios extends Component {
   }
 
   //Setar nome e nif do usuario selecionado para executar alguma acao  resetar senha
-  handleNameNif_resetarSenha(nif) {
+  handleNameNif_resetarSenha(nif, name) {
     this.setState({
-      UserParaResetarSenha: nif
+      UserParaResetarSenha: nif,
+      NomeParaRestuarSenha: name
     })
   }
 
@@ -207,7 +209,7 @@ export class Tabela_Funcionarios extends Component {
     // EXCLUIR AQUI !!!!!
     window.location.reload(); 
   }
-
+  c
   handleResetarSenha(nif) {
    
 
@@ -216,9 +218,11 @@ export class Tabela_Funcionarios extends Component {
     }).then((res) => {
       alert("Usuario" + nif + "teve a senha restaurada para 'senai115'")
     }).catch ((err) => {
-      alert("Houve um erro ao restaurar a senha so funcionario")
+      alert("Houve um erro ao restaurar a senha do funcionario")
     })
     // RESETAR SENHA AQUI !!!!!
+
+    
   }
 
   handleEditUser(nif) {
@@ -263,7 +267,6 @@ export class Tabela_Funcionarios extends Component {
   }
 
   handleChangeUserCargo(e) {
-    console.log(e)
     this.setState({ UserCargo: e.value })
   }
 
@@ -392,7 +395,7 @@ export class Tabela_Funcionarios extends Component {
                 <div className="senha">
                   <form class="form-inline" style={{ margin: "40px" }}>
                     <div class="modal-body">
-                      <p>Tem certeza que deseja restaurar a senha do funcionario?     Se sim a senha sera restaurada para 'senai115'</p>
+                      <p>Deseja resturar senha de {this.state.NomeParaRestuarSenha} para "senai115"</p>
                     </div>
                   </form>
                 </div>
@@ -532,7 +535,7 @@ export class Tabela_Funcionarios extends Component {
                     <td>{element.data_criacao}</td>
                     <td><img data-toggle="modal" data-target="#exampleModal3" src={IconExcluir} onClick={() => this.handleNameNif_delete(element.nif, element.nome)} alt={element.nif} name={element.nome} style={{ height: '20x', width: '20px', marginLeft: '15px', cursor: 'pointer' }} /></td>
                     {/*Estou passando o nif da pessoa a ser excluida pelo alt da imagem */}
-                    <td><img data-toggle="modal" data-target="#exampleModal2" src={IconSenha} onClick={() => this.handleNameNif_resetarSenha(element.nif)} alt={element.nif} name={element.nome} style={{ height: '20x', width: '20px', marginLeft: '50px', cursor: 'pointer' }} /></td>
+                    <td><img data-toggle="modal" data-target="#exampleModal2" src={IconSenha} onClick={() => this.handleNameNif_resetarSenha(element.nif, element.nome )} alt={element.nif} name={element.nome} style={{ height: '20x', width: '20px', marginLeft: '50px', cursor: 'pointer' }} /></td>
 
                     <td><img data-toggle="modal" data-target="#exampleModal" src={IconCaneta} onClick={() => this.handleNameNif_edit(element.nif)} alt={element.nif} name={element.nome} style={{ height: '20x', width: '20px', marginLeft: '10px', cursor: 'pointer' }} /></td>
 
