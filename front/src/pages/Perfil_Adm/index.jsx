@@ -36,10 +36,6 @@ function Adm_Registros() {
   
 
   useEffect(() => {
-
-    
-
-    console.log('MEU TOKEN E ' + cookies.get('tokenJWT'))
     let token = cookies.get('tokenJWT')
 
     axios.get(process.env.REACT_APP_SERVER_TO_AUTHENTICATE, {
@@ -49,9 +45,7 @@ function Adm_Registros() {
 
       //Se o usuario for adm e estiver autenticado 
       if (res.data[0].auth && res.data[0].adm === "sim") {
-        console.log('Voce tem acesso adiministrativo')
         setShowPage(true)
-        console.log(res.data[0])
 
         //Pegando as informacoes do user pelo nif
         let url = `${process.env.REACT_APP_SERVER_BASE}/buscar-user-nif/${res.data[0].nif}`
@@ -68,7 +62,6 @@ function Adm_Registros() {
       //Se nao voltar para login
       else {
         history.push("/")
-        console.log("estou aqui")
       }
 
     }).catch(() => { history.push("/") })

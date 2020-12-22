@@ -134,7 +134,6 @@ export class Tabela_De_Historico extends Component {
 
 
   render() {
-
     let filterRegister = this.state.tableData.filter(
       (register) => {
         return register.nome.toLowerCase().indexOf(this.state.search) !== -1 ||

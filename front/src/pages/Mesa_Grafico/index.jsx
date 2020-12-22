@@ -35,7 +35,6 @@ function Mesa_Grafico() {
 
   useEffect(() => {
 
-    console.log('MEU TOKEN E ' + cookies.get('tokenJWT'))
     var token = cookies.get('tokenJWT')
 
     axios.get(process.env.REACT_APP_SERVER_TO_AUTHENTICATE, {
@@ -44,7 +43,6 @@ function Mesa_Grafico() {
     }).then((res) => {
 
       if (res.data[0].auth && res.data[0].adm === 'sim') {
-        console.log('Voce tem acesso adiministrativo')
         setShowPage(true)
 
 

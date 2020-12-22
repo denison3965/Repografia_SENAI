@@ -42,16 +42,12 @@ function Detalhes(props) {
 
 
   //pegando o node do registro a ser mostrado ( tem que pegar o id depois )
-  console.log(props.location.state.registro[0])
-
   const [registro, setRegistro] = useState('')
 
 
   useEffect(() => {
     setRegistro(props.location.state.registro[0])
 
-
-    console.log('MEU TOKEN E ' + cookies.get('tokenJWT'))
     var token = cookies.get('tokenJWT')
 
     axios.get(process.env.REACT_APP_SERVER_TO_AUTHENTICATE, {
@@ -60,21 +56,13 @@ function Detalhes(props) {
     }).then((res) => {
 
       if (res.data[0].auth) {
-        console.log('Voce tem acesso')
         setShowPage(true)
 
         //Pegando as informacoes do user pela requisição
         let url = `${process.env.REACT_APP_SERVER_BASE}/pegar-uma-requisicao/${props.location.state.registro[0]}`
-
-        console.log(url)
-        console.log(props.location.state.registro[0])
-
         axios.get(url).then(async (result) => {
 
           await setInfoReq(result.data[0])
-
-          console.log(result.data[0])
-
 
         }).catch((err) => {
           console.log(err)
@@ -113,7 +101,6 @@ function Detalhes(props) {
 
 
     let nome_pdf = `${registro}-requisicao.pdf`
-    console.log(nome_pdf)
 
     //Pegando pdf do servidor e imprimindo ele
     axios({
@@ -147,8 +134,6 @@ function Detalhes(props) {
       link.click();
     });
   }
-
-  console.log(infoReq)
 
   return (
 

@@ -62,8 +62,6 @@ function Cadastro() {
 
 
   useEffect(() => {
-
-    console.log('MEU TOKEN E ' + cookies.get('tokenJWT'))
     var token = cookies.get('tokenJWT')
 
 

@@ -35,8 +35,6 @@ function Adm_Registros() {
 
 
   useEffect(() => {
-
-    console.log('MEU TOKEN E ' + cookies.get('tokenJWT'))
     var token = cookies.get('tokenJWT')
 
     axios.get(process.env.REACT_APP_SERVER_TO_AUTHENTICATE, {
@@ -45,7 +43,6 @@ function Adm_Registros() {
     }).then((res) => {
 
       if (res.data[0].auth && res.data[0].adm == "sim") {
-        console.log("Voce entrou no sistema como Adiministrador")
         setShowPage(true)
 
         //Pegando as informacoes do user pelo nif
@@ -61,13 +58,11 @@ function Adm_Registros() {
 
       }
       else {
-        console.log('estou no else')
         history.push("/")
       }
 
     }).catch((err) => {
       history.push("/")
-      console.log('O erro e aqui ' + err)
     })
   }, [])
   //**Verificando Se o usuario esta autorizado para acessar essa pagina**

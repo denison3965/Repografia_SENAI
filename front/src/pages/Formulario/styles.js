@@ -51,7 +51,7 @@ export const Container = styled.div`
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        background: hidden;
+        margin-top: -200px;
     }
    .div_titulo_form{
         width: 100%;
@@ -313,39 +313,19 @@ export const Container = styled.div`
         align-self:flex-end;
     }
     .div_upload{
-        width: 70vw;
+        width: 50vw;
         height: 40vh;
         border: 1px dashed var(--color-preto);
-        background: hidden;
         border-radius: 65px;
         text-align: center;
         margin-bottom: 6vh;
     }
     .titulo_upload{
-        width: 70vw;
-        font-size: 1.2vw;
-        background-color:white;
+        font-size: 20px;
         text-align: center;
-        margin-left: -1.5vw;
     }
     .text_upload{
-        font-size: 1.2vw;
-        position: absolute;
-        margin-top: 9%;
-        margin-left: 26.4%;
-    }
-    .input_exemplar{
-        position: absolute;
-        text-align: center;
-        margin-left: 3.5vw;
-        font-family: inherit;
-        font-size: 1.2vw;
-        line-height: inherit;
-        display: block;
-        padding-top:32.7vh;
-        padding-bottom: 2vh;
-        padding-right: 17.5vw;
-        padding-left: 17.5vw;
+        font-size: 20px;
     }
     .img_cloud{
         margin-left: -3.2%;
@@ -353,8 +333,8 @@ export const Container = styled.div`
         margin-bottom:3%;
         width: 5vw;
         height: 10vh;
-        position: absolute;
     }
+
     .sair--button{
         cursor: pointer;
         height: 2vh;

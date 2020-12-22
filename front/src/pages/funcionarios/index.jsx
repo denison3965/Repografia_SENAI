@@ -34,8 +34,6 @@ function Funcionarios() {
   const [infoUser, setInfoUser] = useState({nome: '', sobrenome: ''})
 
   useEffect(() => {
-
-    console.log('MEU TOKEN E ' + cookies.get('tokenJWT'))
     var token = cookies.get('tokenJWT')
 
 
@@ -45,7 +43,6 @@ function Funcionarios() {
     }).then((res) => {
 
       if (res.data[0].auth && res.data[0].adm === 'sim') {
-        console.log('Voce tem acesso como adimmistrador')
         setShowPage(true)
 
         //Pegando as informacoes do user pelo nif

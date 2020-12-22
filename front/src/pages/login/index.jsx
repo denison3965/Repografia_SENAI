@@ -30,7 +30,6 @@ function  Login() {
   },[])
 
   const enviarFormulario = () => {
-    console.log( "senha :" +password + "nif" + nif)
     axios.post(`${process.env.REACT_APP_SERVER_BASE}/login`,{
       nif: nif,
       password: password
@@ -39,7 +38,6 @@ function  Login() {
       let token = res.data.token
 
       cookies.set('tokenJWT', token, {path: '/'})
-      console.log(res.data)
 
       if (res.data.message == 'Login valido' && res.data.isAd == "sim") 
       {
@@ -63,10 +61,15 @@ function  Login() {
         }
       
 
-      // if (res.data.message == 'Login invalido!')
-      // {
-      //   console.log("INVALDO!!!")
-      // }
+      if (res.data.message == 'Login invalido!')
+      {
+        var erroLogin = document.getElementById("LoginErrorDiv");
+          if (erroLogin.style.display === "none" || erroLogin.style.display === "" ) {
+            erroLogin.style.display = "block";
+          }else {
+            erroLogin.style.display = "none";
+          }
+      }
 
 
     })
@@ -81,7 +84,9 @@ function  Login() {
         <Logo width="100%" height="100%" color="black" />
       </div>
 
+
       <form className="barra_cinza">
+        
         <div className="nif_posicao">
           <label>
             NIF:
@@ -116,7 +121,7 @@ function  Login() {
               </div>
               <div class="modal-body">
                 <div className="oqueFazer">
-                  O que vc tem que fazer é ir falar com sua supervisora
+                 Por favor, fale com alguém do suporte administrativo!
                 </div>
               </div>
               <div class="modal-footer">
@@ -129,7 +134,7 @@ function  Login() {
         
 
         <div className="Nao_acesso">
-          <text>Não tenho acesso.</text>
+          <text>Não tenho acesso</text>
         </div>
 
         <div className="o_que_fazer">
@@ -148,7 +153,7 @@ function  Login() {
               </div>
               <div class="modal-body">
                 <div className="oqueFazer">
-                  O que vc tem que fazer é ir falar com sua supervisora
+                Por favor, fale com alguém do suporte administrativo!
                 </div>
               </div>
               <div class="modal-footer">
@@ -161,7 +166,6 @@ function  Login() {
         <div class="alert alert-danger" role="alert" id="LoginErrorDiv">
           Nif ou Senha Inválido!
         </div>
-
       </form>
 
     </Container>
