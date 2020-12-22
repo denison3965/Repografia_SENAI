@@ -7,7 +7,6 @@ import Perfil from './pages/Perfil'
 import Historico from './pages/Perfil_Historico'
 import Detalhes from './pages/Detalhes'
 import DetalhesHistorico from './pages/Detalhes_Historico'
-import Graficos from './pages/Mesa_Grafico'
 import Funcionarios from './pages/funcionarios'
 import Cadastro from './pages/Cadastro'
 import PerfilAdm from './pages/Perfil_Adm'
@@ -21,7 +20,6 @@ const Routes = () => (
             <Route path="/registros" component={Adm_Registros} />
             <Route path="/Historico" component={Historico} />
             <Route path="/Formulario" component={Formulario}/>
-            <Route path="/graficos" component={Graficos}/>
             <Route path="/Perfil" component={Perfil}/>
             <Route path="/detalhes/:nif" render={(props) => <Detalhes {...props} data=""/>}/>
             <Route path="/detalhes-historicos/:nif" render={(props) => <DetalhesHistorico {...props} data=""/>}/>

@@ -5,7 +5,6 @@ import Logo from '../../components/Logo'
 import Icon_Ativado from '../../assets/img/ativado.png'
 import Icon_Folha from '../../assets/img/folha.png'
 import Icon_Pessoa from '../../assets/img/pessoa.png'
-import Icon_Grafico from '../../assets/img/grafico.png'
 import Icon_Banco from '../../assets/img/banco.png'
 import { Link } from 'react-router-dom'
 import Grupo from '../../assets/img/grupo-de-usuarios.png'
@@ -53,7 +52,7 @@ function Nav_Lateral(props) {
                     }
                     
                 </li>
-                <li>
+                {/* <li>
 
                     <div className="Nav_Lateral_li_esquerdo">
                         <img src={Icon_Grafico} style={{width:"25px", height:"25px"}} alt="Grafico img"/>
@@ -66,7 +65,7 @@ function Nav_Lateral(props) {
                         ):<div></div>
                     }
 
-                </li>
+                </li> */}
                 <li> 
 
                     <Link to="/funcionarios-cadastrados">
@@ -77,7 +76,7 @@ function Nav_Lateral(props) {
                     </Link>
 
                     {
-                        ativado == "4" ? (
+                        ativado == "3" ? (
                         <img className="Nav_Lateral_Icon_Ativado"src={Icon_Ativado} style={{width:"25px", height:"25px"}} alt="banco img"/>
                         ):<div></div>
                     }

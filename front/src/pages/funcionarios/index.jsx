@@ -68,7 +68,7 @@ function Funcionarios() {
 
     <Container>
       <Menu_Area>
-        <Nav_Lateral ativado="4" />
+        <Nav_Lateral ativado="3" />
       </Menu_Area>
 
       {
