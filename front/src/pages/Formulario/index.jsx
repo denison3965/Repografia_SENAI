@@ -610,6 +610,8 @@ function Formulario() {
                                     </div>
                                 </div>
 
+                                <hr></hr>
+        <p style={{ color: "#b4a3a3", fontSize: "15px" }}>@Criado por Denison Portela, Ana L. Gomes, Felipe Braga, Guilherme Cunha e Caio Daniel !</p>       
                             </form>
                         </Container>
 

@@ -563,7 +563,7 @@ export class Tabela_Funcionarios extends Component {
           activeClassName={"active"} />
 
         <hr></hr>
-        <p style={{ color: "#ccc", fontSize: "15px" }}>@SENAI Suíço-Brasileira "Paulo Ernesto Tolle"</p>
+        <p style={{ color: "#b4a3a3", fontSize: "15px" }}>@Criado por Denison Portela, Ana L. Gomes, Felipe Braga, Guilherme Cunha e Caio Daniel !"</p>
 
       </Container>
     )

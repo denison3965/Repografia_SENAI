@@ -65,6 +65,8 @@ function Mesa_Grafico() {
     }).catch(() => { history.push("/") })
   }, [])
   //**Verificando Se o usuario esta autorizado para acessar essa pagina**
+
+
   return (
 
     <Container>

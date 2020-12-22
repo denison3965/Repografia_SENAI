@@ -161,7 +161,7 @@ function Adm_Registros() {
 
                   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                     Editar senha
-      </button>
+                  </button>
                 </div>
 
                 {/* Modal  */}
@@ -222,7 +222,6 @@ function Adm_Registros() {
             </div>
           </div>
       }
-
 
     </Container>
 
