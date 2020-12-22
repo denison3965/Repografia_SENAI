@@ -22,7 +22,7 @@ const Routes = () => (
             <Route path="/Historico" component={Historico} />
             <Route path="/Formulario" component={Formulario}/>
             <Route path="/graficos" component={Graficos}/>
-            <Route path="/Perfil" component={Perfil}/>
+            <Route path="/perfil" component={Perfil}/>
             <Route path="/detalhes/:nif" render={(props) => <Detalhes {...props} data=""/>}/>
             <Route path="/detalhes-historicos/:nif" render={(props) => <DetalhesHistorico {...props} data=""/>}/>
             <Route path="/funcionarios-cadastrados" component={Funcionarios}/>
