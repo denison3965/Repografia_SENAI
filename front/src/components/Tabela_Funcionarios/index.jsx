@@ -449,12 +449,12 @@ export class Tabela_Funcionarios extends Component {
                       </div>
                     </div>
                   </div>
-                  <div class="form-inline" style={{ margin: "40px" }}>
+                  {/* <div class="form-inline" style={{ margin: "40px" }}>
                     <div class="form-group">
                       <label style={{ marginRight: "45px" }} for="nifUser">Editar NIF:      </label>
                       <input style={{ width: "200px" }} id="nifUser" class="form-control mx-sm-3" onChange={(e) => { this.handleChangeUserNifEdit(e) }} defaultValue={this.state.UserNif} />
                     </div>
-                  </div>
+                  </div> */}
                   <div class="form-inline" style={{ margin: "40px" }}>
                     <div class="form-group">
                       <label style={{ marginRight: "13px" }} for="telefoneUser">Editar Telefone:      </label>

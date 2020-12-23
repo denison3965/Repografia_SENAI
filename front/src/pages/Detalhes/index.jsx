@@ -63,6 +63,7 @@ function Detalhes(props) {
         axios.get(url).then(async (result) => {
 
           await setInfoReq(result.data[0])
+          console.log(result)
 
         }).catch((err) => {
           console.log(err)
@@ -210,7 +211,7 @@ function Detalhes(props) {
               <div className="right-side">
 
                 <div className="registro_item">
-                  <div className="registro_chave"><strong>Avaliado:</strong></div>
+                  <div className="registro_chave"><strong>Feedback:</strong></div>
                   <div className="registro_valor">{infoReq.feedback}</div>
                 </div>
 

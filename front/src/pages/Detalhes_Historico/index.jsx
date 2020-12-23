@@ -331,7 +331,7 @@ function DetalhesHistorico(props) {
                   </div>
 
                 </div>
-                {dataDeHoje > 1 ?
+                {dataDeHoje > dataEnvioMais7 ?
                   <div className="feedback">
                     <p><strong>Seu feedback?</strong></p>
 
@@ -363,7 +363,7 @@ function DetalhesHistorico(props) {
                   </div>
                 }
 
-                {dataDeHoje < dataEnvioMais1 ?
+                {dataDeHoje > dataEnvioMais1 ?
                   <div className="cancelar">
                     <p><strong>Deseja cancelar esse pedido ?</strong></p>
                     <button onClick={CancelarRequisicao}  data-toggle="modal" data-target="#exampleModal" type="button" class="btn btn-light">Cancelar</button>
