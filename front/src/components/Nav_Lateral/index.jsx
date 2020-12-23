@@ -3,9 +3,9 @@ import Logo from '../../components/Logo'
 
 //importando os logos
 import Icon_Ativado from '../../assets/img/ativado.png'
+import Icon_Grafico from '../../assets/img/grafico.png'
 import Icon_Folha from '../../assets/img/folha.png'
 import Icon_Pessoa from '../../assets/img/pessoa.png'
-import Icon_Grafico from '../../assets/img/grafico.png'
 import Icon_Banco from '../../assets/img/banco.png'
 import { Link } from 'react-router-dom'
 import Grupo from '../../assets/img/grupo-de-usuarios.png'

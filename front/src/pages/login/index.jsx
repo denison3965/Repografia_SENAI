@@ -30,7 +30,6 @@ function  Login() {
   },[])
 
   const enviarFormulario = () => {
-    console.log( "senha :" +password + "nif" + nif)
     axios.post(`${process.env.REACT_APP_SERVER_BASE}/login`,{
       nif: nif,
       password: password
@@ -39,7 +38,6 @@ function  Login() {
       let token = res.data.token
 
       cookies.set('tokenJWT', token, {path: '/'})
-      console.log(res.data)
 
       if (res.data.message == 'Login valido' && res.data.isAd == "sim") 
       {
@@ -63,10 +61,15 @@ function  Login() {
         }
       
 
-      // if (res.data.message == 'Login invalido!')
-      // {
-      //   console.log("INVALDO!!!")
-      // }
+      if (res.data.message == 'Login invalido!')
+      {
+        var erroLogin = document.getElementById("LoginErrorDiv");
+          if (erroLogin.style.display === "none" || erroLogin.style.display === "" ) {
+            erroLogin.style.display = "block";
+          }else {
+            erroLogin.style.display = "none";
+          }
+      }
 
 
     })
@@ -81,7 +84,9 @@ function  Login() {
         <Logo width="100%" height="100%" color="black" />
       </div>
 
+
       <form className="barra_cinza">
+        
         <div className="nif_posicao">
           <label>
             NIF:
@@ -104,19 +109,19 @@ function  Login() {
           <a href="#text1" data-toggle="modal" data-target="#exampleModal">Esqueci minha senha</a>
         </div>
 
-        {/* Modal 'esqueci minha senha' */}
+        {/* Modal */}
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Esqueci minha senha</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Comunicado</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
               <div class="modal-body">
                 <div className="oqueFazer">
-                  O que vc tem que fazer é ir falar com sua supervisora
+                 Por favor, fale com alguém do suporte administrativo!
                 </div>
               </div>
               <div class="modal-footer">
@@ -129,39 +134,15 @@ function  Login() {
         
 
         <div className="Nao_acesso">
-          <text>Não tenho acesso.</text>
+          <text>Não tenho acesso</text>
         </div>
 
         <div className="o_que_fazer">
           <a href="#text2" data-toggle="modal" data-target="#exampleModal" >O que fazer?</a>
         </div>
-
-        {/* Modal 'o que fazer' */}
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">O que fazer?</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                <div className="oqueFazer">
-                  O que vc tem que fazer é ir falar com sua supervisora
-                </div>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Sair</button>
-              </div>
-            </div>
-          </div>
-        </div>
-
         <div class="alert alert-danger" role="alert" id="LoginErrorDiv">
           Nif ou Senha Inválido!
         </div>
-
       </form>
 
     </Container>

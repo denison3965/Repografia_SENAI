@@ -29,8 +29,6 @@ function Perfil_Historico() {
       const [showPage, setShowPage] = useState(false)
     
       useEffect(() => {
-
-        console.log('MEU TOKEN E ' + cookies.get('tokenJWT'))
         var token = cookies.get('tokenJWT')
           
   
@@ -41,7 +39,6 @@ function Perfil_Historico() {
   
               if(res.data[0].auth)
               {
-                  console.log('Voce tem acesso')
                   setShowPage(true)
 
               }

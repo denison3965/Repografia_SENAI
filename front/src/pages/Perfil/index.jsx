@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Container } from './styles';
+import avatar from '../../assets/img/avatar.png'
 import Header from '../../components/Header';
-import Avatar from '../../assets/img/avatar.png';
 import MaisInfo from '../../assets/img/maisInfo.png';
 import { Link } from 'react-router-dom'
 import { useHistory } from 'react-router-dom'
@@ -35,8 +35,6 @@ function Perfil() {
    const [msg_acerto, setMsgAcerto] = useState()
 
    useEffect(() => {
-
-      console.log('MEU TOKEN E ' + cookies.get('tokenJWT'))
       var token = cookies.get('tokenJWT')
 
 
@@ -46,7 +44,6 @@ function Perfil() {
       }).then((res) => {
 
          if (res.data[0].auth) {
-            console.log('Voce tem acesso')
             setShowPage(true)
 
             //Pegando as informacoes do user pelo nif
@@ -71,7 +68,6 @@ function Perfil() {
    }, [])
    //**Verificando Se o usuario esta autorizado para acessar essa pagina**
 
-   console.log(infoUser)
 
    function fazerSingOut() {
       axios.post(`${process.env.REACT_APP_SERVER_BASE}/logout`)
@@ -130,20 +126,20 @@ function Perfil() {
                   <hr />
 
                   <form className="posicao_do_form">
-
+                     <div className="infoUser">
                      <div className="posicao_avatar">
-                        <img src={Avatar} style={{ height: "300px", width: "300px", marginLeft: '20px', marginRight: '20px' }} alt="avatar" />
+                        <img src={avatar} style={{ height: "100px", width: "100px", marginLeft: '50px', marginTop: "30px"}} alt="avatar" />
                      </div>
-
-                     <div className="informacoes">
-                        <div className="telefone">Telefone: {infoUser.telefone}</div>
-                        <div className="numero">Nome: {infoUser.nome} {infoUser.sobrenome}</div>
-                        <div className="nif">NIF: {infoUser.nif}</div>
-                     </div>
-
-                     <div className="informacao">
-                        <div className="email">e-mail: {infoUser.email}</div>
-                        <div className="cargo">Cargo: {infoUser.nome_cargo}</div>
+                        <div className="info--User">
+                        <div style={{ marginTop: "-30px" }} className="info"> <strong style={{marginRight: "10px"}}> Nome: </strong>  {infoUser.nome} {infoUser.sobrenome}</div>
+                        <div className="info"> <strong style={{marginRight: "10px"}}> E-mail: </strong>  {infoUser.email}</div>
+                        <div style={{ marginTop: "10px" }} className="info"> <strong style={{marginRight: "10px"}}> Cargo: </strong> {infoUser.nome_cargo}</div>
+                                                 
+                        </div>
+                        <div className="informacoes">
+                           <div style={{ marginBottom: "10px" }} className="info"> <strong style={{marginRight: "10px"}}> NIF: </strong>  {infoUser.nif}</div>
+                           <div className="info"> <strong style={{marginRight: "10px"}}>Telefone:</strong>{infoUser.telefone}</div>         
+                        </div>
                      </div>
 
                      <div className="senha_posicao">
@@ -197,9 +193,9 @@ function Perfil() {
                      </div>
 
 
-                     <div>
+                     <div className="Nova--requisicao">
                         <div className="posicao_requisicao">Nova Requisição
-                <Link to="/formulario"><img src={MaisInfo} style={{ height: "80px", width: "80px" }} className="posicao_maisinfo" alt="maisInfo" /></Link>
+                            <Link to="/formulario"><img src={MaisInfo} className="iconeMais" alt="maisInfo" /></Link>
                         </div>
                      </div>
 

@@ -79,24 +79,6 @@ export class Tabela_Registros extends Component {
       })
     })
 
-    // var data = [
-    //   {
-    //     nomedarequisicao : 'qualquer coisa C#',
-    //     nomedosolicitante: 'Atila',
-    //     departamento: 'Informatica',
-    //     cc: '20150102',
-    //     arquivo: 'apostila.pdf',
-    //     copias: 30,
-    //     paginas: 30,
-    //     totalpaginas: 900,
-    //     coordenador: 'Sergio',
-    //     avaliado: 'Nao',
-    //     data: '21/11/2020',
-    //     dataentrega: '04/12/2020',
-    //     observacao: 'Vou levar a apostila ai a tarde',
-    //     acabamento: ' Encadernamento com espiral, Capa em pvc, frente e verso'
-    //   },
-    // ]
 
 
 
@@ -192,7 +174,7 @@ export class Tabela_Registros extends Component {
           activeClassName={"active"} />
 
         <hr></hr>
-        <p style={{ color: "#ccc", fontSize: "15px" }}>@SENAI Suíço-Brasileira "Paulo Ernesto Tolle"</p>
+        <p style={{ color: "#b4a3a3", fontSize: "15px" }}>@Criado por Denison Portela, Ana L. Gomes, Felipe Braga, Guilherme Cunha e Caio Daniel !</p>
 
       </Container>
     )

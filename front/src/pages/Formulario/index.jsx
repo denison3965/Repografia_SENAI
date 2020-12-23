@@ -43,8 +43,6 @@ function Formulario() {
     const [fornecedor, setFornecedor] = useState([])
 
     useEffect(() => {
-
-        console.log('MEU TOKEN E ' + cookies.get('tokenJWT'))
         var token = cookies.get('tokenJWT')
 
 
@@ -54,7 +52,6 @@ function Formulario() {
         }).then((res) => {
 
             if (res.data[0].auth) {
-                console.log('Voce tem acesso')
                 setShowPage(true)
 
                 //Pegando as informacoes do user pelo nif
@@ -136,7 +133,6 @@ function Formulario() {
                 let item = array_nomes[indice]
                 array_acabamento.push(item)
                 setArrayAcabamento(array_acabamento)
-                console.log(array_acabamento)
 
             }
         })
@@ -161,8 +157,6 @@ function Formulario() {
     function onChangeHandler(event) {
 
         const uploadfile = event.target.files[0];
-        console.log("OLHA AQUI")
-        console.log(uploadfile)
         setFileUploaed(uploadfile)
 
     }
@@ -263,9 +257,6 @@ function Formulario() {
 
                 if (res.data.message === 'Requisição feita com sucesso !') {
                      setMsgError(null)
-                    console.log(res.data)
-
-
                     data.numero = res.data.numeroReq
                     numero_teste = res.data.numeroReq
                     setNumeroReq(res.data.numeroReq)
@@ -273,7 +264,6 @@ function Formulario() {
 
                     setMsgAcerto(res.data.message)
 
-                    console.log(data_to_upload_file)
 
                     const myFile = new FormData();
                     myFile.append('file', fileUploaed)
@@ -281,14 +271,13 @@ function Formulario() {
 
                     //Gravar o arquivo exemplar no banco
                     axios.post(`${process.env.REACT_APP_SERVER_BASE}/file-requisicao`, myFile).then((res) => {
-                        console.log(res)
+                       
                     })
                     data.numero = numero_teste
-                    console.log(data.numero)
 
                     //Gerando pdf
                     axios.post(`${process.env.REACT_APP_SERVER_BASE}/criar-pdf-requisicao`, data).then((result) => {
-                        console.log(result.data.filename)
+
 
                         //Pegando o nome do arquivo que esta dentro de uma url
                         let url = result.data.filename
@@ -297,7 +286,6 @@ function Formulario() {
 
                         let nome_pdf = array_url[array_url.length - 1];
 
-                        console.log(nome_pdf)
 
                         //Pegando pdf do servidor e imprimindo ele
                         axios({
@@ -584,20 +572,15 @@ function Formulario() {
 
                             <form className="form_baixo">
 
-                                <select className="dropdown_form_baixo" onChange={e => (setResponsavel(e.target.value))}>
-                                    <option selected value="">Coordenador</option>
-                                    <option value="Sandra Sobrenome"> Sandra Sobrenome</option>
-                                    <option value="Alexandre Sobrenome"> Alexandre Sobrenome</option>
-                                    <option value="Fulano Sobrenome"> Fulano Sobrenome</option>
-                                    <option value="Ciclano Sobrenome"> Ciclano Sobrenome</option>
-                                </select>
-
                                 <h5 className='titulo_upload'>Upload do exemplar:</h5>
 
                                 <div className="div_upload">
                                     <img className="img_cloud" src={IconCloud} alt="" />
-                                    <p className="text_upload">Arraste e solte um arquivo aqui <br /> ou</p>
-                                    <input type="file" className="cursor-pointer input_exemplar" id="attachment" name="file" onChange={onChangeHandler} />
+                                    <p className="text_upload">Arraste e solte apenas um arquivo aqui</p>
+                                    <div className="input--File"> 
+                                    <input type="file" className="cursor-pointer" id="attachment" name="file" onChange={onChangeHandler} />
+                                    </div>
+                                    
                                 </div>
 
                                 <button style={{ width: "150px" }} onClick={EnviarFormulario} type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">Enviar</button>
@@ -627,6 +610,8 @@ function Formulario() {
                                     </div>
                                 </div>
 
+                                <hr></hr>
+        <p style={{ color: "#b4a3a3", fontSize: "15px" }}>@Criado por Denison Portela, Ana L. Gomes, Felipe Braga, Guilherme Cunha e Caio Daniel !</p>       
                             </form>
                         </Container>
 

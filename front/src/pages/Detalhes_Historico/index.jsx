@@ -38,8 +38,6 @@ function DetalhesHistorico(props) {
 
 
   useEffect(() => {
-
-    console.log('MEU TOKEN E ' + cookies.get('tokenJWT'))
     var token = cookies.get('tokenJWT')
 
     axios.get(process.env.REACT_APP_SERVER_TO_AUTHENTICATE, {
@@ -48,7 +46,6 @@ function DetalhesHistorico(props) {
     }).then((res) => {
 
       if (res.data[0].auth) {
-        console.log('Voce tem acesso')
         setShowPage(true)
 
       }
@@ -61,7 +58,6 @@ function DetalhesHistorico(props) {
   //**Verificando Se o usuario esta autorizado para acessar essa pagina**
 
   //pegando o node do registro a ser mostrado ( tem que pegar o id depois )
-  console.log(props.location.state.registro[0])
 
   const [registro, setRegistro] = useState('')
   const [valorFeedback, setValorFeedback] = useState()
@@ -76,8 +72,6 @@ function DetalhesHistorico(props) {
 
   useEffect(() => {
     setRegistro(props.location.state.registro[0])
-
-    console.log('MEU TOKEN E ' + cookies.get('tokenJWT'))
     var token = cookies.get('tokenJWT')
 
     axios.get(process.env.REACT_APP_SERVER_TO_AUTHENTICATE, {
@@ -86,22 +80,16 @@ function DetalhesHistorico(props) {
     }).then((res) => {
 
       if (res.data[0].auth) {
-        console.log('Voce tem acesso')
+
         setShowPage(true)
 
         //Pegando as informacoes do user pela requisição
         let url = `${process.env.REACT_APP_SERVER_BASE}/pegar-uma-requisicao/${props.location.state.registro[0]}`
 
-        console.log(url)
-        console.log(props.location.state.registro[0])
-
         axios.get(url).then(async (result) => {
 
           await setInfoReq(result.data[0])
 
-          console.log(result.data[0])
-
-          console.log(infoReq)
 
           //Setando dadas para fazer a regra de negocio do feedback e cancelar
 
@@ -119,8 +107,6 @@ function DetalhesHistorico(props) {
           //Pegando a data de envio em milisegundos e somando mais 1 dia em milisegundos
           let dataEnvioMais1 = dataEnvioMilli + 86400000
 
-          console.log("Estou aquiiiiiiiii")
-
 
           setDataEnvioMilli(dataEnvioMilli)
           setDataEnvioMais7(dataEnvioMais7)
@@ -129,10 +115,6 @@ function DetalhesHistorico(props) {
           //Pegando a data de hole em milisegundos
           var dataDeHoje = Date.now();
           setDataDeHoje(dataDeHoje)
-
-
-          console.log(dataEnvioMilli)
-          console.log(dataEnvioMais7)
 
           //*__Setando dadas para fazer a regra de negocio do feedback e cancelar__*
 
@@ -170,7 +152,6 @@ function DetalhesHistorico(props) {
 
 
     let nome_pdf = `${registro}-requisicao.pdf`
-    console.log(nome_pdf)
 
     //Pegando pdf do servidor e imprimindo ele
     axios({
