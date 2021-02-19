@@ -1,7 +1,7 @@
 import React from 'react';
 import Login  from './pages/login'
 import Formulario from './pages/Formulario'
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
+import {  HashRouter, BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
 import Adm_Registros from './pages/Adm_Registros'
 import Perfil from './pages/Perfil'
 import Historico from './pages/Perfil_Historico'
@@ -15,9 +15,10 @@ import HistoricoAdm from './pages/Historico_Adm'
 
 
 const Routes = () => (
-    <BrowserRouter>
-        <Switch>
+    <HashRouter >
+         <Switch> 
             <Route exact path="/" component={Login}/>
+            <Route path="/perfil-adm" component={PerfilAdm} />
             <Route path="/registros" component={Adm_Registros} />
             <Route path="/Historico" component={Historico} />
             <Route path="/Formulario" component={Formulario}/>
@@ -27,10 +28,9 @@ const Routes = () => (
             <Route path="/detalhes-historicos/:nif" render={(props) => <DetalhesHistorico {...props} data=""/>}/>
             <Route path="/funcionarios-cadastrados" component={Funcionarios}/>
             <Route path="/cadastro" component={Cadastro} />
-            <Route path="/perfil-adm" component={PerfilAdm} />
             <Route path="/historico-adm" component={HistoricoAdm} />
-        </Switch>
-    </BrowserRouter>
+         </Switch> 
+    </HashRouter>
 )
 
 export default Routes;
