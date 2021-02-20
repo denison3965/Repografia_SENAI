@@ -279,13 +279,24 @@ function Formulario() {
                     //Gerando pdf
                     axios.post(`${process.env.REACT_APP_SERVER_BASE}/criar-pdf-requisicao`, data).then((result) => {
 
+                        console.log(result.data.filename)
 
                         //Pegando o nome do arquivo que esta dentro de uma url
                         let url = result.data.filename
 
-                        let array_url = url.split('/')
 
-                        let nome_pdf = array_url[array_url.length - 1];
+                        let nome_pdf 
+
+                        try 
+                        {
+                            let array_url = url.split('/')
+
+                            nome_pdf = array_url[array_url.length - 1];
+                        }
+                        catch
+                        {
+                            nome_pdf = "Não gerar um requisição corretamente"
+                        }
 
 
                         //Pegando pdf do servidor e imprimindo ele

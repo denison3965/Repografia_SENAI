@@ -1,0 +1,30 @@
+{
+  "files": {
+    "main.js": "./static/js/main.c727e0c4.chunk.js",
+    "main.js.map": "./static/js/main.c727e0c4.chunk.js.map",
+    "runtime-main.js": "./static/js/runtime-main.5c95ae40.js",
+    "runtime-main.js.map": "./static/js/runtime-main.5c95ae40.js.map",
+    "static/css/2.837ac467.chunk.css": "./static/css/2.837ac467.chunk.css",
+    "static/js/2.a869b0e1.chunk.js": "./static/js/2.a869b0e1.chunk.js",
+    "static/js/2.a869b0e1.chunk.js.map": "./static/js/2.a869b0e1.chunk.js.map",
+    "index.html": "./index.html",
+    "static/css/2.837ac467.chunk.css.map": "./static/css/2.837ac467.chunk.css.map",
+    "static/js/2.a869b0e1.chunk.js.LICENSE.txt": "./static/js/2.a869b0e1.chunk.js.LICENSE.txt",
+    "static/media/add.4bb65a2f.png": "./static/media/add.4bb65a2f.png",
+    "static/media/avatar.034a7b2b.png": "./static/media/avatar.034a7b2b.png",
+    "static/media/banco.aa615174.png": "./static/media/banco.aa615174.png",
+    "static/media/caneta.571b26d4.png": "./static/media/caneta.571b26d4.png",
+    "static/media/grupo-de-usuarios.4d1c85a9.png": "./static/media/grupo-de-usuarios.4d1c85a9.png",
+    "static/media/loading.d218b2b1.gif": "./static/media/loading.d218b2b1.gif",
+    "static/media/loading2.51121806.gif": "./static/media/loading2.51121806.gif",
+    "static/media/maisInfo.a9f367f5.png": "./static/media/maisInfo.a9f367f5.png",
+    "static/media/pessoa.273a527e.png": "./static/media/pessoa.273a527e.png",
+    "static/media/senaiLogo.5fc4ab09.png": "./static/media/senaiLogo.5fc4ab09.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.5c95ae40.js",
+    "static/css/2.837ac467.chunk.css",
+    "static/js/2.a869b0e1.chunk.js",
+    "static/js/main.c727e0c4.chunk.js"
+  ]
+}

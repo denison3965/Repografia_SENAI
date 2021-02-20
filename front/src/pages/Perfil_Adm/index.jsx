@@ -61,6 +61,7 @@ function Adm_Registros() {
       }
       //Se nao voltar para login
       else {
+        console.log("Estou aquiiii")
         history.push("/")
       }
 
