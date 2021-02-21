@@ -71,7 +71,16 @@ function DetalhesHistorico(props) {
   const [dataDeHoje, setDataDeHoje] = useState()
 
   useEffect(() => {
-    setRegistro(props.location.state.registro[0])
+
+    try
+    {
+      setRegistro(props.location.state.registro[0])
+    }
+    catch
+    {
+      history.push("/")
+    }
+    
     var token = cookies.get('tokenJWT')
 
     axios.get(process.env.REACT_APP_SERVER_TO_AUTHENTICATE, {
@@ -225,6 +234,9 @@ function DetalhesHistorico(props) {
   })
   }
 
+  console.log("MANUTENÇÃO");
+  console.log(infoReq)
+
 
 
   return (
@@ -332,8 +344,10 @@ function DetalhesHistorico(props) {
 
                 </div>
                 {dataDeHoje > dataEnvioMais7 ?
-                  <div className="feedback">
-                    <p><strong>Seu feedback?</strong></p>
+
+                  infoReq.feedback == "Em espera" ? 
+                    <div className="feedback">
+                    <p><strong>Seu feedback?????</strong></p>
 
                     <div className="">
 
@@ -352,22 +366,33 @@ function DetalhesHistorico(props) {
                         <label className="custom-control-label" for="customRadio3">Não Chegou</label>
                         <p>{valorFeedback}</p>
                       </div>
+                      <button onClick={EnviarFeedback} type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Enviar</button>
+                    </div>
 
+                    </div>
+                    :
+                    <div className="feedback">
+                      Voce já deu o seu feedback sobre essa requisição !!
                     </div>
 
 
-                    <button onClick={EnviarFeedback} type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Enviar</button>
-                  </div> :
+                :
                   <div className="feedback" style={{ height: 200 }}>
                     <p><strong>Seu Feedback ainda não está disponível, so apenas depois de 7 dias</strong></p>
                   </div>
                 }
 
-                {dataDeHoje > dataEnvioMais1 ?
-                  <div className="cancelar">
-                    <p><strong>Deseja cancelar esse pedido ?</strong></p>
-                    <button onClick={CancelarRequisicao}  data-toggle="modal" data-target="#exampleModal" type="button" class="btn btn-light">Cancelar</button>
-                  </div> :
+                {dataDeHoje < dataEnvioMais1 ?
+                  infoReq.status != "cancelado" ? 
+                    <div className="cancelar">
+                      <p><strong>Deseja cancelar esse pedido ?</strong></p>
+                      <button onClick={CancelarRequisicao}  data-toggle="modal" data-target="#exampleModal" type="button" class="btn btn-light">Cancelar</button>
+                    </div> 
+                    :
+                    <div className="cancelar">
+                      <p><strong>Requisição cancelada</strong></p>
+                    </div>
+                  :
                   <div className="cancelar">
                     <p><strong>Você não pode mais cancelar o pedido</strong></p>
                   </div>
