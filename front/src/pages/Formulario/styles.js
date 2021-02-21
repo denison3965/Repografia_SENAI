@@ -262,9 +262,10 @@ export const Container = styled.div`
     .div_dropdown_form_direita{
         width: 40vw;
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         margin-left: -12%;
         margin-top: -250px;
+
     }
     .campo_select{
         width: 250px;
@@ -357,5 +358,12 @@ export const Container = styled.div`
         .img_cloud {
             margin-top: -1%;
         }
+    }
+
+    .Centro__custo{
+        width: 100%;
+        font-size: 20px;
+        text-align: center;
+        font-weight: bold;
     }
 `;

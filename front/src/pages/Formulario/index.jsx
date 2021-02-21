@@ -241,7 +241,7 @@ function Formulario() {
         "suporte": radioSuporte,
         "coodernador": responsavel,
 
-        "status" : "ativo",
+        "status": "ativo",
         "feedback": "4"
 
     }
@@ -257,7 +257,7 @@ function Formulario() {
             .then((res) => {
 
                 if (res.data.message === 'Requisição feita com sucesso !') {
-                     setMsgError(null)
+                    setMsgError(null)
                     data.numero = res.data.numeroReq
                     numero_teste = res.data.numeroReq
                     setNumeroReq(res.data.numeroReq)
@@ -272,7 +272,7 @@ function Formulario() {
 
                     //Gravar o arquivo exemplar no banco
                     axios.post(`${process.env.REACT_APP_SERVER_BASE}/file-requisicao`, myFile).then((res) => {
-                       
+
                     })
                     data.numero = numero_teste
 
@@ -285,10 +285,9 @@ function Formulario() {
                         let url = result.data.filename
 
 
-                        let nome_pdf 
+                        let nome_pdf
 
-                        try 
-                        {
+                        try {
                             let array_url = url.split('/')
 
                             nome_pdf = array_url[array_url.length - 1];
@@ -316,7 +315,7 @@ function Formulario() {
 
                 }
                 else {
-                     setMsgAcerto(null)
+                    setMsgAcerto(null)
                     setMsgError(res.data)
                 }
             }).catch((err) => {
@@ -418,17 +417,26 @@ function Formulario() {
 
                             <form className="form_direita">
                                 <div className="div_dropdown_form_direita">
-                                    <div className="campo_select">
-                                        <Select style={{ width: "500px" }} options={optionsDepartamento} isSearchable required onChange={(e) => setDepartamento(e.value)} />
+                                    <div>
+                                        <div className="Centro__custo">
+                                            Centro de Custo:
+                                        </div>
                                     </div>
 
-                                    <div className="campo_CC">
-                                        <p>{listaDepartamento.map((element) => {
-                                            if (element.id_departamento == departamento) {
-                                                return element.centro_custo
-                                            }
-                                        })}</p>
+                                    <div style={{display:'flex'}}>
+                                        <div className="campo_select">
+                                            <Select style={{ width: "500px" }} options={optionsDepartamento} isSearchable required onChange={(e) => setDepartamento(e.value)} />
+                                        </div>
+
+                                        <div className="campo_CC">
+                                            <p>{listaDepartamento.map((element) => {
+                                                if (element.id_departamento == departamento) {
+                                                    return element.centro_custo
+                                                }
+                                            })}</p>
+                                        </div>
                                     </div>
+
                                 </div>
 
                                 <div className="acabamento">
@@ -589,10 +597,10 @@ function Formulario() {
                                 <div className="div_upload">
                                     <img className="img_cloud" src={IconCloud} alt="" />
                                     <p className="text_upload">Arraste e solte apenas um arquivo aqui</p>
-                                    <div className="input--File"> 
-                                    <input type="file" className="cursor-pointer" id="attachment" name="file" onChange={onChangeHandler} />
+                                    <div className="input--File">
+                                        <input type="file" className="cursor-pointer" id="attachment" name="file" onChange={onChangeHandler} />
                                     </div>
-                                    
+
                                 </div>
 
                                 <button style={{ width: "150px" }} onClick={EnviarFormulario} type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">Enviar</button>
@@ -609,9 +617,9 @@ function Formulario() {
                                             </div>
                                             <div class="modal-body">
                                                 <div>
-                                                    {msg_error != null ? <div className="alert alert-danger">{msg_error} </div> : null}                                                  
+                                                    {msg_error != null ? <div className="alert alert-danger">{msg_error} </div> : null}
                                                     {msg_acerto != null ? <div className="alert alert-success" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-                                                    {msg_acerto}
+                                                        {msg_acerto}
                                                     </div> : null}
                                                 </div>
                                             </div>
@@ -623,7 +631,7 @@ function Formulario() {
                                 </div>
 
                                 <hr></hr>
-        <p style={{ color: "#b4a3a3", fontSize: "15px" }}>@Criado por Denison Portela, Ana L. Gomes, Felipe Braga, Guilherme Cunha e Caio Daniel !</p>       
+                                <p style={{ color: "#b4a3a3", fontSize: "15px" }}>@Criado por Denison Portela, Ana L. Gomes, Felipe Braga, Guilherme Cunha e Caio Daniel !</p>
                             </form>
                         </Container>
 
