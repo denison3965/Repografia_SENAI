@@ -138,7 +138,7 @@ export class Tabela_Funcionarios extends Component {
         this.setState({
           pageCount: Math.ceil(userInativos.length / this.state.perPage),
           orgtableData: userInativos,
-          tableData: slice
+          tableData: new_slice
 
         })
         console.log(this.state.orgtableData)
