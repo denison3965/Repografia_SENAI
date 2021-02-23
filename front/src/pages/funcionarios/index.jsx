@@ -97,7 +97,12 @@ function Funcionarios() {
 
             </div>
             <Tabela>
-              <Tabela_Funcionarios />
+              {infoUser.nif == undefined ? 
+                <img src={Loading} alt="loading"></img>
+              :
+                <Tabela_Funcionarios user={infoUser} />
+              }
+              
             </Tabela>
 
             <Tabela>
