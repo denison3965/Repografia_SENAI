@@ -111,7 +111,7 @@ function DetalhesHistorico(props) {
           let dataEnvioMilli = Date.parse(dateToEN(result.data[0].data_envio));
 
           //Pegando a data de envio em milisegundos e somando mais 7 dias em milisegundos
-          let dataEnvioMais7 = dataEnvioMilli + 604800000
+          let dataEnvioMais7 = dataEnvioMilli + 1
 
           //Pegando a data de envio em milisegundos e somando mais 1 dia em milisegundos
           let dataEnvioMais1 = dataEnvioMilli + 86400000
@@ -234,9 +234,6 @@ function DetalhesHistorico(props) {
   })
   }
 
-  console.log("MANUTENÇÃO");
-  console.log(infoReq)
-
 
 
   return (
@@ -320,7 +317,7 @@ function DetalhesHistorico(props) {
                   </div>
 
                   <div className="registro_item">
-                    <div className="registro_chave"><strong>Data prevista pata entrega:</strong></div>
+                    <div className="registro_chave"><strong>Data prevista para entrega:</strong></div>
                     <div className="registro_valor">{infoReq.data_entrega}</div>
                   </div>
 
@@ -347,13 +344,13 @@ function DetalhesHistorico(props) {
 
                   infoReq.feedback == "Em espera" ? 
                     <div className="feedback">
-                    <p><strong>Seu feedback?????</strong></p>
+                    <p><strong>FEEDBACK ?? </strong></p>
 
                     <div className="">
 
                       <div className="custom-control custom-radio">
                         <input type="radio" id="customRadio1" name="customRadio" onClick={(e) => setarValorFeedback(e)} className="custom-control-input" value={1} />
-                        <label className="custom-control-label" for="customRadio1">Chegou!!!!</label>
+                        <label className="custom-control-label" for="customRadio1">Chegou!</label>
                         <p>{valorFeedback}</p>
                       </div>
                       <div className="custom-control custom-radio">
