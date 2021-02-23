@@ -69,6 +69,8 @@ function DetalhesHistorico(props) {
   const [dataEnvioMais7, setDataEnvioMais7] = useState()
   const [dataEnvioMais1, setDataEnvioMais1] = useState()
   const [dataDeHoje, setDataDeHoje] = useState()
+  const [dataPrevistaMilli, setdataPrevistaMilli] = useState()
+
 
   useEffect(() => {
 
@@ -109,9 +111,10 @@ function DetalhesHistorico(props) {
 
           //Pegando a data de envio e convertendo para mmilisegundos
           let dataEnvioMilli = Date.parse(dateToEN(result.data[0].data_envio));
+          let dataPrevistaMilli = Date.parse(dateToEN(result.data[0].data_entrega));
 
           //Pegando a data de envio em milisegundos e somando mais 7 dias em milisegundos
-          let dataEnvioMais7 = dataEnvioMilli + 604800000
+          let dataEnvioMais7 = dataEnvioMilli + 1
 
           //Pegando a data de envio em milisegundos e somando mais 1 dia em milisegundos
           let dataEnvioMais1 = dataEnvioMilli + 86400000
@@ -120,8 +123,11 @@ function DetalhesHistorico(props) {
           setDataEnvioMilli(dataEnvioMilli)
           setDataEnvioMais7(dataEnvioMais7)
           setDataEnvioMais1(dataEnvioMais1)
+          setdataPrevistaMilli(dataPrevistaMilli)
 
-          //Pegando a data de hole em milisegundos
+          console.log("Testando" + dataPrevistaMilli)
+
+          //Pegando a data de hoje em milisegundos
           var dataDeHoje = Date.now();
           setDataDeHoje(dataDeHoje)
 
@@ -234,8 +240,7 @@ function DetalhesHistorico(props) {
   })
   }
 
-  console.log("MANUTENÇÃO");
-  console.log(infoReq)
+  
 
 
 
@@ -320,7 +325,7 @@ function DetalhesHistorico(props) {
                   </div>
 
                   <div className="registro_item">
-                    <div className="registro_chave"><strong>Data prevista pata entrega:</strong></div>
+                    <div className="registro_chave"><strong>Data prevista para entrega:</strong></div>
                     <div className="registro_valor">{infoReq.data_entrega}</div>
                   </div>
 
@@ -347,13 +352,13 @@ function DetalhesHistorico(props) {
 
                   infoReq.feedback == "Em espera" ? 
                     <div className="feedback">
-                    <p><strong>Seu feedback?????</strong></p>
+                    <p><strong>FEEDBACK ?? </strong></p>
 
                     <div className="">
 
                       <div className="custom-control custom-radio">
                         <input type="radio" id="customRadio1" name="customRadio" onClick={(e) => setarValorFeedback(e)} className="custom-control-input" value={1} />
-                        <label className="custom-control-label" for="customRadio1">Chegou!!!!</label>
+                        <label className="custom-control-label" for="customRadio1">Chegou!</label>
                         <p>{valorFeedback}</p>
                       </div>
                       <div className="custom-control custom-radio">

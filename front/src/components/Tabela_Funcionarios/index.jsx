@@ -14,6 +14,7 @@ export class Tabela_Funcionarios extends Component {
   constructor(props) {
     super(props)
 
+
     this.state = {
       offset: 0,
       tableData: [],
@@ -125,10 +126,19 @@ export class Tabela_Funcionarios extends Component {
         //slice = 20, ou seja na pagina ira commecar a listar pelo numero 20
         var slice = userInativos.slice(this.state.offset, this.state.offset + this.state.perPage)
 
+
+        // Tirando o úsuário que está logado da lista de usuários
+
+        var new_slice = slice.filter((user) => {
+          if (user.nif !== this.props.user.nif) {
+            return user
+          }
+        })
+
         this.setState({
           pageCount: Math.ceil(userInativos.length / this.state.perPage),
           orgtableData: userInativos,
-          tableData: slice
+          tableData: new_slice
 
         })
         console.log(this.state.orgtableData)
