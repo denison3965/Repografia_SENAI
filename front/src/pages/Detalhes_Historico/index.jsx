@@ -234,9 +234,6 @@ function DetalhesHistorico(props) {
   })
   }
 
-  console.log("MANUTENÇÃO");
-  console.log(infoReq)
-
 
 
   return (
