@@ -9,6 +9,7 @@ export class Tabela_Funcionarios_Excluidos extends Component {
     //Iniciando o componente com o construtor recebendo as props e iniciando os estados
     constructor(props) {
       super(props)
+
   
       this.state ={
         offset: 0,
@@ -50,7 +51,7 @@ export class Tabela_Funcionarios_Excluidos extends Component {
     click_RestaurarUser(nif) {
 
 
-      axios.put('http://localhost:3000/v1/restaurarfuncionario', {
+      axios.put(`${process.env.REACT_APP_SERVER_BASE}/restaurarfuncionario`, {
         nif: this.state.UserParaRestaurar,
       }).then((res) => {
         console.log(res)
@@ -100,7 +101,7 @@ export class Tabela_Funcionarios_Excluidos extends Component {
       .then((res) => {
         // slice = de quanto a quanto sera exibido na tela
         // slice = data.slice(15, 15 + 5) 
-        //slice = 20, ou seja na pagina ira commecar a listar pelo numero 20
+        // slice = 20, ou seja na pagina ira commecar a listar pelo numero 20
 
         //Retirando todos os usuarios ativos e deixando apenas os inativos para serem listados
         let infoArray = res.data
@@ -146,6 +147,8 @@ export class Tabela_Funcionarios_Excluidos extends Component {
     
   
     render(){
+
+      
   
       let filterRegister = this.state.tableData.filter(
         (register) => {

@@ -123,16 +123,15 @@ export class Tabela_Registros extends Component {
           <table className="table table-striped">
             <thead>
               <tr>
-                <th scope="col"><strong>numero</strong></th>
-                <th scope="col"><strong>nome da requisicao</strong></th>
-                <th scope="col"><strong>solicitante</strong></th>
-                <th scope="col"><strong>departamento</strong></th>
+                <th scope="col"><strong>Número</strong></th>
+                <th scope="col"><strong>Nome da requisicao</strong></th>
+                <th scope="col"><strong>Solicitante</strong></th>
+                <th scope="col"><strong>Departamento</strong></th>
                 <th scope="col"><strong>cc</strong></th>
-                <th scope="col"><strong>status</strong></th>
-                <th scope="col"><strong>total de paginas</strong> </th>
-                <th scope="col"><strong>data do pedido</strong></th>
-                <th scope="col"><strong>data de entrega</strong></th>
-                <th scope="col"></th>
+                <th scope="col"><strong>Status</strong></th>
+                <th scope="col"><strong>Data do pedido</strong> </th>
+                <th scope="col"><strong>Data de entrega</strong></th>
+                <th scope="col"><strong>Saiba mais</strong></th>
               </tr>
             </thead>
             <tbody>
