@@ -2,13 +2,14 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
     
+    display:flex;
     flex: 1;
 
-    .grafico1{
-        width: 800px;
-        height: 500px;
+    .grafico2{
+        width: 700px;
+        height: 300px;
+        margin-top: -150px;
     }
-
 
     @media screen and (max-width:1600px){
         &{
@@ -18,7 +19,7 @@ export const Container = styled.div`
             margin-top: 20px;
     }
         .grafico2{
-            margin-top: 155px;
+            margin-top:1px;
         }
     }
 `;

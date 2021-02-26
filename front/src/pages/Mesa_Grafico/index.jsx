@@ -4,11 +4,13 @@ import { Container, MenuLateral, InfoBox, Navegation, Info, Title, Grafico, Tabe
 import Nav_Lateral from '../../components/Nav_Lateral';
 import User_Box_Info from '../../components/User_Box_Info';
 import Graficos from '../../components/Graficos';
+import Grafico_Barra from '../../components/Grafico_barra';
 import { useHistory } from 'react-router-dom'
 import Tabelas_estatistica from '../../components/Tabelas_estatistica'
 
 import axios from 'axios'
 import Loading from '../../assets/img/loading2.gif'
+import Loading3 from '../../assets/img/loading3.gif'
 import Cookies from 'universal-cookie'
 
 const cookies = new Cookies()
@@ -31,10 +33,11 @@ function Mesa_Grafico() {
   const history = useHistory()
   const [showPage, setShowPage] = useState(false)
   const [infoUser, setInfoUser] = useState({ nome: '', sobrenome: '' })
-  const [allInfoReq, setAllInfoReq] = useState([]);
   const [departamentos, setDepartamentos] = useState([]);
   const [erros, setErros] = useState({ departamento: "", dados_requisição: "" });
   const [top5Req, setTop5Req] = useState();
+  const [top5Funcionarios, setTop5Funcionarios] = useState();
+  const [dadosFuncionarios, setDadosFuncionarios] = useState();
 
 
   useEffect(() => {
@@ -77,136 +80,48 @@ function Mesa_Grafico() {
     /*/
     //**Verificando Se o usuario esta autorizado para acessar essa pagina**
 
-    var requisicoes
+    /*
+     * GRAFICO 1 -
+     */
 
-    //Pegando informações de todas as requisiçoẽs 
-    axios.get(`${process.env.REACT_APP_SERVER_BASE}/pegar-requisicao`).then((res) => {
-      setAllInfoReq(res.data)
-      requisicoes = res.data
-
-    }).catch((error) => {
-      setErros({ dados_requisição: "Erro ao carregar os dados para alimentar o grafíco" })
-      alert(erros)
+    axios.get(`${process.env.REACT_APP_SERVER_BASE}/pegar-top5-departamentos`).then((res) => {
+      setTop5Req(res.data)
+    }).catch((err) => {
+      setErros({ departamento: "Não conseguimos acessar a base de dados para pegar os 5 departamentos que mais gastam" })
     })
 
-    //Pegando informaçôes do departamento
-    axios.get(`${process.env.REACT_APP_SERVER_BASE}/pegar-departamento`).then((res) => {
-
-      let data = res.data
-
-      //Adicionando campo de folhas usadas e todos os departamento
-      data.map((element) => {
-        element.folhas_usadas = 0
-      })
-      setDepartamentos(data)
-      var departamentos = data
-
-    /* 
-    *  PEGANDO QUANTIDADES DE FOLHAS GASTA POR DEPARTAMENTO
-    */
-
-      requisicoes.map((req) => {
-        switch (req.id_departamento) {
-          case 1:
-            departamentos[0].folhas_usadas += req.total_paginas
-            break;
-
-          case 2:
-            departamentos[1].folhas_usadas += req.total_paginas
-            break;
-
-          case 3:
-            departamentos[2].folhas_usadas += req.total_paginas
-            break;
-
-
-          case 4:
-            departamentos[3].folhas_usadas += req.total_paginas
-            break;
-
-
-          case 5:
-            departamentos[4].folhas_usadas += req.total_paginas
-            break;
-
-
-          case 6:
-            departamentos[5].folhas_usadas += req.total_paginas
-            break;
-
-
-          case 7:
-            departamentos[6].folhas_usadas += req.total_paginas
-            break;
-
-
-          case 8:
-            departamentos[7].folhas_usadas += req.total_paginas
-            break;
-
-
-          case 9:
-            departamentos[8].folhas_usadas += req.total_paginas
-            break;
-
-
-          case 10:
-            departamentos[9].folhas_usadas += req.total_paginas
-            break;
-
-
-          case 11:
-            departamentos[10].folhas_usadas += req.total_paginas
-            break;
-
-
-          case 12:
-            departamentos[11].folhas_usadas += req.total_paginas
-            break;
-
-          default:
-            break;
-        }
-      })
-
-
-
-
-
-      let top5 = []
-
-      /*
-          ALGORITIMO PARA PEGAR O 5 DEPARTAMENTO QUE MAIS GASTARAM
-      */
-      
-        departamentos.map((element) => {
-          let aux = 0
-
-          departamentos.map((element2) => {
-            if (element.folhas_usadas < element2.folhas_usadas) {
-              aux++
-            }
-          })
-
-          if (aux < 5) {
-            top5.push(element)
-          }
-          
-        })
-
-
-      setTop5Req(top5)
-
-
-
-    }).catch((error) => {
-      setErros({ departamento: "Erro ao carregado os departamento para alimentar os gráfico" })
-      alert(erros)
+    axios.get(`${process.env.REACT_APP_SERVER_BASE}/dados-graficos`).then((res) => {
+      setDepartamentos(res.data)
+    }).catch((err) => {
+      setErros({ dados_requisição: "Não conseguimos acessar a base de dados para pegar os dados de todos os departamentos" })
     })
+
+
+    /*
+     * GRAFICO 2 - 
+     */
+    axios.get(`${process.env.REACT_APP_SERVER_BASE}/pegar-top5-funcionarios`).then((res) => {
+      setTop5Funcionarios(res.data)
+
+    }).catch((err) => {
+      setErros({ dados_requisição: "Não conseguimos acessar a base de dados para pegar os dados de todos os departamentos" })
+    })
+
+    axios.get(`${process.env.REACT_APP_SERVER_BASE}/dados-grafico-funcionario`).then((res) => {
+      setDadosFuncionarios(res.data)
+    }).catch((err) => {
+      setErros({ dados_requisição: "Não conseguimos acessar a base de dados para pegar os dados de todos os departamentos" })
+    })
+
+
+
+
 
 
 
   }, [])
+
+
 
 
 
@@ -247,29 +162,65 @@ function Mesa_Grafico() {
               <Title>Relatórios</Title>
             </Info>
 
+            {erros.dados_requisição != '' ?
+              <div className="alert alert-danger">{erros.dados_requisição}</div>
+              :
+              <span></span>
+            }
+            {erros.departamento != '' ?
+              <div className="alert alert-danger">{erros.departamento}</div>
+              :
+              <span></span>
+            }
+
             <Grafico>
-              {top5Req == undefined ?
-                <div>Erro</div>
-                :
-                <Graficos data={top5Req} />
-              }
-              
+
+
+              <div className="espaco_grafico_1">
+                {top5Req == undefined || top5Funcionarios == undefined ?
+                  <div>
+                    <img src={Loading3} alt="loading" style={{ width: "120px", height: "100px" }}></img>
+                    <p style={{ marginLeft: "-70px" }}>Carregando gráfico dos departamentos</p>
+                  </div>
+                  :
+                  <Graficos data={top5Req} />
+                }
+              </div>
+
+              <div className="espaco_grafico_2">
+                {top5Funcionarios == undefined || top5Req == undefined ?
+                  <div>
+                    <img src={Loading3} alt="loading" style={{ width: "120px", height: "100px" }}></img>
+                    <p style={{ marginLeft: "-60px" }}>Carregando gráfico dos funcionários</p>
+                  </div>
+                  :
+                  <Grafico_Barra data2={top5Funcionarios} />
+                }
+              </div>
+
+
             </Grafico>
-            
+
             <Tabela>
-              {departamentos == undefined ? 
-                <img src={Loading} alt="loading"></img>
-              : 
-                <Tabelas_estatistica data={departamentos} />
+              {departamentos == undefined || dadosFuncionarios == undefined ?
+                <div className="loading_tabela">
+                  <img src={Loading3} alt="loading" style={{ width: "120px", height: "100px" }}></img>
+                  <p style={{ marginLeft: "-250px", marginTop: "150px"  }}>Carregando Tabelas dos departamentos e funcionários</p>
+                </div>
+
+                :
+
+                <Tabelas_estatistica data={departamentos} data2={dadosFuncionarios} />
               }
-              
+
             </Tabela>
 
           </InfoBox>
 
           : <div>
             <div style={loading}>
-              <img src={Loading} alt="loading"></img>
+              <img src={Loading3} alt="loading"></img>
+              <p>Estamos preparando os dados estatísticos para você, por favor aguarde ...</p>
             </div>
           </div>
       }

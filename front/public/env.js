@@ -1,11 +1,15 @@
 window.env = {
+<<<<<<< HEAD
   "GJS_DEBUG_TOPICS": "JS ERROR;JS LOG",
+=======
+>>>>>>> 03a543e2be768a28d403c79ed7c265c02ff30fe5
   "LESSOPEN": "| /usr/bin/lesspipe %s",
   "npm_config_cache_lock_stale": "60000",
   "npm_config_ham_it_up": "",
   "npm_package_dependencies_react_bootstrap_table2_paginator": "^2.1.2",
   "npm_config_legacy_bundling": "",
   "npm_config_sign_git_tag": "",
+<<<<<<< HEAD
   "LANGUAGE": "pt_BR:pt:en",
   "USER": "ana",
   "npm_config_user_agent": "npm/6.14.4 node/v10.19.0 linux x64",
@@ -15,6 +19,17 @@ window.env = {
   "SSH_AGENT_PID": "1573",
   "XDG_SESSION_TYPE": "x11",
   "GIT_ASKPASS": "/snap/code/55/usr/share/code/resources/app/extensions/git/dist/askpass.sh",
+=======
+  "USER": "deny",
+  "LC_TIME": "pt_BR.UTF-8",
+  "npm_config_user_agent": "npm/6.14.8 node/v12.19.0 linux x64",
+  "npm_config_always_auth": "",
+  "npm_config_bin_links": "true",
+  "npm_config_key": "",
+  "SSH_AGENT_PID": "1836",
+  "XDG_SESSION_TYPE": "x11",
+  "GIT_ASKPASS": "/usr/share/code/resources/app/extensions/git/dist/askpass.sh",
+>>>>>>> 03a543e2be768a28d403c79ed7c265c02ff30fe5
   "npm_config_allow_same_version": "",
   "npm_config_description": "true",
   "npm_config_fetch_retries": "2",
@@ -23,6 +38,7 @@ window.env = {
   "npm_config_init_version": "1.0.0",
   "npm_config_user": "",
   "npm_node_execpath": "/usr/bin/node",
+<<<<<<< HEAD
   "SHLVL": "2",
   "npm_config_prefer_online": "",
   "npm_config_noproxy": "",
@@ -33,11 +49,24 @@ window.env = {
   "npm_package_browserslist_production_0": ">0.2%",
   "npm_config_force": "",
   "TERM_PROGRAM_VERSION": "1.53.2",
+=======
+  "SHLVL": "1",
+  "npm_config_prefer_online": "",
+  "npm_config_noproxy": "",
+  "QT4_IM_MODULE": "ibus",
+  "HOME": "/home/deny",
+  "CHROME_DESKTOP": "code-url-handler.desktop",
+  "npm_package_dependencies_chart_js": "^2.9.4",
+  "npm_package_browserslist_production_0": ">0.2%",
+  "npm_config_force": "",
+  "TERM_PROGRAM_VERSION": "1.50.1",
+>>>>>>> 03a543e2be768a28d403c79ed7c265c02ff30fe5
   "DESKTOP_SESSION": "ubuntu",
   "npm_package_dependencies_reactstrap": "^8.7.1",
   "npm_package_browserslist_production_1": "not dead",
   "npm_config_only": "",
   "npm_config_read_only": "",
+<<<<<<< HEAD
   "npm_package_browserslist_production_2": "not op_mini all",
   "npm_config_cache_min": "10",
   "npm_config_init_license": "ISC",
@@ -45,10 +74,20 @@ window.env = {
   "GNOME_SHELL_SESSION_MODE": "ubuntu",
   "GTK_MODULES": "gail:atk-bridge",
   "VSCODE_GIT_ASKPASS_MAIN": "/snap/code/55/usr/share/code/resources/app/extensions/git/dist/askpass-main.js",
+=======
+  "GIO_LAUNCHED_DESKTOP_FILE": "/usr/share/applications/code.desktop",
+  "npm_package_browserslist_production_2": "not op_mini all",
+  "npm_config_cache_min": "10",
+  "npm_config_init_license": "ISC",
+  "GNOME_SHELL_SESSION_MODE": "ubuntu",
+  "GTK_MODULES": "gail:atk-bridge",
+  "VSCODE_GIT_ASKPASS_MAIN": "/usr/share/code/resources/app/extensions/git/dist/askpass-main.js",
+>>>>>>> 03a543e2be768a28d403c79ed7c265c02ff30fe5
   "npm_package_dependencies_react_dotenv": "^0.1.2",
   "npm_config_editor": "vi",
   "npm_config_rollback": "true",
   "npm_config_tag_version_prefix": "v",
+<<<<<<< HEAD
   "VSCODE_GIT_ASKPASS_NODE": "/snap/code/55/usr/share/code/code",
   "MANAGERPID": "1386",
   "npm_package_scripts_serve": "react-dotenv && serve build",
@@ -56,6 +95,18 @@ window.env = {
   "npm_config_timing": "",
   "npm_config_userconfig": "/home/ana/.npmrc",
   "DBUS_SESSION_BUS_ADDRESS": "unix:path=/run/user/1000/bus",
+=======
+  "LC_MONETARY": "pt_BR.UTF-8",
+  "VSCODE_GIT_ASKPASS_NODE": "/usr/share/code/code",
+  "MANAGERPID": "1649",
+  "LC_CTYPE": "pt_BR.UTF-8",
+  "npm_package_scripts_serve": "react-dotenv && serve build",
+  "npm_config_cache_max": "Infinity",
+  "npm_config_timing": "",
+  "npm_config_userconfig": "/home/deny/.npmrc",
+  "DBUS_STARTER_BUS_TYPE": "session",
+  "DBUS_SESSION_BUS_ADDRESS": "unix:path=/run/user/1000/bus,guid=2170221de46591a39f886bac6036811c",
+>>>>>>> 03a543e2be768a28d403c79ed7c265c02ff30fe5
   "npm_package_dependencies_dotenv": "^8.2.0",
   "npm_config_engine_strict": "",
   "npm_config_init_author_name": "",
@@ -63,6 +114,10 @@ window.env = {
   "npm_config_preid": "",
   "npm_config_tmp": "/tmp",
   "COLORTERM": "truecolor",
+<<<<<<< HEAD
+=======
+  "GIO_LAUNCHED_DESKTOP_FILE_PID": "54073",
+>>>>>>> 03a543e2be768a28d403c79ed7c265c02ff30fe5
   "npm_package_dependencies_react_router_dom": "^5.2.0",
   "npm_package_dependencies_react_scripts": "4.0.1",
   "npm_package_description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
@@ -80,16 +135,27 @@ window.env = {
   "npm_config_progress": "true",
   "npm_config_https_proxy": "",
   "npm_config_save_prod": "",
+<<<<<<< HEAD
+=======
+  "MANDATORY_PATH": "/usr/share/gconf/ubuntu.mandatory.path",
+  "QT_QPA_PLATFORMTHEME": "qt5ct",
+>>>>>>> 03a543e2be768a28d403c79ed7c265c02ff30fe5
   "IM_CONFIG_PHASE": "1",
   "npm_config_audit": "true",
   "npm_config_cidr": "",
   "npm_config_onload_script": "",
   "npm_config_sso_type": "oauth",
+<<<<<<< HEAD
   "LOGNAME": "ana",
+=======
+  "GTK_IM_MODULE": "ibus",
+  "LOGNAME": "deny",
+>>>>>>> 03a543e2be768a28d403c79ed7c265c02ff30fe5
   "npm_package_dependencies_react_chartjs_2": "^2.11.1",
   "npm_config_rebuild_bundle": "true",
   "npm_config_save_bundle": "",
   "npm_config_shell": "/bin/bash",
+<<<<<<< HEAD
   "JOURNAL_STREAM": "8:42378",
   "_": "/usr/bin/npm",
   "npm_package_private": "true",
@@ -98,6 +164,17 @@ window.env = {
   "npm_config_dry_run": "",
   "npm_config_format_package_lock": "true",
   "XDG_SESSION_CLASS": "user",
+=======
+  "JOURNAL_STREAM": "8:47276",
+  "_": "/usr/bin/npm",
+  "npm_package_private": "true",
+  "npm_package_dependencies_universal_cookie": "^4.0.4",
+  "npm_config_dry_run": "",
+  "npm_config_format_package_lock": "true",
+  "npm_config_prefix": "/usr",
+  "XDG_SESSION_CLASS": "user",
+  "DEFAULTS_PATH": "/usr/share/gconf/ubuntu.default.path",
+>>>>>>> 03a543e2be768a28d403c79ed7c265c02ff30fe5
   "npm_config_scope": "",
   "npm_config_browser": "",
   "npm_config_cache_lock_wait": "10000",
@@ -106,10 +183,17 @@ window.env = {
   "npm_config_save_optional": "",
   "npm_config_searchopts": "",
   "npm_config_versions": "",
+<<<<<<< HEAD
   "USERNAME": "ana",
   "TERM": "xterm-256color",
   "npm_package_dependencies_react_bootstrap_table_next": "^4.0.3",
   "npm_config_cache": "/home/ana/.npm",
+=======
+  "USERNAME": "deny",
+  "TERM": "xterm-256color",
+  "npm_package_dependencies_react_bootstrap_table_next": "^4.0.3",
+  "npm_config_cache": "/home/deny/.npm",
+>>>>>>> 03a543e2be768a28d403c79ed7c265c02ff30fe5
   "npm_config_proxy": "",
   "npm_config_send_metrics": "",
   "GNOME_DESKTOP_SESSION_ID": "this-is-deprecated",
@@ -123,10 +207,17 @@ window.env = {
   "npm_package_browserslist_development_0": "last 1 chrome version",
   "npm_config_local_address": "",
   "npm_config_viewer": "man",
+<<<<<<< HEAD
   "npm_config_node_gyp": "/usr/bin/node-gyp",
   "PATH": "/usr/share/npm/node_modules/npm-lifecycle/node-gyp-bin:/home/ana/Área de Trabalho/reprografia/Repografia_SENAI/front/node_modules/.bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin",
   "SESSION_MANAGER": "local/ana-ThinkPad-T440p:@/tmp/.ICE-unix/1617,unix/ana-ThinkPad-T440p:/tmp/.ICE-unix/1617",
   "INVOCATION_ID": "2629dc2c238244e5b14169d4e02b1dca",
+=======
+  "npm_config_node_gyp": "/usr/lib/node_modules/npm/node_modules/node-gyp/bin/node-gyp.js",
+  "PATH": "/usr/lib/node_modules/npm/node_modules/npm-lifecycle/node-gyp-bin:/home/deny/Desktop/Projetos/Reppografia_SENAI/front/node_modules/.bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/deny/Android/Sdk/emulator:/home/deny/Android/Sdk/tools:/home/deny/Android/Sdk/tools/bin:/home/deny/Android/Sdk/platform-tools:/home/deny/Android/Sdk/emulator:/home/deny/Android/Sdk/tools:/home/deny/Android/Sdk/tools/bin:/home/deny/Android/Sdk/platform-tools",
+  "SESSION_MANAGER": "local/deny-desktop:@/tmp/.ICE-unix/1929,unix/deny-desktop:/tmp/.ICE-unix/1929",
+  "INVOCATION_ID": "451ac90e439d49499627ce5795c7fc34",
+>>>>>>> 03a543e2be768a28d403c79ed7c265c02ff30fe5
   "npm_package_name": "front",
   "npm_package_browserslist_development_1": "last 1 firefox version",
   "npm_config_audit_level": "low",
@@ -144,7 +235,11 @@ window.env = {
   "npm_config_maxsockets": "50",
   "npm_config_offline": "",
   "npm_config_sso_poll_frequency": "500",
+<<<<<<< HEAD
   "LANG": "pt_BR.UTF-8",
+=======
+  "LANG": "en_US.UTF-8",
+>>>>>>> 03a543e2be768a28d403c79ed7c265c02ff30fe5
   "XDG_CURRENT_DESKTOP": "Unity",
   "npm_package_dependencies_react_dom": "^17.0.1",
   "npm_config_umask": "0002",
@@ -161,7 +256,11 @@ window.env = {
   "npm_config_loglevel": "notice",
   "npm_config_logs_max": "10",
   "npm_config_message": "%s",
+<<<<<<< HEAD
   "npm_lifecycle_script": "react-dotenv && react-scripts start",
+=======
+  "npm_lifecycle_script": "react-dotenv && react-scripts build",
+>>>>>>> 03a543e2be768a28d403c79ed7c265c02ff30fe5
   "SSH_AUTH_SOCK": "/run/user/1000/keyring/ssh",
   "GSETTINGS_SCHEMA_DIR": "/snap/code/55/usr/share/glib-2.0/schemas",
   "ORIGINAL_XDG_CURRENT_DESKTOP": "ubuntu:GNOME",
@@ -173,19 +272,31 @@ window.env = {
   "npm_config_global": "",
   "npm_config_link": "",
   "SHELL": "/bin/bash",
+<<<<<<< HEAD
   "DISABLE_WAYLAND": "1",
+=======
+  "LC_NAME": "pt_BR.UTF-8",
+>>>>>>> 03a543e2be768a28d403c79ed7c265c02ff30fe5
   "npm_package_version": "0.1.0",
   "npm_package_dependencies__testing_library_jest_dom": "^5.11.4",
   "npm_config_access": "",
   "npm_config_also": "",
   "npm_config_save": "true",
   "npm_config_unicode": "true",
+<<<<<<< HEAD
   "npm_lifecycle_event": "start",
+=======
+  "npm_lifecycle_event": "build",
+>>>>>>> 03a543e2be768a28d403c79ed7c265c02ff30fe5
   "QT_ACCESSIBILITY": "1",
   "GDMSESSION": "ubuntu",
   "npm_package_dependencies__testing_library_user_event": "^12.1.10",
   "npm_package_scripts_build": "react-dotenv && react-scripts build",
+<<<<<<< HEAD
   "npm_config_argv": "{\"remain\":[],\"cooked\":[\"start\"],\"original\":[\"start\"]}",
+=======
+  "npm_config_argv": "{\"remain\":[],\"cooked\":[\"rum\",\"build\"],\"original\":[\"rum\",\"build\"]}",
+>>>>>>> 03a543e2be768a28d403c79ed7c265c02ff30fe5
   "npm_config_before": "",
   "npm_config_long": "",
   "npm_config_production": "",
@@ -194,8 +305,14 @@ window.env = {
   "npm_config_update_notifier": "true",
   "LESSCLOSE": "/usr/bin/lesspipe %s %s",
   "npm_config_auth_type": "legacy",
+<<<<<<< HEAD
   "npm_config_node_version": "10.19.0",
   "npm_config_tag": "latest",
+=======
+  "npm_config_node_version": "12.19.0",
+  "npm_config_tag": "latest",
+  "LC_MEASUREMENT": "pt_BR.UTF-8",
+>>>>>>> 03a543e2be768a28d403c79ed7c265c02ff30fe5
   "npm_config_git_tag_version": "true",
   "npm_config_commit_hooks": "true",
   "npm_config_script_shell": "",
@@ -208,6 +325,7 @@ window.env = {
   "npm_config_strict_ssl": "true",
   "QT_IM_MODULE": "ibus",
   "npm_package_dependencies_react_select": "^3.1.1",
+<<<<<<< HEAD
   "npm_config_globalconfig": "/etc/npmrc",
   "npm_config_dev": "",
   "npm_config_init_module": "/home/ana/.npm-init.js",
@@ -216,18 +334,40 @@ window.env = {
   "npm_package_dependencies_bootstrap": "^4.5.3",
   "npm_config_globalignorefile": "/etc/npmignore",
   "npm_execpath": "/usr/share/npm/bin/npm-cli.js",
+=======
+  "npm_config_dev": "",
+  "npm_config_globalconfig": "/usr/etc/npmrc",
+  "npm_config_init_module": "/home/deny/.npm-init.js",
+  "npm_config_parseable": "",
+  "JAVA_HOME": "/usr/lib/jvm/java-8-openjdk-amd64",
+  "PWD": "/home/deny/Desktop/Projetos/Reppografia_SENAI/front",
+  "npm_package_dependencies_bootstrap": "^4.5.3",
+  "npm_config_globalignorefile": "/usr/etc/npmignore",
+  "npm_execpath": "/usr/lib/node_modules/npm/bin/npm-cli.js",
+>>>>>>> 03a543e2be768a28d403c79ed7c265c02ff30fe5
   "XDG_CONFIG_DIRS": "/etc/xdg/xdg-ubuntu:/etc/xdg",
   "XDG_DATA_DIRS": "/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop",
   "npm_config_cache_lock_retries": "10",
   "npm_config_searchstaleness": "900",
+<<<<<<< HEAD
+=======
+  "LC_NUMERIC": "pt_BR.UTF-8",
+>>>>>>> 03a543e2be768a28d403c79ed7c265c02ff30fe5
   "npm_package_dependencies_styled_components": "^5.2.1",
   "npm_config_node_options": "",
   "npm_config_save_prefix": "^",
   "npm_config_scripts_prepend_node_path": "warn-only",
+<<<<<<< HEAD
   "npm_config_group": "1000",
   "npm_config_init_author_email": "",
   "npm_config_searchexclude": "",
   "VTE_VERSION": "6003",
+=======
+  "LC_PAPER": "pt_BR.UTF-8",
+  "npm_config_group": "1000",
+  "npm_config_init_author_email": "",
+  "npm_config_searchexclude": "",
+>>>>>>> 03a543e2be768a28d403c79ed7c265c02ff30fe5
   "npm_package_dependencies_react_to_print": "^2.12.1",
   "npm_package_dependencies_web_vitals": "^0.2.4",
   "npm_config_git": "git",
@@ -235,7 +375,11 @@ window.env = {
   "npm_package_dependencies_react": "^17.0.1",
   "npm_package_dependencies_react_paginate": "^6.5.0",
   "npm_config_json": "",
+<<<<<<< HEAD
   "INIT_CWD": "/home/ana/Área de Trabalho/reprografia/Repografia_SENAI/front",
+=======
+  "INIT_CWD": "/home/deny/Desktop/Projetos/Reppografia_SENAI/front",
+>>>>>>> 03a543e2be768a28d403c79ed7c265c02ff30fe5
   "REACT_APP_SERVER_TO_AUTHENTICATE": "http://localhost:3000/v1/teste",
   "REACT_APP_SERVER_BASE": "http://localhost:3000/v1/"
 };
