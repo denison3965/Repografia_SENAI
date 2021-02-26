@@ -5,7 +5,7 @@ import {Pie, Bar} from 'react-chartjs-2'
 
 function Graficos(props) {
 
-    console.log(props.data)
+    console.log(props.data2)
     
 
     //Informações do grafico 1
@@ -45,57 +45,10 @@ function Graficos(props) {
         }
     }
 
-    //Informações do grafico 2
-
-    const data2 = {
-        labels: [
-            'Atila',
-            'Danilo',
-            'Milton',
-            'Sandra',
-            'Claudia',
-        ],
-        datasets:[
-            {
-                label: 'Funcionários',
-                data: [3,2,2,1,5,2],
-                backgroundColor:[
-                    '#ee1141',
-                    '#d3cf0f',
-                    '#2198e7',
-                    '#f57a00',
-                    '#7330f8',
-                    '#36cfc3',
-                    '#1e3ada'
-                ]
-            },
-        ]
-    }
-
-    const options2 = {
-        title:{
-            display: true,
-            text: 'Funcionários'
-        },
-        scales:{
-            yAxes:[
-                {
-                    ticks:{
-                        min: 0,
-                        stepSize:1
-                    }
-                }
-            ]
-        }
-    }
   return (
       <Container>
           <div className="grafico1"> 
               <Pie data={data} options={options}/>
-          </div>
-
-          <div className="grafico2"> 
-             <Bar data={data2} options={options2}/>
           </div>
       </Container>
   );

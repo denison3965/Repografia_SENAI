@@ -4,6 +4,7 @@ import { Container, MenuLateral, InfoBox, Navegation, Info, Title, Grafico, Tabe
 import Nav_Lateral from '../../components/Nav_Lateral';
 import User_Box_Info from '../../components/User_Box_Info';
 import Graficos from '../../components/Graficos';
+import Grafico_Barra from '../../components/Grafico_barra';
 import { useHistory } from 'react-router-dom'
 import Tabelas_estatistica from '../../components/Tabelas_estatistica'
 
@@ -31,10 +32,11 @@ function Mesa_Grafico() {
   const history = useHistory()
   const [showPage, setShowPage] = useState(false)
   const [infoUser, setInfoUser] = useState({ nome: '', sobrenome: '' })
-  const [allInfoReq, setAllInfoReq] = useState([]);
   const [departamentos, setDepartamentos] = useState([]);
   const [erros, setErros] = useState({ departamento: "", dados_requisição: "" });
   const [top5Req, setTop5Req] = useState();
+  const [top5Funcionarios, setTop5Funcionarios] = useState();
+  const [dadosFuncionarios, setDadosFuncionarios] = useState();
 
 
   useEffect(() => {
@@ -97,9 +99,18 @@ function Mesa_Grafico() {
     /*
      * GRAFICO 2 - 
      */
+    axios.get(`${process.env.REACT_APP_SERVER_BASE}/pegar-top5-funcionarios`).then((res) =>{
+      setTop5Funcionarios(res.data)
+      
+    }).catch((err) => {
+      setErros({dados_requisição: "Não conseguimos acessar a base de dados para pegar os dados de todos os departamentos"})
+    })
 
-
-
+    axios.get(`${process.env.REACT_APP_SERVER_BASE}/dados-grafico-funcionario`).then((res) => {
+      setDadosFuncionarios(res.data)
+    }).catch((err) => {
+      setErros({dados_requisição: "Não conseguimos acessar a base de dados para pegar os dados de todos os departamentos"})
+    })
 
 
 
@@ -162,19 +173,38 @@ function Mesa_Grafico() {
             }
 
             <Grafico>
-              {top5Req == undefined?
-                <div>Erro ao Carregar os graficos, tente atualizar a página</div>
+
+
+              <div className="espaco_grafico_1">
+                {top5Req == undefined?
+                <div>
+                  <img src={Loading} alt="loading"></img>
+                  <p style={{marginLeft : "70px"}}>Carregando gráfico dos departamentos</p>
+                </div>
+                  :
+                  <Graficos data={top5Req} />
+                }
+              </div>
+
+              <div className="espaco_grafico_2">
+                {top5Funcionarios == undefined ? 
+                  <div>
+                    <img src={Loading} alt="loading"></img>
+                    <p style={{marginLeft : "70px"}}>Carregando gráfico dos funcionários</p>
+                  </div>
                 :
-                <Graficos data={top5Req} />
-              }
+                  <Grafico_Barra  data2={top5Funcionarios} />
+                }
+              </div>
+              
 
             </Grafico>
 
             <Tabela>
-              {departamentos == undefined ?
+              {departamentos == undefined || dadosFuncionarios == undefined ?
                 <img src={Loading} alt="loading"></img>
                 :
-                <Tabelas_estatistica data={departamentos} />
+                <Tabelas_estatistica data={departamentos} data2={dadosFuncionarios} />
               }
 
             </Tabela>

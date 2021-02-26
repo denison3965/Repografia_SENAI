@@ -57,9 +57,24 @@ export const Title = styled.div`
 `;
 export const Grafico = styled.div`
    margin-top: 30px;
+   display: flex;
+   min-height: 500px;
+
+  .espaco_grafico_1,
+  .espaco_grafico_2{
+    flex:1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+   @media screen and (max-width:1600px){
+     flex-direction: column;
+   }
+
 `;
 export const Tabela = styled.div`
-   margin-top: 150px;
+   margin-top: -10px;
    margin-right: 100px
 
 `;
