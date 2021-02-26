@@ -113,7 +113,7 @@ function DetalhesHistorico(props) {
 
 
           //Pegando a data de envio em milisegundos e somando mais 7 dias em milisegundos
-          let dataEnvioMais7 = dataEnvioMilli + 1
+          let dataEnvioMais7 = dataEnvioMilli + 240000
 
           //Pegando a data de envio em milisegundos e somando mais 1 dia em milisegundos
           let dataEnvioMais1 = dataEnvioMilli + 86400000
