@@ -77,136 +77,39 @@ function Mesa_Grafico() {
     /*/
     //**Verificando Se o usuario esta autorizado para acessar essa pagina**
 
-    var requisicoes
+    /*
+     * GRAFICO 1 -
+     */
 
-    //Pegando informações de todas as requisiçoẽs 
-    axios.get(`${process.env.REACT_APP_SERVER_BASE}/pegar-requisicao`).then((res) => {
-      setAllInfoReq(res.data)
-      requisicoes = res.data
-
-    }).catch((error) => {
-      setErros({ dados_requisição: "Erro ao carregar os dados para alimentar o grafíco" })
-      alert(erros)
+    axios.get(`${process.env.REACT_APP_SERVER_BASE}/pegar-top5-departamentos`).then((res) =>{
+      setTop5Req(res.data)
+    }).catch((err) => {
+      setErros({departamento: "Não conseguimos acessar a base de dados para pegar os 5 departamentos que mais gastam"})
     })
 
-    //Pegando informaçôes do departamento
-    axios.get(`${process.env.REACT_APP_SERVER_BASE}/pegar-departamento`).then((res) => {
-
-      let data = res.data
-
-      //Adicionando campo de folhas usadas e todos os departamento
-      data.map((element) => {
-        element.folhas_usadas = 0
-      })
-      setDepartamentos(data)
-      var departamentos = data
-
-    /* 
-    *  PEGANDO QUANTIDADES DE FOLHAS GASTA POR DEPARTAMENTO
-    */
-
-      requisicoes.map((req) => {
-        switch (req.id_departamento) {
-          case 1:
-            departamentos[0].folhas_usadas += req.total_paginas
-            break;
-
-          case 2:
-            departamentos[1].folhas_usadas += req.total_paginas
-            break;
-
-          case 3:
-            departamentos[2].folhas_usadas += req.total_paginas
-            break;
-
-
-          case 4:
-            departamentos[3].folhas_usadas += req.total_paginas
-            break;
-
-
-          case 5:
-            departamentos[4].folhas_usadas += req.total_paginas
-            break;
-
-
-          case 6:
-            departamentos[5].folhas_usadas += req.total_paginas
-            break;
-
-
-          case 7:
-            departamentos[6].folhas_usadas += req.total_paginas
-            break;
-
-
-          case 8:
-            departamentos[7].folhas_usadas += req.total_paginas
-            break;
-
-
-          case 9:
-            departamentos[8].folhas_usadas += req.total_paginas
-            break;
-
-
-          case 10:
-            departamentos[9].folhas_usadas += req.total_paginas
-            break;
-
-
-          case 11:
-            departamentos[10].folhas_usadas += req.total_paginas
-            break;
-
-
-          case 12:
-            departamentos[11].folhas_usadas += req.total_paginas
-            break;
-
-          default:
-            break;
-        }
-      })
-
-
-
-
-
-      let top5 = []
-
-      /*
-          ALGORITIMO PARA PEGAR O 5 DEPARTAMENTO QUE MAIS GASTARAM
-      */
-      
-        departamentos.map((element) => {
-          let aux = 0
-
-          departamentos.map((element2) => {
-            if (element.folhas_usadas < element2.folhas_usadas) {
-              aux++
-            }
-          })
-
-          if (aux < 5) {
-            top5.push(element)
-          }
-          
-        })
-
-
-      setTop5Req(top5)
-
-
-
-    }).catch((error) => {
-      setErros({ departamento: "Erro ao carregado os departamento para alimentar os gráfico" })
-      alert(erros)
+    axios.get(`${process.env.REACT_APP_SERVER_BASE}/dados-graficos`).then((res) => {
+      setDepartamentos(res.data)
+    }).catch((err) => {
+      setErros({dados_requisição: "Não conseguimos acessar a base de dados para pegar os dados de todos os departamentos"})
     })
+
+
+    /*
+     * GRAFICO 2 - 
+     */
+
+
+
+
+
+
+
 
 
 
   }, [])
+
+
 
 
 
@@ -247,22 +150,33 @@ function Mesa_Grafico() {
               <Title>Relatórios</Title>
             </Info>
 
+            {erros.dados_requisição != '' ?
+              <div className="alert alert-danger">{erros.dados_requisição}</div>
+              :
+              <span></span>
+            }
+            {erros.departamento != '' ?
+              <div className="alert alert-danger">{erros.departamento}</div>
+              :
+              <span></span>
+            }
+
             <Grafico>
-              {top5Req == undefined ?
-                <div>Erro</div>
+              {top5Req == undefined?
+                <div>Erro ao Carregar os graficos, tente atualizar a página</div>
                 :
                 <Graficos data={top5Req} />
               }
-              
+
             </Grafico>
-            
+
             <Tabela>
-              {departamentos == undefined ? 
+              {departamentos == undefined ?
                 <img src={Loading} alt="loading"></img>
-              : 
+                :
                 <Tabelas_estatistica data={departamentos} />
               }
-              
+
             </Tabela>
 
           </InfoBox>
