@@ -34,6 +34,8 @@ function Perfil() {
    const [confirmarSenha, setConfirmarSenha] = useState()
    const [msg_error, setMsgError] = useState()
    const [msg_acerto, setMsgAcerto] = useState()
+   const [infoReq, setInfoReq] = useState({ id_requisicao: '', nome_arquivo: '', nome_requisicao: '', nif: '', num_paginas: '', num_copias: '', total_paginas: '', observacao: '', data_envio: '', data_entrega: '', id_fornecedor: '', id_formato: '', id_suporte: '', id_departamento: '', id_arquivo: '', id_feedback: '', id_funcionario: '', })
+   const [dataDeHoje, setDataDeHoje] = useState()
 
    useEffect(() => {
       var token = cookies.get('tokenJWT')
@@ -58,14 +60,25 @@ function Perfil() {
             }).catch((err) => {
                console.log(err)
             })
-
-
          }
          else {
             history.push("/")
          }
 
       }).catch(() => { history.push("/") })
+
+
+      //pegando as informações da requisicao 
+      axios.get(`${process.env.REACT_APP_SERVER_BASE}/pegar-requisicao/${infoUser.nif}`).then((res) => {
+         setInfoReq(res.data)
+
+         //Pegando a data de hoje em milisegundos
+         var dataDeHoje = Date.now();
+         setDataDeHoje(dataDeHoje)
+
+
+      })
+
    }, [])
    //**Verificando Se o usuario esta autorizado para acessar essa pagina**
 
@@ -125,18 +138,18 @@ function Perfil() {
 
                   <form className="posicao_do_form">
                      <div className="infoUser">
-                     <div className="posicao_avatar">
-                        <img src={avatar} style={{ height: "100px", width: "100px", marginLeft: '50px', marginTop: "30px"}} alt="avatar" />
-                     </div>
+                        <div className="posicao_avatar">
+                           <img src={avatar} style={{ height: "100px", width: "100px", marginLeft: '50px', marginTop: "30px" }} alt="avatar" />
+                        </div>
                         <div className="info--User">
-                        <div style={{ marginTop: "-30px" }} className="info"> <strong style={{marginRight: "10px"}}> Nome: </strong>  {infoUser.nome} {infoUser.sobrenome}</div>
-                        <div className="info"> <strong style={{marginRight: "10px"}}> E-mail: </strong>  {infoUser.email}</div>
-                        <div style={{ marginTop: "10px" }} className="info"> <strong style={{marginRight: "10px"}}> Cargo: </strong> {infoUser.nome_cargo}</div>
-                                                 
+                           <div style={{ marginTop: "-30px" }} className="info"> <strong style={{ marginRight: "10px" }}> Nome: </strong>  {infoUser.nome} {infoUser.sobrenome}</div>
+                           <div className="info"> <strong style={{ marginRight: "10px" }}> E-mail: </strong>  {infoUser.email}</div>
+                           <div style={{ marginTop: "10px" }} className="info"> <strong style={{ marginRight: "10px" }}> Cargo: </strong> {infoUser.nome_cargo}</div>
+
                         </div>
                         <div className="informacoes">
-                           <div style={{ marginBottom: "10px" }} className="info"> <strong style={{marginRight: "10px"}}> NIF: </strong>  {infoUser.nif}</div>
-                           <div className="info"> <strong style={{marginRight: "10px"}}>Telefone:</strong>{infoUser.telefone}</div>         
+                           <div style={{ marginBottom: "10px" }} className="info"> <strong style={{ marginRight: "10px" }}> NIF: </strong>  {infoUser.nif}</div>
+                           <div className="info"> <strong style={{ marginRight: "10px" }}>Telefone:</strong>{infoUser.telefone}</div>
                         </div>
                      </div>
 

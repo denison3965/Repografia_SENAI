@@ -3,21 +3,30 @@ import { Container } from './styles';
 import {Pie, Bar} from 'react-chartjs-2'
 
 
-function Graficos() {
+function Graficos(props) {
+
+    console.log(props.data)
+    
 
     //Informações do grafico 1
     const data = {
         labels: [
-            'Atila',
-            'Danilo',
-            'Milton',
-            'Sangra',
-            'Claudia',
+            props.data[0].nome_departamento,
+            props.data[1].nome_departamento,
+            props.data[2].nome_departamento,
+            props.data[3].nome_departamento,
+            props.data[4].nome_departamento,
         ],
         datasets:[
             {
                 label: 'Professores 2020 !',
-                data: [3,2,2,1,5],
+                data: [
+                    props.data[0].folhas_usadas,
+                    props.data[1].folhas_usadas,
+                    props.data[2].folhas_usadas,
+                    props.data[3].folhas_usadas,
+                    props.data[4].folhas_usadas
+                ],
                 backgroundColor:[
                     'rgba(255,99,132,1)',
                     'rgba(255, 205, 86, 1)',
@@ -32,7 +41,7 @@ function Graficos() {
     const options = {
         title:{
             display: true,
-            text: 'Setor de Atuação'
+            text: 'Número de folhas por departamento'
         }
     }
 

@@ -4,8 +4,8 @@ import { Container, MenuLateral, InfoBox, Navegation, Info, Title, Grafico, Tabe
 import Nav_Lateral from '../../components/Nav_Lateral';
 import User_Box_Info from '../../components/User_Box_Info';
 import Graficos from '../../components/Graficos';
-import TabelaBaixarPeriodo from '../../components/Tabela_BaixarPeriodo'
 import { useHistory } from 'react-router-dom'
+import Tabelas_estatistica from '../../components/Tabelas_estatistica'
 
 import axios from 'axios'
 import Loading from '../../assets/img/loading2.gif'
@@ -31,9 +31,17 @@ function Mesa_Grafico() {
   const history = useHistory()
   const [showPage, setShowPage] = useState(false)
   const [infoUser, setInfoUser] = useState({ nome: '', sobrenome: '' })
-  
+  const [allInfoReq, setAllInfoReq] = useState([]);
+  const [departamentos, setDepartamentos] = useState([]);
+  const [erros, setErros] = useState({ departamento: "", dados_requisição: "" });
+  const [top5Req, setTop5Req] = useState();
+
 
   useEffect(() => {
+
+    /*/
+    /*    AUTENTICAÇÃO DA PÁGINA
+    /*/
 
     var token = cookies.get('tokenJWT')
 
@@ -63,8 +71,47 @@ function Mesa_Grafico() {
       }
 
     }).catch(() => { history.push("/") })
+
+    /*/
+    /*    AUTENTICAÇÃO DA PÁGINA
+    /*/
+    //**Verificando Se o usuario esta autorizado para acessar essa pagina**
+
+    /*
+     * GRAFICO 1 -
+     */
+
+    axios.get(`${process.env.REACT_APP_SERVER_BASE}/pegar-top5-departamentos`).then((res) =>{
+      setTop5Req(res.data)
+    }).catch((err) => {
+      setErros({departamento: "Não conseguimos acessar a base de dados para pegar os 5 departamentos que mais gastam"})
+    })
+
+    axios.get(`${process.env.REACT_APP_SERVER_BASE}/dados-graficos`).then((res) => {
+      setDepartamentos(res.data)
+    }).catch((err) => {
+      setErros({dados_requisição: "Não conseguimos acessar a base de dados para pegar os dados de todos os departamentos"})
+    })
+
+
+    /*
+     * GRAFICO 2 - 
+     */
+
+
+
+
+
+
+
+
+
+
   }, [])
-  //**Verificando Se o usuario esta autorizado para acessar essa pagina**
+
+
+
+
 
 
   return (
@@ -81,7 +128,7 @@ function Mesa_Grafico() {
           <InfoBox>
 
             <div className="user_box_info">
-            <User_Box_Info nome={infoUser.nome} sobrenome={infoUser.sobrenome}/>
+              <User_Box_Info nome={infoUser.nome} sobrenome={infoUser.sobrenome} />
             </div>
 
 
@@ -103,12 +150,33 @@ function Mesa_Grafico() {
               <Title>Relatórios</Title>
             </Info>
 
+            {erros.dados_requisição != '' ?
+              <div className="alert alert-danger">{erros.dados_requisição}</div>
+              :
+              <span></span>
+            }
+            {erros.departamento != '' ?
+              <div className="alert alert-danger">{erros.departamento}</div>
+              :
+              <span></span>
+            }
+
             <Grafico>
-              <Graficos />
+              {top5Req == undefined?
+                <div>Erro ao Carregar os graficos, tente atualizar a página</div>
+                :
+                <Graficos data={top5Req} />
+              }
+
             </Grafico>
 
             <Tabela>
-              <TabelaBaixarPeriodo />
+              {departamentos == undefined ?
+                <img src={Loading} alt="loading"></img>
+                :
+                <Tabelas_estatistica data={departamentos} />
+              }
+
             </Tabela>
 
           </InfoBox>

@@ -69,7 +69,6 @@ function DetalhesHistorico(props) {
   const [dataEnvioMais7, setDataEnvioMais7] = useState()
   const [dataEnvioMais1, setDataEnvioMais1] = useState()
   const [dataDeHoje, setDataDeHoje] = useState()
-  const [dataPrevistaMilli, setdataPrevistaMilli] = useState()
 
 
   useEffect(() => {
@@ -111,7 +110,7 @@ function DetalhesHistorico(props) {
 
           //Pegando a data de envio e convertendo para mmilisegundos
           let dataEnvioMilli = Date.parse(dateToEN(result.data[0].data_envio));
-          let dataPrevistaMilli = Date.parse(dateToEN(result.data[0].data_entrega));
+
 
           //Pegando a data de envio em milisegundos e somando mais 7 dias em milisegundos
           let dataEnvioMais7 = dataEnvioMilli + 1
@@ -123,9 +122,8 @@ function DetalhesHistorico(props) {
           setDataEnvioMilli(dataEnvioMilli)
           setDataEnvioMais7(dataEnvioMais7)
           setDataEnvioMais1(dataEnvioMais1)
-          setdataPrevistaMilli(dataPrevistaMilli)
 
-          console.log("Testando" + dataPrevistaMilli)
+
 
           //Pegando a data de hoje em milisegundos
           var dataDeHoje = Date.now();
@@ -135,7 +133,7 @@ function DetalhesHistorico(props) {
 
 
         }).catch((err) => {
-          console.log(err)
+         
         })
 
 
@@ -149,7 +147,7 @@ function DetalhesHistorico(props) {
 
 
         }).catch((err) => {
-          console.log(err)
+         
         })
       }
       else {
@@ -224,10 +222,11 @@ function DetalhesHistorico(props) {
   }
 
   function CancelarRequisicao(){
-    axios.put('http://localhost:3000/v1/AtualizarStatus', {
+    axios.put(`${process.env.REACT_APP_SERVER_BASE}/AtualizarStatus`, {
      status: 'cancelado', 
      id_requisicao: registro
   })
+  
     .then((res) => {
     if (res.data === 'Cancelamento feio com sucesso !!') {
       setMsgError(null)
@@ -239,6 +238,8 @@ function DetalhesHistorico(props) {
     }
   })
   }
+
+
 
   return (
     <div>
