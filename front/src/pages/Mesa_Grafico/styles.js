@@ -75,7 +75,13 @@ export const Grafico = styled.div`
 `;
 export const Tabela = styled.div`
    margin-top: -10px;
-   margin-right: 100px
+   margin-right: 100px;
+   .loading_tabela {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+   }
+
 
 `;
 
