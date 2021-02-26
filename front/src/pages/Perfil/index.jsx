@@ -8,6 +8,7 @@ import { useHistory } from 'react-router-dom'
 import axios from 'axios'
 import Loading from '../../assets/img/loading.gif'
 import Cookies from 'universal-cookie'
+import verificarFeedback from '../Detalhes_Historico/index'
 
 const cookies = new Cookies()
 
@@ -105,9 +106,6 @@ function Perfil() {
             console.log(err)
          })
    }
-
-
-
 
    return (
       <div>

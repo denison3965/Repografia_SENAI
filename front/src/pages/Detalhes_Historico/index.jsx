@@ -240,10 +240,6 @@ function DetalhesHistorico(props) {
   })
   }
 
-  
-
-
-
   return (
     <div>
       {
