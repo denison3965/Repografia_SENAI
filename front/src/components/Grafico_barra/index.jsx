@@ -19,7 +19,7 @@ function Grafico_barra(props) {
         ],
         datasets:[
             {
-                label: 'Funcionários',
+                label: 'Número de folhas gastas por funcionários',
                 data: [
                     props.data2[0].folhas_usadas,
                     props.data2[1].folhas_usadas,
@@ -43,7 +43,7 @@ function Grafico_barra(props) {
     const options2 = {
         title:{
             display: true,
-            text: 'Funcionários'
+            text: 'Número de folhas gastas por funcionários'
         },
         scales:{
             yAxes:[
