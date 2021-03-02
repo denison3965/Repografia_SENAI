@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom'
-import { Container, MenuLateral, InfoBox, Navegation, Info, Title, Grafico, Tabela } from './styles';
+import { Container, MenuLateral, InfoBox, Navegation, Info, Title, Grafico, Tabela, Date_Area } from './styles';
 import Nav_Lateral from '../../components/Nav_Lateral';
 import User_Box_Info from '../../components/User_Box_Info';
 import Graficos from '../../components/Graficos';
 import Grafico_Barra from '../../components/Grafico_barra';
 import { useHistory } from 'react-router-dom'
 import Tabelas_estatistica from '../../components/Tabelas_estatistica'
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 import axios from 'axios'
 import Loading from '../../assets/img/loading2.gif'
@@ -38,7 +40,7 @@ function Mesa_Grafico() {
   const [top5Req, setTop5Req] = useState();
   const [top5Funcionarios, setTop5Funcionarios] = useState();
   const [dadosFuncionarios, setDadosFuncionarios] = useState();
-
+  const [startDate, setStartDate] = useState(new Date());
 
   useEffect(() => {
 
@@ -161,6 +163,30 @@ function Mesa_Grafico() {
             <Info>
               <Title>Relatórios</Title>
             </Info>
+
+            <hr style={{marginLeft:30}}></hr>
+            <Date_Area>
+              <div className="titulo_date"><span>*</span> <p><strong>Escolha uma data de início e outra de final para filtrar o período dos relatótios.</strong></p></div>
+              
+              <div className="date_area">
+                <div className="date_area_into">
+                  <span>De :</span>
+                  <DatePicker selected={startDate} onChange={date => setStartDate(date)} />
+                </div>
+
+                <div className="date_area_into">
+                  <span>Para :</span>
+                  <DatePicker selected={startDate} onChange={date => setStartDate(date)} />
+                </div>
+
+                <button type="button" class="btn btn-info">Filtrar resultado</button>
+                
+              </div>
+              
+            </Date_Area>
+            <hr style={{marginLeft:30}}></hr>
+
+           
 
             {erros.dados_requisição != '' ?
               <div className="alert alert-danger">{erros.dados_requisição}</div>
