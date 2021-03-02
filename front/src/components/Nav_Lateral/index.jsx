@@ -33,7 +33,8 @@ function Nav_Lateral(props) {
             setInfoUser(res.data)
             console.log(res)
             if(res.data == false){
-                alert('Você possui feedbacks pendentes, por favor, averiguar')
+                alert('Você possui feedbacks pendentes, por favor, averiguar.')
+                window.history.back() 
                 console.log("POGCHAMP!!!!")
             }
         })
