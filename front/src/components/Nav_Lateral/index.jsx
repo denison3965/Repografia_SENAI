@@ -13,9 +13,24 @@ import axios from 'axios'
 
 import { Container, NavIcons } from './styles';
 
+
+
 function Nav_Lateral(props) {
 
+    const [infoUser, setInfoUser] = useState({ nome: '', sobrenome: '' })
     const [ativado , setAtivado] = useState('')
+
+    function BloquearFeedback(req, res){
+        axios.get(`${process.env.REACT_APP_SERVER_BASE}/bloquear-requisicao/121212`,)
+
+        .then((res) => {
+            setInfoUser(res.data)
+            alert("you shall not pass")
+        })
+        // alert("POGCHAMP") 
+    }    
+
+     console.log(`${process.env.REACT_APP_SERVER_BASE}/bloquear-requisicao/121212`)
 
     useEffect(()=>{
         setAtivado(props.ativado)
@@ -88,7 +103,7 @@ function Nav_Lateral(props) {
 
         <div className="Nav_Lateral_Bottom">
             <NavIcons>
-                <Link to='/formulario'>
+                <Link to='/formulario' onClick={BloquearFeedback}>
                     <li>
                         <img src={Icon_Folha} style={{width:"25px", height:"25px"}} alt="formulario"/>
                         <div className="Nav_Lateral_Icon_title">Formulario para requisicao</div>
