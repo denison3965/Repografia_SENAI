@@ -34,8 +34,7 @@ function Nav_Lateral(props) {
             console.log(res)
             if(res.data == false){
                 alert('Você possui feedbacks pendentes, por favor, averiguar.')
-                window.history.back() 
-                console.log("POGCHAMP!!!!")
+                history.push ('/perfil-adm')
             }
         })
     }   
