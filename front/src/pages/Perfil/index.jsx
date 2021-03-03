@@ -120,7 +120,6 @@ function Perfil() {
          })
    }
 
-<<<<<<< HEAD
    function bloquearRequisicao(){
       axios.get(`${process.env.REACT_APP_SERVER_BASE}/bloquear-requisicao/${infoUser.nif}`).then((res) => {
 
@@ -135,8 +134,6 @@ function Perfil() {
       })
    }
 
-=======
->>>>>>> 691425ddd5f8b221d32a57f8a08e51d3f1dd26bf
    return (
       <div>
          {
