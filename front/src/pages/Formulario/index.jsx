@@ -59,7 +59,21 @@ function Formulario() {
 
                 axios.get(url).then(async (res) => {
 
-                    await setInfoUser(res.data)
+                    setInfoUser(await res.data)
+
+                    //verificando se o user pode acesar a pagina de formulario se houver feedbacks pendentes
+                    axios.get(`${process.env.REACT_APP_SERVER_BASE}/bloquear-requisicao/${res.data.nif}`)
+                        .then((res) => {
+
+                            let resposta = res.data
+
+                            if (resposta != true) {
+                                window.history.back()
+                            } else {
+                                return
+                            }
+
+                        })
 
                 }).catch((err) => {
                     console.log(err)
@@ -90,6 +104,10 @@ function Formulario() {
             }
 
         }).catch(() => { history.push("/") })
+
+
+
+
     }, [])
     //**Verificando Se o usuario esta autorizado para acessar essa pagina**
 
@@ -423,7 +441,7 @@ function Formulario() {
                                         </div>
                                     </div>
 
-                                    <div style={{display:'flex'}}>
+                                    <div style={{ display: 'flex' }}>
                                         <div className="campo_select">
                                             <Select style={{ width: "500px" }} options={optionsDepartamento} isSearchable required onChange={(e) => setDepartamento(e.value)} />
                                         </div>
