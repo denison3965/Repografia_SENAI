@@ -126,7 +126,7 @@ function Perfil() {
          let resposta = res.data
 
          if(resposta != true) {
-            alert("Você tem um feedback pendente")
+            alert("Você possui feedbacks pendentes, por favor, averiguar.")
             history.push("/perfil")
          }else{
             return

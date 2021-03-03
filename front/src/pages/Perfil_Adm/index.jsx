@@ -148,14 +148,14 @@ function Adm_Registros() {
 
 
                 <div className="Info_item">
-                  <div className="Info_Key"><strong>Email:</strong></div>
+                  <div className="Info_Key"><strong>E-mail:</strong></div>
                   <div className="Info_Valor">{infoUser.email}</div>
                 </div>
 
 
 
                 <div className="password_box2">
-                  <Link to="/historico-adm"><button type="button" class="btn btn-secondary">Historico</button></Link>
+                  <Link to="/historico-adm"><button type="button" class="btn btn-secondary">Histórico</button></Link>
                 </div>
 
                 <div className="password_box">

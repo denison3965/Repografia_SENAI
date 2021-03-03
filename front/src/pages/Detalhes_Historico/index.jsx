@@ -65,7 +65,7 @@ function DetalhesHistorico(props) {
   const [valorFeedback, setValorFeedback] = useState()
   const [msg_error, setMsgError] = useState()
   const [msg_acerto, setMsgAcerto] = useState()
-  const [infoReq, setInfoReq] = useState({ id_requisicao: '', nome_arquivo: '', nome_requisicao: '', nif: '', num_paginas: '', num_copias: '', total_paginas: '', observacao: '', data_envio: '', data_entrega: '', id_fornecedor: '', id_formato: '', id_suporte: '', id_departamento: '', id_arquivo: '', id_feedback: '', id_funcionario: '', })
+  const [infoReq, setInfoReq] = useState({ id_requisicao: '', nome_arquivo: '', nome_requisicao: '', nome_departamento: '', nome: '', nif: '', num_paginas: '', num_copias: '', total_paginas: '', observacao: '', data_envio: '', data_entrega: '', id_fornecedor: '', id_formato: '', id_suporte: '', id_departamento: '', id_arquivo: '', id_feedback: '', id_funcionario: '', })
   const [infoUser, setInfoUser] = useState({ nome: '', sobrenome: '' })
   const [dataEnvioMilli, setDataEnvioMilli] = useState()
   const [dataEnvioMais7, setDataEnvioMais7] = useState()
@@ -262,18 +262,18 @@ function DetalhesHistorico(props) {
               <Information>
                 <div className="left-side">
                   <div className="registro_item">
-                    <div className="registro_chave"><strong>Numero da requisicao:</strong></div>
+                    <div className="registro_chave"><strong>Número da requisição:</strong></div>
                     <div className="registro_valor">{infoReq.id_requisicao} </div>
                   </div>
 
                   <div className="registro_item">
-                    <div className="registro_chave"><strong>Nome da requisicao :</strong></div>
+                    <div className="registro_chave"><strong>Nome da requisição:</strong></div>
                     <div className="registro_valor">{infoReq.nome_requisicao}</div>
                   </div>
 
                   <div className="registro_item">
                     <div className="registro_chave"><strong>Nome do solicitante: </strong></div>
-                    <div className="registro_valor">{infoReq.nome_fornecedor} </div>
+                    <div className="registro_valor">{infoReq.nome} </div>
                   </div>
 
                   <div className="registro_item">
@@ -283,11 +283,11 @@ function DetalhesHistorico(props) {
 
                   <div className="registro_item">
                     <div className="registro_chave"><strong>Departamento:</strong></div>
-                    <div className="registro_valor">{infoReq.id_departamento}</div>
+                    <div className="registro_valor">{infoReq.nome_departamento}</div>
                   </div>
 
                   <div className="registro_item">
-                    <div className="registro_chave"><strong>Arquivo solicitado para copia: </strong></div>
+                    <div className="registro_chave"><strong>Arquivo solicitado para cópia: </strong></div>
                     <div className="registro_valor_img">
                       <img src={Baixar} alt="impressora" style={{ width: 20, height: 20 }} />
                       <p className="baixar_arquivo" onClick={() => baixarArquivo()}>Baixar arquivo</p>
@@ -300,17 +300,12 @@ function DetalhesHistorico(props) {
                   </div>
 
                   <div className="registro_item">
-                    <div className="registro_chave"><strong>Paginas do documento:</strong></div>
+                    <div className="registro_chave"><strong>Páginas do documento:</strong></div>
                     <div className="registro_valor">{infoReq.num_paginas}</div>
                   </div>
 
                   <div className="registro_item">
-                    <div className="registro_chave"><strong>Total de paginas:</strong> </div>
-                    <div className="registro_valor">{infoReq.total_paginas}</div>
-                  </div>
-
-                  <div className="registro_item">
-                    <div className="registro_chave"><strong>Coordenador: </strong></div>
+                    <div className="registro_chave"><strong>Total de páginas:</strong> </div>
                     <div className="registro_valor">{infoReq.total_paginas}</div>
                   </div>
 
@@ -355,24 +350,21 @@ function DetalhesHistorico(props) {
 
                   infoReq.feedback == "Em espera" ? 
                     <div className="feedback">
-                    <p><strong>FEEDBACK ?? </strong></p>
+                    <p><strong>FEEDBACK</strong></p>
 
                     <div className="">
 
                       <div className="custom-control custom-radio">
                         <input type="radio" id="customRadio1" name="customRadio" onClick={(e) => setarValorFeedback(e)} className="custom-control-input" value={1} />
                         <label className="custom-control-label" for="customRadio1">Chegou!</label>
-                        <p>{valorFeedback}</p>
                       </div>
                       <div className="custom-control custom-radio">
                         <input type="radio" id="customRadio2" name="customRadio" onClick={(e) => setarValorFeedback(e)} className="custom-control-input" value={2} />
-                        <label className="custom-control-label" for="customRadio2">Chegou, porém com uma qualidade ruim</label>
-                        <p>{valorFeedback}</p>
+                        <label className="custom-control-label" for="customRadio2">Chegou, porém com uma qualidade ruim.</label>
                       </div>
                       <div className="custom-control custom-radio mb-3">
                         <input type="radio" id="customRadio3" name="customRadio" onClick={(e) => setarValorFeedback(e)} className="custom-control-input" value={3} />
-                        <label className="custom-control-label" for="customRadio3">Não Chegou</label>
-                        <p>{valorFeedback}</p>
+                        <label className="custom-control-label" for="customRadio3">Não Chegou.</label>
                       </div>
                       <button onClick={EnviarFeedback} type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Enviar</button>
                     </div>
@@ -398,11 +390,11 @@ function DetalhesHistorico(props) {
                     </div> 
                     :
                     <div className="cancelar">
-                      <p><strong>Requisição cancelada</strong></p>
+                      <p><strong>Requisição cancelada.</strong></p>
                     </div>
                   :
                   <div className="cancelar">
-                    <p><strong>Você não pode mais cancelar o pedido</strong></p>
+                    <p><strong>Você não pode mais cancelar o pedido.</strong></p>
                   </div>
                 }
 
