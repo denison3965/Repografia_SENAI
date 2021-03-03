@@ -1,5 +1,7 @@
 import React from 'react';
 import Header from '../../components/Header'
+import Button from '../../components/Button'
+import { Link } from 'react-router-dom'
 
 
 import { Container, Adm_Area, Header_Area, Information } from './styles';
@@ -250,6 +252,10 @@ function DetalhesHistorico(props) {
             <Header_Area>
               <Header titulo="Historico" />
             </Header_Area>
+
+            <div className="button--voltar"> 
+              <Link to="/historico"><Button width="100px" height="35px" title="VOLTAR"/></Link> 
+            </div> 
 
             <Adm_Area>
 

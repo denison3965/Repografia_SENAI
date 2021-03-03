@@ -3,6 +3,13 @@ import styled from 'styled-components';
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
+
+  .button--voltar{
+        height:35px;
+        max-width: 100px;
+        margin: 20px;
+    }
+
 `;
 
 
@@ -122,6 +129,7 @@ export const Information = styled.div`
           bottom:0 ;
        }
       }
+
 `;
 
 
