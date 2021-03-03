@@ -10,16 +10,63 @@ import Icon_Banco from '../../assets/img/banco.png'
 import { Link } from 'react-router-dom'
 import Grupo from '../../assets/img/grupo-de-usuarios.png'
 import axios from 'axios'
+import Cookies from 'universal-cookie'
+import { useHistory } from 'react-router-dom'
 
 import { Container, NavIcons } from './styles';
 
+const cookies = new Cookies()
+
+
 function Nav_Lateral(props) {
 
+    const [infoUser, setInfoUser] = useState({ nome: '', sobrenome: '' })
+    const [showPage, setShowPage] = useState(false)
     const [ativado , setAtivado] = useState('')
+    const history = useHistory()
+
+    function BloquearFeedback(req, res){
+        axios.get(`${process.env.REACT_APP_SERVER_BASE}/bloquear-requisicao/${infoUser.nif}`,{
+        })
+
+        .then((res) => {
+            setInfoUser(res.data)
+            console.log(res)
+            if(res.data == false){
+                alert('Você possui feedbacks pendentes, por favor, averiguar.')
+                history.push ('/perfil-adm')
+            }
+        })
+    }   
 
     useEffect(()=>{
         setAtivado(props.ativado)
-    },[])
+        
+        var token = cookies.get('tokenJWT')
+
+
+        axios.get(process.env.REACT_APP_SERVER_TO_AUTHENTICATE, {
+           method: 'GET',
+           headers: { 'X-access-token': token }
+        }).then((res) => {
+        if (res.data[0].auth) {
+                setShowPage(true)
+
+            //Pegando as informacoes do user pelo nif
+            let url = `${process.env.REACT_APP_SERVER_BASE}/buscar-user-nif/${res.data[0].nif}`
+
+            axios.get(url).then(async(res) => {
+                console.log(res)
+                 setInfoUser(res.data)
+
+            }).catch((err) => {
+                console.log(err)
+            })
+        } else {
+            history.push("/")
+        }
+        }).catch(() => { history.push("/") })
+     },[])
 
   return (
       <Container>
@@ -88,7 +135,7 @@ function Nav_Lateral(props) {
 
         <div className="Nav_Lateral_Bottom">
             <NavIcons>
-                <Link to='/formulario'>
+                <Link to='/formulario' onClick={BloquearFeedback}>
                     <li>
                         <img src={Icon_Folha} style={{width:"25px", height:"25px"}} alt="formulario"/>
                         <div className="Nav_Lateral_Icon_title">Formulario para requisicao</div>

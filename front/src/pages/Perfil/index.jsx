@@ -8,6 +8,7 @@ import { useHistory } from 'react-router-dom'
 import axios from 'axios'
 import Loading from '../../assets/img/loading.gif'
 import Cookies from 'universal-cookie'
+import verificarFeedback from '../Detalhes_Historico/index'
 
 const cookies = new Cookies()
 
@@ -35,6 +36,7 @@ function Perfil() {
    const [msg_acerto, setMsgAcerto] = useState()
    const [infoReq, setInfoReq] = useState({ id_requisicao: '', nome_arquivo: '', nome_requisicao: '', nif: '', num_paginas: '', num_copias: '', total_paginas: '', observacao: '', data_envio: '', data_entrega: '', id_fornecedor: '', id_formato: '', id_suporte: '', id_departamento: '', id_arquivo: '', id_feedback: '', id_funcionario: '', })
    const [dataDeHoje, setDataDeHoje] = useState()
+
 
    useEffect(() => {
       var token = cookies.get('tokenJWT')
@@ -74,7 +76,6 @@ function Perfil() {
          //Pegando a data de hoje em milisegundos
          var dataDeHoje = Date.now();
          setDataDeHoje(dataDeHoje)
-
 
       })
 
@@ -119,9 +120,19 @@ function Perfil() {
          })
    }
 
+   function bloquearRequisicao(){
+      axios.get(`${process.env.REACT_APP_SERVER_BASE}/bloquear-requisicao/${infoUser.nif}`).then((res) => {
 
- 
+         let resposta = res.data
 
+         if(resposta != true) {
+            alert("Você tem um feedback pendente")
+            history.push("/perfil")
+         }else{
+            return
+         }
+      })
+   }
 
    return (
       <div>
@@ -207,11 +218,12 @@ function Perfil() {
                      </div>
 
 
-                     <div className="Nova--requisicao">
-                        <div className="posicao_requisicao">Nova Requisição
-                            <Link to="/formulario"><img src={MaisInfo} className="iconeMais" alt="maisInfo" /></Link>
+                     
+                        <div className="Nova--requisicao">
+                              <div className="posicao_requisicao">Nova Requisição
+                              <Link to="/formulario" onClick={bloquearRequisicao}><img src={MaisInfo} className="iconeMais" alt="maisInfo" /> </Link>
+                           </div>                                                
                         </div>
-                     </div>
 
                   </form>
                </Container>

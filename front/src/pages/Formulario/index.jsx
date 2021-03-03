@@ -8,6 +8,7 @@ import Loading from '../../assets/img/loading.gif'
 import Cookies from 'universal-cookie'
 import { Link } from 'react-router-dom'
 import Select from 'react-select'
+import Button from '../../components/Button'
 
 
 const cookies = new Cookies()
@@ -59,7 +60,21 @@ function Formulario() {
 
                 axios.get(url).then(async (res) => {
 
-                    await setInfoUser(res.data)
+                    setInfoUser(await res.data)
+
+                    //verificando se o user pode acesar a pagina de formulario se houver feedbacks pendentes
+                    axios.get(`${process.env.REACT_APP_SERVER_BASE}/bloquear-requisicao/${res.data.nif}`)
+                        .then((res) => {
+
+                            let resposta = res.data
+
+                            if (resposta != true) {
+                                window.history.back()
+                            } else {
+                                return
+                            }
+
+                        })
 
                 }).catch((err) => {
                     console.log(err)
@@ -90,6 +105,10 @@ function Formulario() {
             }
 
         }).catch(() => { history.push("/") })
+
+
+
+
     }, [])
     //**Verificando Se o usuario esta autorizado para acessar essa pagina**
 
@@ -330,6 +349,9 @@ function Formulario() {
                     ? <Container>
                         <Header />
                         <h3 className="titulo_do_formulario">Solicitação de Serviços Reprográficos</h3>
+                        <div className="button--voltar"> 
+                            <Link to="/perfil"><Button width="100px" height="35px" title="VOLTAR"/></Link> 
+                        </div> 
                         <div className="div_pai--button">
                             <Link to="/"><div className="sair--button"><p>Sair</p></div> </Link>
                         </div>
@@ -423,7 +445,7 @@ function Formulario() {
                                         </div>
                                     </div>
 
-                                    <div style={{display:'flex'}}>
+                                    <div style={{ display: 'flex' }}>
                                         <div className="campo_select">
                                             <Select style={{ width: "500px" }} options={optionsDepartamento} isSearchable required onChange={(e) => setDepartamento(e.value)} />
                                         </div>

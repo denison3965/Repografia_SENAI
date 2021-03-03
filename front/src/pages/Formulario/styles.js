@@ -17,6 +17,13 @@ export const Container = styled.div`
         font-weight: 300;
         font-style: italic;
     }
+    .button--voltar{
+        position: absolute;
+        height:35px;
+        max-width: 100px;
+        margin-top: 140px;
+        margin-left: 20px;
+    }
     .form_esquerda{
         width: 50%;
         max-width: 50%;
