@@ -85,3 +85,35 @@ export const Tabela = styled.div`
 
 `;
 
+export const Date_Area = styled.div`
+  margin-left: 30px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 15px;
+  justify-content: center;
+  align-items: center;
+  .titulo_date{
+    display: flex;
+
+    span{
+      color:red;
+      margin-right: 10px;
+    }
+  }
+
+  .date_area{
+      display: flex;
+      flex-direction: row;
+      margin-left: 30px;
+
+    }
+  .date_area_into{
+    margin-left: 30px;
+  }  
+
+  button {
+    margin-left: 50px;
+    margin-top: -5px;
+  }
+`;
+
