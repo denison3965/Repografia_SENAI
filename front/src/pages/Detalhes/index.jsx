@@ -247,9 +247,6 @@ function Detalhes(props) {
 
             </Information>
 
-            {/* <p>{registro}</p>
-            <p>basta pegar a variavel registro que tera o codigo do regidtro a ser mostrado e fazer um fetch para ppegar o respectivo registro</p> */}
-
           </Adm_Area>
 
           : <div>

@@ -61,7 +61,6 @@ function Adm_Registros() {
       }
       //Se nao voltar para login
       else {
-        console.log("Estou aquiiii")
         history.push("/")
       }
 
@@ -181,25 +180,18 @@ function Adm_Registros() {
                             <div class="form-group">
                               <label style={{ marginRight: "30px" }} for="inputPassword6">Senha atual:      </label>
                               <input onChange={(e) => setSenhaAtual(e.target.value)} style={{ width: "200px" }} type="password" id="inputPassword6" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" />
-                              <p>
-                                {senhaAtual}
-                              </p>
                             </div>
                           </form>
                           <form class="form-inline" style={{ margin: "40px" }}>
                             <div class="form-group">
                               <label style={{ marginRight: "30px" }} for="inputPassword6">Nova senha:     </label>
                               <input onChange={(e)=> setNovaSenha(e.target.value)} style={{ width: "200px" }} type="password" id="inputPassword6" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" />
-                              {novaSenha}
                             </div>
                           </form>
                           <form class="form-inline" style={{ margin: "40px" }}>
                             <div class="form-group">
                               <label for="inputPassword6">Confimar senha:</label>   
                               <input  onChange={(e)=>setConfirmarSenha(e.target.value)}  style={{ width: "200px" }} type="password" id="inputPassword6" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" />
-                            <p>
-                              {confirmarSenha}
-                            </p>
                             </div>
                           </form>
                           <div>
