@@ -138,7 +138,7 @@ function Nav_Lateral(props) {
                 <Link to='/formulario' onClick={BloquearFeedback}>
                     <li>
                         <img src={Icon_Folha} style={{width:"25px", height:"25px"}} alt="formulario"/>
-                        <div className="Nav_Lateral_Icon_title">Formulario para requisicao</div>
+                        <div className="Nav_Lateral_Icon_title">Formulário para requisição</div>
                     </li>
                 </Link>
             </NavIcons>

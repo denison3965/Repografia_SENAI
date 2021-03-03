@@ -41,6 +41,13 @@ function Mesa_Grafico() {
   const [top5Funcionarios, setTop5Funcionarios] = useState();
   const [dadosFuncionarios, setDadosFuncionarios] = useState();
   const [startDate, setStartDate] = useState(new Date());
+  const [startDate2, setStartDate2] = useState(new Date());
+  const [dateMillis, setDateMillis] = useState(Date.now());
+  const [dateMillis2, setDateMillis2] = useState(Date.now());
+  const [dateToShow, setDateToShow] = useState(null);
+  const [dateToShow2, setDateToShow2] = useState(null);
+  
+
 
   useEffect(() => {
 
@@ -86,13 +93,13 @@ function Mesa_Grafico() {
      * GRAFICO 1 -
      */
 
-    axios.get(`${process.env.REACT_APP_SERVER_BASE}/pegar-top5-departamentos`).then((res) => {
+    axios.get(`${process.env.REACT_APP_SERVER_BASE}/pegar-top5-departamentos/null/null`).then((res) => {
       setTop5Req(res.data)
     }).catch((err) => {
       setErros({ departamento: "Não conseguimos acessar a base de dados para pegar os 5 departamentos que mais gastam" })
     })
 
-    axios.get(`${process.env.REACT_APP_SERVER_BASE}/dados-graficos`).then((res) => {
+    axios.get(`${process.env.REACT_APP_SERVER_BASE}/dados-graficos/null/null`).then((res) => {
       setDepartamentos(res.data)
     }).catch((err) => {
       setErros({ dados_requisição: "Não conseguimos acessar a base de dados para pegar os dados de todos os departamentos" })
@@ -102,15 +109,18 @@ function Mesa_Grafico() {
     /*
      * GRAFICO 2 - 
      */
-    axios.get(`${process.env.REACT_APP_SERVER_BASE}/pegar-top5-funcionarios`).then((res) => {
+    axios.get(`${process.env.REACT_APP_SERVER_BASE}/pegar-top5-funcionarios/null/null`).then((res) => {
       setTop5Funcionarios(res.data)
 
     }).catch((err) => {
       setErros({ dados_requisição: "Não conseguimos acessar a base de dados para pegar os dados de todos os departamentos" })
     })
 
-    axios.get(`${process.env.REACT_APP_SERVER_BASE}/dados-grafico-funcionario`).then((res) => {
-      setDadosFuncionarios(res.data)
+    axios.get(`${process.env.REACT_APP_SERVER_BASE}/dados-grafico-funcionario/null/null`).then(async(res) => {
+      setDadosFuncionarios(await res.data)
+      console.log("MANUTENÇÕA")
+      console.log(res.data)
+
     }).catch((err) => {
       setErros({ dados_requisição: "Não conseguimos acessar a base de dados para pegar os dados de todos os departamentos" })
     })
@@ -124,6 +134,89 @@ function Mesa_Grafico() {
   }, [])
 
 
+  function getDateAndCovertToMilles(date) {
+
+    //Funcao para converter data em PT/BR para ENG
+    function dateToEN(myDate) {
+     return myDate.split('/').reverse().join('-');
+   }
+
+
+   let day = date.getDate();
+   let mounth = date.getMonth() + 1;
+   let year = date.getFullYear();
+
+   let complety_date = day+"/"+mounth+"/"+year;
+
+
+   //Pegando a data de envio e convertendo para mmilisegundos
+   let dateEmMilli = Date.parse(dateToEN(complety_date));
+
+   setDateMillis(dateEmMilli)
+ }
+
+
+ function getDateAndCovertToMilles2(date) {
+
+  //Funcao para converter data em PT/BR para ENG
+  function dateToEN(myDate) {
+   return myDate.split('/').reverse().join('-');
+ }
+
+
+ let day = date.getDate();
+ let mounth = date.getMonth() + 1;
+ let year = date.getFullYear();
+
+ let complety_date = day+"/"+mounth+"/"+year;
+
+
+ //Pegando a data de envio e convertendo para mmilisegundos
+ let dateEmMilli = Date.parse(dateToEN(complety_date));
+
+ setDateMillis2(dateEmMilli)
+}
+
+function filtraEstatisticasPelaData () {
+  
+  let de = dateMillis
+  let ate =  dateMillis2
+
+  //GRAFICO 1
+  axios.get(`${process.env.REACT_APP_SERVER_BASE}/dados-graficos/${de}/${ate}`).then((res) => {
+    setDepartamentos(res.data)
+  }).catch((err) => {
+    setErros({ dados_requisição: "Não conseguimos acessar a base de dados para pegar os dados de todos os departamentos" })
+  })
+
+  axios.get(`${process.env.REACT_APP_SERVER_BASE}/pegar-top5-departamentos/${de}/${ate}`).then((res) => {
+    setTop5Req(res.data)
+  }).catch((err) => {
+    setErros({ departamento: "Não conseguimos acessar a base de dados para pegar os 5 departamentos que mais gastam" })
+  })
+
+
+  //GRAFICO 2
+  axios.get(`${process.env.REACT_APP_SERVER_BASE}/dados-grafico-funcionario/${de}/${ate}`).then((res) => {
+    setDadosFuncionarios(res.data)
+    alert("Dados atualizados com sucesso")
+  }).catch((err) => {
+    setErros({ dados_requisição: "Não conseguimos acessar a base de dados para pegar os dados de todos os departamentos" })
+  })
+
+  axios.get(`${process.env.REACT_APP_SERVER_BASE}/pegar-top5-funcionarios/${de}/${ate}`).then((res) => {
+    setTop5Funcionarios(res.data)
+
+  }).catch((err) => {
+    setErros({ dados_requisição: "Não conseguimos acessar a base de dados para pegar os dados de todos os departamentos" })
+  })
+
+
+  setDateToShow(startDate)
+  setDateToShow2(startDate2)
+
+
+} 
 
 
 
@@ -161,7 +254,16 @@ function Mesa_Grafico() {
             </Navegation>
 
             <Info>
-              <Title>Relatórios</Title>
+                 {dateToShow == null ? 
+                    <Title>Relatórios Geral</Title>
+                  :
+                  <div>
+                    <Title>Relatórios</Title>
+                    <p style={{marginLeft: 30}}>De : {dateToShow.getDate()}/{dateToShow.getMonth() + 1}/{dateToShow.getFullYear()}, Ate : {dateToShow2.getDate()}/{dateToShow2.getMonth() + 1}/{dateToShow2.getFullYear()}</p>
+                  </div>
+
+                 
+                  }
             </Info>
 
             <hr style={{marginLeft:30}}></hr>
@@ -169,17 +271,20 @@ function Mesa_Grafico() {
               <div className="titulo_date"><span>*</span> <p><strong>Escolha uma data de início e outra de final para filtrar o período dos relatótios.</strong></p></div>
               
               <div className="date_area">
+                
                 <div className="date_area_into">
-                  <span>De :</span>
-                  <DatePicker selected={startDate} onChange={date => setStartDate(date)} />
+                  <p>{dateMillis}</p>
+                  <span>De : </span>
+                  <DatePicker selected={startDate} onChange={date => {{setStartDate(date); getDateAndCovertToMilles(date)}}}  dateFormat="dd/MM/yyyy" />
                 </div>
 
                 <div className="date_area_into">
-                  <span>Para :</span>
-                  <DatePicker selected={startDate} onChange={date => setStartDate(date)} />
+                  <p>{dateMillis2}</p>
+                  <span>Até : </span>
+                  <DatePicker selected={startDate2} onChange={date => {setStartDate2(date); getDateAndCovertToMilles2(date)}} dateFormat="dd/MM/yyyy" />
                 </div>
 
-                <button type="button" class="btn btn-info">Filtrar resultado</button>
+                <button type="button" class="btn btn-info" onClick={() => {filtraEstatisticasPelaData()}}>Filtrar resultado</button>
                 
               </div>
               

@@ -8,6 +8,7 @@ import Loading from '../../assets/img/loading.gif'
 import Cookies from 'universal-cookie'
 import { Link } from 'react-router-dom'
 import Select from 'react-select'
+import Button from '../../components/Button'
 
 
 const cookies = new Cookies()
@@ -347,6 +348,9 @@ function Formulario() {
                     ? <Container>
                         <Header />
                         <h3 className="titulo_do_formulario">Solicitação de Serviços Reprográficos</h3>
+                        <div className="button--voltar"> 
+                            <Link to="/perfil"><Button width="100px" height="35px" title="VOLTAR"/></Link> 
+                        </div> 
                         <div className="div_pai--button">
                             <Link to="/"><div className="sair--button"><p>Sair</p></div> </Link>
                         </div>

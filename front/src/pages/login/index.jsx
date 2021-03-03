@@ -55,8 +55,6 @@ function  Login() {
         var erroLogin = document.getElementById("LoginErrorDiv");
           if (erroLogin.style.display === "none" || erroLogin.style.display === "" ) {
             erroLogin.style.display = "block";
-          }else {
-            erroLogin.style.display = "none";
           }
         }
       
@@ -66,8 +64,6 @@ function  Login() {
         var erroLogin = document.getElementById("LoginErrorDiv");
           if (erroLogin.style.display === "none" || erroLogin.style.display === "" ) {
             erroLogin.style.display = "block";
-          }else {
-            erroLogin.style.display = "none";
           }
       }
 

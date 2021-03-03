@@ -124,7 +124,7 @@ export class Tabela_Registros extends Component {
             <thead>
               <tr>
                 <th scope="col"><strong>Número</strong></th>
-                <th scope="col"><strong>Nome da requisicao</strong></th>
+                <th scope="col"><strong>Nome da requisição</strong></th>
                 <th scope="col"><strong>Solicitante</strong></th>
                 <th scope="col"><strong>Departamento</strong></th>
                 <th scope="col"><strong>cc</strong></th>
