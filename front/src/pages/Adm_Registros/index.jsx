@@ -53,7 +53,6 @@ function Adm_Registros() {
           await setInfoUser(res.data)
 
         }).catch((err) => {
-          console.log(err)
         })
 
       }

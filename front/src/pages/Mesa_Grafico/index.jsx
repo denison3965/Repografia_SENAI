@@ -268,7 +268,7 @@ function filtraEstatisticasPelaData () {
 
             <hr style={{marginLeft:30}}></hr>
             <Date_Area>
-              <div className="titulo_date"><span>*</span> <p><strong>Escolha uma data de início e outra de final para filtrar o período dos relatótios.</strong></p></div>
+              <div className="titulo_date"><span>*</span> <p><strong>Escolha uma data de início e outra de final para filtrar o período dos relatórios.</strong></p></div>
               
               <div className="date_area">
                 

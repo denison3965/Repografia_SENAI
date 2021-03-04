@@ -82,7 +82,6 @@ function Cadastro() {
           await setInfoUser(res.data)
 
         }).catch((err) => {
-          console.log(err)
         })
 
         //Pegando os cargos para listar
@@ -120,7 +119,6 @@ function Cadastro() {
         setMsgAcerto(result.data)
       }
     }).catch((err) => {
-      console.log(err)
     })
 
   }
@@ -173,29 +171,30 @@ function Cadastro() {
                       <label for="inputEmail4">Sobrenome</label>
                       <input type="text" class="form-control" id="inputNome" placeholder="Ex: Alves" required onChange={e => setSobrenome(e.target.value)} />
                     </div>
+                  </div>
+                  <div class="form-row">
                     <div class="form-group col-md-6">
                       <label for="inputPassword4">Cargo</label>
                       <Select options={cargos} isSearchable required onChange={e => setId_cargo(e.value)} />
                     </div>
-                  </div>
-                  <div class="form-row">
                     <div class="form-group col-md-6">
                       <label for="inputEmail4">NIF</label>
                       <input type="text" class="form-control" id="inputNif" placeholder="Ex: 0000000" required onChange={e => setNif(e.target.value)} />
                     </div>
+                  </div>
+                  <div class="form-row">
                     <div class="form-group col-md-6">
                       <label for="inputPassword4">Telefone</label>
                       <input type="number" class="form-control" id="inputTelefone" placeholder="Ex: 11 00000-0000" required onChange={e => setTelefone(e.target.value)} />
                     </div>
+                    <div class="form-group col-md-6">
+                      <label for="inputEmail4">E-mail</label>
+                      <input type="email" class="form-control" id="inputEmail4" placeholder="senai@senaisp.com.br" required onChange={e => setEmail(e.target.value)} />
+                    </div>
                   </div>
                   <div class="form-row">
                     <div class="form-group col-md-6">
-                      <label for="inputEmail4">Email</label>
-                      <input type="email" class="form-control" id="inputEmail4" placeholder="senai@senaisp.com.br" required onChange={e => setEmail(e.target.value)} />
-                    </div>
-
-                    <div class="form-group col-md-6">
-                      <label for="inputState">O usuario tera acesso administartivo ?</label>
+                      <label for="inputState">O usuário tera acesso administrativo ?</label>
                       <select id="inputState" name="administrativo" class="form-control" required onChange={e => setAdministrativo(e.target.value)}>
                         <option selected value="nao">não</option>
                         <option value="sim">sim</option>

@@ -357,19 +357,6 @@ function DetalhesHistorico(props) {
                       <div className="custom-control custom-radio">
                         <input type="radio" id="customRadio1" name="customRadio" onClick={(e) => setarValorFeedback(e)} className="custom-control-input" value={1} />
                         <label className="custom-control-label" for="customRadio1">Chegou!</label>
-<<<<<<< HEAD
-
-                      </div>
-                      <div className="custom-control custom-radio">
-                        <input type="radio" id="customRadio2" name="customRadio" onClick={(e) => setarValorFeedback(e)} className="custom-control-input" value={2} />
-                        <label className="custom-control-label" for="customRadio2">Chegou, porém com uma qualidade ruim</label>
-
-                      </div>
-                      <div className="custom-control custom-radio mb-3">
-                        <input type="radio" id="customRadio3" name="customRadio" onClick={(e) => setarValorFeedback(e)} className="custom-control-input" value={3} />
-                        <label className="custom-control-label" for="customRadio3">Não Chegou</label>
-
-=======
                       </div>
                       <div className="custom-control custom-radio">
                         <input type="radio" id="customRadio2" name="customRadio" onClick={(e) => setarValorFeedback(e)} className="custom-control-input" value={2} />
@@ -378,7 +365,6 @@ function DetalhesHistorico(props) {
                       <div className="custom-control custom-radio mb-3">
                         <input type="radio" id="customRadio3" name="customRadio" onClick={(e) => setarValorFeedback(e)} className="custom-control-input" value={3} />
                         <label className="custom-control-label" for="customRadio3">Não Chegou.</label>
->>>>>>> 40304ee6ac70691a50809dbaff64584272b1de78
                       </div>
                       <button onClick={EnviarFeedback} type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Enviar</button>
                     </div>

@@ -63,10 +63,8 @@ function Detalhes(props) {
         axios.get(url).then(async (result) => {
 
           await setInfoReq(result.data[0])
-          console.log(result)
 
         }).catch((err) => {
-          console.log(err)
         })
 
 
@@ -79,7 +77,6 @@ function Detalhes(props) {
 
 
         }).catch((err) => {
-          console.log(err)
         })
 
       }

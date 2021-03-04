@@ -77,7 +77,6 @@ function Formulario() {
                         })
 
                 }).catch((err) => {
-                    console.log(err)
                 })
 
                 //Pegando lista de departamento
@@ -337,9 +336,12 @@ function Formulario() {
                     setMsgError(res.data)
                 }
             }).catch((err) => {
-                console.log(err)
             })
     }
+
+    function voltar() {
+        window.history.back();
+      }
 
     return (
         <div>
@@ -348,8 +350,8 @@ function Formulario() {
                     ? <Container>
                         <Header />
                         <h3 className="titulo_do_formulario">Solicitação de Serviços Reprográficos</h3>
-                        <div className="button--voltar"> 
-                            <Link to="/perfil"><Button width="100px" height="35px" title="VOLTAR"/></Link> 
+                        <div className="button--voltar" onClick={voltar}> 
+                            <Link><Button width="100px" height="35px" title="VOLTAR"/></Link> 
                         </div> 
                         <div className="div_pai--button">
                             <Link to="/"><div className="sair--button"><p>Sair</p></div> </Link>
@@ -586,7 +588,7 @@ function Formulario() {
                                             <div class="form-check container" style={{ marginBottom: 1 }}>
                                                 <input style={{ height: 20, width: 20, marginLeft: -30 }} class="form-check-input" onClick={(e) => setasValorSupporte(e)} type="radio" name="exampleRadios" id="exampleRadios7" value={3} />
                                                 <label class="form-check-label" for="exampleRadios7">
-                                                    <p className="p_radio">Email</p>
+                                                    <p className="p_radio">E-mail</p>
                                                 </label>
                                             </div>
 

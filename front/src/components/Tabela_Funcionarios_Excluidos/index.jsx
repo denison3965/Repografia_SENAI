@@ -202,9 +202,9 @@ export class Tabela_Funcionarios_Excluidos extends Component {
 
   
           <Info>
-            <Title>Funcionários excluidos</Title>
+            <Title>Funcionários excluídos</Title>
             <Pesquisa>
-              <p>pesquisa:</p>
+              <p>Pesquisa:</p>
               <Input 
               value={this.state.search}
               onChange={this.updateSearch.bind(this)}
@@ -216,12 +216,12 @@ export class Tabela_Funcionarios_Excluidos extends Component {
               <thead>
                 <tr>
                   <th scope="col"><strong>NIF</strong></th>
-                  <th scope="col"><strong>nome</strong></th>
-                  <th scope="col"><strong>sobrenome</strong></th>
-                  <th scope="col"><strong>cargo</strong></th>
-                  <th scope="col"><strong>email</strong></th>
-                  <th scope="col"><strong>fone</strong></th>
-                  <th scope="col"><strong>Adiministrativo</strong></th>
+                  <th scope="col"><strong>Nome</strong></th>
+                  <th scope="col"><strong>Sobrenome</strong></th>
+                  <th scope="col"><strong>Cargo</strong></th>
+                  <th scope="col"><strong>E-mail</strong></th>
+                  <th scope="col"><strong>Fone</strong></th>
+                  <th scope="col"><strong>Administrativo</strong></th>
                   <th scope="col"><strong>Data de criação</strong></th>
                   <th scope="col"><strong>Data de exclusão</strong></th>
                   <th scope="col"><strong>Restaurar usuário</strong></th>

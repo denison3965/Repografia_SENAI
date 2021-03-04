@@ -80,7 +80,7 @@ function Funcionarios() {
               <Link to="/cadastro">
                 <AddUser>
                   <img src={AddIcon} alt="usuario" />
-                  <p>Adicionar um novo funcionario</p>
+                  <p>Adicionar um novo funcionário</p>
                 </AddUser>
               </Link>
 

@@ -377,7 +377,7 @@ export class Tabela_Funcionarios extends Component {
                 <div className="senha">
                   <form class="form-inline" style={{ margin: "40px" }}>
                     <div class="modal-body">
-                      <p>Tem certeza que deseja excluir o usuario {this.state.NomeParaDeletar} ?</p>
+                      <p>Tem certeza que deseja excluir o usuário {this.state.NomeParaDeletar} ?</p>
                     </div>
                   </form>
                 </div>
@@ -473,15 +473,15 @@ export class Tabela_Funcionarios extends Component {
                   </div>
                   <div class="form-inline" style={{ margin: "40px" }}>
                     <div class="form-group">
-                      <label style={{ marginRight: "13px" }} for="emailUser">Editar Email:      </label>
+                      <label style={{ marginRight: "13px" }} for="emailUser">Editar E-mail:      </label>
                       <input style={{ width: "200px" }} id="emailUser" class="form-control mx-sm-3" onChange={(e) => { this.handleChangeUserEmail(e) }} defaultValue={this.state.UserEmail} />
                     </div>
                   </div>
                   <div class="form-inline" style={{ margin: "40px" }}>
                     <div class="form-group col-md-6">
-                      <label for="inputState">O usuario tera acesso administartivo ?</label>
+                      <label for="inputState">O usuário terá acesso administrativo ?</label>
                       <select id="inputState" class="form-control" onChange={(e) => { this.handleChangeUserAdm(e) }}>
-                        <option selected={this.state.UserAdm == 'nao' ? true : false}>nao</option>
+                        <option selected={this.state.UserAdm == 'nao' ? true : false}>não</option>
                         <option selected={this.state.UserAdm == 'nao' ? false : true}>sim</option>
                       </select>
                     </div>
@@ -506,7 +506,7 @@ export class Tabela_Funcionarios extends Component {
         <Info>
           <Title>Funcionários cadastrados</Title>
           <Pesquisa>
-            <p>pesquisa:</p>
+            <p>Pesquisa:</p>
             <Input
               value={this.state.search}
               onChange={this.updateSearch.bind(this)}
@@ -518,16 +518,16 @@ export class Tabela_Funcionarios extends Component {
             <thead>
               <tr>
                 <th scope="col"><strong>NIF</strong></th>
-                <th scope="col"><strong>nome</strong></th>
-                <th scope="col"><strong>sobrenome</strong></th>
-                <th scope="col"><strong>cargo</strong></th>
-                <th scope="col"><strong>email</strong></th>
-                <th scope="col"><strong>fone</strong></th>
-                <th scope="col"><strong>Adiministrativo</strong></th>
+                <th scope="col"><strong>Nome</strong></th>
+                <th scope="col"><strong>Sobrenome</strong></th>
+                <th scope="col"><strong>Cargo</strong></th>
+                <th scope="col"><strong>E-mail</strong></th>
+                <th scope="col"><strong>Fone</strong></th>
+                <th scope="col"><strong>Administrativo</strong></th>
                 <th scope="col"><strong>Data de criação</strong></th>
-                <th scope="col"><strong>excluir</strong></th>
-                <th scope="col"><strong>restaurar senha</strong></th>
-                <th scope="col"><strong>ação</strong></th>
+                <th scope="col"><strong>Excluir</strong></th>
+                <th scope="col"><strong>Restaurar senha</strong></th>
+                <th scope="col"><strong>Ação</strong></th>
               </tr>
             </thead>
             <tbody>
