@@ -241,6 +241,10 @@ function DetalhesHistorico(props) {
   })
   }
 
+  function voltar() {
+    window.history.back();
+  }
+
 
 
   return (
@@ -253,8 +257,8 @@ function DetalhesHistorico(props) {
               <Header titulo="Historico" />
             </Header_Area>
 
-            <div className="button--voltar"> 
-              <Link to="/historico"><Button width="100px" height="35px" title="VOLTAR"/></Link> 
+            <div className="button--voltar" onClick={voltar}> 
+              <Link><Button width="100px" height="35px" title="VOLTAR"/></Link> 
             </div> 
 
             <Adm_Area>
