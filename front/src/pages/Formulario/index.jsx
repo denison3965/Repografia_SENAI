@@ -350,9 +350,9 @@ function Formulario() {
                     ? <Container>
                         <Header />
                         <h3 className="titulo_do_formulario">Solicitação de Serviços Reprográficos</h3>
-                        <div className="button--voltar" onClick={voltar}> 
-                            <Link><Button width="100px" height="35px" title="VOLTAR"/></Link> 
-                        </div> 
+                        <div className="password_box" onClick={voltar}>
+                            <Link><button type="button" class="btn btn-danger">Voltar</button></Link>
+                        </div>
                         <div className="div_pai--button">
                             <Link to="/"><div className="sair--button"><p>Sair</p></div> </Link>
                         </div>
