@@ -257,9 +257,9 @@ function DetalhesHistorico(props) {
               <Header titulo="Historico" />
             </Header_Area>
 
-            <div className="button--voltar" onClick={voltar}> 
-              <Link><Button width="100px" height="35px" title="VOLTAR"/></Link> 
-            </div> 
+            <div className="password_box" onClick={voltar}>
+              <Link><button type="button" class="btn btn-danger">Voltar</button></Link>
+            </div>
 
             <Adm_Area>
 

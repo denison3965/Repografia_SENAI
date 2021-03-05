@@ -165,15 +165,15 @@ export class Tabela_De_Historico extends Component {
           <table className="table table-striped">
             <thead>
               <tr>
-                <th scope="col"><strong>número</strong></th>
-                <th scope="col"><strong>nome da requisição</strong></th>
-                <th scope="col"><strong>solicitante</strong></th>
-                <th scope="col"><strong>departamento</strong></th>
+                <th scope="col"><strong>Número</strong></th>
+                <th scope="col"><strong>Nome da requisição</strong></th>
+                <th scope="col"><strong>Solicitante</strong></th>
+                <th scope="col"><strong>Departamento</strong></th>
                 <th scope="col"><strong>cc</strong></th>
-                <th scope="col"><strong>status</strong></th>
-                <th scope="col"><strong>total de páginas</strong> </th>
-                <th scope="col"><strong>data do pedido</strong></th>
-                <th scope="col"><strong>data de entrega</strong></th>
+                <th scope="col"><strong>Status</strong></th>
+                <th scope="col"><strong>Total de páginas</strong> </th>
+                <th scope="col"><strong>Data do pedido</strong></th>
+                <th scope="col"><strong>Data de entrega</strong></th>
                 <th scope="col"></th>
               </tr>
             </thead>
