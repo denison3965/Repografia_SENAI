@@ -273,13 +273,11 @@ function filtraEstatisticasPelaData () {
               <div className="date_area">
                 
                 <div className="date_area_into">
-                  <p>{dateMillis}</p>
                   <span>De : </span>
                   <DatePicker selected={startDate} onChange={date => {{setStartDate(date); getDateAndCovertToMilles(date)}}}  dateFormat="dd/MM/yyyy" />
                 </div>
 
                 <div className="date_area_into">
-                  <p>{dateMillis2}</p>
                   <span>Até : </span>
                   <DatePicker selected={startDate2} onChange={date => {setStartDate2(date); getDateAndCovertToMilles2(date)}} dateFormat="dd/MM/yyyy" />
                 </div>

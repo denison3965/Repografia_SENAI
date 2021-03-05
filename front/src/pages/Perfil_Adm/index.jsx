@@ -110,7 +110,7 @@ function Adm_Registros() {
               <Navegation>
                 <ul>
                   <Link >
-                    <li>Perfil adiministrador</li>
+                    <li>Perfil administrador</li>
                   </Link>
 
                 </ul>

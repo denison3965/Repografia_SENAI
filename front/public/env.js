@@ -4,7 +4,7 @@ window.env = {
   "APPDATA": "C:\\Users\\guilh\\AppData\\Roaming",
   "ChocolateyInstall": "C:\\ProgramData\\chocolatey",
   "ChocolateyLastPathUpdate": "132488985506446397",
-  "CHROME_CRASHPAD_PIPE_NAME": "\\\\.\\pipe\\crashpad_16196_VKRWZWZMLJFSKAAO",
+  "CHROME_CRASHPAD_PIPE_NAME": "\\\\.\\pipe\\crashpad_6432_PBFTCDHBWZYTYERO",
   "CLASSPATH": ".;",
   "COLORTERM": "truecolor",
   "COMMONPROGRAMFILES": "C:\\Program Files\\Common Files",
@@ -236,7 +236,7 @@ window.env = {
   "TEMP": "C:\\Users\\guilh\\AppData\\Local\\Temp",
   "TERM": "xterm-256color",
   "TERM_PROGRAM": "vscode",
-  "TERM_PROGRAM_VERSION": "1.53.2",
+  "TERM_PROGRAM_VERSION": "1.54.0",
   "TMP": "C:\\Users\\guilh\\AppData\\Local\\Temp",
   "USERDOMAIN": "DESK-DEMOLIDOR",
   "USERDOMAIN_ROAMINGPROFILE": "DESK-DEMOLIDOR",
@@ -247,5 +247,6 @@ window.env = {
   "VSCODE_GIT_IPC_HANDLE": "\\\\.\\pipe\\vscode-git-c8fb1e52ac-sock",
   "WINDIR": "C:\\WINDOWS",
   "_": "C:/Program Files/nodejs/node.exe",
-  "_prog": "node"
+  "_prog": "node",
+  "__COMPAT_LAYER": "DetectorsAppHealth"
 };
