@@ -84,12 +84,17 @@ function Adm_Registros() {
               <hr></hr>
 
               <Navegation>
-                <ul>
-                  <Link >
-                    <li>Perfil administrador</li>
-                  </Link>
+              <ul>
+                    <Link to="/perfil-adm">
+                      <li>Perfil Administrador</li>
+                    </Link>
 
-                </ul>
+                    <li>/</li>
+
+                    <Link>
+                      <li>Histórico</li>
+                    </Link>
+              </ul>
               </Navegation>
 
             </div>

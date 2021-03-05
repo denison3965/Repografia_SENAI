@@ -63,8 +63,10 @@ export const Navegation = styled.nav`
     ul{
       list-style: none;
       margin-left: 15px;
+      display: flex;
         li{
           color: #666;
+          margin-right: 15px;
         }
     }
 `;
