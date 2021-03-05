@@ -353,27 +353,34 @@ function DetalhesHistorico(props) {
                 {dataDeHoje > dataEnvioMais7 ?
 
                   infoReq.feedback == "Em espera" ? 
-                    <div className="feedback">
-                    <p><strong>FEEDBACK</strong></p>
 
-                    <div className="">
+                      infoReq.status == "ativo" ? 
+                        <div className="feedback">
+                        <p><strong>FEEDBACK</strong></p>
 
-                      <div className="custom-control custom-radio">
-                        <input type="radio" id="customRadio1" name="customRadio" onClick={(e) => setarValorFeedback(e)} className="custom-control-input" value={1} />
-                        <label className="custom-control-label" for="customRadio1">Chegou!</label>
-                      </div>
-                      <div className="custom-control custom-radio">
-                        <input type="radio" id="customRadio2" name="customRadio" onClick={(e) => setarValorFeedback(e)} className="custom-control-input" value={2} />
-                        <label className="custom-control-label" for="customRadio2">Chegou, porém com uma qualidade ruim.</label>
-                      </div>
-                      <div className="custom-control custom-radio mb-3">
-                        <input type="radio" id="customRadio3" name="customRadio" onClick={(e) => setarValorFeedback(e)} className="custom-control-input" value={3} />
-                        <label className="custom-control-label" for="customRadio3">Não Chegou.</label>
-                      </div>
-                      <button onClick={EnviarFeedback} type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Enviar</button>
-                    </div>
+                        <div className="">
 
-                    </div>
+                          <div className="custom-control custom-radio">
+                            <input type="radio" id="customRadio1" name="customRadio" onClick={(e) => setarValorFeedback(e)} className="custom-control-input" value={1} />
+                            <label className="custom-control-label" for="customRadio1">Chegou!</label>
+                          </div>
+                          <div className="custom-control custom-radio">
+                            <input type="radio" id="customRadio2" name="customRadio" onClick={(e) => setarValorFeedback(e)} className="custom-control-input" value={2} />
+                            <label className="custom-control-label" for="customRadio2">Chegou, porém com uma qualidade ruim.</label>
+                          </div>
+                          <div className="custom-control custom-radio mb-3">
+                            <input type="radio" id="customRadio3" name="customRadio" onClick={(e) => setarValorFeedback(e)} className="custom-control-input" value={3} />
+                            <label className="custom-control-label" for="customRadio3">Não Chegou.</label>
+                          </div>
+                          <button onClick={EnviarFeedback} type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Enviar</button>
+                        </div>
+
+                        </div>
+                      :
+                      <div className="feedback">
+                      Você já cancelou essa requisição, !!
+                      </div>
+                    
                     :
                     <div className="feedback">
                       Você já deu o seu feedback sobre essa requisição !!
@@ -390,6 +397,7 @@ function DetalhesHistorico(props) {
                   infoReq.status != "cancelado" ? 
                     <div className="cancelar">
                       <p><strong>Deseja cancelar esse pedido ?</strong></p>
+                      <p style={{textAlign : "center"}}> Você têm 24h para cancelar apartir da data do pedido</p>
                       <button onClick={CancelarRequisicao}  data-toggle="modal" data-target="#exampleModal" type="button" class="btn btn-light">Cancelar</button>
                     </div> 
                     :
