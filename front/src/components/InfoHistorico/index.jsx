@@ -32,9 +32,9 @@ function TabelaDeHistorico() {
   return(
       <Container>
          <div className="infoHistorico">
-          <div className="button--voltar" onClick={voltar}> 
-              <Link><Button width="100px" height="35px" title="VOLTAR"/></Link> 
-          </div> 
+          <div className="password_box" onClick={voltar}>
+            <Link><button type="button" class="btn btn-danger">Voltar</button></Link>
+          </div>
            <div className="seu--historico">SEU HISTÓRICO</div>
            <div onClick={() => fazerSingOut()} className="sair--button">SAIR</div>
          </div>

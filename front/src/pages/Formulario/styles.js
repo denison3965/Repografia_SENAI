@@ -17,7 +17,7 @@ export const Container = styled.div`
         font-weight: 300;
         font-style: italic;
     }
-    .button--voltar{
+    .password_box{
         position: absolute;
         height:35px;
         max-width: 100px;

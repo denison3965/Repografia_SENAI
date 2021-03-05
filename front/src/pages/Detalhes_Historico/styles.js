@@ -4,7 +4,7 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
 
-  .button--voltar{
+  .password_box{
         height:35px;
         max-width: 100px;
         margin: 20px;
