@@ -68,6 +68,7 @@ function Formulario() {
 
                             let resposta = res.data
 
+                            alert(resposta.res)
                             if (resposta != true) {
                                 window.history.back()
                             } else {
