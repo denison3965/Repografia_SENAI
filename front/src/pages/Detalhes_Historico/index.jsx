@@ -432,7 +432,7 @@ function DetalhesHistorico(props) {
                     </div>
                   </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Sair</button>
+                    <button onClick={voltar} type="button" class="btn btn-secondary" data-dismiss="modal">Sair</button>
                   </div>
                 </div>
               </div>
@@ -455,7 +455,7 @@ function DetalhesHistorico(props) {
                     </div>
                   </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Sair</button>
+                    <button onClick={voltar} type="button" class="btn btn-secondary" data-dismiss="modal">Sair</button>
                   </div>
                 </div>
               </div>
