@@ -66,9 +66,9 @@ function Formulario() {
                     axios.get(`${process.env.REACT_APP_SERVER_BASE}/bloquear-requisicao/${res.data.nif}`)
                         .then((res) => {
 
-                            let resposta = res.data
+                            let resposta = res.data.res
 
-                            alert(resposta.res)
+                            
                             if (resposta != true) {
                                 window.history.back()
                             } else {

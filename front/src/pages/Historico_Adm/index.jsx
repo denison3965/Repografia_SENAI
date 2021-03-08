@@ -28,6 +28,7 @@ function Adm_Registros() {
   const history = useHistory()
   const [showPage, setShowPage] = useState(false)
   const [infoUser, setInfoUser] = useState({ nome: '', sobrenome: '' })
+  const [req_pendencias, setReq_pendencias] = useState([])
 
   useEffect(() => {
     var token = cookies.get('tokenJWT')
@@ -49,6 +50,16 @@ function Adm_Registros() {
 
           await setInfoUser(res.data)
 
+          //Pegando as feedback pendentes
+          axios.get(`${process.env.REACT_APP_SERVER_BASE}/bloquear-requisicao/${res.data.nif}`)
+            .then((res) => {
+
+              let resposta = res.data.pendencias
+
+              setReq_pendencias(resposta)
+            })
+
+
         }).catch((err) => {
           console.log(err)
         })
@@ -65,7 +76,7 @@ function Adm_Registros() {
 
 
 
-  
+
   return (
 
     <Container>
@@ -80,27 +91,26 @@ function Adm_Registros() {
           ?
           <Adm_Area>
             <div className="User_Box_Info_Area">
-            <User_Box_Info nome={infoUser.nome} sobrenome={infoUser.sobrenome}/>
+              <User_Box_Info nome={infoUser.nome} sobrenome={infoUser.sobrenome} />
               <hr></hr>
 
               <Navegation>
-              <ul>
-                    <Link to="/perfil-adm">
-                      <li>Perfil Administrador</li>
-                    </Link>
+                <ul>
+                  <Link to="/perfil-adm">
+                    <li>Perfil Administrador</li>
+                  </Link>
 
-                    <li>/</li>
+                  <li>/</li>
 
-                    <Link>
-                      <li>Histórico</li>
-                    </Link>
-              </ul>
+                  <Link>
+                    <li>Histórico</li>
+                  </Link>
+                </ul>
               </Navegation>
 
             </div>
             <Tabela>
-              
-              <TabelaHistorico nif={infoUser.nif} />
+              <TabelaHistorico nif={infoUser.nif} pendencias={req_pendencias} />
 
               <div className="password_box">
 

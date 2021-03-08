@@ -68,8 +68,13 @@ export const Grafico = styled.div`
     align-items: center;
   }
 
-   @media screen and (max-width:1600px){
+   @media screen and (max-width:1500px){
      flex-direction: column;
+
+     .espaco_grafico_1 {
+       margin-left: 100px;
+     }
+
    }
 
 `;

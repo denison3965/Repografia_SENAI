@@ -115,7 +115,7 @@ function DetalhesHistorico(props) {
 
 
           //Pegando a data de envio em milisegundos e somando mais 7 dias em milisegundos
-          let dataEnvioMais7 = dataEnvioMilli + 4000
+          let dataEnvioMais7 = dataEnvioMilli + 604800000
 
           //Pegando a data de envio em milisegundos e somando mais 1 dia em milisegundos
           let dataEnvioMais1 = dataEnvioMilli + 86400000
@@ -345,7 +345,7 @@ function DetalhesHistorico(props) {
                     <div className="registro_chave"><strong>Imprimir:</strong></div>
                     <div className="registro_valor_img">
                       <img src={Impressao} alt="impressora" style={{ width: 25, height: 25 }} />
-                      <button style={{ marginLeft: 15 }} onClick={() => baixarPDF()} type="button" class="btn btn-primary">Click aqui para imprimir</button>
+                      <button style={{ marginLeft: 15 }} onClick={() => baixarPDF()} type="button" class="btn btn-primary">Click aqui para imprimir a requisição</button>
                     </div>
                   </div>
 
