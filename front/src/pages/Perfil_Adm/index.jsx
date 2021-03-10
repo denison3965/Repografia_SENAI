@@ -27,13 +27,14 @@ function Adm_Registros() {
   //Verificando Se o usuario esta autorizado para acessar essa pagina
   const history = useHistory()
   const [showPage, setShowPage] = useState(false)
-  const [infoUser, setInfoUser] = useState({nome: '', sobrenome: ''})
+  const [infoUser, setInfoUser] = useState({ nome: '', sobrenome: '' })
   const [senhaAtual, setSenhaAtual] = useState()
-  const [novaSenha , setNovaSenha] = useState()
+  const [novaSenha, setNovaSenha] = useState()
   const [confirmarSenha, setConfirmarSenha] = useState()
   const [msg_error, setMsgError] = useState()
   const [msg_acerto, setMsgAcerto] = useState()
-  
+  const [req_pendencias, setReq_pendencias] = useState([])
+
 
   useEffect(() => {
     let token = cookies.get('tokenJWT')
@@ -50,12 +51,23 @@ function Adm_Registros() {
         //Pegando as informacoes do user pelo nif
         let url = `${process.env.REACT_APP_SERVER_BASE}/buscar-user-nif/${res.data[0].nif}`
 
-        axios.get(url).then(async(res) => {
-            
-            await setInfoUser(res.data)
+        axios.get(url).then(async (res) => {
+
+          await setInfoUser(res.data)
+
+          //Pegando as feedback pendentes
+          axios.get(`${process.env.REACT_APP_SERVER_BASE}/bloquear-requisicao/${res.data.nif}`)
+            .then((res) => {
+
+              let resposta = res.data.pendencias
+
+              setReq_pendencias(resposta)
+            })
+
+
 
         }).catch((err) => {
-            console.log(err)
+          console.log(err)
         })
 
       }
@@ -69,7 +81,7 @@ function Adm_Registros() {
   //**Verificando Se o usuario esta autorizado para acessar essa pagina**
 
   //função de alterar senha
-  function EditarSenha(){
+  function EditarSenha() {
     axios.put(`${process.env.REACT_APP_SERVER_BASE}/editarSenha`, {
       senhaAtual: senhaAtual,
       novaSenha: novaSenha,
@@ -77,21 +89,21 @@ function Adm_Registros() {
       nif: infoUser.nif
     })
 
-    .then((res)=>{
-      if(res.data == "Senha alterada com sucesso"){
-         setMsgError(null)
-         setMsgAcerto(res.data)
-      }else{
-         setMsgAcerto(null)
-         setMsgError(res.data)
-      }
-   })
+      .then((res) => {
+        if (res.data == "Senha alterada com sucesso") {
+          setMsgError(null)
+          setMsgAcerto(res.data)
+        } else {
+          setMsgAcerto(null)
+          setMsgError(res.data)
+        }
+      })
 
-   .catch((err)=> {
-      console.log(err)
-   })
+      .catch((err) => {
+        console.log(err)
+      })
   }
- 
+
 
   return (
     <Container>
@@ -104,7 +116,7 @@ function Adm_Registros() {
         showPage
           ? <Adm_Area>
             <div className="User_Box_Info_Area">
-              <User_Box_Info nome={infoUser.nome} sobrenome={infoUser.sobrenome}/>
+              <User_Box_Info nome={infoUser.nome} sobrenome={infoUser.sobrenome} />
               <hr></hr>
 
               <Navegation>
@@ -153,15 +165,14 @@ function Adm_Registros() {
 
 
 
-                <div className="password_box2">
+                <div className="password_box2" style={{ zIndex: 999 }}>
                   <Link to="/historico-adm"><button type="button" class="btn btn-secondary">Histórico</button></Link>
                 </div>
 
-                <div className="password_box">
-
+                <div className="password_box" style={{ zIndex: 999 }}>
                   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                     Editar senha
-                  </button>
+                </button>
                 </div>
 
                 {/* Modal  */}
@@ -185,19 +196,19 @@ function Adm_Registros() {
                           <form class="form-inline" style={{ margin: "40px" }}>
                             <div class="form-group">
                               <label style={{ marginRight: "30px" }} for="inputPassword6">Nova senha:     </label>
-                              <input onChange={(e)=> setNovaSenha(e.target.value)} style={{ width: "200px" }} type="password" id="inputPassword6" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" />
+                              <input onChange={(e) => setNovaSenha(e.target.value)} style={{ width: "200px" }} type="password" id="inputPassword6" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" />
                             </div>
                           </form>
                           <form class="form-inline" style={{ margin: "40px" }}>
                             <div class="form-group">
-                              <label for="inputPassword6">Confimar senha:</label>   
-                              <input  onChange={(e)=>setConfirmarSenha(e.target.value)}  style={{ width: "200px" }} type="password" id="inputPassword6" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" />
+                              <label for="inputPassword6">Confimar senha:</label>
+                              <input onChange={(e) => setConfirmarSenha(e.target.value)} style={{ width: "200px" }} type="password" id="inputPassword6" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" />
                             </div>
                           </form>
                           <div>
-                            {msg_error!= null ? <div className="alert alert-danger">{msg_error} </div>:null}
-                            {msg_acerto!= null ? <div className="alert alert-success">{msg_acerto} </div>:null}
-                            </div>     
+                            {msg_error != null ? <div className="alert alert-danger">{msg_error} </div> : null}
+                            {msg_acerto != null ? <div className="alert alert-success">{msg_acerto} </div> : null}
+                          </div>
                         </div>
                       </div>
                       <div class="modal-footer">
@@ -208,6 +219,15 @@ function Adm_Registros() {
                 </div>
               </div>
             </Info>
+            {req_pendencias.length > 0 ?
+              <div style={{ marginLeft: 30, marginRight: 30, marginTop: 50 }}>
+                <div class="alert alert-warning" role="alert"> ATENÇÃO !!!, você têm feedbacks de requisições passadas pendente, você só poderá fazer uma nova requisição quando responder os feedbacks, click em histórico para responde-los </div>
+              </div>
+              :
+              <></>
+            }
+
+
           </Adm_Area>
           : <div>
             <div style={loading}>

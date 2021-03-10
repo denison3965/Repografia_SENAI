@@ -231,7 +231,7 @@ function Detalhes(props) {
                   <div className="registro_chave"><strong>Imprimir:</strong></div>
                   <div className="registro_valor_img">
                     <img src={Impressao} alt="impressora" style={{ width: 25, height: 25 }} />
-                    <button style={{ marginLeft: 15 }} onClick={() => baixarPDF()} type="button" class="btn btn-primary">Click aqui para imprimir</button>
+                    <button style={{ marginLeft: 15 }} onClick={() => baixarPDF()} type="button" class="btn btn-primary">Click aqui para imprimir a requisição</button>
                   </div>
                 </div>
 

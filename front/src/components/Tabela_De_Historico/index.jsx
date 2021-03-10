@@ -4,6 +4,7 @@ import SaibaMais from '../SaibaMais'
 import { Container, Info, Tabela, Title, Pesquisa, Input } from './styles';
 import axios from 'axios'
 import Cookies from 'universal-cookie'
+import Alert from '../../assets/img/alert.gif'
 
 const cookies = new Cookies()
 
@@ -25,7 +26,8 @@ export class Tabela_De_Historico extends Component {
       search: '',
 
       User_info: {},
-      Requisicoes: {}
+      Requisicoes: {},
+      Pendencias: []
 
     }
     this.handlePageClick = this.handlePageClick.bind(this);
@@ -74,16 +76,27 @@ export class Tabela_De_Historico extends Component {
 
       if (res.data[0].auth) {
         //Pegando as informacoes do user pelo nif
-        let url = `${process.env.REACT_APP_SERVER_BASE}/buscar-user-nif/`+ `${res.data[0].nif}`
+        let url = `${process.env.REACT_APP_SERVER_BASE}/buscar-user-nif/` + `${res.data[0].nif}`
 
         axios.get(url).then(async (res) => {
 
 
-          
+
 
           this.setState({
             User_info: res.data
           })
+
+          //Pegando as feedback pendentes
+          axios.get(`${process.env.REACT_APP_SERVER_BASE}/bloquear-requisicao/${res.data.nif}`)
+            .then((res) => {
+
+              let resposta = res.data.pendencias
+
+              this.setState({
+                Pendencias: resposta
+              })
+            })
 
           //Aqui vai o fetch para a api pegar os registros no banco de dados
 
@@ -104,7 +117,7 @@ export class Tabela_De_Historico extends Component {
             //slice = 20, ou seja na pagina ira commecar a listar pelo numero 20
             var slice = result.data.slice(this.state.offset, this.state.offset + this.state.perPage)
             console.log(slice)
-  
+
             this.setState({
               pageCount: Math.ceil(result.data.length / this.state.perPage),
               orgtableData: result.data,
@@ -144,15 +157,25 @@ export class Tabela_De_Historico extends Component {
           register.data_entrega.indexOf(this.state.search) !== -1 ||
           register.nome_departamento.toLowerCase().indexOf(this.state.search) !== -1 ||
           register.nome_departamento.indexOf(this.state.search) !== -1 ||
-          register.centro_custo.toLowerCase().indexOf(this.state.search) !== -1 
+          register.centro_custo.toLowerCase().indexOf(this.state.search) !== -1
       }
     )
+    console.log("MAMUTENÇÃO")
+    console.log(this.props.pendencias)
+
+    let id_requisicao_pendentes = []
+    this.state.Pendencias.map((element) => {
+      id_requisicao_pendentes.push(element.id_requisicao)
+    })
+
+    console.log(id_requisicao_pendentes)
 
     return (
       <Container>
 
         <Info>
           <Title>Histórico de Registros</Title>
+
           <Pesquisa>
             <p>pesquisa:</p>
             <Input
@@ -175,6 +198,7 @@ export class Tabela_De_Historico extends Component {
                 <th scope="col"><strong>Data do pedido</strong></th>
                 <th scope="col"><strong>Data de entrega</strong></th>
                 <th scope="col"></th>
+                <th scope="col"></th>
               </tr>
             </thead>
             <tbody>
@@ -187,11 +211,12 @@ export class Tabela_De_Historico extends Component {
                     <td>{element.nome}</td>
                     <td>{element.nome_departamento}</td>
                     <td>{element.centro_custo}</td>
-                    <td style={element.status == 'cancelado'? {color:'red'}:{color: 'green'}}>{element.status}</td>
+                    <td style={element.status == 'cancelado' ? { color: 'red' } : { color: 'green' }}>{element.status}</td>
                     <td>{element.total_paginas}</td>
                     <td>{element.data_envio}</td>
                     <td>{element.data_entrega}</td>
-                    <td><SaibaMais caminho="detalhes-historicos" data={element.id_requisicao} /></td>
+                    <td>{id_requisicao_pendentes.indexOf(element.id_requisicao) == 0 ? <img style={{ width: 30, height: 22 }} src={Alert} data-bs-toggle="tooltip" data-bs-placement="left" title="Feedback disponível !!!" /> : <></>}</td>
+                    <td data-bs-toggle="tooltip" data-bs-placement="left" title="Saiba mais sobre essa requisição"><SaibaMais caminho="detalhes-historicos" data={element.id_requisicao} /></td>
 
                   </tr>
 
